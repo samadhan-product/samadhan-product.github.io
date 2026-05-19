@@ -17,7 +17,7 @@ assets/       Shared static assets
 
 Pushes to `main` run [.github/workflows/deploy.yml](.github/workflows/deploy.yml), which builds the React app and publishes to GitHub Pages.
 
-**One-time:** In repo **Settings → Pages**, set **Source** to **GitHub Actions**.
+**Required (one-time):** In repo **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions** — not “Deploy from branch”. If Source is branch-based, GitHub serves `README.md` at the root instead of the Vite build.
 
 ## Local development
 
