@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A PM-friendly explanation of attention intuition and self-attention based on Jay Alammar's Illustrated Transformer, showing how Transformers connect words, resolve context, and power modern LLMs." />
+  <title>Understanding Attention Intuition from “The Illustrated Transformer” | AI Learning</title>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a class="brand" href="/">Samadhan <span>Mishra</span></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/portfolio/">Portfolio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/blog/ai-learning/">AI Learning</a>
+      </div>
+      <a class="nav-cta" href="/blog/ai-learning/transformer-architecture-pm-version/">← Back to Module</a>
+    </div>
+  </nav>
+
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">→</span>
+    <a href="/blog/">Blog</a>
+    <span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a>
+    <span class="sep">→</span>
+    <a href="/blog/ai-learning/transformer-architecture-pm-version/">Transformer Architecture — The PM Version</a>
+    <span class="sep">→</span>
+    <span class="current">Chapter 01</span>
+  </nav>
+
+  <header class="hero hero-compact">
+    <div class="eyebrow">Chapter 01</div>
+    <h1>Understanding Attention Intuition from “The Illustrated Transformer”</h1>
+    <p class="hero-text">
+      A PM-friendly explanation of how Transformers use attention to connect words, resolve context, and power modern LLMs.
+    </p>
+    <div class="meta-badges">
+      <span class="meta-badge">Book: AI Learning</span>
+      <span class="meta-badge">Module: Transformer Architecture — The PM Version</span>
+      <span class="meta-badge">Chapter: 01</span>
+      <span class="meta-badge">Difficulty: Beginner</span>
+      <span class="meta-badge">Reading time: 12–15 min</span>
+    </div>
+  </header>
+
+  <div class="article-layout">
+    <aside class="toc card" aria-label="Table of contents">
+      <p class="toc-title">On this page</p>
+      <ol>
+        <li><a href="#why">Why this chapter exists</a></li>
+        <li><a href="#focus">What this chapter focuses on</a></li>
+        <li><a href="#mental-model">One-line mental model</a></li>
+        <li><a href="#meeting-room">Meeting room analogy</a></li>
+        <li><a href="#example">Running example</a></li>
+        <li><a href="#attention">Attention intuition</a></li>
+        <li><a href="#it-animal">Why "it" → "animal"</a></li>
+        <li><a href="#tokens">Tokens &amp; embeddings</a></li>
+        <li><a href="#self-attention">Self-attention</a></li>
+        <li><a href="#qkv">Query, Key, Value</a></li>
+        <li><a href="#multi-head">Multi-head attention</a></li>
+        <li><a href="#product">Product leader lens</a></li>
+        <li><a href="#misconceptions">Misconceptions</a></li>
+        <li><a href="#recap">Chapter recap</a></li>
+        <li><a href="#quiz">Quick check quiz</a></li>
+        <li><a href="#next">Next chapter</a></li>
+      </ol>
+    </aside>
+
+    <article>
+      <section id="why" class="content-section">
+        <h2>1. Why this chapter exists</h2>
+        <p>
+          Jay Alammar's
+          <a href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener noreferrer">The Illustrated Transformer</a>
+          is excellent — but it can feel overwhelming because it mixes diagrams, full architecture,
+          and math-adjacent terms in one flow.
+        </p>
+        <p>
+          Most product teams adopt LLMs before anyone on the product side has a clear picture of
+          <em>how</em> the model reads context. That gap leads to unrealistic expectations, weak prompts,
+          and poor evaluation design.
+        </p>
+        <p>
+          This chapter exists to give you one durable intuition first: <strong>attention</strong>.
+          The rest of the module builds on that foundation.
+        </p>
+      </section>
+
+      <section id="focus" class="content-section">
+        <h2>2. What this chapter will focus on</h2>
+        <div class="callout insight">
+          <p class="callout-title">Scope</p>
+          <p>
+            This chapter focuses <strong>only</strong> on attention intuition and self-attention —
+            not the entire Transformer architecture, training, or encoder-decoder stacks.
+          </p>
+        </div>
+        <p>
+          Later chapters cover tokens, embeddings, Q/K/V in depth, multi-head mechanics, and how
+          modern LLMs are structured. Read this chapter to understand <em>why</em> Transformers
+          changed language AI — not every implementation detail.
+        </p>
+      </section>
+
+      <section id="mental-model" class="content-section">
+        <h2>3. The one-line Transformer mental model</h2>
+        <p class="example-sentence" style="font-style:normal;font-weight:800;text-align:center;">
+          A Transformer understands text by letting every word look at every other word and decide what matters.
+        </p>
+      </section>
+
+      <section id="meeting-room" class="content-section">
+        <h2>4. The meeting room analogy</h2>
+        <p>Imagine every word in a sentence is a person in one meeting room.</p>
+        <p class="example-sentence" style="font-style:normal;">
+          The word <strong>"it"</strong> asks: “Who am I referring to?”<br />
+          <strong>"animal"</strong> says: “Probably me.”<br />
+          <strong>"street"</strong> says: “Maybe, but less likely.”<br />
+          <strong>"tired"</strong> supports <strong>"animal"</strong>.
+        </p>
+        <p>
+          Self-attention is that conversation, repeated in software. Each word leaves the round with
+          a richer meaning because it listened to the right voices.
+        </p>
+      </section>
+
+      <section id="example" class="content-section">
+        <h2>5. Running example</h2>
+        <p class="example-sentence">
+          "The animal did not cross the street because it was tired."
+        </p>
+        <p>We will use this sentence throughout the chapter.</p>
+      </section>
+
+      <section id="attention" class="content-section">
+        <h2>6. Attention intuition</h2>
+        <p>
+          <strong>Attention</strong> is relevance scoring. For each word, the model assigns a weight
+          to every other word: how much should this word influence my current understanding?
+        </p>
+        <p>Higher weight → stronger influence. Lower weight → mostly ignore.</p>
+      </section>
+
+      <section id="it-animal" class="content-section">
+        <h2>7. Why "it" should connect to "animal"</h2>
+        <p>For the word <code>it</code>, intuitive relevance might look like:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Word</th><th>Relevance to "it"</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>animal</td><td>High</td></tr>
+              <tr><td>tired</td><td>High (contextual clue)</td></tr>
+              <tr><td>cross</td><td>Medium</td></tr>
+              <tr><td>street</td><td>Low</td></tr>
+              <tr><td>the</td><td>Low</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The model learns these patterns from data — it is not following a hand-written grammar rule.
+        </p>
+      </section>
+
+      <section id="tokens" class="content-section">
+        <h2>8. Tokens and embeddings — high level only</h2>
+        <p>
+          The model does not see words exactly like humans. It sees <strong>tokens</strong> converted
+          into numerical <strong>embeddings</strong> — fingerprints of meaning in number-space.
+        </p>
+        <p>
+          Attention operates on those representations. Word order is added separately (positional encoding).
+          <strong>Chapter 02</strong> covers tokens and embeddings properly — do not worry about the math here.
+        </p>
+      </section>
+
+      <section id="self-attention" class="content-section">
+        <h2>9. Self-attention</h2>
+        <p>
+          <strong>Self-attention</strong> means each word looks at other words in the <em>same</em>
+          sentence to build a better meaning for itself.
+        </p>
+        <p class="example-sentence">
+          "The doctor checked the patient because he was coughing."
+        </p>
+        <p>
+          Who is <strong>he</strong>? Attention weights usually favor <strong>patient</strong> in this
+          pattern — though edge cases and bias risks still matter for product design.
+        </p>
+      </section>
+
+      <section id="qkv" class="content-section">
+        <h2>10. Query, Key, and Value — search analogy</h2>
+        <p>Using <strong>"it"</strong> as the word we are updating:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Term</th><th>Plain meaning</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Query</strong></td><td>What am I looking for?</td></tr>
+              <tr><td><strong>Key</strong></td><td>What does each word offer for matching?</td></tr>
+              <tr><td><strong>Value</strong></td><td>What information should I take if I match?</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Match Query to all Keys → scores → blend Values. Chapter 03 goes deeper on Q/K/V mechanics.</p>
+      </section>
+
+      <section id="multi-head" class="content-section">
+        <h2>11. Multi-head attention — multiple viewpoints</h2>
+        <ul>
+          <li>One head may focus on <strong>pronoun reference</strong> ("it" → "animal").</li>
+          <li>Another on <strong>grammar</strong> (subject–verb, negation with "not").</li>
+          <li>Another on <strong>cause–effect</strong> ("because" → why something happened).</li>
+        </ul>
+        <p>Multiple heads run in parallel; their outputs are combined. One viewpoint is not enough for real language.</p>
+      </section>
+
+      <section id="product" class="content-section">
+        <h2>12. Product leader lens</h2>
+        <p>Why attention intuition matters for AI products:</p>
+        <ul>
+          <li><strong>Prompt quality matters</strong> — models work from the context you provide.</li>
+          <li><strong>RAG quality matters</strong> — retrieved chunks become part of what the model attends to.</li>
+          <li><strong>Long context ≠ good reasoning</strong> — more tokens do not automatically mean better answers.</li>
+          <li><strong>LLMs are not databases</strong> — they predict from patterns; do not treat them as lookup tables.</li>
+          <li><strong>Design for ambiguity</strong> — grounding, evaluation, and human review where stakes are high.</li>
+        </ul>
+      </section>
+
+      <section id="misconceptions" class="content-section">
+        <h2>13. Common misconceptions</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Misconception</th><th>Correction</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Transformers understand like humans.</td>
+                <td>They score relevance from learned patterns — useful, not human comprehension.</td>
+              </tr>
+              <tr>
+                <td>Attention is memory.</td>
+                <td>Attention weights context in the current input; it is not durable long-term memory.</td>
+              </tr>
+              <tr>
+                <td>Bigger context always means better output.</td>
+                <td>Quality of what is in context matters more than length alone.</td>
+              </tr>
+              <tr>
+                <td>LLMs search the internet by default.</td>
+                <td>Base models reason over provided tokens unless tools/retrieval are added.</td>
+              </tr>
+              <tr>
+                <td>Embeddings are exact meanings.</td>
+                <td>Embeddings are learned approximations — similar words cluster, but errors happen.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="recap" class="content-section">
+        <h2>14. Chapter recap</h2>
+        <ul>
+          <li>Attention is <strong>relevance scoring</strong> between words.</li>
+          <li><strong>Self-attention</strong> lets each word understand itself using other words in the sentence.</li>
+          <li><strong>Q / K / V</strong> is easiest as a search analogy: ask, match, retrieve.</li>
+          <li><strong>Multi-head attention</strong> means multiple viewpoints at once.</li>
+          <li>Product leaders need the intuition — not the derivations — to ship and evaluate LLM features well.</li>
+        </ul>
+      </section>
+
+      <section id="quiz" class="content-section">
+        <h2>15. Quick check quiz</h2>
+        <div class="quiz">
+          <div class="quiz-item">
+            <strong>What problem does attention solve?</strong>
+            <details><summary>Show answer</summary>It lets each word use context from the rest of the sentence instead of being interpreted in isolation.</details>
+          </div>
+          <div class="quiz-item">
+            <strong>Why does "it" connect to "animal" in the running example?</strong>
+            <details><summary>Show answer</summary>Attention assigns higher weight to "animal" and "tired" than to "street" based on learned language patterns.</details>
+          </div>
+          <div class="quiz-item">
+            <strong>What does self-attention mean?</strong>
+            <details><summary>Show answer</summary>Each word in a sentence attends to other words in that same sentence to update its representation.</details>
+          </div>
+          <div class="quiz-item">
+            <strong>What is Query in QKV?</strong>
+            <details><summary>Show answer</summary>The "search question" — what the current word is looking for in other words.</details>
+          </div>
+          <div class="quiz-item">
+            <strong>Why are multiple attention heads useful?</strong>
+            <details><summary>Show answer</summary>Different heads can capture different relationship types (coreference, grammar, cause-effect) in parallel.</details>
+          </div>
+        </div>
+      </section>
+
+      <section id="next" class="content-section">
+        <h2>16. Next chapter teaser</h2>
+        <p>
+          <strong>Next:</strong> Tokens, Embeddings and Positional Encoding — how text becomes the numbers
+          attention operates on, and why token limits shape every LLM product decision.
+        </p>
+        <div class="chapter-nav">
+          <a class="button secondary" href="/blog/ai-learning/transformer-architecture-pm-version/">← Back to Module</a>
+          <a class="button secondary" href="/blog/">Back to Blog</a>
+          <span class="button disabled">Next Chapter — Coming Soon</span>
+        </div>
+      </section>
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <div>© 2026 Samadhan Mishra</div>
+  </footer>
+</body>
+</html>

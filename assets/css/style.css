@@ -1,4 +1,4 @@
-/* Samadhan.AI — shared portal styles */
+/* Samadhan Mishra — shared site styles */
 :root {
   --bg: #f8fafc;
   --surface: #ffffff;
@@ -710,6 +710,111 @@ footer {
 }
 
 .redirect-card p { color: var(--muted); margin: 0 0 24px; }
+
+/* Portfolio */
+.work-card {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.work-card h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.work-meta {
+  display: grid;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.work-meta dt {
+  font-weight: 800;
+  color: var(--ink);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 2px;
+}
+
+.work-meta dd { margin: 0 0 8px; }
+
+.theme-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.theme-tag {
+  padding: 5px 10px;
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.portfolio-detail {
+  padding: 32px;
+  margin-bottom: 22px;
+}
+
+.portfolio-detail h3 {
+  margin: 0 0 14px;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+}
+
+.portfolio-detail p {
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+.portfolio-detail ul {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.meta-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.meta-badge {
+  padding: 6px 12px;
+  background: #f8fafc;
+  border: 1px solid var(--soft);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--muted);
+}
+
+footer.site-footer {
+  justify-content: center;
+  text-align: center;
+}
+
+.nav-links a.active {
+  color: var(--blue);
+}
+
+.hero-lead {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 680px;
+  margin: 0 0 20px;
+}
 
 @media (max-width: 900px) {
   .hero-grid,
