@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A simple, beginner-friendly explanation of Transformers, attention, tokens, embeddings, self-attention, Query-Key-Value, encoder-decoder architecture and how LLMs understand text." />
+  <title>Transformer Explained Simply | Learning Advanced AI</title>
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --soft: #e2e8f0;
+      --blue: #2563eb;
+      --blue-dark: #1e3a8a;
+      --blue-light: #eff6ff;
+      --accent: #c99959;
+      --card: #ffffff;
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.10);
+      --shadow-sm: 0 8px 28px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --radius-sm: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 34rem),
+        radial-gradient(circle at top right, rgba(201, 153, 89, 0.12), transparent 30rem),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.75;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(248, 250, 252, 0.82);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      font-size: 20px;
+    }
+
+    .brand span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .back-link {
+      font-size: 14px;
+      font-weight: 750;
+      color: var(--blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-link:hover { text-decoration: underline; }
+
+    /* Hero */
+    .article-hero {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 24px 40px;
+    }
+
+    .series-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid #bfdbfe;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+
+    .series-badge .part {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .article-hero h1 {
+      font-size: clamp(36px, 5.5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -0.06em;
+      margin: 0 0 20px;
+      max-width: 820px;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 28px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .article-lead {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* Layout */
+    .article-layout {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* TOC */
+    .toc {
+      position: sticky;
+      top: 88px;
+      background: var(--surface);
+      border: 1px solid var(--soft);
+      border-radius: var(--radius-sm);
+      padding: 22px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toc-title {
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      margin: 0 0 14px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding: 0 0 0 18px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .toc li { margin-bottom: 8px; color: var(--muted); }
+    .toc a { font-weight: 650; color: var(--muted); transition: color 0.15s; }
+    .toc a:hover { color: var(--blue); }
+
+    /* Content */
+    .article-content { min-width: 0; }
+
+    .content-section {
+      background: var(--surface);
+      border: 1px solid var(--soft);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .content-section h2 {
+      font-size: 28px;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin: 0 0 18px;
+      padding-top: 4px;
+    }
+
+    .content-section h3 {
+      font-size: 20px;
+      letter-spacing: -0.03em;
+      margin: 28px 0 12px;
+      color: var(--ink);
+    }
+
+    .content-section p {
+      margin: 0 0 16px;
+      color: var(--ink);
+    }
+
+    .content-section p:last-child { margin-bottom: 0; }
+
+    .content-section ul,
+    .content-section ol {
+      margin: 0 0 16px;
+      padding-left: 24px;
+    }
+
+    .content-section li {
+      margin-bottom: 8px;
+    }
+
+    .content-section code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9em;
+      background: #f1f5f9;
+      padding: 2px 7px;
+      border-radius: 6px;
+      color: var(--blue-dark);
+    }
+
+    /* Callouts */
+    .callout {
+      border-radius: var(--radius-sm);
+      padding: 20px 22px;
+      margin: 22px 0;
+      border-left: 4px solid var(--blue);
+    }
+
+    .callout.insight {
+      background: var(--blue-light);
+      border-color: var(--blue);
+    }
+
+    .callout.example {
+      background: #fffbeb;
+      border-color: var(--accent);
+    }
+
+    .callout.warning {
+      background: #fef2f2;
+      border-color: #ef4444;
+    }
+
+    .callout-title {
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin: 0 0 8px;
+      color: var(--blue-dark);
+    }
+
+    .callout.example .callout-title { color: #92400e; }
+    .callout.warning .callout-title { color: #991b1b; }
+
+    .callout p { margin: 0; font-size: 15px; }
+
+    .example-sentence {
+      font-size: 17px;
+      font-weight: 650;
+      font-style: italic;
+      color: var(--ink);
+      margin: 12px 0;
+      padding: 14px 18px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px dashed var(--soft);
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--soft);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 800;
+      color: var(--ink);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    /* Cheat sheet */
+    .cheat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .cheat-item {
+      padding: 16px 18px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px solid var(--soft);
+    }
+
+    .cheat-item strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: var(--blue);
+    }
+
+    .cheat-item span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Steps */
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .steps li {
+      position: relative;
+      padding: 16px 18px 16px 56px;
+      margin-bottom: 12px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px solid var(--soft);
+    }
+
+    .steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      width: 28px;
+      height: 28px;
+      background: var(--blue);
+      color: white;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+    }
+
+  /* Next links */
+    .next-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .next-link {
+      display: block;
+      padding: 18px 22px;
+      background: var(--blue-light);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius-sm);
+      font-weight: 750;
+      color: var(--blue-dark);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .next-link:hover {
+      border-color: var(--blue);
+      transform: translateX(4px);
+    }
+
+    .next-link span {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 30px 24px 60px;
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      border-top: 1px solid var(--soft);
+    }
+
+    @media (max-width: 960px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+        order: -1;
+      }
+
+      .cheat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links { display: none; }
+
+      .content-section {
+        padding: 28px 24px;
+      }
+
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a class="brand" href="/">Samadhan<span>.AI</span></a>
+      <div class="nav-links">
+        <a href="#why-difficult">Article</a>
+        <a href="#cheat-sheet">Cheat Sheet</a>
+        <a href="#next">What's Next</a>
+      </div>
+      <a class="back-link" href="/">← Back to Blog Home</a>
+    </div>
+  </nav>
+
+  <header class="article-hero">
+    <div class="series-badge">
+      Learning Advanced AI <span class="part">· Post 1</span>
+    </div>
+    <h1>Transformer Explained Simply</h1>
+    <div class="article-meta">
+      <span>By Samadhan Mishra</span>
+      <span>~18 min read</span>
+      <span>AI Fundamentals</span>
+    </div>
+    <p class="article-lead">
+      If you have ever wondered how ChatGPT understands context, resolves ambiguous pronouns,
+      or predicts the next word — you are really asking about the Transformer. This article
+      explains the architecture in plain language, without assuming a PhD in machine learning.
+    </p>
+  </header>
+
+  <div class="article-layout">
+    <aside class="toc" aria-label="Table of contents">
+      <p class="toc-title">On this page</p>
+      <ol>
+        <li><a href="#why-difficult">Why they feel difficult</a></li>
+        <li><a href="#what-is">What is a Transformer?</a></li>
+        <li><a href="#attention">The core idea: attention</a></li>
+        <li><a href="#tokens">Tokens</a></li>
+        <li><a href="#embeddings">Embeddings</a></li>
+        <li><a href="#positional">Positional encoding</a></li>
+        <li><a href="#self-attention">Self-attention</a></li>
+        <li><a href="#qkv">Query, Key, Value</a></li>
+        <li><a href="#multi-head">Multi-head attention</a></li>
+        <li><a href="#ffn">Feed-forward network</a></li>
+        <li><a href="#encoder-decoder">Encoder &amp; decoder</a></li>
+        <li><a href="#masking">Decoder masking</a></li>
+        <li><a href="#softmax">Final softmax</a></li>
+        <li><a href="#full-example">Complete example</a></li>
+        <li><a href="#cheat-sheet">Cheat sheet</a></li>
+        <li><a href="#next">What to learn next</a></li>
+      </ol>
+    </aside>
+
+    <article class="article-content">
+
+      <section id="why-difficult" class="content-section">
+        <h2>Why Transformers feel difficult at first</h2>
+        <p>
+          Most people encounter Transformers through papers, diagrams, and math-heavy blog posts.
+          The original paper title — "Attention Is All You Need" — is memorable but not exactly
+          a friendly onboarding experience.
+        </p>
+        <p>
+          The difficulty usually comes from three places:
+        </p>
+        <ul>
+          <li><strong>Stacked abstractions.</strong> Tokens, embeddings, attention, layers, heads, encoders, decoders — each builds on the last.</li>
+          <li><strong>Unfamiliar vocabulary.</strong> Words like "Query" and "Key" sound like database jargon because the analogy actually helps — but nobody tells you that upfront.</li>
+          <li><strong>Scale hides the idea.</strong> Production models have billions of parameters. It is easy to assume the architecture must be impossibly complex, when the core idea is surprisingly intuitive.</li>
+        </ul>
+
+        <div class="callout insight">
+          <p class="callout-title">Product leader takeaway</p>
+          <p>
+            You do not need to implement a Transformer to make good decisions about LLM products.
+            You need to understand <em>what it is good at</em> (context, language, sequence patterns)
+            and <em>where it breaks</em> (hallucination, ambiguity, cost at scale).
+          </p>
+        </div>
+      </section>
+
+      <section id="what-is" class="content-section">
+        <h2>What is a Transformer?</h2>
+        <p>
+          A Transformer is a neural network architecture designed to process sequences — especially
+          text — by letting every piece of the input interact with every other piece at once.
+        </p>
+        <p>
+          Before Transformers (roughly pre-2017), many language models used RNNs and LSTMs that read
+          text left-to-right, one word at a time. That worked, but it was slow and struggled with
+          long-range dependencies — like figuring out what "it" refers to ten words earlier.
+        </p>
+        <p>
+          Transformers changed the game by using <strong>attention</strong> instead of sequential
+          reading. That is why modern LLMs (GPT, Claude, Gemini, Llama) are overwhelmingly
+          Transformer-based.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Old approach (RNN/LSTM)</th>
+                <th>Transformer approach</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Reads sequentially, word by word</td>
+                <td>Looks at all words in parallel</td>
+              </tr>
+              <tr>
+                <td>Struggles with distant context</td>
+                <td>Direct connections between any two words</td>
+              </tr>
+              <tr>
+                <td>Hard to train at scale on GPUs</td>
+                <td>Highly parallelizable — scales well</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="attention" class="content-section">
+        <h2>The core idea: attention</h2>
+        <p>
+          When you read a sentence, you do not treat every word equally. Your brain automatically
+          weighs which words matter for understanding the current word.
+        </p>
+        <p class="example-sentence">
+          "The animal did not cross the street because it was tired."
+        </p>
+        <p>
+          To understand "it," you instinctively look back at "animal" — not "street." Attention
+          is the model's version of that instinct: a learned mechanism for deciding which other
+          words to focus on.
+        </p>
+
+        <div class="callout insight">
+          <p class="callout-title">One sentence summary</p>
+          <p>
+            Attention answers: <strong>"For this word, which other words should I pay attention to?"</strong>
+          </p>
+        </div>
+      </section>
+
+      <section id="tokens" class="content-section">
+        <h2>Tokens: how text becomes machine-readable</h2>
+        <p>
+          Models do not see words the way humans do. Text is split into <strong>tokens</strong> —
+          chunks that might be whole words, parts of words, or punctuation.
+        </p>
+
+        <div class="callout example">
+          <p class="callout-title">Example</p>
+          <p>
+            "I drink tea with ___" might become tokens like:
+            <code>["I", " drink", " tea", " with", " ___"]</code>
+          </p>
+          <p style="margin-top:10px;">
+            The blank (<code>___</code>) is where the model will predict the next token — perhaps
+            "milk," "sugar," or "friends" depending on context learned during training.
+          </p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Concept</th>
+                <th>Plain English</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Token</td>
+                <td>A small unit of text the model processes</td>
+              </tr>
+              <tr>
+                <td>Tokenization</td>
+                <td>Splitting raw text into those units</td>
+              </tr>
+              <tr>
+                <td>Vocabulary</td>
+                <td>The set of all tokens the model knows</td>
+              </tr>
+              <tr>
+                <td>Context window</td>
+                <td>Maximum number of tokens the model can handle at once</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Token limits matter for product decisions. A 128K context window sounds large, but
+          long documents, chat histories, and RAG payloads all consume tokens — and tokens cost money.
+        </p>
+      </section>
+
+      <section id="embeddings" class="content-section">
+        <h2>Embeddings: how words become numbers</h2>
+        <p>
+          Neural networks work with numbers, not strings. An <strong>embedding</strong> converts
+          each token into a vector — a list of numbers that captures meaning and relationships.
+        </p>
+        <p>
+          Words with similar meaning end up closer together in this number-space. "King" and
+          "Queen" sit near each other. "Dog" and "Cat" are neighbors. "King" and "Banana" are not.
+        </p>
+
+        <div class="callout insight">
+          <p class="callout-title">Think of it this way</p>
+          <p>
+            If tokens are the model's alphabet, embeddings are its dictionary — each entry is
+            a rich numerical fingerprint of meaning, not just a label.
+          </p>
+        </div>
+
+        <p>
+          During training, the model adjusts these vectors so that useful patterns emerge.
+          That is how "it" in one sentence can learn to point toward "animal" rather than "street."
+        </p>
+      </section>
+
+      <section id="positional" class="content-section">
+        <h2>Positional encoding: why word order matters</h2>
+        <p>
+          Attention looks at all words at once — which is powerful, but it also means the model
+          loses the natural order of words unless we tell it explicitly.
+        </p>
+        <p class="example-sentence">
+          "Dog bites man" vs "Man bites dog"
+        </p>
+        <p>
+          Same words. Completely different meaning. <strong>Positional encoding</strong> adds
+          position information to each embedding so the model knows who did what to whom.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Without position</th>
+                <th>With position</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bag of words — order lost</td>
+                <td>Sequence preserved — subject/verb/object clear</td>
+              </tr>
+              <tr>
+                <td>"Dog bites man" ≈ "Man bites dog"</td>
+                <td>Model distinguishes agent from patient</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Modern models use variations of this idea (learned position embeddings, rotary embeddings,
+          etc.), but the purpose is the same: <strong>word order is not optional in language.</strong>
+        </p>
+      </section>
+
+      <section id="self-attention" class="content-section">
+        <h2>Self-attention: how each word looks at other words</h2>
+        <p>
+          <strong>Self-attention</strong> means every token in a sentence attends to every other
+          token in the same sentence — including itself.
+        </p>
+        <p>
+          For each word, the model computes attention scores: how relevant is every other word
+          to understanding this one? High scores mean strong connection; low scores mean ignore.
+        </p>
+
+        <div class="callout example">
+          <p class="callout-title">Ambiguity example</p>
+          <p class="example-sentence" style="margin-top:8px;">
+            "The doctor checked the patient because he was coughing."
+          </p>
+          <p>
+            Who is "he"? A human uses world knowledge. The model uses attention weights learned
+            from millions of examples — typically linking "he" to "patient" in this pattern,
+            though edge cases can still fail.
+          </p>
+        </div>
+
+        <p>
+          Another classic test:
+        </p>
+        <p class="example-sentence">
+          "Rahul put the trophy in the suitcase because it was too big."
+        </p>
+        <p>
+          What does "it" refer to — the trophy or the suitcase? Humans know: trophies go inside
+          suitcases when they are too big, not the other way around. Self-attention helps the
+          model weigh "trophy" higher than "suitcase" for the word "it."
+        </p>
+      </section>
+
+      <section id="qkv" class="content-section">
+        <h2>Query, Key, Value — explained with a search analogy</h2>
+        <p>
+          This is where many articles lose readers. The trick is to map Q/K/V to something you
+          already understand: <strong>a search engine</strong>.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Search analogy</th>
+                <th>In the Transformer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Query (Q)</strong></td>
+                <td>Your search question</td>
+                <td>"I am the word <em>it</em> — what should I look at?"</td>
+              </tr>
+              <tr>
+                <td><strong>Key (K)</strong></td>
+                <td>Index labels on documents</td>
+                <td>"Here is how each word advertises itself for lookups"</td>
+              </tr>
+              <tr>
+                <td><strong>Value (V)</strong></td>
+                <td>Actual content returned</td>
+                <td>"Here is the information I pass along if selected"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>Each token creates a Query, Key, and Value vector from its embedding.</li>
+          <li>Compare this token's Query against every token's Key → relevance scores.</li>
+          <li>Scale and normalize those scores (softmax) so they sum to 100% attention.</li>
+          <li>Blend all Value vectors using those weights → updated representation for this token.</li>
+        </ol>
+
+        <div class="callout insight">
+          <p class="callout-title">Why three vectors?</p>
+          <p>
+            Separating "what I'm looking for" (Query), "how I'm labeled" (Key), and "what I
+            contribute" (Value) gives the model flexibility. The same word can ask different
+            questions and offer different information in different contexts.
+          </p>
+        </div>
+      </section>
+
+      <section id="multi-head" class="content-section">
+        <h2>Multi-head attention: multiple viewpoints</h2>
+        <p>
+          One attention pass captures one type of relationship. Real language has many: grammar,
+          coreference (what "it" means), topic, sentiment, and more.
+        </p>
+        <p>
+          <strong>Multi-head attention</strong> runs several attention operations in parallel —
+          each "head" learns a different lens. One head might track subject-verb agreement; another
+          might focus on pronoun antecedents.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Single-head</th>
+                <th>Multi-head (e.g. 8–12 heads)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>One relationship pattern</td>
+                <td>Many patterns simultaneously</td>
+              </tr>
+              <tr>
+                <td>Limited expressiveness</td>
+                <td>Richer, more nuanced representations</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          The outputs are concatenated and projected back — giving each token a representation
+          informed by multiple types of context at once.
+        </p>
+      </section>
+
+      <section id="ffn" class="content-section">
+        <h2>Feed-forward network: thinking after looking</h2>
+        <p>
+          Attention gathers context. The <strong>feed-forward network (FFN)</strong> processes
+          what was gathered — like reflecting after you have read the relevant parts of a document.
+        </p>
+        <p>
+          Each token passes through a small two-layer neural network independently. This step
+          adds non-linearity and depth: the model does not just mix information, it transforms it.
+        </p>
+
+        <div class="callout insight">
+          <p class="callout-title">Attention + FFN = one block</p>
+          <p>
+            A Transformer layer typically stacks: <strong>Attention → FFN</strong>, with residual
+            connections and normalization between them. Repeat this block many times (12, 24,
+            96+ layers depending on model size).
+          </p>
+        </div>
+      </section>
+
+      <section id="encoder-decoder" class="content-section">
+        <h2>Encoder and decoder</h2>
+        <p>
+          The original Transformer had two halves:
+        </p>
+        <ul>
+          <li><strong>Encoder</strong> — reads and understands the input. Builds rich representations of every token.</li>
+          <li><strong>Decoder</strong> — generates output one token at a time, using what the encoder understood (in seq2seq tasks like translation).</li>
+        </ul>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Architecture</th>
+                <th>Used for</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Encoder-only</td>
+                <td>Understanding / classification</td>
+                <td>BERT</td>
+              </tr>
+              <tr>
+                <td>Decoder-only</td>
+                <td>Text generation</td>
+                <td>GPT, Llama, Claude</td>
+              </tr>
+              <tr>
+                <td>Encoder-decoder</td>
+                <td>Input → output transformation</td>
+                <td>Translation (T5, BART)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Most chat LLMs you use today are <strong>decoder-only</strong>: they predict the next
+          token given everything before it. That is why prompting matters — you are literally
+          shaping the input sequence the decoder conditions on.
+        </p>
+      </section>
+
+      <section id="masking" class="content-section">
+        <h2>Decoder masking: no cheating while predicting text</h2>
+        <p>
+          When training a decoder to generate text, the model must predict word 5 using only
+          words 1–4 — not words 6–10. Otherwise it cheats by peeking at the answer.
+        </p>
+        <p>
+          <strong>Causal masking</strong> (or look-ahead masking) hides future tokens during training.
+          Each position can only attend to itself and earlier positions.
+        </p>
+
+        <div class="callout warning">
+          <p class="callout-title">Why this matters for products</p>
+          <p>
+            At inference time, the model genuinely does not know what it will say next — it
+            generates one token at a time. That is why streaming responses work token-by-token,
+            and why early tokens in a completion constrain everything that follows.
+          </p>
+        </div>
+      </section>
+
+      <section id="softmax" class="content-section">
+        <h2>Final softmax: choosing the next token</h2>
+        <p>
+          After all layers process the input, the model produces a score for every token in its
+          vocabulary. <strong>Softmax</strong> converts those scores into probabilities that sum to 100%.
+        </p>
+        <p>
+          The model then picks the next token — usually the highest probability, but temperature
+          and sampling add controlled randomness for more natural output.
+        </p>
+
+        <p class="example-sentence">
+          "I drink tea with ___"
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Token candidate</th>
+                <th>Illustrative probability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>milk</td><td>42%</td></tr>
+              <tr><td>sugar</td><td>28%</td></tr>
+              <tr><td>lemon</td><td>15%</td></tr>
+              <tr><td>friends</td><td>8%</td></tr>
+              <tr><td>…others</td><td>7%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Probabilities are illustrative — real distributions depend on training data and context.
+          The key insight: <strong>LLMs are next-token prediction machines</strong>, scaled until
+          emergent abilities appear useful.
+        </p>
+      </section>
+
+      <section id="full-example" class="content-section">
+        <h2>Complete example: walking through one sentence</h2>
+        <p class="example-sentence">
+          "The animal did not cross the street because it was tired."
+        </p>
+        <p>Here is how a Transformer-style model roughly processes this sentence:</p>
+
+        <ol class="steps">
+          <li><strong>Tokenize</strong> — Split into tokens: "The", " animal", " did", " not", " cross", " the", " street", " because", " it", " was", " tired", "."</li>
+          <li><strong>Embed</strong> — Convert each token to a numerical vector; add positional encoding so order is preserved.</li>
+          <li><strong>Self-attention layers</strong> — When processing "it", attention heads compare its Query to Keys from all other tokens. "Animal" gets a high weight; "street" gets a low weight.</li>
+          <li><strong>Multi-head blend</strong> — Several heads may confirm the coreference link while others capture grammar or negation ("did not cross").</li>
+          <li><strong>Feed-forward</strong> — Each token's vector is refined based on the contextual blend from attention.</li>
+          <li><strong>Repeat</strong> — Stack 12–100+ layers; representations get increasingly abstract and task-aware.</li>
+          <li><strong>Output (if generating)</strong> — For prediction tasks, the final layer's representation of the last position feeds softmax over the vocabulary for the next token.</li>
+        </ol>
+
+        <div class="callout insight">
+          <p class="callout-title">What you just learned</p>
+          <p>
+            The model did not look up a rule that "it" means "animal." It learned statistical
+            patterns across billions of examples so attention weights favor the right connection.
+            That is powerful — and also why edge cases and hallucinations still happen.
+          </p>
+        </div>
+      </section>
+
+      <section id="cheat-sheet" class="content-section">
+        <h2>Transformer cheat sheet</h2>
+        <p>Bookmark this section. It condenses the full article into quick reference points.</p>
+
+        <div class="cheat-grid">
+          <div class="cheat-item">
+            <strong>Transformer</strong>
+            <span>Neural architecture for sequences; uses attention instead of sequential RNN reading.</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Token</strong>
+            <span>Smallest text unit the model processes; drives cost and context limits.</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Embedding</strong>
+            <span>Numeric vector representing token meaning in high-dimensional space.</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Positional encoding</strong>
+            <span>Injects word order so "Dog bites man" ≠ "Man bites dog."</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Self-attention</strong>
+            <span>Each word weighs every other word to build contextual understanding.</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Query / Key / Value</strong>
+            <span>Search-like mechanism: ask (Q), match (K), retrieve (V).</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Multi-head attention</strong>
+            <span>Parallel attention lenses for grammar, coreference, topic, etc.</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Feed-forward network</strong>
+            <span>Processes attended information; adds depth per layer.</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Encoder</strong>
+            <span>Understands input (BERT-style).</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Decoder</strong>
+            <span>Generates output token by token (GPT-style).</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Causal masking</strong>
+            <span>Prevents peeking at future tokens during training/generation.</span>
+          </div>
+          <div class="cheat-item">
+            <strong>Softmax</strong>
+            <span>Converts scores to probabilities; picks the next token.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="next" class="content-section">
+        <h2>What to learn next</h2>
+        <p>
+          You now have the mental model behind every major LLM. The Learning Advanced AI series
+          builds on this foundation in order. Recommended next topics:
+        </p>
+
+        <div class="next-links">
+          <a class="next-link" href="/">
+            Context windows &amp; inference economics
+            <span>Why token limits, latency, and cost shape product design.</span>
+          </a>
+          <a class="next-link" href="/">
+            RAG Explained for Product Leaders
+            <span>Coming soon — retrieval, chunking, and when LLMs need external knowledge.</span>
+          </a>
+          <a class="next-link" href="/">
+            How LLMs are trained (pre-training vs fine-tuning)
+            <span>Coming soon — what actually changes inside the model.</span>
+          </a>
+        </div>
+
+        <p style="margin-top:24px;">
+          <a class="back-link" href="/">← Back to Blog Home</a>
+        </p>
+      </section>
+
+    </article>
+  </div>
+
+  <footer>
+    <div>© 2026 Samadhan Mishra. Learning Advanced AI.</div>
+    <div>blog.samadhanmishra.com</div>
+  </footer>
+</body>
+</html>
