@@ -11,8 +11,9 @@ const SECTION_LINKS = [
 ];
 
 const SITE_LINKS = [
-  { href: "/blog", label: "Blog" },
-  { href: "/ai-learning", label: "AI Learning" }
+  { href: "/portfolio/", label: "Portfolio" },
+  { href: "/blog/", label: "Blog" },
+  { href: "/blog/ai-learning/", label: "AI Learning" }
 ];
 
 export default function Navigation() {

@@ -53,68 +53,115 @@ export default function Hero() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
             className="md:col-span-6 md:col-start-1 font-body text-base text-white/70 md:text-lg"
           >
-            AI Product Leader — {profile.years} years building intelligent
-            products across{" "}
-            <span className="text-white">InsurTech</span>,{" "}
-            <span className="text-white">EdTech</span> and{" "}
-            <span className="text-white">FinTech</span>. Currently leading
-            AI/ML products at Bajaj Finserv Health.
+            {profile.role} — {profile.years} across{" "}
+            <span className="text-white">HealthTech</span>,{" "}
+            <span className="text-white">FinTech</span>,{" "}
+            <span className="text-white">EdTech</span>, and{" "}
+            <span className="text-white">enterprise SaaS</span>. {profile.tagline}
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.85 }}
-            className="flex items-end md:col-span-5 md:col-start-8"
-          >
-            <div className="flex flex-wrap items-center gap-4">
-              <MagneticButton
-                href="#contact"
-                shape="pill"
-                variant="primary"
-                data-testid="hire-me-button"
-                data-cursor="hire me"
-              >
-                <span>Hire Me</span>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  className="transition-transform duration-500 group-hover:translate-x-1"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.85 }}
+              className="flex flex-col items-start gap-4 md:col-span-5 md:col-start-8 md:items-end"
+            >
+              <motion.div className="flex flex-wrap items-center gap-3 md:justify-end">
+                <MagneticButton
+                  href="/portfolio/"
+                  shape="pill"
+                  variant="primary"
+                  data-testid="hero-portfolio-button"
+                  data-cursor="portfolio"
                 >
-                  <path
-                    d="M1 7h12M8 2l5 5-5 5"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                  />
-                </svg>
-              </MagneticButton>
+                  <span>View Portfolio</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    className="transition-transform duration-500 group-hover:translate-x-1"
+                  >
+                    <path
+                      d="M1 7h12M8 2l5 5-5 5"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                    />
+                  </svg>
+                </MagneticButton>
 
-              <MagneticButton
-                href={profile.social.linkedin}
-                shape="pill"
-                variant="ghost"
-                data-testid="hero-linkedin-button"
-                data-cursor="linkedin"
-              >
-                <span>LinkedIn</span>
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                <MagneticButton
+                  href="/blog/"
+                  shape="pill"
+                  variant="primary"
+                  data-testid="hero-blog-button"
+                  data-cursor="blog"
                 >
-                  <path
-                    d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                  />
-                </svg>
-              </MagneticButton>
-            </div>
-          </motion.div>
+                  <span>Read Blog</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    className="transition-transform duration-500 group-hover:translate-x-1"
+                  >
+                    <path
+                      d="M1 7h12M8 2l5 5-5 5"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                    />
+                  </svg>
+                </MagneticButton>
+              </motion.div>
+
+              <motion.div className="flex flex-wrap items-center gap-3 md:justify-end">
+                <MagneticButton
+                  href="/blog/ai-learning/"
+                  shape="pill"
+                  variant="ghost"
+                  data-testid="hero-ai-learning-button"
+                  data-cursor="ai learning"
+                >
+                  <span>AI Learning</span>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  >
+                    <path
+                      d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                    />
+                  </svg>
+                </MagneticButton>
+
+                <MagneticButton
+                  href={profile.social.linkedin}
+                  shape="pill"
+                  variant="ghost"
+                  data-testid="hero-linkedin-button"
+                  data-cursor="linkedin"
+                >
+                  <span>LinkedIn</span>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  >
+                    <path
+                      d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                    />
+                  </svg>
+                </MagneticButton>
+              </motion.div>
+            </motion.div>
         </div>
       </div>
 

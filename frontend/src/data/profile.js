@@ -4,12 +4,12 @@ export const profile = {
   location: "Pune, India",
   availability: "Open to roles · Advisory · Speaking",
   tagline:
-    "Building intelligent insurance, ed-tech and fin-tech products at scale.",
+    "Building intelligent HealthTech, FinTech, EdTech, and AI-native workflow products at scale.",
   years: "13+",
   bio: [
-    "I'm an AI Product Leader with 13+ years building software products across InsurTech, EdTech and FinTech.",
-    "I currently lead an AI/ML product portfolio at Bajaj Finserv Health — spanning Claims AI, HealthPay, Wellness Platform and Partner Centre — powering the TPA and health-insurance stack that together generates ₹20M+ GMV.",
-    "My work sits at the intersection of machine learning, insurance operations and payments: turning messy adjudication, settlement and partner workflows into clean, automated, measurable products."
+    "I'm an AI Product Leader with 13+ years across InsurTech/HealthTech, EdTech, FinTech, and enterprise SaaS — from workflow transformation and 0-to-1 product building to scaling AI-native platforms.",
+    "I lead an AI/ML product portfolio at Bajaj Finserv Health spanning Claims AI, HealthPay, Wellness Platform, and Partner Centre — the core TPA and health-insurance stack generating ₹20M+ GMV.",
+    "My work connects product strategy, roadmaps, PRDs, and stakeholder alignment with execution: adjudication, settlement, payments, and partner workflows turned into measurable, automated product systems."
   ],
   social: {
     linkedin: "https://www.linkedin.com/in/samadhan-mishra/",
@@ -180,6 +180,46 @@ export const profile = {
       year: "2022",
       desc: "First-to-market AMP email feature for collection analysts at HighRadius — interactive, dynamic workflows right inside email.",
       bg: "https://images.unsplash.com/photo-1774888912180-ccc87492a260?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRpZ2l0YWwlMjBhcnQlMjB0ZWNoJTIwZGFya3xlbnwwfHx8fDE3NzY2ODE3NzJ8MA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      id: "enigma-vings",
+      title: "Enigma + Vings",
+      tag: "HealthTech · AI Workflow Intelligence",
+      year: "2024",
+      desc: "Product and platform thinking around cognitive automation, OCR, document categorization, medical and billing digitization, rule evaluation, decision support, and Vings as the system of work.",
+      bg: "https://images.unsplash.com/photo-1774888912180-ccc87492a260?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRpZ2l0YWwlMjBhcnQlMjB0ZWNoJTIwZGFya3xlbnwwfHx8fDE3NzY2ODE3NzJ8MA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      id: "preauth-coe",
+      title: "Pre-Auth COE Transformation",
+      tag: "HealthTech · Workflow Transformation",
+      year: "2024",
+      desc: "Workflow modernization around Pre-Auth AHT, Fresh and Discharge TAT, productivity, rule sequencing, auto-allocation, insurer concurrence automation, and governance.",
+      bg: "https://images.unsplash.com/photo-1771873680097-7506773a2b02?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGRpZ2l0YWwlMjBhcnQlMjB0ZWNoJTIwZGFya3xlbnwwfHx8fDE3NzY2ODE3NzJ8MA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      id: "network-claims",
+      title: "Network Claims / OPD / FinOps / Audit",
+      tag: "Enterprise Operations · Agentic Workflow Mapping",
+      year: "2024",
+      desc: "Process analysis and AI-agent mapping across claims, OPD reimbursement, FinOps, customer service, and audit workflows.",
+      bg: "https://images.unsplash.com/photo-1638290047807-4c9d389b9aa6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBpbmRpYW4lMjBtYW4lMjBoZWFkc2hvdCUyMGRhcmslMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc3NjY4MTc3Mnww&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      id: "aischoolhub",
+      title: "AISchoolHub",
+      tag: "AI Education · B2B EdTech",
+      year: "2024",
+      desc: "An AI education platform initiative for schools focused on structured AI curriculum, learner journeys, teacher enablement, project-based learning, LMS-aligned delivery, certification, and practical AI adoption.",
+      bg: "https://images.unsplash.com/photo-1771873680097-7506773a2b02?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGRpZ2l0YWwlMjBhcnQlMjB0ZWNoJTIwZGFya3xlbnwwfHx8fDE3NzY2ODE3NzJ8MA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      id: "smoking-tracker",
+      title: "Smoking Tracker",
+      tag: "Consumer Health · Behaviour Design",
+      year: "2024",
+      desc: "A habit-tracking product concept focused on helping users monitor smoking frequency, identify triggers, understand consumption patterns, and gradually reduce smoking through structured tracking, nudges, streaks, and progress visibility.",
+      bg: "https://images.unsplash.com/photo-1638290047807-4c9d389b9aa6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBpbmRpYW4lMjBtYW4lMjBoZWFkc2hvdCUyMGRhcmslMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc3NjY4MTc3Mnww&ixlib=rb-4.1.0&q=85"
     }
   ],
   skills: [

@@ -34,9 +34,13 @@ jobs:
         env:
           CI: false
 
-      - name: Bundle legacy static sections
+      - name: Bundle static site sections into build output
         run: |
-          for path in blog ai-learning portfolio posts assets; do
+          # blog: knowledge portal (canonical AI Learning under /blog/ai-learning/)
+          # portfolio: detailed static portfolio page
+          # assets: shared CSS and static assets
+          # ai-learning, posts: legacy URL redirects only
+          for path in blog portfolio assets ai-learning posts; do
             if [ -e "$path" ]; then
               cp -r "$path" frontend/build/
             fi
