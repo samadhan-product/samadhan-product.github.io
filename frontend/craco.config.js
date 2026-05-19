@@ -47,6 +47,11 @@ let webpackConfig = {
         ],
       };
 
+      // JS-only project: remove TS checker to avoid ajv/schema-utils version conflicts in CI
+      webpackConfig.plugins = webpackConfig.plugins.filter(
+        (plugin) => plugin?.constructor?.name !== "ForkTsCheckerWebpackPlugin"
+      );
+
       // Add health check plugin to webpack if enabled
       if (config.enableHealthCheck && healthPluginInstance) {
         webpackConfig.plugins.push(healthPluginInstance);

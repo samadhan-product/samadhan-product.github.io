@@ -34,6 +34,7 @@ jobs:
         env:
           CI: false
           GENERATE_SOURCEMAP: false
+          DISABLE_ESLINT_PLUGIN: true
 
       - name: Bundle legacy static sections
         run: |
