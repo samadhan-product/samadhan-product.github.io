@@ -34,4 +34,4 @@ cd frontend
 npm run build
 ```
 
-Use Node.js 20 LTS.
+Use Node.js 20 LTS. The site is built with **Vite** (not Create React App).
