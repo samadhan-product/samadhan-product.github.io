@@ -13,8 +13,8 @@ const socials = [
   {
     key: "email",
     label: "Email",
-    href: "mailto:samadhan.mishra@example.com",
-    handle: "samadhan.mishra@example.com"
+    href: profile.social.email,
+    handle: "me@samadhanmishra.com"
   }
 ];
 
@@ -68,7 +68,7 @@ export default function Contact() {
               </svg>
             </MagneticButton>
             <MagneticButton
-              href="mailto:samadhan.mishra@example.com"
+              href={profile.social.email}
               shape="pill"
               variant="ghost"
               data-testid="contact-email-button"

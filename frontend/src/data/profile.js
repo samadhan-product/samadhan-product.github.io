@@ -13,7 +13,7 @@ export const profile = {
   ],
   social: {
     linkedin: "https://www.linkedin.com/in/samadhan-mishra/",
-    email: "mailto:samadhan.mishra@example.com",
+    email: "mailto:me@samadhanmishra.com",
     twitter: "https://twitter.com/"
   },
   metrics: [
