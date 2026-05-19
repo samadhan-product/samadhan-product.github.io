@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Samadhan Mishra's personal AI blog covering AI product leadership, agents, RAG, LLMs, implementation strategy, and practical AI learning." />
+  <title>Samadhan Mishra | AI Product Leadership Blog</title>
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --soft: #e2e8f0;
+      --blue: #2563eb;
+      --blue-dark: #1e3a8a;
+      --accent: #c99959;
+      --card: #ffffff;
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.10);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 34rem),
+        radial-gradient(circle at top right, rgba(201, 153, 89, 0.16), transparent 30rem),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(248, 250, 252, 0.78);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      font-size: 20px;
+    }
+
+    .brand span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 86px 24px 56px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 14px;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: var(--blue-dark);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(44px, 7vw, 82px);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+      margin: 0 0 24px;
+      color: var(--ink);
+    }
+
+    .hero-text {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0 20px;
+      font-weight: 850;
+      transition: 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--ink);
+      color: white;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.20);
+    }
+
+    .button.secondary {
+      background: white;
+      color: var(--ink);
+      border: 1px solid var(--soft);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .profile-card {
+      background: linear-gradient(145deg, #0f172a, #1e3a8a);
+      color: white;
+      border-radius: 34px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(96, 165, 250, 0.22);
+      right: -90px;
+      top: -90px;
+    }
+
+    .profile-card-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-card h2 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+    }
+
+    .profile-card p {
+      margin: 0;
+      color: #dbeafe;
+    }
+
+    .profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #e0f2fe;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 12px 24px 80px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin: 42px 0 18px;
+    }
+
+    .section-header h2 {
+      font-size: 34px;
+      margin: 0;
+      letter-spacing: -0.04em;
+      line-height: 1.12;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      margin: 8px 0 0;
+      max-width: 680px;
+    }
+
+    .featured {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .featured-card,
+    .card,
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--soft);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .featured-card {
+      padding: 32px;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(255, 255, 255, 0.9)),
+        white;
+    }
+
+    .post-kicker {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .featured-card h3 {
+      font-size: 38px;
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      margin: 0 0 18px;
+    }
+
+    .featured-card p {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 0 0 24px;
+    }
+
+    .read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mini-post {
+      padding: 24px;
+    }
+
+    .mini-post h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .mini-post p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #93c5fd;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: #eff6ff;
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .about-card {
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 30px;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.04), transparent),
+        white;
+    }
+
+    .about-card h2 {
+      font-size: 34px;
+      letter-spacing: -0.04em;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+
+    .principles {
+      display: grid;
+      gap: 12px;
+    }
+
+    .principle {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--soft);
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 30px 24px 60px;
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      border-top: 1px solid var(--soft);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .featured,
+      .about-card {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a class="brand" href="/">Samadhan<span>.AI</span></a>
+      <div class="nav-links">
+        <a href="#posts">Posts</a>
+        <a href="#series">Series</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Personal Blog • AI • Product • Implementation</div>
+      <h1>Learning AI deeply. Explaining it simply.</h1>
+      <p class="hero-text">
+        This is my personal AI learning and product leadership blog where I break down
+        Transformers, LLMs, AI Agents, RAG, MCP, LLMOps, and practical AI implementation
+        in simple, business-friendly language.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="#posts">Read Latest Posts</a>
+        <a class="button secondary" href="#series">Explore Learning Series</a>
+      </div>
+    </div>
+
+    <aside class="profile-card">
+      <div class="profile-card-content">
+        <h2>From product leadership to AI-native execution.</h2>
+        <p>
+          Notes, frameworks, examples, and implementation thinking for anyone trying to
+          understand AI beyond buzzwords.
+        </p>
+
+        <div class="profile-tags">
+          <span class="tag">AI Product Management</span>
+          <span class="tag">AI Agents</span>
+          <span class="tag">RAG</span>
+          <span class="tag">LLMOps</span>
+          <span class="tag">MCP</span>
+          <span class="tag">Systems Thinking</span>
+        </div>
+      </div>
+    </aside>
+  </header>
+
+  <main class="page">
+    <section id="posts">
+      <div class="section-header">
+        <div>
+          <h2>Latest Posts</h2>
+          <p>
+            Beginner-friendly but serious explanations of core AI concepts, written from
+            the lens of product, implementation, and real-world system design.
+          </p>
+        </div>
+      </div>
+
+      <div class="featured">
+        <article class="featured-card">
+          <div>
+            <div class="post-kicker">AI Fundamentals</div>
+            <h3>Transformer Explained Simply</h3>
+            <p>
+              A simple explanation of Transformers, self-attention, tokens, embeddings,
+              encoder-decoder architecture, and how modern AI models understand text.
+            </p>
+          </div>
+
+          <a class="read-link" href="/posts/transformer-explained/">
+            Read the post →
+          </a>
+        </article>
+
+        <div class="side-stack">
+          <article class="card mini-post">
+            <div class="post-kicker">Coming Soon</div>
+            <h3>RAG Explained for Product Leaders</h3>
+            <p>
+              Why RAG exists, where it works, where it fails, and how to design reliable
+              retrieval-based AI systems.
+            </p>
+          </article>
+
+          <article class="card mini-post">
+            <div class="post-kicker">Coming Soon</div>
+            <h3>AI Agents Without the Hype</h3>
+            <p>
+              A practical breakdown of agents, tools, memory, orchestration, and
+              human-in-the-loop workflows.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="series">
+      <div class="section-header">
+        <div>
+          <h2>Learning Series</h2>
+          <p>
+            The blog is organized into learning tracks so concepts build on top of each
+            other instead of feeling random.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card-icon">01</div>
+          <h3>AI Fundamentals</h3>
+          <p>
+            Tokens, embeddings, attention, Transformers, context windows, inference,
+            training, and model behavior.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">02</div>
+          <h3>AI Product Leadership</h3>
+          <p>
+            How to evaluate AI use cases, define success metrics, design workflows,
+            manage risk, and align stakeholders.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">03</div>
+          <h3>AI Agents & Automation</h3>
+          <p>
+            Agents, tools, MCP, planning, memory, orchestration, approvals, and
+            production-grade workflow automation.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">04</div>
+          <h3>RAG & Knowledge Systems</h3>
+          <p>
+            Document ingestion, chunking, embeddings, vector databases, retrieval quality,
+            citations, and evaluation.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">05</div>
+          <h3>LLMOps</h3>
+          <p>
+            Prompt management, evaluation, observability, guardrails, cost, latency,
+            model routing, and reliability.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">06</div>
+          <h3>Implementation Playbooks</h3>
+          <p>
+            Practical AI implementation notes for enterprise workflows, operations,
+            customer support, claims, education, and SaaS products.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-header">
+        <div>
+          <h2>About This Blog</h2>
+          <p>
+            This is not a news site and not a shallow AI buzzword page. The goal is to
+            build durable understanding.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-card">
+        <div>
+          <h2>My working principle is simple: learn deeply, simplify aggressively, apply practically.</h2>
+        </div>
+
+        <div>
+          <p>
+            I write these notes to strengthen my own understanding of advanced AI and to
+            create a practical reference for product leaders, builders, and operators.
+          </p>
+
+          <div class="principles">
+            <div class="principle">No unnecessary jargon unless the concept genuinely needs it.</div>
+            <div class="principle">Every technical concept should map to a real product or system decision.</div>
+            <div class="principle">AI should be evaluated by outcomes, not demos.</div>
+            <div class="principle">The best AI systems combine automation, controls, and human judgment.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© 2026 Samadhan Mishra. Personal AI learning notes.</div>
+    <div>Built on GitHub Pages.</div>
+  </footer>
+</body>
+</html>
