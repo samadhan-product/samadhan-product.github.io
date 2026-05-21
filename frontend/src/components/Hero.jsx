@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import ShaderBackground from "./ShaderBackground";
 import MagneticButton from "./MagneticButton";
 import { RevealText } from "./Reveal";
 import { profile } from "../data/profile";
@@ -11,8 +10,6 @@ export default function Hero() {
       className="relative flex min-h-[100svh] w-full flex-col overflow-hidden"
       data-testid="hero-section"
     >
-      <ShaderBackground />
-
       {/* Vignette overlay */}
       <div className="hero-vignette" aria-hidden="true" />
 

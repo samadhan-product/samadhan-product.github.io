@@ -1,4 +1,11 @@
 .App {
+    position: relative;
+    isolation: isolate;
     background: transparent;
     min-height: 100vh;
+}
+
+.App > :not(.animated-dot-field) {
+    position: relative;
+    z-index: 1;
 }

@@ -136,10 +136,8 @@ export default function Contact() {
           MISHRA.
         </motion.div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 py-6 font-mono text-[11px] uppercase tracking-[0.22em] text-white/40 md:flex-row md:items-center">
+        <div className="mt-10 border-t border-white/10 py-6 font-mono text-[11px] uppercase tracking-[0.22em] text-white/40">
           <span>© 2025 — Samadhan Mishra</span>
-          <span>Built with react · three.js · framer-motion · lenis</span>
-          <span>Inspired by shader.se</span>
         </div>
       </div>
     </Section>

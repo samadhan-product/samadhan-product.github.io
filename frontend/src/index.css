@@ -193,34 +193,89 @@ html.lenis body {
 }
 
 /* =============================================
-   Animated Dot Field — AI / Network Background
+   Animated Dot Field — moving grid background
    ============================================= */
 
-@keyframes dotDrift {
-  from { background-position: 0 0; }
-  to   { background-position: 64px 64px; }
+@keyframes dotDriftSlow {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(48px, 48px, 0);
+  }
 }
 
-/* Default dark: blue/cyan dots */
+@keyframes dotDriftFast {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-36px, 36px, 0);
+  }
+}
+
 .animated-dot-field {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -1;
-  opacity: 0.15;
-  background-image: radial-gradient(circle, rgba(59, 130, 246, 0.35) 1px, transparent 1px);
-  background-size: 32px 32px;
-  animation: dotDrift 40s linear infinite;
+  z-index: 0;
+  overflow: hidden;
 }
 
-/* Light / vintage mode: warm sepia-grey dots */
-[data-theme="light"] .animated-dot-field {
-  opacity: 0.12;
-  background-image: radial-gradient(circle, rgba(90, 80, 65, 0.28) 1px, transparent 1px);
+.animated-dot-field::before,
+.animated-dot-field::after {
+  content: "";
+  position: absolute;
+  inset: -80px;
+  will-change: transform;
+}
+
+/* Primary dot layer — soft white grid */
+.animated-dot-field::before {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.16) 1.25px,
+    transparent 1.25px
+  );
+  background-size: 40px 40px;
+  animation: dotDriftSlow 55s linear infinite;
+}
+
+/* Secondary layer — subtle blue drift, offset rhythm */
+.animated-dot-field::after {
+  background-image: radial-gradient(
+    circle,
+    rgba(96, 165, 250, 0.22) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  background-position: 14px 14px;
+  opacity: 0.85;
+  animation: dotDriftFast 38s linear infinite reverse;
+}
+
+[data-theme="light"] .animated-dot-field::before {
+  background-image: radial-gradient(
+    circle,
+    rgba(90, 80, 65, 0.22) 1.25px,
+    transparent 1.25px
+  );
+}
+
+[data-theme="light"] .animated-dot-field::after {
+  background-image: radial-gradient(
+    circle,
+    rgba(166, 111, 47, 0.18) 1px,
+    transparent 1px
+  );
+  opacity: 0.75;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animated-dot-field { animation: none; }
+  .animated-dot-field::before,
+  .animated-dot-field::after {
+    animation: none;
+  }
 }
 
 /* =============================================
@@ -271,11 +326,6 @@ html[data-theme="light"] ::-webkit-scrollbar-thumb {
 /* Grain overlay — softer in light mode */
 html[data-theme="light"] .grain::before {
     mix-blend-mode: multiply;
-    opacity: 0.04;
-}
-
-/* Shader canvas — reduce to near-invisible in light mode */
-html[data-theme="light"] [data-testid="hero-shader-canvas"] {
     opacity: 0.04;
 }
 
