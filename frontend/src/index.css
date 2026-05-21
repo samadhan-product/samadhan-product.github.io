@@ -193,6 +193,37 @@ html.lenis body {
 }
 
 /* =============================================
+   Animated Dot Field — AI / Network Background
+   ============================================= */
+
+@keyframes dotDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 64px 64px; }
+}
+
+/* Default dark: blue/cyan dots */
+.animated-dot-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.15;
+  background-image: radial-gradient(circle, rgba(59, 130, 246, 0.35) 1px, transparent 1px);
+  background-size: 32px 32px;
+  animation: dotDrift 40s linear infinite;
+}
+
+/* Light / vintage mode: warm sepia-grey dots */
+[data-theme="light"] .animated-dot-field {
+  opacity: 0.12;
+  background-image: radial-gradient(circle, rgba(90, 80, 65, 0.28) 1px, transparent 1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-dot-field { animation: none; }
+}
+
+/* =============================================
    Hero vignette — theme-aware overlay
    ============================================= */
 

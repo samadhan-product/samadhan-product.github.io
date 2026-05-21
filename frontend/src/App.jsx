@@ -20,6 +20,7 @@ function GitHubPagesRedirect() {
 export default function App() {
   return (
     <div className="App">
+      <div className="animated-dot-field" aria-hidden="true" />
       <BrowserRouter>
         <GitHubPagesRedirect />
         <Routes>

@@ -1442,7 +1442,7 @@ button:focus-visible {
 .cg-orb.cyan  { width: 380px; height: 380px; background: rgba(34,211,238,0.14); top: 25%; right: -80px; }
 .cg-orb.gold  { width: 320px; height: 320px; background: rgba(245,158,11,0.12); bottom: -60px; right: -40px; }
 
-.cg-blog-theme > *:not(.cg-mesh-bg):not(.cg-grid-bg):not(.cg-orb):not(.cg-progress-bar):not(.cg-back-to-top) {
+.cg-blog-theme > *:not(.cg-mesh-bg):not(.cg-grid-bg):not(.cg-orb):not(.cg-progress-bar):not(.cg-back-to-top):not(.animated-dot-field) {
   position: relative;
   z-index: 1;
 }

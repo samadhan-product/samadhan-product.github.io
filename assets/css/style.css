@@ -1215,3 +1215,45 @@ footer.site-footer {
 @media (max-width: 960px) {
   .orbit-system { display: none; }
 }
+
+/* =============================================
+   Animated Dot Field — AI / Network Background
+   ============================================= */
+
+@keyframes dotDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 64px 64px; }
+}
+
+/* Default: light / vintage — warm sepia dots */
+.animated-dot-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.13;
+  background-image: radial-gradient(circle, rgba(90, 80, 65, 0.30) 1px, transparent 1px);
+  background-size: 32px 32px;
+  animation: dotDrift 40s linear infinite;
+}
+
+/* Dark mode: blue / cyan dots */
+[data-theme="dark"] .animated-dot-field {
+  opacity: 0.15;
+  background-image: radial-gradient(circle, rgba(59, 130, 246, 0.35) 1px, transparent 1px);
+}
+
+/* cg-blog-theme pages: sit above the fixed mesh-bg (z-index 0) so dots are visible */
+.cg-blog-theme .animated-dot-field {
+  z-index: 0;
+}
+
+/* Light mode on cg-blog-theme: keep sepia dots */
+html[data-theme="light"] .cg-blog-theme .animated-dot-field {
+  opacity: 0.13;
+  background-image: radial-gradient(circle, rgba(90, 80, 65, 0.30) 1px, transparent 1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-dot-field { animation: none; }
+}
