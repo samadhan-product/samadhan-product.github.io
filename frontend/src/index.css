@@ -193,6 +193,36 @@ html.lenis body {
 }
 
 /* =============================================
+   Hero vignette — theme-aware overlay
+   ============================================= */
+
+.hero-vignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  /* Dark default: subtle top tint + gentle bottom fade, no solid black */
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.18) 0%,
+      transparent 38%,
+      rgba(5, 5, 5, 0.42) 100%
+    );
+}
+
+[data-theme="light"] .hero-vignette {
+  /* Light/vintage: barely-there warm gradient, no black at all */
+  background:
+    radial-gradient(ellipse at 65% 30%, rgba(166, 111, 47, 0.06), transparent 32rem),
+    linear-gradient(
+      to bottom,
+      rgba(255, 250, 240, 0.10) 0%,
+      transparent 50%,
+      rgba(82, 64, 39, 0.04) 100%
+    );
+}
+
+/* =============================================
    Light mode overrides for React homepage
    ============================================= */
 

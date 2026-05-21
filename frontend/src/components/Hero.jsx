@@ -14,7 +14,7 @@ export default function Hero() {
       <ShaderBackground />
 
       {/* Vignette overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
+      <div className="hero-vignette" aria-hidden="true" />
 
       {/* Top meta */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-6 pt-28 font-mono text-[11px] uppercase tracking-[0.22em] text-white/50 md:px-12 md:pt-32">

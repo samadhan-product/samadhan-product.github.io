@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useTheme } from "../hooks/useTheme";
 
 /**
  * Magnetic button — the button subtly follows the cursor on hover.
@@ -20,6 +21,7 @@ export default function MagneticButton({
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 220, damping: 18, mass: 0.4 });
   const sy = useSpring(y, { stiffness: 220, damping: 18, mass: 0.4 });
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const el = ref.current;
@@ -46,10 +48,16 @@ export default function MagneticButton({
   const base =
     "group relative inline-flex items-center justify-center gap-3 overflow-hidden px-7 py-4 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-500";
   const shapeCls = shape === "pill" ? "rounded-full" : "rounded-none";
-  const variantCls =
-    variant === "primary"
+
+  const variantCls = isDark
+    ? variant === "primary"
       ? "border border-white/80 text-white hover:text-black"
-      : "border border-white/20 text-white/80 hover:text-white";
+      : "border border-white/20 text-white/80 hover:text-white"
+    : variant === "primary"
+      ? "border border-stone-700 text-stone-800 hover:text-white"
+      : "border border-stone-400/70 text-stone-600 hover:text-stone-900";
+
+  const fillBg = isDark ? "bg-white" : "bg-stone-800";
 
   const Tag = href ? motion.a : motion.button;
   const linkProps = href
@@ -68,7 +76,7 @@ export default function MagneticButton({
       {/* fill */}
       <span
         aria-hidden
-        className={`pointer-events-none absolute inset-0 -z-10 origin-bottom scale-y-0 bg-white transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-top group-hover:scale-y-100 ${shapeCls}`}
+        className={`pointer-events-none absolute inset-0 -z-10 origin-bottom scale-y-0 ${fillBg} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-top group-hover:scale-y-100 ${shapeCls}`}
       />
       <span className="relative flex items-center gap-3">{children}</span>
     </Tag>
