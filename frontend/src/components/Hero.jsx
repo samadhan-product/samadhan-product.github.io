@@ -53,10 +53,9 @@ export default function Hero() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
             className="md:col-span-6 md:col-start-1 font-body text-base text-white/70 md:text-lg"
           >
-            {profile.role} — {profile.years} across{" "}
+            {profile.role} — {profile.years} in product across{" "}
             <span className="text-white">HealthTech</span>,{" "}
-            <span className="text-white">FinTech</span>,{" "}
-            <span className="text-white">EdTech</span>, and{" "}
+            <span className="text-white">FinTech</span>, and{" "}
             <span className="text-white">enterprise SaaS</span>. {profile.tagline}
           </motion.p>
 
@@ -122,7 +121,7 @@ export default function Hero() {
                   data-testid="hero-ai-learning-button"
                   data-cursor="ai learning"
                 >
-                  <span>AI Learning</span>
+                  <span>Learn AI</span>
                   <svg
                     width="12"
                     height="12"

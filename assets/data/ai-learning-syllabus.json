@@ -1,0 +1,212 @@
+{
+  "bookTitle": "AI Learning",
+  "description": "A structured AI Product Leader learning book for understanding modern AI systems, prompting, token economics, RAG, agents, MCP, production AI infrastructure, and applied AI product strategy.",
+  "overview": {
+    "modules": 8,
+    "weeks": "18–22",
+    "hoursPerWeek": "8–10",
+    "lens": "Product-first"
+  },
+  "sourceNote": "Normalized from published site content. Replace by re-running syllabus import when AI_Product_Leader_Syllabus.xlsx (Master Syllabus) is placed at repo root.",
+  "modules": [
+    {
+      "number": "01",
+      "title": "Foundations of Modern AI Systems",
+      "slug": "foundations-of-modern-ai-systems",
+      "theme": "LLM Mechanics",
+      "weeks": "1–2",
+      "duration": "2 weeks",
+      "status": "Active",
+      "coreTopics": [
+        "Transformer architecture",
+        "Tokenization & context windows",
+        "Temperature / top-p / sampling",
+        "Pre-training vs fine-tuning vs RLHF",
+        "Model families (GPT, Claude, Gemini, Llama)",
+        "Hallucination causes",
+        "Knowledge cutoffs",
+        "Multimodal capabilities",
+        "Benchmarks (MMLU, HumanEval)",
+        "Cost per token",
+        "Model tier tradeoffs"
+      ],
+      "tools": [
+        "OpenAI Tokenizer",
+        "LMSYS Chatbot Arena",
+        "Anthropic API pricing calculator",
+        "Model cards"
+      ],
+      "pmFocus": "Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints, write better specs, and own AI feature unit economics.",
+      "deliverable": "Model selection memo — use case, quality requirements, cost estimate at scale, chosen model + rationale, risks",
+      "learningOutcomes": [
+        "Explain context windows to stakeholders",
+        "Estimate monthly inference cost for a feature",
+        "Choose the right model tier for a use case",
+        "Have a credible LLM conversation with engineers"
+      ],
+      "resources": [
+        "The Illustrated Transformer — Jay Alammar",
+        "Intro to LLMs — Andrej Karpathy",
+        "Anthropic model docs",
+        "Lilian Weng's blog",
+        "State of AI Report"
+      ],
+      "chapters": [
+        {
+          "number": "01",
+          "title": "Understanding Attention Intuition from \"The Illustrated Transformer\"",
+          "slug": "illustrated-transformer-attention-intuition",
+          "status": "Active"
+        },
+        {
+          "number": "02",
+          "title": "Tokenization and Context Windows for Product Leaders",
+          "slug": "tokenization-context-windows",
+          "status": "Coming Soon"
+        },
+        {
+          "number": "03",
+          "title": "Temperature, Top-p and Sampling — Why Same Prompt Gives Different Outputs",
+          "slug": "temperature-top-p-sampling",
+          "status": "Coming Soon"
+        },
+        {
+          "number": "04",
+          "title": "Pre-training vs Fine-tuning vs RLHF",
+          "slug": "pretraining-finetuning-rlhf",
+          "status": "Coming Soon"
+        },
+        {
+          "number": "05",
+          "title": "Choosing Between GPT, Claude, Gemini and Llama",
+          "slug": "choosing-model-families",
+          "status": "Coming Soon"
+        },
+        {
+          "number": "06",
+          "title": "Hallucinations, Knowledge Cutoffs and Model Limitations",
+          "slug": "hallucinations-limitations",
+          "status": "Coming Soon"
+        },
+        {
+          "number": "07",
+          "title": "Benchmarks, Cost per Token and Model Tier Tradeoffs",
+          "slug": "benchmarks-cost-tradeoffs",
+          "status": "Coming Soon"
+        }
+      ]
+    },
+    {
+      "number": "02",
+      "title": "Prompt Engineering — Techniques & Structure",
+      "slug": "prompt-engineering-techniques-structure",
+      "theme": "Prompting Craft",
+      "weeks": "3–4",
+      "duration": "2 weeks",
+      "status": "Coming Soon",
+      "coreTopics": [],
+      "tools": [],
+      "pmFocus": "Prompt engineering is the new acceptance criteria. A well-structured prompt defines \"done\" for the AI as clearly as a user story does for an engineer.",
+      "deliverable": "3 production-quality system prompts for features in your product + an eval rubric for each",
+      "learningOutcomes": [],
+      "resources": [],
+      "chapters": []
+    },
+    {
+      "number": "03",
+      "title": "Token-Efficient Prompting",
+      "slug": "token-efficient-prompting",
+      "theme": "Cost Optimization",
+      "weeks": "4–5",
+      "duration": "1.5 weeks",
+      "status": "Coming Soon",
+      "coreTopics": [],
+      "tools": [],
+      "pmFocus": "At 1M calls/day, a 3x reduction in prompt tokens can be the difference between a profitable and unprofitable AI feature. Token efficiency is a product economics lever.",
+      "deliverable": "Token efficiency audit — compress 3 prompts by ≥50%, validate quality parity, document savings at scale",
+      "learningOutcomes": [],
+      "resources": [],
+      "chapters": []
+    },
+    {
+      "number": "04",
+      "title": "Retrieval-Augmented Generation (RAG)",
+      "slug": "retrieval-augmented-generation",
+      "theme": "Knowledge Grounding",
+      "weeks": "6–8",
+      "duration": "3 weeks",
+      "status": "Coming Soon",
+      "coreTopics": [],
+      "tools": [],
+      "pmFocus": "RAG is the most common production pattern for grounding LLMs in company knowledge. Retrieval precision directly reduces context tokens.",
+      "deliverable": "RAG pipeline spec — chunking strategy, embedding model, vector DB, retrieval approach, eval plan, freshness strategy",
+      "learningOutcomes": [],
+      "resources": [],
+      "chapters": []
+    },
+    {
+      "number": "05",
+      "title": "AI Agents & Agentic Systems",
+      "slug": "ai-agents-agentic-systems",
+      "theme": "Autonomous AI",
+      "weeks": "9–12",
+      "duration": "4 weeks",
+      "status": "Coming Soon",
+      "coreTopics": [],
+      "tools": [],
+      "pmFocus": "Agents introduce compounding failure modes and latency. The PM's job is defining HITL boundaries and what \"done\" looks like for an agent task.",
+      "deliverable": "Agentic feature PRD — scope, tool list, HITL checkpoints, blast radius controls, observability, token cost per run",
+      "learningOutcomes": [],
+      "resources": [],
+      "chapters": []
+    },
+    {
+      "number": "06",
+      "title": "Model Context Protocol (MCP)",
+      "slug": "model-context-protocol",
+      "theme": "Agent Connectivity",
+      "weeks": "12–14",
+      "duration": "2 weeks",
+      "status": "Coming Soon",
+      "coreTopics": [],
+      "tools": [],
+      "pmFocus": "MCP is becoming the USB-C of AI tool connectivity. Understanding when to expose your product via MCP is a platform strategy question.",
+      "deliverable": "MCP build-vs-skip decision memo — who benefits, tools to expose, security requirements",
+      "learningOutcomes": [],
+      "resources": [],
+      "chapters": []
+    },
+    {
+      "number": "07",
+      "title": "AI Infrastructure & the Production Stack",
+      "slug": "ai-infrastructure-production-stack",
+      "theme": "Production AI",
+      "weeks": "14–17",
+      "duration": "3 weeks",
+      "status": "Coming Soon",
+      "coreTopics": [],
+      "tools": [],
+      "pmFocus": "Observability tools let you see token spend by feature, by user segment, and by prompt version. This is your cost-of-goods dashboard for AI.",
+      "deliverable": "AI observability spec — metrics, dashboards, alerts, cost-per-feature breakdown",
+      "learningOutcomes": [],
+      "resources": [],
+      "chapters": []
+    },
+    {
+      "number": "08",
+      "title": "AI Product Strategy & Applied Practice",
+      "slug": "ai-product-strategy-applied-practice",
+      "theme": "Strategy & Capstone",
+      "weeks": "17–22",
+      "duration": "5 weeks",
+      "status": "Coming Soon",
+      "coreTopics": [],
+      "tools": [],
+      "pmFocus": "The capstone synthesizes everything. Pick a real problem and design the full AI system — including token budget, caching strategy, eval plan, guardrails, and product decisions.",
+      "deliverable": "Capstone — full agentic feature design with PRD, token budget, eval strategy, guardrails, HITL design, unit economics",
+      "learningOutcomes": [],
+      "resources": [],
+      "chapters": []
+    }
+  ]
+}

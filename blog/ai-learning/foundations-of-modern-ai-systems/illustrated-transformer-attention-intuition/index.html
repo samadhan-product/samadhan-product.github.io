@@ -3,9 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A PM-friendly explanation of attention intuition and self-attention based on Jay Alammar's Illustrated Transformer, showing how Transformers connect words, resolve context, and power modern LLMs." />
-  <title>Understanding Attention Intuition from “The Illustrated Transformer” | AI Learning</title>
+  <meta name="description" content="A beginner-friendly explanation of attention intuition and self-attention for AI product leaders, based on Jay Alammar's Illustrated Transformer." />
+  <title>Understanding Attention Intuition from The Illustrated Transformer | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Understanding Attention Intuition from The Illustrated Transformer" />
+  <meta property="og:description" content="PM-friendly attention and self-attention intuition for AI product leaders — based on Jay Alammar's Illustrated Transformer." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
   <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Understanding Attention Intuition from The Illustrated Transformer",
+    "description": "A PM-friendly explanation of attention intuition and self-attention for AI product leaders.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/",
+    "dateModified": "2026-05-19",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 01", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/" }
+    ]
+  }
+  </script>
 </head>
 <body>
   <nav class="navbar">
@@ -53,6 +86,7 @@
       <p class="toc-title">On this page</p>
       <ol>
         <li><a href="#why">Why this chapter exists</a></li>
+        <li><a href="#alammar">Jay Alammar's article</a></li>
         <li><a href="#focus">What this chapter focuses on</a></li>
         <li><a href="#mental-model">One-line mental model</a></li>
         <li><a href="#meeting-room">Meeting room analogy</a></li>
@@ -91,8 +125,21 @@
         </p>
       </section>
 
+      <section id="alammar" class="content-section">
+        <h2>2. What Jay Alammar's article is trying to explain</h2>
+        <p>
+          <a href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener noreferrer">The Illustrated Transformer</a>
+          shows how information flows when a model processes language — especially how translation
+          models connect words across sentences using attention.
+        </p>
+        <p>
+          The article is excellent but dense: diagrams, encoder-decoder stacks, and math-adjacent
+          terms appear together. As a product leader, you mainly need the <strong>attention story</strong> first.
+        </p>
+      </section>
+
       <section id="focus" class="content-section">
-        <h2>2. What this chapter will focus on</h2>
+        <h2>3. What this chapter will focus on</h2>
         <div class="callout insight">
           <p class="callout-title">Scope</p>
           <p>
@@ -101,21 +148,20 @@
           </p>
         </div>
         <p>
-          Later chapters cover tokens, embeddings, Q/K/V in depth, multi-head mechanics, and how
-          modern LLMs are structured. Read this chapter to understand <em>why</em> Transformers
-          changed language AI — not every implementation detail.
+          Later chapters in this module cover tokens, embeddings, sampling, model selection, and cost.
+          Read this chapter to understand <em>why</em> Transformers changed language AI.
         </p>
       </section>
 
       <section id="mental-model" class="content-section">
-        <h2>3. The one-line Transformer mental model</h2>
+        <h2>4. The one-line Transformer mental model</h2>
         <p class="example-sentence" style="font-style:normal;font-weight:800;text-align:center;">
           A Transformer understands text by letting every word look at every other word and decide what matters.
         </p>
       </section>
 
       <section id="meeting-room" class="content-section">
-        <h2>4. The meeting room analogy</h2>
+        <h2>5. The meeting room analogy</h2>
         <p>Imagine every word in a sentence is a person in one meeting room.</p>
         <p class="example-sentence" style="font-style:normal;">
           The word <strong>"it"</strong> asks: “Who am I referring to?”<br />
@@ -130,7 +176,7 @@
       </section>
 
       <section id="example" class="content-section">
-        <h2>5. Running example</h2>
+        <h2>6. Running example</h2>
         <p class="example-sentence">
           "The animal did not cross the street because it was tired."
         </p>
@@ -138,7 +184,7 @@
       </section>
 
       <section id="attention" class="content-section">
-        <h2>6. Attention intuition</h2>
+        <h2>7. Attention intuition</h2>
         <p>
           <strong>Attention</strong> is relevance scoring. For each word, the model assigns a weight
           to every other word: how much should this word influence my current understanding?
@@ -147,7 +193,7 @@
       </section>
 
       <section id="it-animal" class="content-section">
-        <h2>7. Why "it" should connect to "animal"</h2>
+        <h2>8. Why "it" should connect to "animal"</h2>
         <p>For the word <code>it</code>, intuitive relevance might look like:</p>
         <div class="table-wrap">
           <table>
@@ -169,7 +215,7 @@
       </section>
 
       <section id="tokens" class="content-section">
-        <h2>8. Tokens and embeddings — high level only</h2>
+        <h2>9. Tokens and embeddings — high level only</h2>
         <p>
           The model does not see words exactly like humans. It sees <strong>tokens</strong> converted
           into numerical <strong>embeddings</strong> — fingerprints of meaning in number-space.
@@ -181,7 +227,7 @@
       </section>
 
       <section id="self-attention" class="content-section">
-        <h2>9. Self-attention</h2>
+        <h2>10. Self-attention</h2>
         <p>
           <strong>Self-attention</strong> means each word looks at other words in the <em>same</em>
           sentence to build a better meaning for itself.
@@ -196,7 +242,7 @@
       </section>
 
       <section id="qkv" class="content-section">
-        <h2>10. Query, Key, and Value — search analogy</h2>
+        <h2>11. Query, Key, and Value — search analogy</h2>
         <p>Using <strong>"it"</strong> as the word we are updating:</p>
         <div class="table-wrap">
           <table>
@@ -214,7 +260,7 @@
       </section>
 
       <section id="multi-head" class="content-section">
-        <h2>11. Multi-head attention — multiple viewpoints</h2>
+        <h2>12. Multi-head attention — multiple viewpoints</h2>
         <ul>
           <li>One head may focus on <strong>pronoun reference</strong> ("it" → "animal").</li>
           <li>Another on <strong>grammar</strong> (subject–verb, negation with "not").</li>
@@ -224,7 +270,7 @@
       </section>
 
       <section id="product" class="content-section">
-        <h2>12. Product leader lens</h2>
+        <h2>13. Product leader lens</h2>
         <p>Why attention intuition matters for AI products:</p>
         <ul>
           <li><strong>Prompt quality matters</strong> — models work from the context you provide.</li>
@@ -236,7 +282,7 @@
       </section>
 
       <section id="misconceptions" class="content-section">
-        <h2>13. Common misconceptions</h2>
+        <h2>14. Common misconceptions</h2>
         <div class="table-wrap">
           <table>
             <thead>
@@ -269,7 +315,7 @@
       </section>
 
       <section id="recap" class="content-section">
-        <h2>14. Chapter recap</h2>
+        <h2>15. Chapter recap</h2>
         <ul>
           <li>Attention is <strong>relevance scoring</strong> between words.</li>
           <li><strong>Self-attention</strong> lets each word understand itself using other words in the sentence.</li>
@@ -280,7 +326,7 @@
       </section>
 
       <section id="quiz" class="content-section">
-        <h2>15. Quick check quiz</h2>
+        <h2>16. Quick check quiz</h2>
         <div class="quiz">
           <div class="quiz-item">
             <strong>What problem does attention solve?</strong>
@@ -306,7 +352,7 @@
       </section>
 
       <section id="next" class="content-section">
-        <h2>16. Next chapter teaser</h2>
+        <h2>17. Next chapter teaser</h2>
         <p>
           <strong>Next:</strong> Tokenization and Context Windows for Product Leaders — how text becomes tokens,
           why context limits shape product constraints, and how to estimate cost at scale.

@@ -4,12 +4,12 @@ export const profile = {
   location: "Pune, India",
   availability: "Open to roles · Advisory · Speaking",
   tagline:
-    "Building intelligent HealthTech, FinTech, EdTech, and AI-native workflow products at scale.",
+    "Building AI-native products, HealthTech workflow automation, claims AI systems, agentic workflows, digital transformation platforms, and practical AI learning assets.",
   years: "13+",
   bio: [
-    "I'm an AI Product Leader with 13+ years across InsurTech/HealthTech, EdTech, FinTech, and enterprise SaaS — from workflow transformation and 0-to-1 product building to scaling AI-native platforms.",
-    "I lead an AI/ML product portfolio at Bajaj Finserv Health spanning Claims AI, HealthPay, Wellness Platform, and Partner Centre — the core TPA and health-insurance stack generating ₹20M+ GMV.",
-    "My work connects product strategy, roadmaps, PRDs, and stakeholder alignment with execution: adjudication, settlement, payments, and partner workflows turned into measurable, automated product systems."
+    "I'm an AI Product Leader and AI Product Manager with 13+ years across InsurTech/HealthTech, EdTech, FinTech, and enterprise SaaS — focused on AI-led digital transformation, enterprise AI implementation, and workflow automation.",
+    "I lead an AI/ML product portfolio at Bajaj Finserv Health spanning Claims AI, HealthPay, Wellness Platform, and Partner Centre — the core TPA and health-insurance stack generating ₹20M+ GMV, with 60% claims TAT reduction and 99% settlement accuracy.",
+    "I work at the intersection of AI product management, enterprise operations, digital transformation, and business process transformation — converting complex workflows and learning needs into intelligent, scalable, measurable product systems."
   ],
   social: {
     linkedin: "https://www.linkedin.com/in/samadhan-mishra/",
@@ -220,6 +220,14 @@ export const profile = {
       year: "2024",
       desc: "A habit-tracking product concept focused on helping users monitor smoking frequency, identify triggers, understand consumption patterns, and gradually reduce smoking through structured tracking, nudges, streaks, and progress visibility.",
       bg: "https://images.unsplash.com/photo-1638290047807-4c9d389b9aa6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBpbmRpYW4lMjBtYW4lMjBoZWFkc2hvdCUyMGRhcmslMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc3NjY4MTc3Mnww&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      id: "highradius",
+      title: "HighRadius / Autonomous Collections",
+      tag: "FinTech SaaS · Workflow Automation",
+      year: "2022",
+      desc: "Product experience in enterprise FinTech SaaS and autonomous collections, focused on workflow automation, receivables intelligence, and B2B product execution.",
+      bg: "https://images.unsplash.com/photo-1774888912180-ccc87492a260?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRpZ2l0YWwlMjBhcnQlMjB0ZWNoJTIwZGFya3xlbnwwfHx8fDE3NzY2ODE3NzJ8MA&ixlib=rb-4.1.0&q=85"
     }
   ],
   skills: [

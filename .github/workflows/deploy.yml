@@ -45,6 +45,11 @@ jobs:
               cp -r "$path" frontend/build/
             fi
           done
+          for file in robots.txt sitemap.xml; do
+            if [ -f "$file" ]; then
+              cp "$file" frontend/build/
+            fi
+          done
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
