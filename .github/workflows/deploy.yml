@@ -51,6 +51,12 @@ jobs:
             fi
           done
 
+      - name: Verify SEO files in build output
+        run: |
+          test -f frontend/build/sitemap.xml || (echo "Missing sitemap.xml in build" && exit 1)
+          test -f frontend/build/robots.txt || (echo "Missing robots.txt in build" && exit 1)
+          python3 -c "import xml.etree.ElementTree as ET; ET.parse('frontend/build/sitemap.xml')"
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

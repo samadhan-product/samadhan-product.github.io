@@ -43,20 +43,20 @@
 <body class="blog-page blog-article">
   <div class="mesh-bg" aria-hidden="true"></div>
 
-  <nav class="navbar">
-    <div class="nav-inner">
+  <nav class="blog-navbar">
+    <div class="blog-nav-inner">
       <a class="brand" href="/">Samadhan <span>Mishra</span></a>
-      <div class="nav-links">
+      <div class="blog-nav-links">
         <a href="/">Home</a>
         <a href="/portfolio/">Portfolio</a>
         <a href="/blog/">Blog</a>
-        <a href="/blog/ai-learning/">AI Learning</a>
+        <a class="active" href="/blog/ai-learning/">AI Learning</a>
       </div>
-      <a class="nav-cta" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Module</a>
+      <a class="button secondary small" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Module</a>
     </div>
   </nav>
 
-  <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a><span class="sep">→</span>
     <a href="/blog/">Blog</a><span class="sep">→</span>
     <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
@@ -75,11 +75,11 @@
       <span class="stat-pill">Beginner</span>
       <span class="stat-pill">12–15 min</span>
     </div>
-    <div class="blog-actions" style="margin-top:20px;">
+    <div class="blog-actions">
       <a class="button primary" href="#article-start">Start reading</a>
       <a class="button secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
     </div>
-    <div class="attention-map reveal" style="margin-top:28px;" aria-label="Attention diagram: it connects to animal">
+    <div class="attention-map reveal" aria-label="Attention diagram: it connects to animal">
       <span class="attention-word">The</span>
       <span class="attention-word">animal</span>
       <span class="attention-word">did</span>
@@ -91,7 +91,7 @@
       <span class="attention-word is-focus">it</span>
       <span class="attention-word is-linked">tired</span>
     </div>
-    <p style="font-size:14px;color:var(--muted);margin:12px 0 0;text-align:center;">Highlighted: how <strong>it</strong> attends to <strong>animal</strong> and <strong>tired</strong></p>
+    <p class="illustration-caption">Highlighted: how <strong>it</strong> attends to <strong>animal</strong> and <strong>tired</strong></p>
   </header>
 
   <div class="article-shell" id="article-start">
@@ -139,7 +139,7 @@
           </p>
           <div class="article-callout insight">
             <p class="article-callout-title">What to remember</p>
-            <p style="margin:0;">One durable intuition first: <strong>attention</strong>. The rest of the module builds on that.</p>
+            <p class="marginless">One durable intuition first: <strong>attention</strong>. The rest of the module builds on that.</p>
           </div>
         </section>
 
@@ -159,13 +159,13 @@
           <h2>3. What this chapter will focus on</h2>
           <div class="article-callout insight">
             <p class="article-callout-title">Scope</p>
-            <p style="margin:0;">Attention intuition and self-attention only — not the entire Transformer architecture.</p>
+            <p class="marginless">Attention intuition and self-attention only — not the entire Transformer architecture.</p>
           </div>
         </section>
 
         <section id="mental-model" class="article-section reveal">
           <h2>4. The one-line Transformer mental model</h2>
-          <p class="article-example" style="font-style:normal;font-weight:800;text-align:center;">
+          <p class="article-example-hero">
             A Transformer understands text by letting every word look at every other word and decide what matters.
           </p>
         </section>
@@ -181,7 +181,7 @@
           </div>
           <div class="article-callout product">
             <p class="article-callout-title">PM translation</p>
-            <p style="margin:0;">Self-attention is that meeting round in software — repeated across layers.</p>
+            <p class="marginless">Self-attention is that meeting round in software — repeated across layers.</p>
           </div>
         </section>
 
@@ -212,7 +212,7 @@
             The model sees <strong>tokens</strong> as numerical <strong>embeddings</strong>.
             Attention operates on those representations. <strong>Chapter 02</strong> goes deeper.
           </p>
-          <div class="token-flow" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:20px 0;padding:16px;background:#f8fafc;border-radius:12px;border:1px solid var(--soft);">
+          <div class="token-flow">
             <span class="tag-pill">text</span><span>→</span><span class="tag-pill">tokens</span><span>→</span><span class="tag-pill">embeddings</span><span>→</span><span class="tag-pill">attention</span>
           </div>
         </section>
@@ -245,8 +245,8 @@
 
         <section id="product" class="article-section reveal">
           <h2>13. Product leader lens</h2>
-          <div class="bento-card span-6" style="grid-column:1/-1;">
-            <ul style="margin:0;padding-left:20px;font-size:17px;color:var(--muted);">
+          <div class="bento-card span-12">
+            <ul class="bento-list">
               <li><strong>Prompt quality</strong> — models work from context you provide.</li>
               <li><strong>RAG quality</strong> — retrieved chunks shape what the model attends to.</li>
               <li><strong>Long context ≠ good reasoning</strong> — length alone does not fix ambiguity.</li>
@@ -275,7 +275,7 @@
         <section id="recap" class="article-section reveal">
           <h2>15. Chapter recap</h2>
           <div class="recap-card">
-            <ul style="margin:0;padding-left:20px;font-size:17px;">
+            <ul class="recap-list">
               <li>Attention is <strong>relevance scoring</strong>.</li>
               <li><strong>Self-attention</strong> updates each word using the sentence.</li>
               <li><strong>Q / K / V</strong> = search analogy.</li>

@@ -1,3 +1,4 @@
+@import url("blog.css");
 /* Samadhan Mishra — shared site styles */
 :root {
   --bg: #f8fafc;
@@ -815,8 +816,6 @@ footer.site-footer {
   max-width: 680px;
   margin: 0 0 20px;
 }
-
-@import url("blog.css");
 
 @media (max-width: 900px) {
   .hero-grid,

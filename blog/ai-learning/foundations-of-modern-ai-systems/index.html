@@ -29,19 +29,19 @@
   <div class="mesh-bg" aria-hidden="true"></div>
   <div class="animated-grid" aria-hidden="true"></div>
 
-  <nav class="navbar">
-    <div class="nav-inner">
+  <nav class="blog-navbar">
+    <div class="blog-nav-inner">
       <a class="brand" href="/">Samadhan <span>Mishra</span></a>
-      <div class="nav-links">
+      <div class="blog-nav-links">
         <a href="/">Home</a>
         <a href="/portfolio/">Portfolio</a>
         <a href="/blog/">Blog</a>
-        <a href="/blog/ai-learning/">AI Learning</a>
+        <a class="active" href="/blog/ai-learning/">AI Learning</a>
       </div>
     </div>
   </nav>
 
-  <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a><span class="sep">→</span>
     <a href="/blog/">Blog</a><span class="sep">→</span>
     <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
@@ -50,7 +50,7 @@
 
   <header class="blog-hero reveal">
     <span class="blog-kicker">Module 01 · Weeks 1–2</span>
-    <h1 class="blog-title" style="font-size:clamp(32px,5vw,52px);">Foundations of Modern AI Systems</h1>
+    <h1 class="blog-title blog-title-module">Foundations of Modern AI Systems</h1>
     <p class="blog-subtitle">
       A product-first introduction to LLM mechanics, Transformer architecture, tokenization, context windows,
       model tradeoffs, hallucinations, cost, and benchmarks.
@@ -60,7 +60,7 @@
       <span class="stat-pill">2 weeks</span>
       <span class="stat-pill live">Active</span>
     </div>
-    <div class="blog-actions" style="margin-top:20px;">
+    <div class="blog-actions">
       <a class="button primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
       <a class="button secondary" href="/blog/ai-learning/">← AI Learning</a>
     </div>
@@ -70,12 +70,12 @@
     <section class="blog-section reveal">
       <div class="bento-grid">
         <div class="bento-card span-6">
-          <h3 style="margin:0 0 10px;font-size:18px;">PM-specific focus</h3>
-          <p style="margin:0;color:var(--muted);">Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints, write better specs, and own AI feature unit economics.</p>
+          <h3 class="bento-title-18">PM-specific focus</h3>
+          <p class="bento-desc-marginless">Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints, write better specs, and own AI feature unit economics.</p>
         </div>
         <div class="bento-card span-6">
-          <h3 style="margin:0 0 10px;font-size:18px;">Deliverable</h3>
-          <p style="margin:0;color:var(--muted);"><strong>Model selection memo:</strong> use case, quality requirements, cost estimate at scale, chosen model + rationale, risks.</p>
+          <h3 class="bento-title-18">Deliverable</h3>
+          <p class="bento-desc-marginless"><strong>Model selection memo:</strong> use case, quality requirements, cost estimate at scale, chosen model + rationale, risks.</p>
         </div>
       </div>
     </section>
@@ -108,7 +108,7 @@
     <section class="blog-section reveal">
       <div class="bento-grid">
         <div class="bento-card">
-          <h3 style="margin:0 0 12px;">Tools &amp; frameworks</h3>
+          <h3 class="bento-title-small">Tools &amp; frameworks</h3>
           <div class="tag-cloud">
             <span class="tag-pill">OpenAI Tokenizer</span>
             <span class="tag-pill">LMSYS Chatbot Arena</span>
@@ -117,7 +117,7 @@
           </div>
         </div>
         <div class="bento-card">
-          <h3 style="margin:0 0 12px;">Resources</h3>
+          <h3 class="bento-title-small">Resources</h3>
           <div class="tag-cloud">
             <span class="tag-pill">Illustrated Transformer</span>
             <span class="tag-pill">Karpathy — Intro to LLMs</span>
@@ -132,7 +132,7 @@
     <section class="blog-section reveal">
       <div class="blog-section-header"><h2>Chapter path</h2></div>
       <ul class="chapter-path">
-        <li>
+        <li class="is-active">
           <a href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">
             <span>
               <span class="path-num">Chapter 01 · Active</span>

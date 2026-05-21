@@ -131,14 +131,16 @@
 
   /* Copy link on h2 */
   function initCopyLinks() {
-    document.querySelectorAll(".article-section h2[id]").forEach(function (h2) {
+    document.querySelectorAll(".article-section[id] h2").forEach(function (h2) {
+      var section = h2.closest(".article-section");
+      if (!section || !section.id) return;
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "copy-link-btn";
       btn.setAttribute("aria-label", "Copy link to section");
       btn.textContent = "#";
       btn.addEventListener("click", function () {
-        var url = window.location.href.split("#")[0] + "#" + h2.id;
+        var url = window.location.href.split("#")[0] + "#" + section.id;
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(url).then(
             function () {
