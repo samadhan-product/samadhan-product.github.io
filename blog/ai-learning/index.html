@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A structured AI learning book by Samadhan Mishra covering Transformers, LLMs, embeddings, RAG, AI agents, MCP, LLMOps, evaluation, and AI product implementation." />
+  <meta name="description" content="A structured AI Product Leader learning book by Samadhan Mishra covering modern AI systems, prompting, token efficiency, RAG, agents, MCP, production AI infrastructure, and AI product strategy." />
   <title>AI Learning | Samadhan Mishra</title>
   <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
@@ -32,50 +32,101 @@
     <div class="eyebrow">Book</div>
     <h1>AI Learning</h1>
     <p class="hero-text">
-      A structured learning book for understanding AI deeply, from fundamentals to implementation.
+      A structured 8-module learning book for becoming an AI product leader — covering LLM mechanics,
+      prompting, token economics, RAG, agents, MCP, production AI infrastructure, and applied AI product strategy.
     </p>
+    <div class="meta-badges" style="margin-top:20px;">
+      <span class="meta-badge">8 Modules</span>
+      <span class="meta-badge">18–22 Weeks</span>
+      <span class="meta-badge">8–10 hrs/week</span>
+      <span class="meta-badge">Product-first lens</span>
+    </div>
     <div class="hero-actions">
-      <a class="button primary" href="/blog/ai-learning/transformer-architecture-pm-version/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
+      <a class="button primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
     </div>
   </header>
 
   <main class="page">
-    <section>
+    <section id="modules">
       <div class="section-header">
-        <h2>About this book</h2>
+        <h2>Modules</h2>
       </div>
-      <div class="card" style="padding:28px;">
-        <p style="margin:0;color:var(--muted);">
-          AI Learning is a structured book-style learning path for understanding advanced AI concepts
-          in a practical, product-friendly way. Modules build on each other — start with Transformer
-          intuition, then expand into LLMs, retrieval, agents, and implementation.
-        </p>
-      </div>
-    </section>
+      <div class="grid-2">
 
-    <section id="path">
-      <div class="section-header">
-        <h2>Recommended Learning Path</h2>
+        <a class="card" href="/blog/ai-learning/foundations-of-modern-ai-systems/" style="display:block;padding:24px;">
+          <span class="badge live">Active</span>
+          <p class="chapter-num" style="margin-top:12px;">Module 01 · Weeks 1–2 · 2 weeks</p>
+          <h3 style="margin:8px 0 4px;">Foundations of Modern AI Systems</h3>
+          <p style="color:var(--blue);font-weight:700;font-size:14px;margin:0 0 12px;">Theme: LLM Mechanics</p>
+          <p style="color:var(--muted);font-size:15px;margin:0 0 12px;">Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints, write better specs, and own AI feature unit economics.</p>
+          <p style="font-size:14px;margin:0 0 16px;"><strong>Deliverable:</strong> Model selection memo — use case, quality requirements, cost estimate at scale, chosen model + rationale, risks</p>
+          <span class="read-link">Open module →</span>
+        </a>
+
+        <article class="card disabled" style="padding:24px;">
+          <span class="badge soon">Coming Soon</span>
+          <p class="chapter-num" style="margin-top:12px;">Module 02 · Weeks 3–4 · 2 weeks</p>
+          <h3 style="margin:8px 0 4px;">Prompt Engineering — Techniques &amp; Structure</h3>
+          <p style="color:var(--blue);font-weight:700;font-size:14px;margin:0 0 12px;">Theme: Prompting Craft</p>
+          <p style="color:var(--muted);font-size:15px;margin:0 0 12px;">Prompt engineering is the new acceptance criteria. A well-structured prompt defines “done” for the AI as clearly as a user story does for an engineer.</p>
+          <p style="font-size:14px;margin:0;"><strong>Deliverable:</strong> 3 production-quality system prompts for features in your product + an eval rubric for each</p>
+        </article>
+
+        <article class="card disabled" style="padding:24px;">
+          <span class="badge soon">Coming Soon</span>
+          <p class="chapter-num" style="margin-top:12px;">Module 03 · Weeks 4–5 · 1.5 weeks</p>
+          <h3 style="margin:8px 0 4px;">Token-Efficient Prompting</h3>
+          <p style="color:var(--blue);font-weight:700;font-size:14px;margin:0 0 12px;">Theme: Cost Optimization</p>
+          <p style="color:var(--muted);font-size:15px;margin:0 0 12px;">At 1M calls/day, a 3x reduction in prompt tokens can be the difference between a profitable and unprofitable AI feature. Token efficiency is a product economics lever.</p>
+          <p style="font-size:14px;margin:0;"><strong>Deliverable:</strong> Token efficiency audit — compress 3 prompts by ≥50%, validate quality parity, document savings at scale</p>
+        </article>
+
+        <article class="card disabled" style="padding:24px;">
+          <span class="badge soon">Coming Soon</span>
+          <p class="chapter-num" style="margin-top:12px;">Module 04 · Weeks 6–8 · 3 weeks</p>
+          <h3 style="margin:8px 0 4px;">Retrieval-Augmented Generation (RAG)</h3>
+          <p style="color:var(--blue);font-weight:700;font-size:14px;margin:0 0 12px;">Theme: Knowledge Grounding</p>
+          <p style="color:var(--muted);font-size:15px;margin:0 0 12px;">RAG is the most common production pattern for grounding LLMs in company knowledge. Retrieval precision directly reduces context tokens.</p>
+          <p style="font-size:14px;margin:0;"><strong>Deliverable:</strong> RAG pipeline spec — chunking strategy, embedding model, vector DB, retrieval approach, eval plan, freshness strategy</p>
+        </article>
+
+        <article class="card disabled" style="padding:24px;">
+          <span class="badge soon">Coming Soon</span>
+          <p class="chapter-num" style="margin-top:12px;">Module 05 · Weeks 9–12 · 4 weeks</p>
+          <h3 style="margin:8px 0 4px;">AI Agents &amp; Agentic Systems</h3>
+          <p style="color:var(--blue);font-weight:700;font-size:14px;margin:0 0 12px;">Theme: Autonomous AI</p>
+          <p style="color:var(--muted);font-size:15px;margin:0 0 12px;">Agents introduce compounding failure modes and latency. The PM’s job is defining HITL boundaries and what “done” looks like for an agent task.</p>
+          <p style="font-size:14px;margin:0;"><strong>Deliverable:</strong> Agentic feature PRD — scope, tool list, HITL checkpoints, blast radius controls, observability, token cost per run</p>
+        </article>
+
+        <article class="card disabled" style="padding:24px;">
+          <span class="badge soon">Coming Soon</span>
+          <p class="chapter-num" style="margin-top:12px;">Module 06 · Weeks 12–14 · 2 weeks</p>
+          <h3 style="margin:8px 0 4px;">Model Context Protocol (MCP)</h3>
+          <p style="color:var(--blue);font-weight:700;font-size:14px;margin:0 0 12px;">Theme: Agent Connectivity</p>
+          <p style="color:var(--muted);font-size:15px;margin:0 0 12px;">MCP is becoming the USB-C of AI tool connectivity. Understanding when to expose your product via MCP is a platform strategy question.</p>
+          <p style="font-size:14px;margin:0;"><strong>Deliverable:</strong> MCP build-vs-skip decision memo — who benefits, tools to expose, security requirements</p>
+        </article>
+
+        <article class="card disabled" style="padding:24px;">
+          <span class="badge soon">Coming Soon</span>
+          <p class="chapter-num" style="margin-top:12px;">Module 07 · Weeks 14–17 · 3 weeks</p>
+          <h3 style="margin:8px 0 4px;">AI Infrastructure &amp; the Production Stack</h3>
+          <p style="color:var(--blue);font-weight:700;font-size:14px;margin:0 0 12px;">Theme: Production AI</p>
+          <p style="color:var(--muted);font-size:15px;margin:0 0 12px;">Observability tools let you see token spend by feature, by user segment, and by prompt version. This is your cost-of-goods dashboard for AI.</p>
+          <p style="font-size:14px;margin:0;"><strong>Deliverable:</strong> AI observability spec — metrics, dashboards, alerts, cost-per-feature breakdown</p>
+        </article>
+
+        <article class="card disabled" style="padding:24px;">
+          <span class="badge soon">Coming Soon</span>
+          <p class="chapter-num" style="margin-top:12px;">Module 08 · Weeks 17–22 · 5 weeks</p>
+          <h3 style="margin:8px 0 4px;">AI Product Strategy &amp; Applied Practice</h3>
+          <p style="color:var(--blue);font-weight:700;font-size:14px;margin:0 0 12px;">Theme: Strategy &amp; Capstone</p>
+          <p style="color:var(--muted);font-size:15px;margin:0 0 12px;">The capstone synthesizes everything. Pick a real problem and design the full AI system — including token budget, caching strategy, eval plan, guardrails, and product decisions.</p>
+          <p style="font-size:14px;margin:0;"><strong>Deliverable:</strong> Capstone — full agentic feature design with PRD, token budget, eval strategy, guardrails, HITL design, unit economics</p>
+        </article>
+
       </div>
-      <ul class="chapter-list">
-        <li>
-          <a href="/blog/ai-learning/transformer-architecture-pm-version/">
-            <span>
-              <span class="chapter-num">Module 01</span>
-              <strong>Transformer Architecture — The PM Version</strong>
-            </span>
-            <span class="badge live">Active</span>
-          </a>
-        </li>
-        <li><span class="item-soon"><span><span class="chapter-num">Module 02</span><strong>LLM Fundamentals</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Module 03</span><strong>Tokens, Context Windows and Inference</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Module 04</span><strong>Embeddings and Vector Search</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Module 05</span><strong>RAG Systems</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Module 06</span><strong>AI Agents</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Module 07</span><strong>MCP</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Module 08</span><strong>LLMOps and Evaluation</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Module 09</span><strong>AI Product Implementation</strong></span><span class="badge soon">Coming Soon</span></span></li>
-      </ul>
     </section>
 
     <section>
@@ -84,9 +135,9 @@
       </div>
       <ul class="chapter-list">
         <li>
-          <a href="/blog/ai-learning/transformer-architecture-pm-version/illustrated-transformer-attention-intuition/">
+          <a href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">
             <span>
-              <span class="chapter-num">Chapter 01</span>
+              <span class="chapter-num">Module 01 · Chapter 01</span>
               <strong>Understanding Attention Intuition from “The Illustrated Transformer”</strong>
             </span>
             <span class="badge live">Read</span>
