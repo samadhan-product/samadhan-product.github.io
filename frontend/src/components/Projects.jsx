@@ -50,26 +50,6 @@ function ProjectRow({ project, index }) {
         </div>
       </div>
 
-      {/* Hover preview */}
-      <motion.div
-        aria-hidden
-        initial={false}
-        animate={{
-          opacity: hover ? 1 : 0,
-          scale: hover ? 1 : 0.95
-        }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute right-4 top-1/2 z-10 hidden h-48 w-80 -translate-y-1/2 overflow-hidden border border-white/10 md:block"
-      >
-        <div
-          className="h-full w-full bg-cover bg-center grayscale"
-          style={{ backgroundImage: `url(${project.bg})` }}
-        />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-x-3 bottom-3 font-mono text-[10px] uppercase tracking-[0.22em] text-white/80">
-          {project.desc.slice(0, 70)}…
-        </div>
-      </motion.div>
     </motion.a>
   );
 }
