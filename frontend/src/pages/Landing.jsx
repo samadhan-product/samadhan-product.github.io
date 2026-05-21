@@ -12,7 +12,7 @@ import LoadingIntro from "../components/LoadingIntro";
 
 export default function Landing() {
   return (
-    <main className="relative grain bg-[#050505] text-white" data-testid="landing-root">
+    <main className="relative grain" style={{ background: "var(--bg)", color: "var(--fg)" }} data-testid="landing-root">
       <LoadingIntro />
       <SmoothScroll />
       <CustomCursor />

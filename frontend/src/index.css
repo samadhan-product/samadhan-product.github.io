@@ -12,6 +12,16 @@
     --line-strong: rgba(255, 255, 255, 0.22);
 }
 
+[data-theme="light"] {
+    --bg: #f7f0e3;
+    --bg-2: #fffaf0;
+    --fg: #1f2933;
+    --fg-2: #5c4f3d;
+    --fg-3: #8a7d6b;
+    --line: rgba(101, 87, 65, 0.15);
+    --line-strong: rgba(101, 87, 65, 0.28);
+}
+
 html,
 body {
     margin: 0;
@@ -180,4 +190,70 @@ html.lenis body {
 .link-reveal:hover::after {
     transform: scaleX(1);
     transform-origin: left center;
+}
+
+/* =============================================
+   Light mode overrides for React homepage
+   ============================================= */
+
+/* Selection */
+html[data-theme="light"] ::selection {
+    background: #1f2933;
+    color: #f7f0e3;
+}
+
+/* Scrollbar */
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: rgba(101, 87, 65, 0.25);
+}
+
+/* Grain overlay — softer in light mode */
+html[data-theme="light"] .grain::before {
+    mix-blend-mode: multiply;
+    opacity: 0.04;
+}
+
+/* Shader canvas — reduce to near-invisible in light mode */
+html[data-theme="light"] [data-testid="hero-shader-canvas"] {
+    opacity: 0.04;
+}
+
+/* text-white/* classes — remap to --fg */
+html[data-theme="light"] [class*="text-white"] {
+    color: var(--fg);
+}
+
+/* border-white/* classes — remap to --line-strong */
+html[data-theme="light"] [class*="border-white"] {
+    border-color: var(--line-strong);
+}
+
+/* bg-white/* used as section/card bg — keep white in light mode (intentional) */
+/* bg-black/* overlays */
+html[data-theme="light"] [class*="bg-black"] {
+    background-color: transparent;
+}
+
+/* Tailwind bg-background (maps to --background HSL var from @layer base) */
+html[data-theme="light"] body {
+    background: var(--bg);
+    color: var(--fg);
+}
+
+/* Marquee track items in light mode */
+html[data-theme="light"] [class*="border-white/"] {
+    border-color: var(--line-strong);
+}
+
+/* bg-white/X opacity cards used as subtle panels — make them use parchment */
+html[data-theme="light"] [class*="bg-white/"] {
+    background-color: rgba(247, 240, 227, 0.7);
+}
+
+/* Stroke/fill overrides for SVG elements that use white */
+html[data-theme="light"] [class*="stroke-white"] {
+    stroke: var(--fg);
+}
+html[data-theme="light"] [class*="fill-white"] {
+    fill: var(--fg);
 }
