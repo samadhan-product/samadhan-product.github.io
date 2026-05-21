@@ -390,6 +390,17 @@
 .status-pill.live { background: #dcfce7; color: #166534; }
 .status-pill.soon { background: #f1f5f9; color: var(--muted); }
 
+.status-pill-lg {
+  padding: 10px 16px;
+  background: #dcfce7;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #166534;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .stat-pill {
   padding: 12px 16px;
   background: #f8fafc;
@@ -1099,6 +1110,193 @@
 .button.secondary.small {
   padding: 6px 12px;
   font-size: 13px;
+}
+
+/* ============================================================
+   Syllabus tabs — Active / Coming Soon
+   ============================================================ */
+.syllabus-tabs {
+  margin-top: 8px;
+}
+
+/* Tab lists are hidden without JS — no orphaned buttons */
+.syllabus-tab-list {
+  display: none;
+  gap: 4px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 4px;
+  width: fit-content;
+  margin-bottom: 24px;
+}
+
+body[data-js] .syllabus-tab-list {
+  display: flex;
+}
+
+.syllabus-tab {
+  padding: 10px 22px;
+  border: none;
+  background: transparent;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.syllabus-tab:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.syllabus-tab[aria-selected="true"] {
+  background: white;
+  color: var(--ink);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.10);
+  font-weight: 800;
+}
+
+.syllabus-tab:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Without JS: all panels visible. With JS (body[data-js]): only active panel shown. */
+.syllabus-panel {
+  display: block;
+}
+
+body[data-js] .syllabus-panel {
+  display: none;
+}
+
+body[data-js] .syllabus-panel.is-active {
+  display: block;
+}
+
+/* Status pill variants */
+.status-pill.active-pill {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-pill.soon-pill {
+  background: #f1f5f9;
+  color: var(--muted);
+}
+
+/* Module status helpers */
+.module-status-active {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.module-status-coming-soon {
+  color: var(--muted);
+  background: #f1f5f9;
+}
+
+/* ============================================================
+   Chapter tabs — Active / Coming Soon
+   ============================================================ */
+.chapter-tabs {
+  margin-top: 8px;
+}
+
+.chapter-tab-list {
+  display: none;
+  gap: 4px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 4px;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+body[data-js] .chapter-tab-list {
+  display: flex;
+}
+
+.chapter-tab {
+  padding: 9px 20px;
+  border: none;
+  background: transparent;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.chapter-tab:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.chapter-tab[aria-selected="true"] {
+  background: white;
+  color: var(--ink);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.10);
+  font-weight: 800;
+}
+
+.chapter-tab:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Without JS: all chapter panels visible. With JS: only active shown. */
+.chapter-panel {
+  display: block;
+}
+
+body[data-js] .chapter-panel {
+  display: none;
+}
+
+body[data-js] .chapter-panel.is-active {
+  display: block;
+}
+
+/* Mobile nav */
+.blog-mobile-nav {
+  display: none;
+}
+
+@media (max-width: 680px) {
+  .blog-mobile-nav {
+    display: block;
+    padding: 12px 24px;
+    border-top: 1px solid var(--soft);
+    background: rgba(248, 250, 252, 0.96);
+    position: sticky;
+    top: 57px;
+    z-index: 80;
+  }
+
+  .blog-mobile-nav select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--soft);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 650;
+    background: white;
+    color: var(--ink);
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
 }
 
 /* Reveal */

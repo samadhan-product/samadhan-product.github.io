@@ -7,7 +7,7 @@
     "hoursPerWeek": "8–10",
     "lens": "Product-first"
   },
-  "sourceNote": "Normalized from published site content. Replace by re-running syllabus import when AI_Product_Leader_Syllabus.xlsx (Master Syllabus) is placed at repo root.",
+  "sourceNote": "Generated from AI_Product_Leader_Syllabus.xlsx Master Syllabus tab. Module 01 marked Active (live chapter); Modules 02–08 marked Coming Soon.",
   "modules": [
     {
       "number": "01",
@@ -37,7 +37,7 @@
         "Model cards"
       ],
       "pmFocus": "Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints, write better specs, and own AI feature unit economics.",
-      "deliverable": "Model selection memo — use case, quality requirements, cost estimate at scale, chosen model + rationale, risks",
+      "deliverable": "Model selection memo: use case, quality reqs, cost estimate at scale, chosen model + rationale, risks",
       "learningOutcomes": [
         "Explain context windows to stakeholders",
         "Estimate monthly inference cost for a feature",
@@ -45,8 +45,8 @@
         "Have a credible LLM conversation with engineers"
       ],
       "resources": [
-        "The Illustrated Transformer — Jay Alammar",
-        "Intro to LLMs — Andrej Karpathy",
+        "The Illustrated Transformer (Jay Alammar)",
+        "Andrej Karpathy 'Intro to LLMs' (YouTube)",
         "Anthropic model docs",
         "Lilian Weng's blog",
         "State of AI Report"
@@ -104,12 +104,42 @@
       "weeks": "3–4",
       "duration": "2 weeks",
       "status": "Coming Soon",
-      "coreTopics": [],
-      "tools": [],
-      "pmFocus": "Prompt engineering is the new acceptance criteria. A well-structured prompt defines \"done\" for the AI as clearly as a user story does for an engineer.",
+      "coreTopics": [
+        "Zero-shot, few-shot, many-shot",
+        "Chain-of-thought (CoT)",
+        "Least-to-most prompting",
+        "Self-consistency",
+        "Role & persona assignment",
+        "System prompt anatomy",
+        "XML tags as delimiters",
+        "Positive vs negative instructions",
+        "Prompt chaining",
+        "Step-back prompting",
+        "ReAct-style reasoning",
+        "Constitutional prompting",
+        "Meta-prompting"
+      ],
+      "tools": [
+        "Anthropic Workbench",
+        "LangSmith",
+        "PromptFlow",
+        "Helicone",
+        "OpenAI Playground"
+      ],
+      "pmFocus": "Prompt engineering is the new acceptance criteria. A well-structured prompt defines 'done' for the AI as clearly as a user story does for an engineer. Own this skill.",
       "deliverable": "3 production-quality system prompts for features in your product + an eval rubric for each",
-      "learningOutcomes": [],
-      "resources": [],
+      "learningOutcomes": [
+        "Write production-grade system prompts",
+        "Design CoT prompts for complex reasoning tasks",
+        "Use XML tags for reliable structured output",
+        "Version and A/B test prompts"
+      ],
+      "resources": [
+        "Anthropic Prompt Engineering Guide (docs.anthropic.com)",
+        "OpenAI Cookbook",
+        "'Prompt Engineering Guide' (promptingguide.ai)",
+        "Learn Prompting (learnprompting.org)"
+      ],
       "chapters": []
     },
     {
@@ -120,12 +150,42 @@
       "weeks": "4–5",
       "duration": "1.5 weeks",
       "status": "Coming Soon",
-      "coreTopics": [],
-      "tools": [],
-      "pmFocus": "At 1M calls/day, a 3x reduction in prompt tokens can be the difference between a profitable and unprofitable AI feature. Token efficiency is a product economics lever.",
-      "deliverable": "Token efficiency audit — compress 3 prompts by ≥50%, validate quality parity, document savings at scale",
-      "learningOutcomes": [],
-      "resources": [],
+      "coreTopics": [
+        "Eliminating prompt bloat",
+        "Lean instruction patterns",
+        "Context compression",
+        "Output length directives",
+        "Structured JSON/XML to reduce explanation tokens",
+        "Suppressing unwanted output",
+        "Prompt caching (Anthropic / OpenAI)",
+        "Batch API for non-real-time tasks",
+        "Model routing & cascade architectures",
+        "Token accounting & budgeting",
+        "Iterative compression methodology",
+        "Quality-cost tradeoff framework",
+        "Efficiency metrics (cost per successful completion, token efficiency ratio)"
+      ],
+      "tools": [
+        "tiktoken (token counter)",
+        "Anthropic prompt caching API",
+        "OpenAI Batch API",
+        "Helicone (cost dashboards)",
+        "Langfuse"
+      ],
+      "pmFocus": "At 1M calls/day, a 3x reduction in prompt tokens can be the difference between a profitable and unprofitable AI feature. Token efficiency is a product economics lever — own the number in your unit economics doc.",
+      "deliverable": "Token efficiency audit: take 3 existing prompts from your product, compress each by ≥50%, validate quality parity, document savings at projected scale",
+      "learningOutcomes": [
+        "Audit & compress a production prompt",
+        "Design a cache-friendly system prompt architecture",
+        "Define token budget in a PRD",
+        "Model AI feature unit economics with caching and batching"
+      ],
+      "resources": [
+        "Anthropic prompt caching docs",
+        "OpenAI Batch API docs",
+        "'Reducing LLM costs' — Simon Willison's blog",
+        "Helicone cost analytics guide"
+      ],
       "chapters": []
     },
     {
@@ -136,12 +196,49 @@
       "weeks": "6–8",
       "duration": "3 weeks",
       "status": "Coming Soon",
-      "coreTopics": [],
-      "tools": [],
-      "pmFocus": "RAG is the most common production pattern for grounding LLMs in company knowledge. Retrieval precision directly reduces context tokens.",
-      "deliverable": "RAG pipeline spec — chunking strategy, embedding model, vector DB, retrieval approach, eval plan, freshness strategy",
-      "learningOutcomes": [],
-      "resources": [],
+      "coreTopics": [
+        "What embeddings are intuitively",
+        "Embedding models (OpenAI, Cohere, BGE)",
+        "Cosine similarity & nearest-neighbor search",
+        "Chunking strategies (fixed, semantic, hierarchical)",
+        "Metadata filtering",
+        "Naive RAG vs Advanced RAG",
+        "Hybrid search (BM25 + dense)",
+        "Rerankers (cross-encoders)",
+        "Query rewriting & HyDE",
+        "Multi-vector retrieval",
+        "Vector databases (Pinecone, Weaviate, Qdrant, pgvector)",
+        "HNSW vs IVF index types",
+        "GraphRAG",
+        "Long-context vs RAG tradeoffs",
+        "RAGAS eval framework",
+        "Hallucination detection in RAG"
+      ],
+      "tools": [
+        "Pinecone",
+        "Weaviate",
+        "Qdrant",
+        "pgvector",
+        "LlamaIndex",
+        "LangChain",
+        "RAGAS",
+        "Cohere Rerank"
+      ],
+      "pmFocus": "RAG is the most common production pattern for grounding LLMs in company knowledge. Retrieval precision directly reduces context tokens — a well-tuned retriever cuts input size 40–60% vs naive retrieval.",
+      "deliverable": "RAG pipeline spec for a real feature: chunking strategy, embedding model choice, vector DB selection, retrieval approach, eval plan, freshness strategy",
+      "learningOutcomes": [
+        "Spec a RAG pipeline for a product feature",
+        "Diagnose poor retrieval quality",
+        "Choose a vector DB for a given use case",
+        "Design a RAG eval suite using RAGAS"
+      ],
+      "resources": [
+        "LlamaIndex docs",
+        "LangChain RAG tutorials",
+        "RAGAS paper (arxiv)",
+        "'Advanced RAG' — Pinecone blog series",
+        "Jerry Liu's (LlamaIndex) Twitter/blog"
+      ],
       "chapters": []
     },
     {
@@ -152,12 +249,53 @@
       "weeks": "9–12",
       "duration": "4 weeks",
       "status": "Coming Soon",
-      "coreTopics": [],
-      "tools": [],
-      "pmFocus": "Agents introduce compounding failure modes and latency. The PM's job is defining HITL boundaries and what \"done\" looks like for an agent task.",
-      "deliverable": "Agentic feature PRD — scope, tool list, HITL checkpoints, blast radius controls, observability, token cost per run",
-      "learningOutcomes": [],
-      "resources": [],
+      "coreTopics": [
+        "ReAct pattern",
+        "Plan-and-Execute",
+        "LLM as orchestrator",
+        "Tool/function calling anatomy",
+        "Scratchpad & chain-of-thought traces",
+        "Stopping conditions & loops",
+        "Web search / code interpreter / browser tools",
+        "API tools & side effects",
+        "Error handling in tool calls",
+        "In-context memory",
+        "External memory (vector + KV stores)",
+        "Episodic vs semantic memory",
+        "Memory summarization",
+        "Orchestrator-subagent topology",
+        "Parallel vs sequential agents",
+        "Multi-agent communication",
+        "Prompt injection in agents",
+        "Human-in-the-loop checkpoints",
+        "Reversible vs irreversible actions",
+        "Agent observability",
+        "Blast radius control"
+      ],
+      "tools": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Assistants API",
+        "Anthropic tool use",
+        "LangSmith (agent tracing)"
+      ],
+      "pmFocus": "Agents introduce compounding failure modes and latency. Your job is defining the right HITL boundaries and what 'done' looks like for an agent task. Agent loops multiply token costs — efficient scratchpads are critical.",
+      "deliverable": "Agentic feature PRD: agent scope, tool list, HITL checkpoints, blast radius controls, failure handling, observability requirements, token cost estimate per agent run",
+      "learningOutcomes": [
+        "Define agent scope & guardrails in a PRD",
+        "Design human-in-the-loop checkpoints",
+        "Choose the right agent topology",
+        "Identify and mitigate prompt injection risks",
+        "Estimate token cost for multi-step agent runs"
+      ],
+      "resources": [
+        "LangGraph docs",
+        "AutoGen paper (Microsoft Research)",
+        "Anthropic tool use guide",
+        "'Agents' chapter — LlamaIndex docs",
+        "Harrison Chase (LangChain) talks on YouTube"
+      ],
       "chapters": []
     },
     {
@@ -168,12 +306,45 @@
       "weeks": "12–14",
       "duration": "2 weeks",
       "status": "Coming Soon",
-      "coreTopics": [],
-      "tools": [],
-      "pmFocus": "MCP is becoming the USB-C of AI tool connectivity. Understanding when to expose your product via MCP is a platform strategy question.",
-      "deliverable": "MCP build-vs-skip decision memo — who benefits, tools to expose, security requirements",
-      "learningOutcomes": [],
-      "resources": [],
+      "coreTopics": [
+        "What MCP is & why it exists",
+        "MCP vs function calling vs plugins",
+        "Client-server architecture",
+        "Resources, Tools, Prompts primitives",
+        "Transport: stdio vs SSE",
+        "MCP server registry overview",
+        "Claude Desktop, Cursor, VS Code integrations",
+        "Building vs buying MCP servers",
+        "Auth patterns (OAuth, API keys)",
+        "Trust levels: local vs remote servers",
+        "Tool poisoning & injection risks",
+        "Permission scoping",
+        "Sandboxing",
+        "MCP as a platform distribution play",
+        "When to build an MCP server for your product",
+        "Competitive landscape (MCP vs A2A vs others)"
+      ],
+      "tools": [
+        "MCP SDK (TypeScript / Python)",
+        "Claude Desktop",
+        "Cursor",
+        "modelcontextprotocol.io registry",
+        "Official MCP servers (GitHub)"
+      ],
+      "pmFocus": "MCP is becoming the USB-C of AI tool connectivity. Understand when to expose your product via MCP and how that creates distribution in the agent ecosystem. This is a platform strategy question.",
+      "deliverable": "MCP build-vs-skip decision memo: should your product expose an MCP server? Who benefits? What tools would you expose? What are the security requirements?",
+      "learningOutcomes": [
+        "Evaluate whether to build an MCP server for your product",
+        "Spec MCP security & trust requirements",
+        "Understand the MCP platform ecosystem",
+        "Map competitive implications"
+      ],
+      "resources": [
+        "modelcontextprotocol.io (spec + docs)",
+        "Anthropic MCP announcement blog",
+        "MCP GitHub repo (official servers)",
+        "Simon Willison's MCP coverage"
+      ],
       "chapters": []
     },
     {
@@ -184,12 +355,51 @@
       "weeks": "14–17",
       "duration": "3 weeks",
       "status": "Coming Soon",
-      "coreTopics": [],
-      "tools": [],
-      "pmFocus": "Observability tools let you see token spend by feature, by user segment, and by prompt version. This is your cost-of-goods dashboard for AI.",
-      "deliverable": "AI observability spec — metrics, dashboards, alerts, cost-per-feature breakdown",
-      "learningOutcomes": [],
-      "resources": [],
+      "coreTopics": [
+        "Full fine-tuning vs LoRA / QLoRA",
+        "Instruction tuning & RLHF",
+        "When fine-tuning beats prompting",
+        "Dataset curation",
+        "LLM tracing (LangSmith, Helicone, Langfuse)",
+        "Latency / token / cost dashboards",
+        "Continuous eval pipelines",
+        "A/B testing LLM features",
+        "Input/output moderation",
+        "NeMo Guardrails / Llama Guard",
+        "Jailbreak patterns & mitigations",
+        "PII detection & redaction",
+        "Prompt caching strategies",
+        "Streaming responses",
+        "Batch vs real-time inference",
+        "Edge inference tradeoffs",
+        "Model routing"
+      ],
+      "tools": [
+        "LangSmith",
+        "Helicone",
+        "Langfuse",
+        "NeMo Guardrails",
+        "Llama Guard",
+        "Together AI",
+        "Fireworks AI",
+        "Modal (inference infra)"
+      ],
+      "pmFocus": "Observability tools let you see token spend by feature, by user segment, and by prompt version — this is your cost-of-goods dashboard for AI. Knowing this stack makes you a better partner to ML and platform engineers.",
+      "deliverable": "AI observability spec: what metrics to track, what dashboards to build, what alerts to set, and a cost-per-feature breakdown for your AI product",
+      "learningOutcomes": [
+        "Define observability & monitoring requirements",
+        "Write guardrail policy specs",
+        "Build an AI A/B testing plan",
+        "Set up cost attribution by feature",
+        "Specify fine-tuning decision criteria"
+      ],
+      "resources": [
+        "LangSmith docs",
+        "Helicone analytics guide",
+        "'Production LLM apps' — Eugene Yan's blog",
+        "NeMo Guardrails docs",
+        "'Fine-tuning vs RAG vs prompting' decision guide"
+      ],
       "chapters": []
     },
     {
@@ -200,12 +410,47 @@
       "weeks": "17–22",
       "duration": "5 weeks",
       "status": "Coming Soon",
-      "coreTopics": [],
-      "tools": [],
-      "pmFocus": "The capstone synthesizes everything. Pick a real problem and design the full AI system — including token budget, caching strategy, eval plan, guardrails, and product decisions.",
-      "deliverable": "Capstone — full agentic feature design with PRD, token budget, eval strategy, guardrails, HITL design, unit economics",
-      "learningOutcomes": [],
-      "resources": [],
+      "coreTopics": [
+        "AI-native vs AI-augmented products",
+        "Jobs-to-be-done for AI features",
+        "Moat-building with AI (data, workflow, UX)",
+        "AI feature prioritization frameworks",
+        "Build vs buy vs API decisions",
+        "Trust calibration & transparency UX",
+        "Progressive disclosure of AI reasoning",
+        "Latency UX (streaming, skeletons)",
+        "Handling errors & low-confidence outputs",
+        "AI onboarding & mental models",
+        "Bias / fairness / disparate impact",
+        "EU AI Act overview",
+        "GDPR implications for AI",
+        "Data privacy in training & inference",
+        "Responsible disclosure of AI use",
+        "AI incident response"
+      ],
+      "tools": [
+        "Reforge AI courses",
+        "Lenny's Podcast (AI episodes)",
+        "Ben's Bites newsletter",
+        "TLDR AI",
+        "EU AI Act text"
+      ],
+      "pmFocus": "The capstone synthesizes everything. Pick a real problem you are solving at work and design the full AI system — including token budget, caching strategy, eval plan, guardrails, and the product decisions only you can make.",
+      "deliverable": "Capstone: full agentic feature design — PRD with AI-specific sections, token budget, eval strategy, guardrail spec, HITL design, model selection rationale, and unit economics model",
+      "learningOutcomes": [
+        "Lead AI product discovery end-to-end",
+        "Write a complete agentic feature PRD",
+        "Navigate AI ethics & compliance tradeoffs",
+        "Present AI architecture decisions to leadership",
+        "Define and own AI product metrics"
+      ],
+      "resources": [
+        "Reforge AI product course",
+        "'Building AI Products' — Lenny Rachitsky",
+        "EU AI Act (EUR-Lex)",
+        "Microsoft Responsible AI principles",
+        "'AI Canon' — a16z reading list"
+      ],
       "chapters": []
     }
   ]

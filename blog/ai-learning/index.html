@@ -11,6 +11,7 @@
   <meta property="og:description" content="A structured AI learning book for product leaders covering LLMs, prompting, token efficiency, RAG, agents, MCP, LLMOps, AI product strategy, and enterprise AI transformation." />
   <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/" />
   <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script type="application/ld+json">
   {
@@ -61,7 +62,7 @@
         <span class="stat-pill"><strong>8–10</strong> hrs/week</span>
         <span class="stat-pill"><strong>Product-first</strong> lens</span>
       </div>
-      <div class="blog-actions" style="margin-top:24px;">
+      <div class="blog-actions">
         <a class="button primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Start Module 01</a>
         <a class="button secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Jump to Chapter 01</a>
       </div>
@@ -93,12 +94,12 @@
 
     <section class="blog-section reveal" id="about">
       <div class="blog-section-header">
-        <h2>About this book</h2>
+        <h2>Who this is for</h2>
         <p>AI Learning is a structured book-style path — not scattered posts. Modules build sequentially from mechanics to strategy.</p>
       </div>
       <div class="bento-card span-6">
         <p class="bento-lead-text">
-          Written for product leaders, PMs, founders, AI implementation owners, and operators who need to
+          Written for product leaders, PMs, founders, AI implementation owners, and operators who want to
           understand AI systems deeply enough to build, evaluate, and lead them — without becoming ML researchers.
         </p>
       </div>
@@ -106,82 +107,148 @@
 
     <section class="blog-section reveal" id="modules">
       <div class="blog-section-header">
-        <h2>Module timeline</h2>
-        <p>Full syllabus — scan by theme, weeks, and deliverable.</p>
+        <h2>Syllabus</h2>
+        <p>Full 8-module path — scan by theme, weeks, and deliverable. Switch between active and upcoming modules.</p>
       </div>
-      <div class="module-timeline">
-        <a class="module-card is-active is-link reveal" href="/blog/ai-learning/foundations-of-modern-ai-systems/">
-          <span class="status-pill live">Active</span>
-          <p class="theme-line">Module 01 · Weeks 1–2 · 2 weeks · LLM Mechanics</p>
-          <h3>Foundations of Modern AI Systems</h3>
-          <p>Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints and own AI feature unit economics.</p>
-          <p class="deliverable"><strong>Deliverable:</strong> Model selection memo — use case, quality, cost at scale, model + rationale, risks</p>
-          <span class="read-link">Open module →</span>
-        </a>
 
-        <article class="module-card reveal">
-          <span class="status-pill soon">Coming Soon</span>
-          <p class="theme-line">Module 02 · Weeks 3–4 · Prompting Craft</p>
-          <h3>Prompt Engineering — Techniques &amp; Structure</h3>
-          <p>Prompt engineering is the new acceptance criteria.</p>
-          <p class="deliverable"><strong>Deliverable:</strong> 3 production-quality system prompts + eval rubric each</p>
-        </article>
+      <div class="syllabus-tabs" role="region" aria-label="Syllabus modules by status">
+        <div class="syllabus-tab-list" role="tablist" aria-label="Filter modules by status">
+          <button class="syllabus-tab" role="tab" id="tab-active" aria-selected="true" aria-controls="panel-active">Active</button>
+          <button class="syllabus-tab" role="tab" id="tab-soon" aria-selected="false" aria-controls="panel-soon">Coming Soon</button>
+        </div>
 
-        <article class="module-card reveal">
-          <span class="status-pill soon">Coming Soon</span>
-          <p class="theme-line">Module 03 · Weeks 4–5 · Cost Optimization</p>
-          <h3>Token-Efficient Prompting</h3>
-          <p>Token efficiency is a product economics lever at scale.</p>
-          <p class="deliverable"><strong>Deliverable:</strong> Token efficiency audit — compress 3 prompts by ≥50%</p>
-        </article>
+        <!-- Active modules panel -->
+        <div id="panel-active" class="syllabus-panel is-active" role="tabpanel" aria-labelledby="tab-active">
+          <div class="module-timeline">
+            <a class="module-card is-active is-link reveal" href="/blog/ai-learning/foundations-of-modern-ai-systems/">
+              <span class="status-pill live">Active</span>
+              <p class="theme-line">Module 01 · Weeks 1–2 · 2 weeks · LLM Mechanics</p>
+              <h3>Foundations of Modern AI Systems</h3>
+              <p>Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints and own AI feature unit economics.</p>
+              <p class="deliverable"><strong>Deliverable:</strong> Model selection memo — use case, quality reqs, cost estimate at scale, chosen model + rationale, risks</p>
+              <div class="tag-cloud">
+                <span class="tag-pill">Transformer architecture</span>
+                <span class="tag-pill">Tokenization</span>
+                <span class="tag-pill">Context windows</span>
+                <span class="tag-pill">Model families</span>
+                <span class="tag-pill">Cost per token</span>
+              </div>
+              <span class="read-link" style="margin-top:12px;">Open module →</span>
+            </a>
+          </div>
+        </div>
 
-        <article class="module-card reveal">
-          <span class="status-pill soon">Coming Soon</span>
-          <p class="theme-line">Module 04 · Weeks 6–8 · Knowledge Grounding</p>
-          <h3>Retrieval-Augmented Generation (RAG)</h3>
-          <p>RAG grounds LLMs in company knowledge — retrieval precision reduces tokens.</p>
-          <p class="deliverable"><strong>Deliverable:</strong> RAG pipeline spec — chunking, embeddings, vector DB, eval plan</p>
-        </article>
+        <!-- Coming Soon modules panel -->
+        <div id="panel-soon" class="syllabus-panel" role="tabpanel" aria-labelledby="tab-soon">
+          <div class="module-timeline">
 
-        <article class="module-card reveal">
-          <span class="status-pill soon">Coming Soon</span>
-          <p class="theme-line">Module 05 · Weeks 9–12 · Autonomous AI</p>
-          <h3>AI Agents &amp; Agentic Systems</h3>
-          <p>Define HITL boundaries and what “done” means for agent tasks.</p>
-          <p class="deliverable"><strong>Deliverable:</strong> Agentic feature PRD — tools, HITL, observability, token cost per run</p>
-        </article>
+            <article class="module-card reveal">
+              <span class="status-pill soon">Coming Soon</span>
+              <p class="theme-line">Module 02 · Weeks 3–4 · 2 weeks · Prompting Craft</p>
+              <h3>Prompt Engineering — Techniques &amp; Structure</h3>
+              <p>Prompt engineering is the new acceptance criteria. A well-structured prompt defines "done" for the AI as clearly as a user story does for an engineer.</p>
+              <p class="deliverable"><strong>Deliverable:</strong> 3 production-quality system prompts for features in your product + an eval rubric for each</p>
+              <div class="tag-cloud">
+                <span class="tag-pill">Zero-shot / few-shot</span>
+                <span class="tag-pill">Chain-of-thought</span>
+                <span class="tag-pill">System prompt anatomy</span>
+                <span class="tag-pill">Prompt chaining</span>
+              </div>
+            </article>
 
-        <article class="module-card reveal">
-          <span class="status-pill soon">Coming Soon</span>
-          <p class="theme-line">Module 06 · Weeks 12–14 · Agent Connectivity</p>
-          <h3>Model Context Protocol (MCP)</h3>
-          <p>When to expose your product via MCP is a platform strategy question.</p>
-          <p class="deliverable"><strong>Deliverable:</strong> MCP build-vs-skip decision memo</p>
-        </article>
+            <article class="module-card reveal">
+              <span class="status-pill soon">Coming Soon</span>
+              <p class="theme-line">Module 03 · Weeks 4–5 · 1.5 weeks · Cost Optimization</p>
+              <h3>Token-Efficient Prompting</h3>
+              <p>At 1M calls/day, a 3x reduction in prompt tokens can be the difference between a profitable and unprofitable AI feature. Token efficiency is a product economics lever.</p>
+              <p class="deliverable"><strong>Deliverable:</strong> Token efficiency audit — compress 3 prompts by ≥50%, validate quality parity, document savings at scale</p>
+              <div class="tag-cloud">
+                <span class="tag-pill">Prompt caching</span>
+                <span class="tag-pill">Batch API</span>
+                <span class="tag-pill">Token budgeting</span>
+                <span class="tag-pill">Cost tradeoffs</span>
+              </div>
+            </article>
 
-        <article class="module-card reveal">
-          <span class="status-pill soon">Coming Soon</span>
-          <p class="theme-line">Module 07 · Weeks 14–17 · Production AI</p>
-          <h3>AI Infrastructure &amp; the Production Stack</h3>
-          <p>Observability is your cost-of-goods dashboard for AI.</p>
-          <p class="deliverable"><strong>Deliverable:</strong> AI observability spec — metrics, dashboards, alerts</p>
-        </article>
+            <article class="module-card reveal">
+              <span class="status-pill soon">Coming Soon</span>
+              <p class="theme-line">Module 04 · Weeks 6–8 · 3 weeks · Knowledge Grounding</p>
+              <h3>Retrieval-Augmented Generation (RAG)</h3>
+              <p>RAG is the most common production pattern for grounding LLMs in company knowledge. Retrieval precision directly reduces context tokens — a well-tuned retriever cuts input size 40–60%.</p>
+              <p class="deliverable"><strong>Deliverable:</strong> RAG pipeline spec — chunking strategy, embedding model, vector DB, retrieval approach, eval plan, freshness strategy</p>
+              <div class="tag-cloud">
+                <span class="tag-pill">Embeddings</span>
+                <span class="tag-pill">Vector DBs</span>
+                <span class="tag-pill">Hybrid search</span>
+                <span class="tag-pill">RAGAS eval</span>
+              </div>
+            </article>
 
-        <article class="module-card reveal">
-          <span class="status-pill soon">Coming Soon</span>
-          <p class="theme-line">Module 08 · Weeks 17–22 · Capstone</p>
-          <h3>AI Product Strategy &amp; Applied Practice</h3>
-          <p>Synthesize everything into a full agentic feature design.</p>
-          <p class="deliverable"><strong>Deliverable:</strong> Capstone — PRD, token budget, eval, guardrails, unit economics</p>
-        </article>
+            <article class="module-card reveal">
+              <span class="status-pill soon">Coming Soon</span>
+              <p class="theme-line">Module 05 · Weeks 9–12 · 4 weeks · Autonomous AI</p>
+              <h3>AI Agents &amp; Agentic Systems</h3>
+              <p>Agents introduce compounding failure modes and latency. Your job is defining the right HITL boundaries and what "done" looks like for an agent task.</p>
+              <p class="deliverable"><strong>Deliverable:</strong> Agentic feature PRD — scope, tool list, HITL checkpoints, blast radius controls, observability, token cost per run</p>
+              <div class="tag-cloud">
+                <span class="tag-pill">ReAct pattern</span>
+                <span class="tag-pill">Tool calling</span>
+                <span class="tag-pill">HITL design</span>
+                <span class="tag-pill">Agent memory</span>
+              </div>
+            </article>
+
+            <article class="module-card reveal">
+              <span class="status-pill soon">Coming Soon</span>
+              <p class="theme-line">Module 06 · Weeks 12–14 · 2 weeks · Agent Connectivity</p>
+              <h3>Model Context Protocol (MCP)</h3>
+              <p>MCP is becoming the USB-C of AI tool connectivity. Understanding when to expose your product via MCP is a platform strategy question.</p>
+              <p class="deliverable"><strong>Deliverable:</strong> MCP build-vs-skip decision memo — who benefits, tools to expose, security requirements</p>
+              <div class="tag-cloud">
+                <span class="tag-pill">MCP architecture</span>
+                <span class="tag-pill">Platform strategy</span>
+                <span class="tag-pill">Tool connectivity</span>
+              </div>
+            </article>
+
+            <article class="module-card reveal">
+              <span class="status-pill soon">Coming Soon</span>
+              <p class="theme-line">Module 07 · Weeks 14–17 · 3 weeks · Production AI</p>
+              <h3>AI Infrastructure &amp; the Production Stack</h3>
+              <p>Observability tools let you see token spend by feature, by user segment, and by prompt version — this is your cost-of-goods dashboard for AI.</p>
+              <p class="deliverable"><strong>Deliverable:</strong> AI observability spec — metrics, dashboards, alerts, cost-per-feature breakdown</p>
+              <div class="tag-cloud">
+                <span class="tag-pill">LangSmith</span>
+                <span class="tag-pill">Guardrails</span>
+                <span class="tag-pill">Fine-tuning</span>
+                <span class="tag-pill">LLM observability</span>
+              </div>
+            </article>
+
+            <article class="module-card reveal">
+              <span class="status-pill soon">Coming Soon</span>
+              <p class="theme-line">Module 08 · Weeks 17–22 · 5 weeks · Strategy &amp; Capstone</p>
+              <h3>AI Product Strategy &amp; Applied Practice</h3>
+              <p>The capstone synthesizes everything. Pick a real problem and design the full AI system — including token budget, caching strategy, eval plan, guardrails, and product decisions.</p>
+              <p class="deliverable"><strong>Deliverable:</strong> Capstone — full agentic feature design with PRD, token budget, eval strategy, guardrails, HITL design, unit economics</p>
+              <div class="tag-cloud">
+                <span class="tag-pill">AI product strategy</span>
+                <span class="tag-pill">Responsible AI</span>
+                <span class="tag-pill">AI economics</span>
+                <span class="tag-pill">Capstone PRD</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="blog-section reveal">
       <div class="next-card">
         <h3>Begin with Foundations of Modern AI Systems</h3>
-        <p>Chapter 01 — attention intuition — is live now.</p>
-        <a class="button primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/" style="background:white;color:var(--ink);">Start Chapter 01</a>
+        <p>Chapter 01 — attention intuition — is live now. Start with the most important concept in modern AI.</p>
+        <a class="button primary alternate" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
       </div>
     </section>
   </main>

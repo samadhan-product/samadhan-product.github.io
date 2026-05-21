@@ -183,13 +183,78 @@
     });
   }
 
+  /* Tab panels — syllabus tabs and chapter tabs */
+  function initTabs() {
+    document.querySelectorAll("[role='tablist']").forEach(function (tablist) {
+      var tabs = Array.from(tablist.querySelectorAll("[role='tab']"));
+      if (!tabs.length) return;
+
+      function activate(tab) {
+        tabs.forEach(function (t) {
+          var panelId = t.getAttribute("aria-controls");
+          var panel = panelId ? document.getElementById(panelId) : null;
+          var isSelected = t === tab;
+          t.setAttribute("aria-selected", String(isSelected));
+          if (panel) {
+            if (isSelected) {
+              panel.classList.add("is-active");
+            } else {
+              panel.classList.remove("is-active");
+            }
+          }
+        });
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          activate(tab);
+        });
+
+        tab.addEventListener("keydown", function (e) {
+          var idx = tabs.indexOf(tab);
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            var next = tabs[(idx + 1) % tabs.length];
+            next.focus();
+            activate(next);
+          } else if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            var prev = tabs[(idx - 1 + tabs.length) % tabs.length];
+            prev.focus();
+            activate(prev);
+          } else if (e.key === "Home") {
+            e.preventDefault();
+            tabs[0].focus();
+            activate(tabs[0]);
+          } else if (e.key === "End") {
+            e.preventDefault();
+            tabs[tabs.length - 1].focus();
+            activate(tabs[tabs.length - 1]);
+          }
+        });
+      });
+
+      /* Ensure initial state is consistent */
+      var selected = tabs.find(function (t) {
+        return t.getAttribute("aria-selected") === "true";
+      });
+      if (selected) {
+        activate(selected);
+      } else if (tabs[0]) {
+        activate(tabs[0]);
+      }
+    });
+  }
+
   function init() {
+    document.body.setAttribute("data-js", "1");
     initProgress();
     initToc();
     initReveal();
     initRelevanceBars();
     initCopyLinks();
     initBackToTop();
+    initTabs();
   }
 
   if (document.readyState === "loading") {
