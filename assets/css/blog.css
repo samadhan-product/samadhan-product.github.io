@@ -1378,9 +1378,9 @@ button:focus-visible {
    ============================================================ */
 
 .cg-blog-theme {
-  --cg-dark: #080c18;
-  --cg-dark-2: #0d1322;
-  --cg-dark-3: #111827;
+  --cg-dark: #050505;
+  --cg-dark-2: #0a0a0a;
+  --cg-dark-3: #111111;
   --cg-dark-card: rgba(255,255,255,0.04);
   --cg-dark-card-2: rgba(255,255,255,0.07);
   --cg-border: rgba(255,255,255,0.08);
@@ -1405,99 +1405,21 @@ button:focus-visible {
 }
 
 /* --- Background layers --- */
-.cg-mesh-bg {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 70% 50% at 10% -5%, rgba(59,130,246,0.2), transparent 55%),
-    radial-gradient(ellipse 55% 40% at 90% 5%, rgba(34,211,238,0.12), transparent 50%),
-    radial-gradient(ellipse 45% 35% at 50% 100%, rgba(245,158,11,0.06), transparent 55%),
-    #080c18;
-}
-
-.cg-grid-bg {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.28;
-  background-image:
-    linear-gradient(rgba(59,130,246,0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.1) 1px, transparent 1px);
-  background-size: 52px 52px;
-  mask-image: linear-gradient(to bottom, black 0%, rgba(0,0,0,0.4) 55%, transparent 85%);
-}
-
+/* Portal uses dot field only — hide legacy mesh/grid/orbs */
+.cg-mesh-bg,
+.cg-grid-bg,
 .cg-orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.35;
-  pointer-events: none;
-  z-index: 0;
+  display: none !important;
 }
-.cg-orb.blue  { width: 500px; height: 500px; background: rgba(59,130,246,0.25); top: -120px; left: -100px; }
-.cg-orb.cyan  { width: 380px; height: 380px; background: rgba(34,211,238,0.14); top: 25%; right: -80px; }
-.cg-orb.gold  { width: 320px; height: 320px; background: rgba(245,158,11,0.12); bottom: -60px; right: -40px; }
 
-.cg-blog-theme > *:not(.cg-mesh-bg):not(.cg-grid-bg):not(.cg-orb):not(.cg-progress-bar):not(.cg-back-to-top):not(.animated-dot-field) {
+.cg-blog-theme > *:not(.cg-mesh-bg):not(.cg-grid-bg):not(.cg-orb):not(.cg-progress-bar):not(.cg-back-to-top):not(.animated-dot-field):not(.site-nav) {
   position: relative;
   z-index: 1;
 }
 
-/* --- Navbar --- */
-.cg-navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(8,12,24,0.82);
-  border-bottom: 1px solid var(--cg-border);
-}
-.cg-nav-inner {
-  max-width: var(--cg-max);
-  margin: 0 auto;
-  padding: 15px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-.cg-brand {
-  font-size: 18px;
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  color: var(--cg-text);
-  text-decoration: none;
-}
-.cg-brand span { color: var(--cg-blue); }
-.cg-nav-links {
-  display: flex;
-  gap: 22px;
-  font-size: 14px;
-  font-weight: 650;
-}
-.cg-nav-links a {
-  color: var(--cg-text-muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.cg-nav-links a:hover,
-.cg-nav-links a.active { color: var(--cg-text); }
-.cg-nav-cta {
-  font-size: 13px;
-  font-weight: 750;
-  color: var(--cg-blue);
-  text-decoration: none;
-  padding: 7px 14px;
-  border: 1px solid var(--cg-border-blue);
-  border-radius: 8px;
-  transition: background 0.2s;
-}
-.cg-nav-cta:hover { background: var(--cg-blue-dim); }
+/* Legacy cg-navbar — replaced by .site-nav in style.css */
+.cg-navbar { display: none !important; }
+.cg-nav-cta { display: none !important; }
 
 /* --- Breadcrumbs --- */
 .cg-breadcrumbs {
@@ -1512,8 +1434,12 @@ button:focus-visible {
   gap: 6px;
   align-items: center;
 }
-.cg-breadcrumbs a { color: var(--cg-blue); text-decoration: none; }
-.cg-breadcrumbs a:hover { text-decoration: underline; }
+.cg-breadcrumbs a {
+  color: var(--cg-text-muted);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.cg-breadcrumbs a:hover { color: var(--cg-text); }
 .cg-breadcrumbs .sep { color: var(--cg-border); user-select: none; }
 .cg-breadcrumbs .current { color: var(--cg-text-muted); font-weight: 750; }
 
@@ -1535,22 +1461,30 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--cg-text-muted);
+  margin-bottom: 22px;
+}
+
+[data-theme="light"] .cg-pill {
   padding: 5px 13px;
   border: 1px solid var(--cg-border-blue);
   background: var(--cg-blue-dim);
-  color: #93c5fd;
+  color: #1e3a5f;
   border-radius: 999px;
-  font-size: 11px;
   font-weight: 800;
-  text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 22px;
 }
 .cg-hero-title {
+  font-family: "Outfit", sans-serif;
   font-size: clamp(40px, 6vw, 74px);
-  font-weight: 900;
+  font-weight: 300;
   line-height: 0.95;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.04em;
   margin: 0 0 20px;
   color: var(--cg-text);
 }
