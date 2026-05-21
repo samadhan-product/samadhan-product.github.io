@@ -239,14 +239,14 @@
   padding: 24px;
 }
 
-.orbit-ring {
+.module-orbit .orbit-ring {
   position: absolute;
   inset: 24px;
   border: 1px dashed rgba(37, 99, 235, 0.2);
   border-radius: 50%;
 }
 
-.orbit-item {
+.module-orbit .orbit-item {
   position: absolute;
   font-size: 11px;
   font-weight: 750;
@@ -257,14 +257,14 @@
   white-space: nowrap;
 }
 
-.orbit-item:nth-child(1) { top: 8%; left: 50%; transform: translateX(-50%); }
-.orbit-item:nth-child(2) { top: 22%; right: 6%; }
-.orbit-item:nth-child(3) { top: 50%; right: 2%; transform: translateY(-50%); }
-.orbit-item:nth-child(4) { bottom: 18%; right: 10%; }
-.orbit-item:nth-child(5) { bottom: 8%; left: 50%; transform: translateX(-50%); }
-.orbit-item:nth-child(6) { bottom: 20%; left: 6%; }
-.orbit-item:nth-child(7) { top: 48%; left: 2%; transform: translateY(-50%); }
-.orbit-item:nth-child(8) { top: 20%; left: 8%; }
+.module-orbit .orbit-item:nth-child(1) { top: 8%; left: 50%; transform: translateX(-50%); }
+.module-orbit .orbit-item:nth-child(2) { top: 22%; right: 6%; }
+.module-orbit .orbit-item:nth-child(3) { top: 50%; right: 2%; transform: translateY(-50%); }
+.module-orbit .orbit-item:nth-child(4) { bottom: 18%; right: 10%; }
+.module-orbit .orbit-item:nth-child(5) { bottom: 8%; left: 50%; transform: translateX(-50%); }
+.module-orbit .orbit-item:nth-child(6) { bottom: 20%; left: 6%; }
+.module-orbit .orbit-item:nth-child(7) { top: 48%; left: 2%; transform: translateY(-50%); }
+.module-orbit .orbit-item:nth-child(8) { top: 20%; left: 8%; }
 
 @keyframes float-soft {
   0%, 100% { transform: translateY(0); }
