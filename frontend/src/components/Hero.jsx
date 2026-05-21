@@ -108,31 +108,6 @@ export default function Hero() {
                     />
                   </svg>
                 </MagneticButton>
-              </motion.div>
-
-              <motion.div className="flex flex-wrap items-center gap-3 md:justify-end">
-                <MagneticButton
-                  href="/blog/ai-learning/"
-                  shape="pill"
-                  variant="ghost"
-                  data-testid="hero-ai-learning-button"
-                  data-cursor="ai learning"
-                >
-                  <span>Learn AI</span>
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  >
-                    <path
-                      d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                    />
-                  </svg>
-                </MagneticButton>
 
                 <MagneticButton
                   href={profile.social.linkedin}

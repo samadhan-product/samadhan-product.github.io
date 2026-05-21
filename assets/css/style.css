@@ -1326,7 +1326,7 @@ footer.site-footer {
 .orbit-ring-inner {
   --r: 122px;
   --step: 90deg;
-  --dur: 22s;
+  --dur: 28s;
   width: calc(var(--r) * 2);
   height: calc(var(--r) * 2);
   animation: orbitCW var(--dur) linear infinite;
@@ -1335,19 +1335,44 @@ footer.site-footer {
 .orbit-ring-outer {
   --r: 196px;
   --step: 60deg;
-  --dur: 40s;
+  --dur: 42s;
   width: calc(var(--r) * 2);
   height: calc(var(--r) * 2);
-  animation: orbitCCW var(--dur) linear infinite;
+  /* Half-step offset so inner/outer pills interleave symmetrically */
+  animation: orbitCW var(--dur) linear infinite;
 }
 
 .orbit-item {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 0;
+  height: 0;
   transform:
     rotate(calc(var(--i, 0) * var(--step, 90deg)))
     translateY(calc(-1 * var(--r, 122px)));
+}
+
+.orbit-ring-outer .orbit-item {
+  transform:
+    rotate(calc((var(--i, 0) + 0.5) * var(--step, 60deg)))
+    translateY(calc(-1 * var(--r, 196px)));
+}
+
+/* Cancels placement angle + ring spin so pills stay horizontal */
+.orbit-ring-inner .orbit-item {
+  --tilt: calc(-1 * var(--i, 0) * var(--step, 90deg));
+}
+
+.orbit-ring-outer .orbit-item {
+  --tilt: calc(-1 * (var(--i, 0) + 0.5) * var(--step, 60deg));
+}
+
+.orbit-label-spin {
+  display: flex;
+  justify-content: center;
+  transform: translate(-50%, -50%) rotate(var(--tilt, 0deg));
+  animation: orbitLabelUpright var(--dur, 28s) linear infinite;
 }
 
 .orbit-label {
@@ -1359,18 +1384,9 @@ footer.site-footer {
   font-weight: 700;
   letter-spacing: 0.025em;
   white-space: nowrap;
-  transform: translateX(-50%) translateY(-50%);
   background: var(--cg-dark-card, var(--surface, rgba(255,255,255,0.06)));
   border: 1px solid var(--cg-border, var(--soft, rgba(255,255,255,0.1)));
   color: var(--cg-text-muted, var(--muted));
-}
-
-.orbit-ring-inner .orbit-label {
-  animation: counterCW var(--dur, 22s) linear infinite;
-}
-
-.orbit-ring-outer .orbit-label {
-  animation: counterCCW var(--dur, 40s) linear infinite;
 }
 
 /* Orbit dots on ring edges */
@@ -1391,18 +1407,10 @@ footer.site-footer {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-@keyframes orbitCCW {
-  to { transform: translate(-50%, -50%) rotate(-360deg); }
-}
-
-@keyframes counterCW {
-  from { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
-  to   { transform: translateX(-50%) translateY(-50%) rotate(-360deg); }
-}
-
-@keyframes counterCCW {
-  from { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
-  to   { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
+@keyframes orbitLabelUpright {
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--tilt, 0deg) - 360deg));
+  }
 }
 
 /* Light vintage theme — orbit */
@@ -1446,7 +1454,7 @@ footer.site-footer {
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .orbit-ring { animation: none !important; border-style: solid; }
-  .orbit-label { animation: none !important; }
+  .orbit-label-spin { animation: none !important; }
   .orbit-item {
     position: static !important;
     display: inline-flex;
