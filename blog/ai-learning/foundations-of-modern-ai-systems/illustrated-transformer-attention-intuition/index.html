@@ -41,23 +41,26 @@
   }
   </script>
 </head>
-<body class="blog-page blog-article">
-  <div class="mesh-bg" aria-hidden="true"></div>
+<body class="cg-blog-theme">
+  <div class="cg-mesh-bg" aria-hidden="true"></div>
+  <div class="cg-grid-bg" aria-hidden="true"></div>
+  <div class="cg-orb blue" aria-hidden="true"></div>
+  <div class="cg-orb cyan" aria-hidden="true"></div>
 
-  <nav class="blog-navbar">
-    <div class="blog-nav-inner">
-      <a class="brand" href="/">Samadhan <span>Mishra</span></a>
-      <div class="blog-nav-links">
+  <nav class="cg-navbar">
+    <div class="cg-nav-inner">
+      <a class="cg-brand" href="/">Samadhan <span>Mishra</span></a>
+      <div class="cg-nav-links">
         <a href="/">Home</a>
         <a href="/portfolio/">Portfolio</a>
         <a href="/blog/">Blog</a>
         <a class="active" href="/blog/ai-learning/">AI Learning</a>
       </div>
-      <a class="button secondary small" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Module</a>
+      <a class="cg-btn sm secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Module</a>
     </div>
   </nav>
 
-  <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a><span class="sep">→</span>
     <a href="/blog/">Blog</a><span class="sep">→</span>
     <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
@@ -65,70 +68,77 @@
     <span class="current">Chapter 01</span>
   </nav>
 
-  <header class="blog-hero-editorial reveal">
-    <span class="blog-kicker">Chapter 01 · Module 01</span>
-    <h1 class="blog-title">Understanding Attention Intuition from “The Illustrated Transformer”</h1>
-    <p class="blog-subtitle article-lede">
+  <!-- Editorial hero -->
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 01 · Module 01 · Beginner · 12–15 min</span>
+    <h1 class="cg-article-hero-title">Understanding Attention Intuition from "The Illustrated Transformer"</h1>
+    <p class="cg-article-lede">
       A PM-friendly explanation of how Transformers use attention to connect words, resolve context, and power modern LLMs.
     </p>
-    <div class="blog-meta-strip">
-      <span class="stat-pill">Book: AI Learning</span>
-      <span class="stat-pill">Beginner</span>
-      <span class="stat-pill">12–15 min</span>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner</span>
+      <span class="cg-article-badge">12–15 min</span>
     </div>
-    <div class="blog-actions">
-      <a class="button primary" href="#article-start">Start reading</a>
-      <a class="button secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
     </div>
-    <div class="attention-map reveal" aria-label="Attention diagram: it connects to animal">
-      <span class="attention-word">The</span>
-      <span class="attention-word">animal</span>
-      <span class="attention-word">did</span>
-      <span class="attention-word">not</span>
-      <span class="attention-word">cross</span>
-      <span class="attention-word">the</span>
-      <span class="attention-word">street</span>
-      <span class="attention-word">because</span>
-      <span class="attention-word is-focus">it</span>
-      <span class="attention-word is-linked">tired</span>
+    <!-- Attention map visual -->
+    <div class="cg-attn-map" aria-label="Attention diagram: it connects to animal">
+      <span class="cg-attn-word">The</span>
+      <span class="cg-attn-word">animal</span>
+      <span class="cg-attn-word">did</span>
+      <span class="cg-attn-word">not</span>
+      <span class="cg-attn-word">cross</span>
+      <span class="cg-attn-word">the</span>
+      <span class="cg-attn-word">street</span>
+      <span class="cg-attn-word">because</span>
+      <span class="cg-attn-word focus">it</span>
+      <span class="cg-attn-word linked">tired</span>
     </div>
-    <p class="illustration-caption">Highlighted: how <strong>it</strong> attends to <strong>animal</strong> and <strong>tired</strong></p>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Highlighted: how <strong style="color:var(--cg-text);">it</strong> attends to <strong style="color:var(--cg-text);">animal</strong> and <strong style="color:var(--cg-text);">tired</strong></p>
   </header>
 
-  <div class="article-shell" id="article-start">
-    <div class="article-grid">
-      <aside class="article-sidebar">
-        <nav class="article-toc" aria-label="Table of contents">
-          <p class="article-toc-title">On this page</p>
-          <ol>
-            <li><a class="article-toc-link" href="#why">Why this chapter</a></li>
-            <li><a class="article-toc-link" href="#alammar">Jay Alammar</a></li>
-            <li><a class="article-toc-link" href="#focus">Chapter focus</a></li>
-            <li><a class="article-toc-link" href="#mental-model">Mental model</a></li>
-            <li><a class="article-toc-link" href="#meeting-room">Meeting room</a></li>
-            <li><a class="article-toc-link" href="#example">Running example</a></li>
-            <li><a class="article-toc-link" href="#attention">Attention</a></li>
-            <li><a class="article-toc-link" href="#it-animal">Why it → animal</a></li>
-            <li><a class="article-toc-link" href="#tokens">Tokens (high level)</a></li>
-            <li><a class="article-toc-link" href="#self-attention">Self-attention</a></li>
-            <li><a class="article-toc-link" href="#qkv">Q / K / V</a></li>
-            <li><a class="article-toc-link" href="#multi-head">Multi-head</a></li>
-            <li><a class="article-toc-link" href="#product">Product lens</a></li>
-            <li><a class="article-toc-link" href="#misconceptions">Misconceptions</a></li>
-            <li><a class="article-toc-link" href="#recap">Recap</a></li>
-            <li><a class="article-toc-link" href="#quiz">Quiz</a></li>
-            <li><a class="article-toc-link" href="#next">Next chapter</a></li>
+  <!-- Article shell -->
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <!-- Sidebar TOC -->
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#why">Why this chapter</a></li>
+            <li><a class="cg-toc-link" href="#alammar">Jay Alammar</a></li>
+            <li><a class="cg-toc-link" href="#focus">Chapter focus</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">Mental model</a></li>
+            <li><a class="cg-toc-link" href="#meeting-room">Meeting room</a></li>
+            <li><a class="cg-toc-link" href="#example">Running example</a></li>
+            <li><a class="cg-toc-link" href="#attention">Attention</a></li>
+            <li><a class="cg-toc-link" href="#it-animal">Why it → animal</a></li>
+            <li><a class="cg-toc-link" href="#tokens">Tokens (high level)</a></li>
+            <li><a class="cg-toc-link" href="#self-attention">Self-attention</a></li>
+            <li><a class="cg-toc-link" href="#qkv">Q / K / V</a></li>
+            <li><a class="cg-toc-link" href="#multi-head">Multi-head</a></li>
+            <li><a class="cg-toc-link" href="#product">Product lens</a></li>
+            <li><a class="cg-toc-link" href="#misconceptions">Misconceptions</a></li>
+            <li><a class="cg-toc-link" href="#recap">Recap</a></li>
+            <li><a class="cg-toc-link" href="#quiz">Quiz</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
           </ol>
-          <div class="sidebar-meta">
-            <p><strong>Module:</strong> Foundations of Modern AI Systems</p>
-            <p><strong>Reading time:</strong> 12–15 min</p>
-            <a class="read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 12–15 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
           </div>
         </nav>
       </aside>
 
-      <article class="article-content">
-        <section id="why" class="article-section reveal">
+      <!-- Article body -->
+      <article class="cg-article-content">
+
+        <section id="why" class="cg-article-section cg-reveal">
           <h2>1. Why this chapter exists</h2>
           <p>
             <a href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener noreferrer">Jay Alammar's Illustrated Transformer</a>
@@ -138,13 +148,13 @@
             Most teams adopt LLMs before the product side understands <em>how</em> the model reads context.
             That gap creates unrealistic roadmaps, weak prompts, and poor evaluation design.
           </p>
-          <div class="article-callout insight">
-            <p class="article-callout-title">What to remember</p>
-            <p class="marginless">One durable intuition first: <strong>attention</strong>. The rest of the module builds on that.</p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">What to remember</p>
+            <p>One durable intuition first: <strong>attention</strong>. The rest of the module builds on that.</p>
           </div>
         </section>
 
-        <section id="alammar" class="article-section reveal">
+        <section id="alammar" class="cg-article-section cg-reveal">
           <h2>2. What Jay Alammar's article is trying to explain</h2>
           <p>
             The article shows how information flows when a model processes language — especially how words
@@ -156,98 +166,108 @@
           </p>
         </section>
 
-        <section id="focus" class="article-section reveal">
+        <section id="focus" class="cg-article-section cg-reveal">
           <h2>3. What this chapter will focus on</h2>
-          <div class="article-callout insight">
-            <p class="article-callout-title">Scope</p>
-            <p class="marginless">Attention intuition and self-attention only — not the entire Transformer architecture.</p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Scope</p>
+            <p>Attention intuition and self-attention only — not the entire Transformer architecture.</p>
           </div>
         </section>
 
-        <section id="mental-model" class="article-section reveal">
+        <section id="mental-model" class="cg-article-section cg-reveal">
           <h2>4. The one-line Transformer mental model</h2>
-          <p class="article-example-hero">
+          <p style="font-size:1.2rem;font-weight:700;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
             A Transformer understands text by letting every word look at every other word and decide what matters.
           </p>
         </section>
 
-        <section id="meeting-room" class="article-section reveal">
+        <section id="meeting-room" class="cg-article-section cg-reveal">
           <h2>5. The meeting room analogy</h2>
           <p>Every word is a person in one meeting room.</p>
-          <div class="meeting-cards">
-            <div class="meeting-card"><strong>"it"</strong> asks: Who am I referring to?</div>
-            <div class="meeting-card"><strong>"animal"</strong> says: Probably me.</div>
-            <div class="meeting-card"><strong>"street"</strong> says: Maybe, less likely.</div>
-            <div class="meeting-card"><strong>"tired"</strong> supports animal.</div>
+          <div class="cg-meeting-grid">
+            <div class="cg-meeting-card"><strong>"it"</strong> asks: Who am I referring to?</div>
+            <div class="cg-meeting-card"><strong>"animal"</strong> says: Probably me.</div>
+            <div class="cg-meeting-card"><strong>"street"</strong> says: Maybe, less likely.</div>
+            <div class="cg-meeting-card"><strong>"tired"</strong> supports animal.</div>
           </div>
-          <div class="article-callout product">
-            <p class="article-callout-title">PM translation</p>
-            <p class="marginless">Self-attention is that meeting round in software — repeated across layers.</p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM translation</p>
+            <p>Self-attention is that meeting round in software — repeated across layers.</p>
           </div>
         </section>
 
-        <section id="example" class="article-section reveal">
+        <section id="example" class="cg-article-section cg-reveal">
           <h2>6. Running example</h2>
-          <p class="article-example">"The animal did not cross the street because it was tired."</p>
+          <p style="font-size:1.1rem;font-style:italic;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:16px 20px;background:var(--cg-dark-card);">
+            "The animal did not cross the street because it was tired."
+          </p>
         </section>
 
-        <section id="attention" class="article-section reveal">
+        <section id="attention" class="cg-article-section cg-reveal">
           <h2>7. Attention intuition</h2>
           <p><strong>Attention</strong> is relevance scoring — how much each word should influence the word you are updating.</p>
         </section>
 
-        <section id="it-animal" class="article-section reveal">
+        <section id="it-animal" class="cg-article-section cg-reveal">
           <h2>8. Why "it" should connect to "animal"</h2>
-          <div class="relevance-bars" aria-label="Relevance scores for the word it">
-            <div class="relevance-row" style="--w:92%"><span>animal</span><div class="relevance-track"><div class="relevance-fill"></div></div><span>High</span></div>
-            <div class="relevance-row" style="--w:78%"><span>tired</span><div class="relevance-track"><div class="relevance-fill"></div></div><span>High</span></div>
-            <div class="relevance-row" style="--w:45%"><span>cross</span><div class="relevance-track"><div class="relevance-fill"></div></div><span>Med</span></div>
-            <div class="relevance-row" style="--w:18%"><span>street</span><div class="relevance-track"><div class="relevance-fill"></div></div><span>Low</span></div>
+          <div class="cg-relevance-bars" aria-label="Relevance scores for the word it">
+            <div class="cg-relevance-row" style="--w:92%"><span>animal</span><div class="cg-relevance-track"><div class="cg-relevance-fill"></div></div><span>High</span></div>
+            <div class="cg-relevance-row" style="--w:78%"><span>tired</span><div class="cg-relevance-track"><div class="cg-relevance-fill"></div></div><span>High</span></div>
+            <div class="cg-relevance-row" style="--w:45%"><span>cross</span><div class="cg-relevance-track"><div class="cg-relevance-fill"></div></div><span>Med</span></div>
+            <div class="cg-relevance-row" style="--w:18%"><span>street</span><div class="cg-relevance-track"><div class="cg-relevance-fill"></div></div><span>Low</span></div>
           </div>
           <p>The model learns these patterns from data — not a hard-coded grammar rule.</p>
         </section>
 
-        <section id="tokens" class="article-section reveal">
+        <section id="tokens" class="cg-article-section cg-reveal">
           <h2>9. Tokens and embeddings — high level only</h2>
           <p>
             The model sees <strong>tokens</strong> as numerical <strong>embeddings</strong>.
             Attention operates on those representations. <strong>Chapter 02</strong> goes deeper.
           </p>
-          <div class="token-flow">
-            <span class="tag-pill">text</span><span>→</span><span class="tag-pill">tokens</span><span>→</span><span class="tag-pill">embeddings</span><span>→</span><span class="tag-pill">attention</span>
+          <div class="cg-token-flow">
+            <span class="cg-token">text</span>
+            <span class="cg-token-arrow">→</span>
+            <span class="cg-token">tokens</span>
+            <span class="cg-token-arrow">→</span>
+            <span class="cg-token">embeddings</span>
+            <span class="cg-token-arrow">→</span>
+            <span class="cg-token">attention</span>
           </div>
         </section>
 
-        <section id="self-attention" class="article-section reveal">
+        <section id="self-attention" class="cg-article-section cg-reveal">
           <h2>10. Self-attention</h2>
           <p>Each word looks at other words in the <em>same</em> sentence.</p>
-          <p class="article-example">"The doctor checked the patient because he was coughing."</p>
+          <p style="font-size:1.05rem;font-style:italic;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            "The doctor checked the patient because he was coughing."
+          </p>
           <p>Who is <strong>he</strong>? Attention usually favors <strong>patient</strong> — but bias and edge cases matter for product design.</p>
         </section>
 
-        <section id="qkv" class="article-section reveal">
+        <section id="qkv" class="cg-article-section cg-reveal">
           <h2>11. Query, Key, and Value — search analogy</h2>
           <p>Using <strong>"it"</strong> as the word we update:</p>
-          <div class="qkv-grid">
-            <div class="qkv-card"><strong>Query</strong><p>What am I looking for?</p></div>
-            <div class="qkv-card"><strong>Key</strong><p>What does each word offer?</p></div>
-            <div class="qkv-card"><strong>Value</strong><p>What info do I take?</p></div>
+          <div class="cg-qkv-grid">
+            <div class="cg-qkv-card"><strong>Query</strong><p>What am I looking for?</p></div>
+            <div class="cg-qkv-card"><strong>Key</strong><p>What does each word offer?</p></div>
+            <div class="cg-qkv-card"><strong>Value</strong><p>What info do I take?</p></div>
           </div>
         </section>
 
-        <section id="multi-head" class="article-section reveal">
+        <section id="multi-head" class="cg-article-section cg-reveal">
           <h2>12. Multi-head attention — multiple viewpoints</h2>
-          <div class="head-cards">
-            <div class="head-card">Pronoun reference — it → animal</div>
-            <div class="head-card">Grammar — subject, negation</div>
-            <div class="head-card">Cause-effect — because → why</div>
+          <div class="cg-head-grid">
+            <div class="cg-head-card">Pronoun reference — it → animal</div>
+            <div class="cg-head-card">Grammar — subject, negation</div>
+            <div class="cg-head-card">Cause-effect — because → why</div>
           </div>
         </section>
 
-        <section id="product" class="article-section reveal">
+        <section id="product" class="cg-article-section cg-reveal">
           <h2>13. Product leader lens</h2>
-          <div class="bento-card span-12">
-            <ul class="bento-list">
+          <div class="cg-card span-12">
+            <ul class="cg-bento-list">
               <li><strong>Prompt quality</strong> — models work from context you provide.</li>
               <li><strong>RAG quality</strong> — retrieved chunks shape what the model attends to.</li>
               <li><strong>Long context ≠ good reasoning</strong> — length alone does not fix ambiguity.</li>
@@ -257,10 +277,10 @@
           </div>
         </section>
 
-        <section id="misconceptions" class="article-section reveal">
+        <section id="misconceptions" class="cg-article-section cg-reveal">
           <h2>14. Common misconceptions</h2>
-          <div class="table-wrap article-table">
-            <table>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
               <thead><tr><th>Misconception</th><th>Correction</th></tr></thead>
               <tbody>
                 <tr><td>Transformers understand like humans.</td><td>Learned relevance patterns — useful, not human comprehension.</td></tr>
@@ -273,10 +293,11 @@
           </div>
         </section>
 
-        <section id="recap" class="article-section reveal">
+        <section id="recap" class="cg-article-section cg-reveal">
           <h2>15. Chapter recap</h2>
-          <div class="recap-card">
-            <ul class="recap-list">
+          <div class="cg-recap">
+            <h3>Key takeaways</h3>
+            <ul class="cg-recap-list">
               <li>Attention is <strong>relevance scoring</strong>.</li>
               <li><strong>Self-attention</strong> updates each word using the sentence.</li>
               <li><strong>Q / K / V</strong> = search analogy.</li>
@@ -285,33 +306,36 @@
           </div>
         </section>
 
-        <section id="quiz" class="article-section reveal">
+        <section id="quiz" class="cg-article-section cg-reveal">
           <h2>16. Quick check quiz</h2>
-          <div class="quiz-card"><strong>What problem does attention solve?</strong><details><summary>Show answer</summary>It lets each word use context from the rest of the sentence.</details></div>
-          <div class="quiz-card"><strong>Why does "it" connect to "animal"?</strong><details><summary>Show answer</summary>Higher weights on animal and tired from learned patterns.</details></div>
-          <div class="quiz-card"><strong>What does self-attention mean?</strong><details><summary>Show answer</summary>Each word attends to other words in the same sentence.</details></div>
-          <div class="quiz-card"><strong>What is Query in QKV?</strong><details><summary>Show answer</summary>The search question the current word asks.</details></div>
-          <div class="quiz-card"><strong>Why multiple heads?</strong><details><summary>Show answer</summary>Different relationship types in parallel.</details></div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="cg-quiz-card"><strong>What problem does attention solve?</strong><details><summary>Show answer</summary><p>It lets each word use context from the rest of the sentence.</p></details></div>
+            <div class="cg-quiz-card"><strong>Why does "it" connect to "animal"?</strong><details><summary>Show answer</summary><p>Higher weights on animal and tired from learned patterns.</p></details></div>
+            <div class="cg-quiz-card"><strong>What does self-attention mean?</strong><details><summary>Show answer</summary><p>Each word attends to other words in the same sentence.</p></details></div>
+            <div class="cg-quiz-card"><strong>What is Query in QKV?</strong><details><summary>Show answer</summary><p>The search question the current word asks.</p></details></div>
+            <div class="cg-quiz-card"><strong>Why multiple heads?</strong><details><summary>Show answer</summary><p>Different relationship types in parallel.</p></details></div>
+          </div>
         </section>
 
-        <section id="next" class="article-section reveal">
+        <section id="next" class="cg-article-section cg-reveal">
           <h2>17. Next chapter</h2>
-          <div class="next-card">
+          <div class="cg-next-card">
             <h3>Tokenization and Context Windows for Product Leaders</h3>
             <p>How text becomes tokens — and why context limits shape every LLM product decision.</p>
-            <span class="status-pill soon">Coming Soon</span>
+            <span class="cg-status-badge soon" style="width:fit-content;">Coming Soon</span>
           </div>
-          <div class="chapter-nav">
-            <a class="button secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to Module</a>
-            <a class="button secondary" href="/blog/">Back to Blog</a>
-            <a class="button secondary" href="/blog/ai-learning/">AI Learning</a>
+          <div class="cg-chapter-nav" style="margin-top:24px;">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
           </div>
         </section>
+
       </article>
     </div>
   </div>
 
-  <footer class="site-footer"><div>© 2026 Samadhan Mishra</div></footer>
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
   <script src="/assets/js/blog.js" defer></script>
 </body>
 </html>

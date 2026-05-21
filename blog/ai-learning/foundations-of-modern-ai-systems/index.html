@@ -26,167 +26,197 @@
   }
   </script>
 </head>
-<body class="blog-page">
-  <div class="mesh-bg" aria-hidden="true"></div>
-  <div class="animated-grid" aria-hidden="true"></div>
+<body class="cg-blog-theme">
+  <div class="cg-mesh-bg" aria-hidden="true"></div>
+  <div class="cg-grid-bg" aria-hidden="true"></div>
+  <div class="cg-orb blue" aria-hidden="true"></div>
+  <div class="cg-orb cyan" aria-hidden="true"></div>
+  <div class="cg-orb gold" aria-hidden="true"></div>
 
-  <nav class="blog-navbar">
-    <div class="blog-nav-inner">
-      <a class="brand" href="/">Samadhan <span>Mishra</span></a>
-      <div class="blog-nav-links">
+  <nav class="cg-navbar">
+    <div class="cg-nav-inner">
+      <a class="cg-brand" href="/">Samadhan <span>Mishra</span></a>
+      <div class="cg-nav-links">
         <a href="/">Home</a>
         <a href="/portfolio/">Portfolio</a>
         <a href="/blog/">Blog</a>
         <a class="active" href="/blog/ai-learning/">AI Learning</a>
       </div>
+      <a class="cg-nav-cta" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
     </div>
   </nav>
 
-  <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a><span class="sep">→</span>
     <a href="/blog/">Blog</a><span class="sep">→</span>
     <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
     <span class="current">Foundations of Modern AI Systems</span>
   </nav>
 
-  <header class="blog-hero reveal">
-    <span class="blog-kicker">Module 01 · Weeks 1–2 · LLM Mechanics</span>
-    <h1 class="blog-title blog-title-module">Foundations of Modern AI Systems</h1>
-    <p class="blog-subtitle">
-      A product-first introduction to LLM mechanics, Transformer architecture, tokenization, context windows,
-      model tradeoffs, hallucinations, cost, and benchmarks.
-    </p>
-    <div class="blog-meta-strip">
-      <span class="stat-pill">Theme: LLM Mechanics</span>
-      <span class="stat-pill">Weeks 1–2</span>
-      <span class="stat-pill">2 weeks</span>
-      <span class="status-pill-lg">Active</span>
-    </div>
-    <div class="blog-actions">
-      <a class="button primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
-      <a class="button secondary" href="/blog/ai-learning/">← AI Learning</a>
+  <header class="cg-hero cg-hero-compact cg-reveal">
+    <div class="cg-hero-content" style="max-width:720px;">
+      <span class="cg-pill">Module 01 · Weeks 1–2 · LLM Mechanics</span>
+      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3.2rem);">Foundations of Modern AI Systems</h1>
+      <p class="cg-hero-subtitle">
+        A product-first introduction to LLM mechanics, Transformer architecture, tokenization, context windows,
+        model tradeoffs, hallucinations, cost, and benchmarks.
+      </p>
+      <div class="cg-stat-strip" style="margin:24px 0;">
+        <div class="cg-stat-item"><span class="cg-stat-label">Theme</span><span class="cg-stat-num" style="font-size:1rem;">LLM Mechanics</span></div>
+        <div class="cg-stat-item"><span class="cg-stat-label">Duration</span><span class="cg-stat-num" style="font-size:1rem;">Weeks 1–2</span></div>
+        <div class="cg-stat-item"><span class="cg-stat-label">Status</span><span class="cg-stat-num" style="font-size:1rem;color:var(--cg-green);">Active</span></div>
+      </div>
+      <div class="cg-hero-actions">
+        <a class="cg-btn primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
+        <a class="cg-btn secondary" href="/blog/ai-learning/">← AI Learning</a>
+      </div>
     </div>
   </header>
 
-  <main class="blog-shell">
+  <main class="cg-main">
 
-    <!-- Module overview bento cards -->
-    <section class="blog-section reveal">
-      <div class="bento-grid">
-        <div class="bento-card span-6">
-          <h3 class="bento-title-18">PM-specific focus</h3>
-          <p class="bento-desc-marginless">Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints, write better specs, and own AI feature unit economics.</p>
+    <!-- Module overview -->
+    <section class="cg-section cg-reveal">
+      <div class="cg-bento-grid">
+        <div class="cg-card span-6">
+          <h3>PM-specific focus</h3>
+          <p>Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints, write better specs, and own AI feature unit economics.</p>
         </div>
-        <div class="bento-card span-6">
-          <h3 class="bento-title-18">Deliverable</h3>
-          <p class="bento-desc-marginless"><strong>Model selection memo:</strong> use case, quality requirements, cost estimate at scale, chosen model + rationale, risks.</p>
+        <div class="cg-card span-6">
+          <h3>Deliverable</h3>
+          <p><strong>Model selection memo:</strong> use case, quality requirements, cost estimate at scale, chosen model + rationale, risks.</p>
         </div>
       </div>
     </section>
 
     <!-- Learning outcomes -->
-    <section class="blog-section reveal">
-      <div class="blog-section-header"><h2>Learning outcomes</h2></div>
-      <div class="tag-cloud">
-        <span class="tag-pill">Explain context windows to stakeholders</span>
-        <span class="tag-pill">Estimate monthly inference cost</span>
-        <span class="tag-pill">Choose the right model tier</span>
-        <span class="tag-pill">Credible LLM conversations with engineers</span>
+    <section class="cg-section cg-reveal">
+      <div class="cg-section-header">
+        <span class="cg-kicker">Outcomes</span>
+        <h2 class="cg-section-title">Learning outcomes</h2>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span class="cg-chip">Explain context windows to stakeholders</span>
+        <span class="cg-chip">Estimate monthly inference cost</span>
+        <span class="cg-chip">Choose the right model tier</span>
+        <span class="cg-chip">Credible LLM conversations with engineers</span>
       </div>
     </section>
 
     <!-- Core topic map -->
-    <section class="blog-section reveal">
-      <div class="blog-section-header"><h2>Core topic map</h2></div>
-      <div class="concept-map">
-        <span class="concept-chip">Architecture</span>
-        <span class="concept-chip">Tokens &amp; context</span>
-        <span class="concept-chip">Sampling</span>
-        <span class="concept-chip">Training approaches</span>
-        <span class="concept-chip">Model families</span>
-        <span class="concept-chip">Hallucinations</span>
-        <span class="concept-chip">Multimodal</span>
-        <span class="concept-chip">Benchmarks</span>
-        <span class="concept-chip">Cost &amp; tradeoffs</span>
+    <section class="cg-section cg-reveal">
+      <div class="cg-section-header">
+        <span class="cg-kicker">Topics</span>
+        <h2 class="cg-section-title">Core topic map</h2>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span class="cg-chip">Architecture</span>
+        <span class="cg-chip">Tokens &amp; context</span>
+        <span class="cg-chip">Sampling</span>
+        <span class="cg-chip">Training approaches</span>
+        <span class="cg-chip">Model families</span>
+        <span class="cg-chip">Hallucinations</span>
+        <span class="cg-chip">Multimodal</span>
+        <span class="cg-chip">Benchmarks</span>
+        <span class="cg-chip">Cost &amp; tradeoffs</span>
       </div>
     </section>
 
     <!-- Tools & Resources -->
-    <section class="blog-section reveal">
-      <div class="bento-grid">
-        <div class="bento-card">
-          <h3 class="bento-title-small">Tools &amp; frameworks</h3>
-          <div class="tag-cloud">
-            <span class="tag-pill">OpenAI Tokenizer</span>
-            <span class="tag-pill">LMSYS Chatbot Arena</span>
-            <span class="tag-pill">Anthropic pricing calculator</span>
-            <span class="tag-pill">Model cards</span>
+    <section class="cg-section cg-reveal">
+      <div class="cg-bento-grid">
+        <div class="cg-card span-6">
+          <h3>Tools &amp; frameworks</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+            <span class="cg-chip">OpenAI Tokenizer</span>
+            <span class="cg-chip">LMSYS Chatbot Arena</span>
+            <span class="cg-chip">Anthropic pricing calculator</span>
+            <span class="cg-chip">Model cards</span>
           </div>
         </div>
-        <div class="bento-card">
-          <h3 class="bento-title-small">Resources</h3>
-          <div class="tag-cloud">
-            <span class="tag-pill">Illustrated Transformer</span>
-            <span class="tag-pill">Karpathy — Intro to LLMs</span>
-            <span class="tag-pill">Anthropic docs</span>
-            <span class="tag-pill">Lilian Weng</span>
-            <span class="tag-pill">State of AI Report</span>
+        <div class="cg-card span-6">
+          <h3>Resources</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+            <span class="cg-chip">Illustrated Transformer</span>
+            <span class="cg-chip">Karpathy — Intro to LLMs</span>
+            <span class="cg-chip">Anthropic docs</span>
+            <span class="cg-chip">Lilian Weng</span>
+            <span class="cg-chip">State of AI Report</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Chapter tabs -->
-    <section class="blog-section reveal">
-      <div class="blog-section-header"><h2>Chapter path</h2></div>
+    <section class="cg-section cg-reveal" id="chapters">
+      <div class="cg-section-header">
+        <span class="cg-kicker">Chapters</span>
+        <h2 class="cg-section-title">Chapter path</h2>
+      </div>
 
-      <div class="chapter-tabs" role="region" aria-label="Chapters by status">
-        <div class="chapter-tab-list" role="tablist" aria-label="Filter chapters by status">
-          <button class="chapter-tab" role="tab" id="ch-tab-active" aria-selected="true" aria-controls="ch-panel-active">Active Chapters</button>
-          <button class="chapter-tab" role="tab" id="ch-tab-soon" aria-selected="false" aria-controls="ch-panel-soon">Coming Soon</button>
+      <div role="region" aria-label="Chapters by status">
+        <div class="cg-tab-list" role="tablist" aria-label="Filter chapters by status">
+          <button class="cg-tab" role="tab" id="cg-ch-tab-active" aria-selected="true" aria-controls="cg-ch-panel-active">Active Chapters</button>
+          <button class="cg-tab" role="tab" id="cg-ch-tab-soon" aria-selected="false" aria-controls="cg-ch-panel-soon">Coming Soon</button>
         </div>
 
-        <!-- Active chapters panel -->
-        <div id="ch-panel-active" class="chapter-panel is-active" role="tabpanel" aria-labelledby="ch-tab-active">
-          <ul class="chapter-path">
-            <li class="is-active">
-              <a href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">
-                <span>
-                  <span class="path-num">Chapter 01 · Active</span>
-                  <strong>Understanding Attention Intuition from "The Illustrated Transformer"</strong>
-                </span>
-                <span class="status-pill live">Read now</span>
-              </a>
-            </li>
-          </ul>
+        <!-- Active chapters -->
+        <div id="cg-ch-panel-active" class="cg-tab-panel is-active" role="tabpanel" aria-labelledby="cg-ch-tab-active">
+          <a class="cg-card glow is-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">
+            <span class="cg-status-badge live" style="width:fit-content;">Chapter 01 · Active</span>
+            <h3>Understanding Attention Intuition from "The Illustrated Transformer"</h3>
+            <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+              <span style="font-size:14px;color:var(--cg-text-dim);">Beginner</span>
+              <span style="font-size:14px;color:var(--cg-text-dim);">12–15 min read</span>
+            </div>
+            <span class="cg-read-link" style="margin-top:12px;">Read now →</span>
+          </a>
         </div>
 
-        <!-- Coming soon chapters panel -->
-        <div id="ch-panel-soon" class="chapter-panel" role="tabpanel" aria-labelledby="ch-tab-soon">
-          <ul class="chapter-path">
-            <li><span class="path-soon"><span><span class="path-num">Chapter 02</span><strong>Tokenization and Context Windows for Product Leaders</strong></span><span class="status-pill soon">Soon</span></span></li>
-            <li><span class="path-soon"><span><span class="path-num">Chapter 03</span><strong>Temperature, Top-p and Sampling — Why Same Prompt Gives Different Outputs</strong></span><span class="status-pill soon">Soon</span></span></li>
-            <li><span class="path-soon"><span><span class="path-num">Chapter 04</span><strong>Pre-training vs Fine-tuning vs RLHF</strong></span><span class="status-pill soon">Soon</span></span></li>
-            <li><span class="path-soon"><span><span class="path-num">Chapter 05</span><strong>Choosing Between GPT, Claude, Gemini and Llama</strong></span><span class="status-pill soon">Soon</span></span></li>
-            <li><span class="path-soon"><span><span class="path-num">Chapter 06</span><strong>Hallucinations, Knowledge Cutoffs and Model Limitations</strong></span><span class="status-pill soon">Soon</span></span></li>
-            <li><span class="path-soon"><span><span class="path-num">Chapter 07</span><strong>Benchmarks, Cost per Token and Model Tier Tradeoffs</strong></span><span class="status-pill soon">Soon</span></span></li>
-          </ul>
+        <!-- Coming soon chapters -->
+        <div id="cg-ch-panel-soon" class="cg-tab-panel" role="tabpanel" aria-labelledby="cg-ch-tab-soon">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="cg-card is-disabled">
+              <span class="cg-status-badge soon" style="width:fit-content;">Chapter 02</span>
+              <h3>Tokenization and Context Windows for Product Leaders</h3>
+            </div>
+            <div class="cg-card is-disabled">
+              <span class="cg-status-badge soon" style="width:fit-content;">Chapter 03</span>
+              <h3>Temperature, Top-p and Sampling — Why Same Prompt Gives Different Outputs</h3>
+            </div>
+            <div class="cg-card is-disabled">
+              <span class="cg-status-badge soon" style="width:fit-content;">Chapter 04</span>
+              <h3>Pre-training vs Fine-tuning vs RLHF</h3>
+            </div>
+            <div class="cg-card is-disabled">
+              <span class="cg-status-badge soon" style="width:fit-content;">Chapter 05</span>
+              <h3>Choosing Between GPT, Claude, Gemini and Llama</h3>
+            </div>
+            <div class="cg-card is-disabled">
+              <span class="cg-status-badge soon" style="width:fit-content;">Chapter 06</span>
+              <h3>Hallucinations, Knowledge Cutoffs and Model Limitations</h3>
+            </div>
+            <div class="cg-card is-disabled">
+              <span class="cg-status-badge soon" style="width:fit-content;">Chapter 07</span>
+              <h3>Benchmarks, Cost per Token and Model Tier Tradeoffs</h3>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Navigation -->
-    <section class="blog-section reveal">
-      <div class="chapter-nav">
-        <a class="button secondary" href="/blog/ai-learning/">← Back to AI Learning</a>
-        <a class="button primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
-        <span class="button disabled">Module 02 — Coming Soon</span>
+    <section class="cg-section cg-reveal">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <a class="cg-btn secondary" href="/blog/ai-learning/">← Back to AI Learning</a>
+        <a class="cg-btn primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
+        <span class="cg-btn secondary" style="opacity:0.45;cursor:not-allowed;">Module 02 — Coming Soon</span>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-footer"><div>© 2026 Samadhan Mishra</div></footer>
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
   <script src="/assets/js/blog.js" defer></script>
 </body>
 </html>
