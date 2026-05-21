@@ -23,7 +23,10 @@
   }
   </script>
 </head>
-<body>
+<body class="blog-page">
+  <div class="mesh-bg" aria-hidden="true"></div>
+  <div class="animated-grid" aria-hidden="true"></div>
+
   <nav class="navbar">
     <div class="nav-inner">
       <a class="brand" href="/">Samadhan <span>Mishra</span></a>
@@ -36,85 +39,134 @@
     </div>
   </nav>
 
-  <header class="hero hero-compact">
-    <div class="eyebrow">Knowledge Portal</div>
-    <h1>Blog</h1>
-    <p class="hero-text">
-      Structured notes on AI, product leadership, implementation, automation, and building AI-native systems.
-    </p>
+  <header class="blog-hero blog-hero-grid">
+    <div>
+      <span class="blog-kicker">Knowledge Portal</span>
+      <h1 class="blog-title">Blog</h1>
+      <p class="blog-subtitle">
+        Structured notes on AI product leadership, AI product management, digital transformation,
+        enterprise AI implementation, RAG, AI agents, LLMOps, HealthTech AI, workflow automation,
+        and practical AI learning.
+      </p>
+      <div class="blog-actions">
+        <a class="button primary" href="/blog/ai-learning/">Explore AI Learning</a>
+        <a class="button secondary" href="#latest">Latest chapter</a>
+      </div>
+    </div>
+    <div class="learning-map reveal" aria-hidden="true">
+      <span class="learning-map-center">Learn AI</span>
+      <span class="map-node">AI Product Leadership</span>
+      <span class="map-node">Learn AI</span>
+      <span class="map-node">RAG</span>
+      <span class="map-node">Agents</span>
+      <span class="map-node">LLMOps</span>
+      <span class="map-node">Digital Transformation</span>
+      <span class="map-node">HealthTech AI</span>
+      <span class="map-node">Workflow Automation</span>
+    </div>
   </header>
 
-  <main class="page">
-    <section id="featured">
-      <div class="section-header" style="margin-top:0;">
-        <h2>AI Product Leadership Notes</h2>
-        <p>Learn AI, enterprise AI implementation, digital transformation, RAG systems, LLMOps, and HealthTech AI transformation — structured for product leaders.</p>
+  <main class="blog-shell">
+    <section class="blog-section reveal">
+      <div class="blog-section-header">
+        <h2>Featured book</h2>
+        <p>Start with the structured AI Product Leader syllabus — built for product, not research labs.</p>
       </div>
-      <div class="featured-card" style="min-height:auto;">
-        <div>
-          <div class="kicker">Featured Book</div>
-          <h3 style="font-size:30px;">AI Learning</h3>
-          <p style="font-size:17px;margin:16px 0 0;">
-            A structured 8-module learning book for AI product leaders — LLM mechanics, prompting, RAG, agents, MCP, and production AI strategy.
-          </p>
+      <a class="bento-card large glow is-link" href="/blog/ai-learning/" style="text-decoration:none;color:inherit;">
+        <span class="status-pill live">Active · 8 modules</span>
+        <h3 style="font-size:28px;margin:12px 0 8px;letter-spacing:-0.04em;">AI Learning</h3>
+        <p style="color:var(--muted);font-size:17px;margin:0 0 16px;max-width:60ch;">
+          A structured learning book for understanding AI deeply — LLM mechanics, prompting, token economics,
+          RAG, agents, MCP, production AI infrastructure, and applied AI product strategy.
+        </p>
+        <div class="blog-meta-strip">
+          <span class="stat-pill"><strong>8</strong> Modules</span>
+          <span class="stat-pill"><strong>18–22</strong> Weeks</span>
+          <span class="stat-pill"><strong>Product-first</strong> lens</span>
         </div>
-        <a class="button primary" style="width:fit-content;margin-top:20px;" href="/blog/ai-learning/">Open AI Learning</a>
-      </div>
+        <span class="read-link" style="margin-top:8px;">Open AI Learning →</span>
+      </a>
     </section>
 
-    <section id="books">
-      <div class="section-header">
-        <h2>Books &amp; Learning Paths</h2>
+    <section class="blog-section reveal" id="books">
+      <div class="blog-section-header">
+        <h2>Books &amp; learning paths</h2>
       </div>
-      <div class="grid-3">
-        <a class="card" href="/blog/ai-learning/">
-          <span class="badge live">Active</span>
+      <div class="bento-grid">
+        <a class="bento-card span-6 glow is-link" href="/blog/ai-learning/">
+          <span class="status-pill live">Active</span>
           <h3>AI Learning</h3>
-          <p>8 modules: LLM mechanics, prompting, token efficiency, RAG, agents, MCP, production stack, and AI product strategy.</p>
+          <p>LLM mechanics, prompting, RAG, agents, MCP, LLMOps, and enterprise AI transformation.</p>
         </a>
-        <article class="card disabled">
-          <span class="badge soon">Coming Soon</span>
+        <article class="bento-card is-disabled">
+          <span class="status-pill soon">Coming Soon</span>
           <h3>Product Leadership Notes</h3>
           <p>Strategy, metrics, risk, and stakeholder alignment for AI products.</p>
         </article>
-        <article class="card disabled">
-          <span class="badge soon">Coming Soon</span>
+        <article class="bento-card is-disabled">
+          <span class="status-pill soon">Coming Soon</span>
           <h3>AI Implementation Playbooks</h3>
           <p>Shipping AI in enterprise workflows with controls and evaluation.</p>
         </article>
-        <article class="card disabled">
-          <span class="badge soon">Coming Soon</span>
+        <article class="bento-card is-disabled">
+          <span class="status-pill soon">Coming Soon</span>
           <h3>Agentic Workflow Notes</h3>
           <p>Agents, tools, orchestration, and human-in-the-loop design.</p>
         </article>
-        <article class="card disabled">
-          <span class="badge soon">Coming Soon</span>
+        <article class="bento-card is-disabled">
+          <span class="status-pill soon">Coming Soon</span>
           <h3>HealthTech Transformation Notes</h3>
           <p>Claims, pre-auth, operations, and workflow modernization.</p>
+        </article>
+        <article class="bento-card is-disabled">
+          <span class="status-pill soon">Coming Soon</span>
+          <h3>Digital Transformation Notes</h3>
+          <p>AI-led digital transformation for enterprise workflows and operations.</p>
         </article>
       </div>
     </section>
 
-    <section id="chapters">
-      <div class="section-header">
-        <h2>Latest Chapters</h2>
+    <section class="blog-section reveal" id="latest">
+      <div class="blog-section-header">
+        <h2>Latest chapters</h2>
       </div>
-      <ul class="chapter-list">
-        <li>
-          <a href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">
-            <span>
-              <span class="chapter-num">Module 01 · Chapter 01</span>
-              <strong>Understanding Attention Intuition from “The Illustrated Transformer”</strong>
-            </span>
-            <span class="badge live">Read</span>
-          </a>
-        </li>
-      </ul>
+      <a class="bento-card large glow is-link chapter-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/" style="text-decoration:none;color:inherit;">
+        <span class="status-pill live">Chapter 01 · Active</span>
+        <p class="chapter-num" style="margin:12px 0 4px;">AI Learning · Foundations of Modern AI Systems</p>
+        <h3 style="font-size:24px;margin:0 0 12px;">Understanding Attention Intuition from “The Illustrated Transformer”</h3>
+        <div class="blog-meta-strip">
+          <span class="stat-pill">Beginner</span>
+          <span class="stat-pill">12–15 min read</span>
+        </div>
+        <span class="read-link" style="margin-top:12px;">Start reading →</span>
+      </a>
+    </section>
+
+    <section class="blog-section reveal">
+      <div class="blog-section-header">
+        <h2>Why this blog exists</h2>
+      </div>
+      <div class="bento-card span-6">
+        <p style="margin:0;font-size:17px;color:var(--muted);line-height:1.7;">
+          This blog documents my learning and product thinking around AI, digital transformation,
+          enterprise workflow automation, HealthTech AI, agentic systems, RAG, and practical
+          AI product leadership — written so complex ideas become clear frameworks for builders and operators.
+        </p>
+      </div>
+    </section>
+
+    <section class="blog-section reveal">
+      <div class="next-card">
+        <h3>Learn AI as a Product Leader</h3>
+        <p>Start Module 01 — attention intuition, tokens, and the foundations behind every LLM product decision.</p>
+        <a class="button primary" href="/blog/ai-learning/" style="background:white;color:var(--ink);">Open AI Learning</a>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div>© 2026 Samadhan Mishra</div>
   </footer>
+  <script src="/assets/js/blog.js" defer></script>
 </body>
 </html>

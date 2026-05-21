@@ -25,7 +25,10 @@
   }
   </script>
 </head>
-<body>
+<body class="blog-page">
+  <div class="mesh-bg" aria-hidden="true"></div>
+  <div class="animated-grid" aria-hidden="true"></div>
+
   <nav class="navbar">
     <div class="nav-inner">
       <a class="brand" href="/">Samadhan <span>Mishra</span></a>
@@ -39,125 +42,124 @@
   </nav>
 
   <nav class="breadcrumbs" aria-label="Breadcrumb">
-    <a href="/">Home</a>
-    <span class="sep">→</span>
-    <a href="/blog/">Blog</a>
-    <span class="sep">→</span>
-    <a href="/blog/ai-learning/">AI Learning</a>
-    <span class="sep">→</span>
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
     <span class="current">Foundations of Modern AI Systems</span>
   </nav>
 
-  <header class="hero hero-compact">
-    <div class="eyebrow">Module 01 · Weeks 1–2</div>
-    <h1>Foundations of Modern AI Systems</h1>
-    <p class="hero-text">
+  <header class="blog-hero reveal">
+    <span class="blog-kicker">Module 01 · Weeks 1–2</span>
+    <h1 class="blog-title" style="font-size:clamp(32px,5vw,52px);">Foundations of Modern AI Systems</h1>
+    <p class="blog-subtitle">
       A product-first introduction to LLM mechanics, Transformer architecture, tokenization, context windows,
       model tradeoffs, hallucinations, cost, and benchmarks.
     </p>
-    <div class="meta-badges" style="margin-top:16px;">
-      <span class="meta-badge">Theme: LLM Mechanics</span>
-      <span class="meta-badge">Duration: 2 weeks</span>
-      <span class="meta-badge">Status: Active</span>
+    <div class="blog-meta-strip">
+      <span class="stat-pill">Theme: LLM Mechanics</span>
+      <span class="stat-pill">2 weeks</span>
+      <span class="stat-pill live">Active</span>
     </div>
-    <div class="hero-actions">
+    <div class="blog-actions" style="margin-top:20px;">
       <a class="button primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
+      <a class="button secondary" href="/blog/ai-learning/">← AI Learning</a>
     </div>
   </header>
 
-  <main class="page">
-    <section>
-      <div class="section-header"><h2>PM-specific focus</h2></div>
-      <div class="card" style="padding:28px;">
-        <p style="margin:0;color:var(--muted);">
-          Every token costs money. Understanding tokenization, context windows, and model tiers lets you set
-          product constraints, write better specs, and own AI feature unit economics.
-        </p>
+  <main class="blog-shell">
+    <section class="blog-section reveal">
+      <div class="bento-grid">
+        <div class="bento-card span-6">
+          <h3 style="margin:0 0 10px;font-size:18px;">PM-specific focus</h3>
+          <p style="margin:0;color:var(--muted);">Every token costs money. Understanding tokenization, context windows, and model tiers lets you set product constraints, write better specs, and own AI feature unit economics.</p>
+        </div>
+        <div class="bento-card span-6">
+          <h3 style="margin:0 0 10px;font-size:18px;">Deliverable</h3>
+          <p style="margin:0;color:var(--muted);"><strong>Model selection memo:</strong> use case, quality requirements, cost estimate at scale, chosen model + rationale, risks.</p>
+        </div>
       </div>
     </section>
 
-    <section>
-      <div class="section-header"><h2>Core topics</h2></div>
-      <div class="principles">
-        <div class="principle">Transformer architecture</div>
-        <div class="principle">Tokenization &amp; context windows</div>
-        <div class="principle">Temperature / top-p / sampling</div>
-        <div class="principle">Pre-training vs fine-tuning vs RLHF</div>
-        <div class="principle">Model families (GPT, Claude, Gemini, Llama)</div>
-        <div class="principle">Hallucination causes</div>
-        <div class="principle">Knowledge cutoffs</div>
-        <div class="principle">Multimodal capabilities</div>
-        <div class="principle">Benchmarks (MMLU, HumanEval)</div>
-        <div class="principle">Cost per token</div>
-        <div class="principle">Model tier tradeoffs</div>
+    <section class="blog-section reveal">
+      <div class="blog-section-header"><h2>Learning outcomes</h2></div>
+      <div class="tag-cloud">
+        <span class="tag-pill">Explain context windows to stakeholders</span>
+        <span class="tag-pill">Estimate monthly inference cost</span>
+        <span class="tag-pill">Choose the right model tier</span>
+        <span class="tag-pill">Credible LLM conversations with engineers</span>
       </div>
     </section>
 
-    <section>
-      <div class="section-header"><h2>Key tools &amp; frameworks</h2></div>
-      <div class="principles">
-        <div class="principle">OpenAI Tokenizer</div>
-        <div class="principle">LMSYS Chatbot Arena</div>
-        <div class="principle">Anthropic API pricing calculator</div>
-        <div class="principle">Model cards</div>
+    <section class="blog-section reveal">
+      <div class="blog-section-header"><h2>Core topic map</h2></div>
+      <div class="concept-map">
+        <span class="concept-chip">Architecture</span>
+        <span class="concept-chip">Tokens &amp; context</span>
+        <span class="concept-chip">Sampling</span>
+        <span class="concept-chip">Training approaches</span>
+        <span class="concept-chip">Model families</span>
+        <span class="concept-chip">Hallucinations</span>
+        <span class="concept-chip">Multimodal</span>
+        <span class="concept-chip">Benchmarks</span>
+        <span class="concept-chip">Cost &amp; tradeoffs</span>
       </div>
     </section>
 
-    <section>
-      <div class="section-header"><h2>Deliverable</h2></div>
-      <div class="card" style="padding:28px;">
-        <p style="margin:0;color:var(--muted);">
-          <strong>Model selection memo:</strong> use case, quality requirements, cost estimate at scale,
-          chosen model + rationale, risks.
-        </p>
+    <section class="blog-section reveal">
+      <div class="bento-grid">
+        <div class="bento-card">
+          <h3 style="margin:0 0 12px;">Tools &amp; frameworks</h3>
+          <div class="tag-cloud">
+            <span class="tag-pill">OpenAI Tokenizer</span>
+            <span class="tag-pill">LMSYS Chatbot Arena</span>
+            <span class="tag-pill">Anthropic pricing calculator</span>
+            <span class="tag-pill">Model cards</span>
+          </div>
+        </div>
+        <div class="bento-card">
+          <h3 style="margin:0 0 12px;">Resources</h3>
+          <div class="tag-cloud">
+            <span class="tag-pill">Illustrated Transformer</span>
+            <span class="tag-pill">Karpathy — Intro to LLMs</span>
+            <span class="tag-pill">Anthropic docs</span>
+            <span class="tag-pill">Lilian Weng</span>
+            <span class="tag-pill">State of AI Report</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section>
-      <div class="section-header"><h2>Learning outcomes</h2></div>
-      <div class="outcomes">
-        <div class="outcome">Explain context windows to stakeholders</div>
-        <div class="outcome">Estimate monthly inference cost for a feature</div>
-        <div class="outcome">Choose the right model tier for a use case</div>
-        <div class="outcome">Have a credible LLM conversation with engineers</div>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-header"><h2>Resources</h2></div>
-      <div class="principles">
-        <div class="principle">The Illustrated Transformer — Jay Alammar</div>
-        <div class="principle">Intro to LLMs — Andrej Karpathy</div>
-        <div class="principle">Anthropic model docs</div>
-        <div class="principle">Lilian Weng's blog</div>
-        <div class="principle">State of AI Report</div>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-header"><h2>Chapters</h2></div>
-      <ul class="chapter-list">
+    <section class="blog-section reveal">
+      <div class="blog-section-header"><h2>Chapter path</h2></div>
+      <ul class="chapter-path">
         <li>
           <a href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">
             <span>
-              <span class="chapter-num">Chapter 01</span>
+              <span class="path-num">Chapter 01 · Active</span>
               <strong>Understanding Attention Intuition from “The Illustrated Transformer”</strong>
             </span>
-            <span class="badge live">Active</span>
+            <span class="status-pill live">Read</span>
           </a>
         </li>
-        <li><span class="item-soon"><span><span class="chapter-num">Chapter 02</span><strong>Tokenization and Context Windows for Product Leaders</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Chapter 03</span><strong>Temperature, Top-p and Sampling — Why Same Prompt Gives Different Outputs</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Chapter 04</span><strong>Pre-training vs Fine-tuning vs RLHF</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Chapter 05</span><strong>Choosing Between GPT, Claude, Gemini and Llama</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Chapter 06</span><strong>Hallucinations, Knowledge Cutoffs and Model Limitations</strong></span><span class="badge soon">Coming Soon</span></span></li>
-        <li><span class="item-soon"><span><span class="chapter-num">Chapter 07</span><strong>Benchmarks, Cost per Token and Model Tier Tradeoffs</strong></span><span class="badge soon">Coming Soon</span></span></li>
+        <li><span class="path-soon"><span><span class="path-num">Chapter 02</span><strong>Tokenization and Context Windows for Product Leaders</strong></span><span class="status-pill soon">Soon</span></span></li>
+        <li><span class="path-soon"><span><span class="path-num">Chapter 03</span><strong>Temperature, Top-p and Sampling</strong></span><span class="status-pill soon">Soon</span></span></li>
+        <li><span class="path-soon"><span><span class="path-num">Chapter 04</span><strong>Pre-training vs Fine-tuning vs RLHF</strong></span><span class="status-pill soon">Soon</span></span></li>
+        <li><span class="path-soon"><span><span class="path-num">Chapter 05</span><strong>Choosing GPT, Claude, Gemini and Llama</strong></span><span class="status-pill soon">Soon</span></span></li>
+        <li><span class="path-soon"><span><span class="path-num">Chapter 06</span><strong>Hallucinations and Model Limitations</strong></span><span class="status-pill soon">Soon</span></span></li>
+        <li><span class="path-soon"><span><span class="path-num">Chapter 07</span><strong>Benchmarks, Cost per Token and Tradeoffs</strong></span><span class="status-pill soon">Soon</span></span></li>
       </ul>
+    </section>
+
+    <section class="blog-section reveal">
+      <div class="chapter-nav">
+        <a class="button secondary" href="/blog/ai-learning/">← Back to AI Learning</a>
+        <a class="button primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/illustrated-transformer-attention-intuition/">Start Chapter 01</a>
+        <span class="button disabled">Module 02 — Coming Soon</span>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div>© 2026 Samadhan Mishra</div>
-  </footer>
+  <footer class="site-footer"><div>© 2026 Samadhan Mishra</div></footer>
+  <script src="/assets/js/blog.js" defer></script>
 </body>
 </html>
