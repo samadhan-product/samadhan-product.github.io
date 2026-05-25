@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager friendly explanation of tokens, context windows, token budgeting, context engineering, RAG, long-context risks, and why better context design is critical for reliable AI products." />
+  <title>Tokens and Context Windows — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 3: Tokens and Context Windows — The PM Version" />
+  <meta property="og:description" content="Why tokens and context windows matter when building AI products — explained for product leaders." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 3: Tokens and Context Windows — The PM Version",
+    "description": "A product-manager friendly explanation of tokens, context windows, token budgeting, context engineering, RAG, long-context risks, and why better context design is critical for reliable AI products.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 03", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/foundations-of-modern-ai-systems/">Foundations of Modern AI Systems</a><span class="sep">→</span>
+    <span class="current">Chapter 03</span>
+  </nav>
+
+  <!-- Editorial hero -->
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 03 · Module 01 · Beginner–Intermediate · 22–26 min</span>
+    <h1 class="cg-article-hero-title">Chapter 3: Tokens and Context Windows — The PM Version</h1>
+    <p class="cg-article-lede">
+      Why tokens and context windows matter when building AI products.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">22–26 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="Context flow: text to tokens to context window to product">
+      <span class="cg-token">Text</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Tokens</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Context window</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Product</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Four layers: input → units → working memory → experience</p>
+  </header>
+
+  <!-- Article shell -->
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <!-- Sidebar TOC -->
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#tokens">1. What is a token?</a></li>
+            <li><a class="cg-toc-link" href="#pm-matter">2. Why tokens matter for PMs</a></li>
+            <li><a class="cg-toc-link" href="#context-window">3. What is a context window?</a></li>
+            <li><a class="cg-toc-link" href="#not-memory">4. Context ≠ memory</a></li>
+            <li><a class="cg-toc-link" href="#context-buildup">5. How context builds up</a></li>
+            <li><a class="cg-toc-link" href="#bigger-context">6. Bigger context trade-offs</a></li>
+            <li><a class="cg-toc-link" href="#context-rot">7. Context rot</a></li>
+            <li><a class="cg-toc-link" href="#context-engineering">8. Context engineering</a></li>
+            <li><a class="cg-toc-link" href="#token-budget">9. Token budgeting</a></li>
+            <li><a class="cg-toc-link" href="#token-counting">10. Token counting</a></li>
+            <li><a class="cg-toc-link" href="#overflow">11. Context overflow</a></li>
+            <li><a class="cg-toc-link" href="#context-management">12. Context management</a></li>
+            <li><a class="cg-toc-link" href="#extended-thinking">13. Extended thinking</a></li>
+            <li><a class="cg-toc-link" href="#tool-context">14. Tool use pressure</a></li>
+            <li><a class="cg-toc-link" href="#context-awareness">15. Context awareness</a></li>
+            <li><a class="cg-toc-link" href="#long-context-rag">16. Long context vs RAG</a></li>
+            <li><a class="cg-toc-link" href="#poor-context">17. Poor context → hallucination</a></li>
+            <li><a class="cg-toc-link" href="#enterprise">18. Enterprise workflows</a></li>
+            <li><a class="cg-toc-link" href="#checklist">19. PM checklist</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">20. Final mental model</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 22–26 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Article body -->
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/from-transformers-to-llms-the-pm-version/">Chapter 2</a>,
+            we understood how transformers became Large Language Models and why LLMs should be seen as prediction systems, not databases.
+          </p>
+          <p>
+            This chapter goes one level deeper into something every AI product manager must understand:
+            <strong>tokens and context windows.</strong>
+          </p>
+          <p>At first, this may sound like a technical backend topic. It is not.</p>
+          <p>Tokens and context windows directly influence:</p>
+          <ul class="cg-bento-list">
+            <li>how much information the model can read,</li>
+            <li>how much it can remember during a task,</li>
+            <li>how much an AI call costs,</li>
+            <li>how reliable the answer is,</li>
+            <li>how long an AI workflow can run,</li>
+            <li>how well an AI agent can use tools,</li>
+            <li>and whether the final experience feels intelligent or confused.</li>
+          </ul>
+          <p>
+            A lot of AI products fail not because the model is weak, but because the product passes the wrong context,
+            too much context, stale context, or no context at all.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              Context is not storage. Context is working memory.<br />
+              And working memory must be designed.
+            </p>
+          </div>
+        </section>
+
+        <section id="tokens" class="cg-article-section cg-reveal">
+          <h2>1. What Is a Token?</h2>
+          <p>A token is the unit of text that an LLM reads and generates.</p>
+          <p>
+            People casually say that models read "words," but that is not technically accurate.
+            Models process <strong>tokens</strong>.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Input</th><th>Possible Token Meaning</th></tr></thead>
+              <tbody>
+                <tr><td><code>hospital</code></td><td>A full word</td></tr>
+                <tr><td><code>authorization</code></td><td>May be split into smaller pieces</td></tr>
+                <tr><td><code>₹50,000</code></td><td>Currency symbol, number, comma, or grouped chunks</td></tr>
+                <tr><td><code>function getClaim()</code></td><td>Code tokens</td></tr>
+                <tr><td><code>Pre-Auth</code></td><td>Word fragments and punctuation</td></tr>
+                <tr><td><code>.</code></td><td>Punctuation</td></tr>
+                <tr><td><code>2026</code></td><td>Number token</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The exact tokenization depends on the model's tokenizer, but the product implication is simple:
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM translation</p>
+            <p>
+              The model does not see your content exactly like a human sees paragraphs, pages, and documents.
+              It sees a sequence of tokens — and that sequence has limits.
+            </p>
+          </div>
+        </section>
+
+        <section id="pm-matter" class="cg-article-section cg-reveal">
+          <h2>2. Why Tokens Matter for Product Managers</h2>
+          <p>Tokens are not just a technical billing detail. They are a product constraint.</p>
+          <p>Every AI feature has a token economy.</p>
+          <p>When a user asks a question, the model may receive:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Context Component</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>System prompt</td><td>"You are a claim adjudication assistant."</td></tr>
+                <tr><td>User message</td><td>"Review this case."</td></tr>
+                <tr><td>Conversation history</td><td>Previous user and assistant turns</td></tr>
+                <tr><td>Retrieved documents</td><td>Policy wording, SOP, claim documents</td></tr>
+                <tr><td>Tool definitions</td><td>Available APIs or tools the model can call</td></tr>
+                <tr><td>Tool results</td><td>Database lookup, OCR output, search result</td></tr>
+                <tr><td>Instructions</td><td>Output format, refusal rules, tone</td></tr>
+                <tr><td>Current response</td><td>Tokens generated by the model</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>All of this consumes the available context window.</p>
+          <p>
+            The model does not only process the user's visible question.
+            It processes the full package sent to it — hidden instructions, prior conversation, retrieved files,
+            tool schemas, API results, and expected output space.
+          </p>
+          <h3>PM Takeaway</h3>
+          <p>When you design an AI feature, you are not only designing the UI. You are deciding:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>PM Decision</th><th>Token Impact</th></tr></thead>
+              <tbody>
+                <tr><td>How much chat history to retain</td><td>More history = more tokens</td></tr>
+                <tr><td>How many documents to retrieve</td><td>More documents = more tokens</td></tr>
+                <tr><td>How detailed the system prompt should be</td><td>More instruction = more tokens</td></tr>
+                <tr><td>Whether to include full files or summaries</td><td>Full files consume more context</td></tr>
+                <tr><td>Whether to use tools</td><td>Tool definitions and outputs consume tokens</td></tr>
+                <tr><td>Whether to support long workflows</td><td>Long workflows need context strategy</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              A PM who does not understand tokens will design AI features that look good in demos and fail in production.
+            </p>
+          </div>
+        </section>
+
+        <section id="context-window" class="cg-article-section cg-reveal">
+          <h2>3. What Is a Context Window?</h2>
+          <p>
+            The context window is the total amount of information the model can consider while generating a response.
+          </p>
+          <p>
+            Think of it as the model's working desk.
+            You can place documents, instructions, user queries, examples, tool results, and prior conversation on the desk.
+            The model can work with what is on the desk.
+          </p>
+          <p>But if something is not on the desk, the model cannot reliably use it.</p>
+          <p>The context window is different from the model's training data.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Training data</td><td>The broad data the model learned from during training</td></tr>
+                <tr><td>Context window</td><td>The current information available for this specific request</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            This distinction is critical.
+            The model may have general knowledge from training, but for a specific business task,
+            you need to provide the right working context.
+          </p>
+          <h3>Simple Analogy</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Human Workflow</th><th>LLM Workflow</th></tr></thead>
+              <tbody>
+                <tr><td>A person has long-term memory</td><td>Model has training data</td></tr>
+                <tr><td>A person opens files on a desk</td><td>Model receives context</td></tr>
+                <tr><td>A person can only focus on visible material</td><td>Model can only attend to tokens in context</td></tr>
+                <tr><td>A person may forget earlier conversation</td><td>Model may lose access when context is removed</td></tr>
+                <tr><td>A person performs better with organized notes</td><td>Model performs better with curated context</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              The context window should not be treated casually.
+              It is one of the most important design surfaces in an AI product.
+            </p>
+          </div>
+        </section>
+
+        <section id="not-memory" class="cg-article-section cg-reveal">
+          <h2>4. Context Window Is Not the Same as Memory</h2>
+          <p>This is one of the most common misunderstandings in AI product discussions.</p>
+          <p>People say: "The model should remember this." But what do they mean by remember?</p>
+          <p>There are different types of memory in AI products.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Type</th><th>Meaning</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>Training memory</td><td>Patterns learned during model training</td><td>General language, coding patterns, public facts</td></tr>
+                <tr><td>Context window</td><td>Current working memory</td><td>Current prompt, documents, chat history</td></tr>
+                <tr><td>Product memory</td><td>Stored user or project data</td><td>CRM notes, preferences, prior tasks</td></tr>
+                <tr><td>Agent state</td><td>Workflow state across steps</td><td>Current task, completed actions, next action</td></tr>
+                <tr><td>Long-term memory</td><td>Persistent external memory</td><td>Vector DB, database, file store</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The context window is only one layer. It is temporary.
+            Once the conversation changes, gets summarized, or exceeds the limit,
+            earlier information may be dropped, compressed, or no longer visible to the model.
+          </p>
+          <h3>PM Takeaway</h3>
+          <p>Do not use the context window as your product's long-term memory. Use proper storage.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Need</th><th>Better Design</th></tr></thead>
+              <tbody>
+                <tr><td>Remember user preference</td><td>Store in profile/database</td></tr>
+                <tr><td>Remember past claim decision</td><td>Store in system of record</td></tr>
+                <tr><td>Remember prior chat summary</td><td>Store conversation summary</td></tr>
+                <tr><td>Remember project knowledge</td><td>Use RAG/document index</td></tr>
+                <tr><td>Remember agent progress</td><td>Store workflow state</td></tr>
+                <tr><td>Remember audit trail</td><td>Store structured logs</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Mental model</p>
+            <p>A context window is for active reasoning. It is not permanent memory.</p>
+          </div>
+        </section>
+
+        <section id="context-buildup" class="cg-article-section cg-reveal">
+          <h2>5. How Context Builds Up During a Conversation</h2>
+          <p>
+            In a multi-turn conversation, earlier user messages and assistant responses are usually included again in the next request.
+            That means context grows as the conversation continues.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Turn</th><th>What Gets Sent</th></tr></thead>
+              <tbody>
+                <tr><td>Turn 1</td><td>System prompt + user message</td></tr>
+                <tr><td>Turn 2</td><td>System prompt + Turn 1 user + Turn 1 assistant + new user message</td></tr>
+                <tr><td>Turn 3</td><td>System prompt + earlier history + new user message</td></tr>
+                <tr><td>Turn 10</td><td>A lot of accumulated conversation</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>This is fine for short chats. It becomes risky for long-running workflows.</p>
+          <p>Why? Because the model may be forced to process:</p>
+          <ul class="cg-bento-list">
+            <li>old instructions,</li>
+            <li>repeated details,</li>
+            <li>irrelevant discussion,</li>
+            <li>long tool outputs,</li>
+            <li>large documents,</li>
+            <li>intermediate reasoning,</li>
+            <li>duplicated content,</li>
+            <li>stale context.</li>
+          </ul>
+          <p>At some point, the model's working memory gets cluttered.</p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              The issue is not only hitting the maximum limit.
+              Performance can degrade before the limit — when context gets crowded.
+            </p>
+          </div>
+        </section>
+
+        <section id="bigger-context" class="cg-article-section cg-reveal">
+          <h2>6. Bigger Context Is Useful, But Not Automatically Better</h2>
+          <p>
+            A larger context window allows the model to handle longer prompts, larger documents,
+            bigger codebases, and more complex workflows. That sounds great.
+          </p>
+          <p>But bigger context is not automatically better.</p>
+          <p>A large context window gives capacity. It does not automatically create clarity.</p>
+          <h3>PM Analogy</h3>
+          <p>
+            A large desk helps if the right documents are placed neatly.
+            But if the desk is filled with random files, duplicate printouts, old notes, irrelevant emails,
+            and half-read PDFs, the person working on the task may actually perform worse.
+          </p>
+          <p>Same with LLMs.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Bad Product Thinking</th><th>Better Product Thinking</th></tr></thead>
+              <tbody>
+                <tr><td>"The model supports a huge context window. Let us send everything."</td><td>"The model supports a large context window. Let us decide what deserves to enter context, in what order, and in what format."</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">That is context engineering</p>
+            <p>Capacity alone does not create a reliable product. Curation does.</p>
+          </div>
+        </section>
+
+        <section id="context-rot" class="cg-article-section cg-reveal">
+          <h2>7. Context Rot: The Hidden Product Risk</h2>
+          <p>As token count grows, model performance may degrade.</p>
+          <p>Anthropic refers to this type of degradation as <strong>context rot</strong>.</p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">In simple language</p>
+            <p>
+              The more cluttered the context becomes, the harder it can become for the model
+              to reliably find and use the right information.
+            </p>
+          </div>
+          <p>In AI products, context rot may look like:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Symptom</th><th>What User Sees</th></tr></thead>
+              <tbody>
+                <tr><td>Missed instruction</td><td>Model ignores an important rule</td></tr>
+                <tr><td>Lost fact</td><td>Model forgets a document detail</td></tr>
+                <tr><td>Weak retrieval</td><td>Model cites irrelevant context</td></tr>
+                <tr><td>Contradiction</td><td>Model says something inconsistent</td></tr>
+                <tr><td>Shallow answer</td><td>Model summarizes instead of reasoning</td></tr>
+                <tr><td>Bad tool choice</td><td>Agent calls the wrong tool</td></tr>
+                <tr><td>Workflow drift</td><td>Agent moves away from the original task</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            For PMs, context rot explains why long AI workflows can become unreliable
+            even when they technically fit inside the context window.
+          </p>
+          <h3>Example: Claims Review</h3>
+          <p>Suppose you pass:</p>
+          <ul class="cg-bento-list">
+            <li>full policy document,</li>
+            <li>hospital bill,</li>
+            <li>discharge summary,</li>
+            <li>previous authorization letter,</li>
+            <li>email trail,</li>
+            <li>insurer guideline,</li>
+            <li>claim notes,</li>
+            <li>OCR output,</li>
+            <li>user instructions,</li>
+            <li>processor comments.</li>
+          </ul>
+          <p>
+            The model may have enough token capacity to receive all of it.
+            But will it focus on the right sections? Not automatically.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>You still need retrieval, prioritization, structure, and clear instructions.</p>
+          </div>
+        </section>
+
+        <section id="context-engineering" class="cg-article-section cg-reveal">
+          <h2>8. Context Engineering: The New PM Skill</h2>
+          <p>
+            Prompt engineering gets attention, but context engineering is more important for serious AI products.
+          </p>
+          <p><strong>Prompt engineering</strong> asks: What instruction should we give the model?</p>
+          <p><strong>Context engineering</strong> asks: What information should the model see before it answers?</p>
+          <p>That second question is often more important.</p>
+          <h3>Context Engineering Includes</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Area</th><th>PM Question</th></tr></thead>
+              <tbody>
+                <tr><td>Context selection</td><td>What information should be included?</td></tr>
+                <tr><td>Context exclusion</td><td>What should be left out?</td></tr>
+                <tr><td>Ordering</td><td>What should appear first or last?</td></tr>
+                <tr><td>Compression</td><td>What can be summarized?</td></tr>
+                <tr><td>Freshness</td><td>Is this the latest source?</td></tr>
+                <tr><td>Authority</td><td>Which source should override others?</td></tr>
+                <tr><td>Relevance</td><td>Is this needed for this task?</td></tr>
+                <tr><td>Format</td><td>Should this be table, JSON, bullet, or text?</td></tr>
+                <tr><td>Lifecycle</td><td>When should old context be removed?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>A PM does not need to implement tokenization logic. But a PM must define the product rules for context.</p>
+          <h3>Example</h3>
+          <p><strong>Weak context design:</strong> Send all claim documents to the model.</p>
+          <p style="font-size:1.05rem;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            <strong>Better context design:</strong> Send the claim type, policy summary, relevant policy clauses, latest bill extract, discharge diagnosis, previous authorization status, missing document checklist, and user's current question. Exclude unrelated email trail unless the user asks for communication history.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>This is the difference between a demo and a product.</p>
+          </div>
+        </section>
+
+        <section id="token-budget" class="cg-article-section cg-reveal">
+          <h2>9. Token Budgeting: How PMs Should Think</h2>
+          <p>
+            A token budget is a planning tool. It answers:
+            how much of the context window should be reserved for each part of the task?
+          </p>
+          <p>A simple token budget may look like this:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Context Component</th><th>Budget Priority</th></tr></thead>
+              <tbody>
+                <tr><td>System instruction</td><td>Must include</td></tr>
+                <tr><td>User request</td><td>Must include</td></tr>
+                <tr><td>Relevant retrieved documents</td><td>Must include</td></tr>
+                <tr><td>Tool definitions</td><td>Include only required tools</td></tr>
+                <tr><td>Tool results</td><td>Include only useful results</td></tr>
+                <tr><td>Conversation history</td><td>Summarize when long</td></tr>
+                <tr><td>Output space</td><td>Reserve enough for final answer</td></tr>
+                <tr><td>Reasoning budget</td><td>Reserve if using extended reasoning</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            A common mistake is filling the input context so aggressively that the model has too little room
+            to produce a useful answer.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Remember</p>
+            <p>The context window includes both what the model reads and what it generates.</p>
+          </div>
+          <h3>PM Takeaway</h3>
+          <p>When defining an AI feature, ask:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Question</th><th>Why It Matters</th></tr></thead>
+              <tbody>
+                <tr><td>How much input context is needed?</td><td>Controls grounding</td></tr>
+                <tr><td>How much output is expected?</td><td>Controls user experience</td></tr>
+                <tr><td>How much history is useful?</td><td>Controls continuity</td></tr>
+                <tr><td>How much tool output should remain?</td><td>Controls agent reliability</td></tr>
+                <tr><td>What happens when budget is exceeded?</td><td>Controls failure behavior</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Token budgeting should be part of AI product requirements.</p>
+        </section>
+
+        <section id="token-counting" class="cg-article-section cg-reveal">
+          <h2>10. Token Counting: Measurement Before Execution</h2>
+          <p>
+            Token counting is the discipline of estimating how large your prompt is before sending it to the model.
+          </p>
+          <p>Token count affects:</p>
+          <ul class="cg-bento-list">
+            <li>cost,</li>
+            <li>latency,</li>
+            <li>rate limits,</li>
+            <li>model routing,</li>
+            <li>context overflow,</li>
+            <li>prompt optimization.</li>
+          </ul>
+          <p>
+            For a product team, token counting should not be treated as a developer-only diagnostic.
+            It should support product decisions.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Product Scenario</th><th>Token Counting Use</th></tr></thead>
+              <tbody>
+                <tr><td>User uploads 100-page PDF</td><td>Check whether it fits before processing</td></tr>
+                <tr><td>Agent uses many tools</td><td>Estimate tool-definition overhead</td></tr>
+                <tr><td>Chat has 50 turns</td><td>Decide when to summarize</td></tr>
+                <tr><td>Enterprise workflow has cost cap</td><td>Route to cheaper model when possible</td></tr>
+                <tr><td>User asks for detailed report</td><td>Reserve output space</td></tr>
+                <tr><td>Mobile AI feature</td><td>Optimize for latency</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>If your product has no token visibility, you are flying blind.</p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Further reading</p>
+            <p>
+              For tokenization and context window fundamentals, see
+              <a href="https://docs.anthropic.com/en/docs/build-with-claude/context-windows" target="_blank" rel="noopener">Anthropic's context window documentation</a>.
+            </p>
+          </div>
+        </section>
+
+        <section id="overflow" class="cg-article-section cg-reveal">
+          <h2>11. Context Overflow: What Happens When You Run Out of Room?</h2>
+          <p>
+            Context overflow happens when the input plus expected output exceeds what the model can handle.
+            In product terms, this means the model has run out of working memory.
+          </p>
+          <p><strong>Bad experience:</strong> "Error: context length exceeded."</p>
+          <p style="font-size:1.05rem;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            <strong>Better experience:</strong> "This document set is too large to review in one pass. I'll summarize the older documents first, then analyze the most relevant sections."
+          </p>
+          <h3>Product Fallback Options</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Problem</th><th>Product Response</th></tr></thead>
+              <tbody>
+                <tr><td>Too many documents</td><td>Ask user to select priority documents</td></tr>
+                <tr><td>Long conversation</td><td>Summarize earlier discussion</td></tr>
+                <tr><td>Large tool output</td><td>Keep only important fields</td></tr>
+                <tr><td>Too many images/PDF pages</td><td>Split into batches</td></tr>
+                <tr><td>Long report requested</td><td>Generate section by section</td></tr>
+                <tr><td>Agent workflow too long</td><td>Save state and start new context</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              This is where AI product maturity shows.
+              A serious AI product should not collapse when context is full — it should recover gracefully.
+            </p>
+          </div>
+        </section>
+
+        <section id="context-management" class="cg-article-section cg-reveal">
+          <h2>12. Context Management Strategies</h2>
+          <p>
+            For long-running conversations and agentic workflows, context has to be actively managed.
+            There are three important product patterns.
+          </p>
+          <h3>Pattern 1: Summarize</h3>
+          <p>Use when the conversation is long but the full detail is no longer needed.</p>
+          <p style="font-size:1.05rem;font-style:italic;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            "Summarize the first 30 turns into user goals, decisions made, unresolved questions, and next actions."
+          </p>
+          <h3>Pattern 2: Select</h3>
+          <p>Use when only some documents are relevant.</p>
+          <p style="font-size:1.05rem;font-style:italic;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            Retrieve only the policy clauses related to maternity waiting period instead of sending the full policy booklet.
+          </p>
+          <h3>Pattern 3: Clear</h3>
+          <p>Use when old tool outputs are no longer useful.</p>
+          <p style="font-size:1.05rem;font-style:italic;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            Remove raw API responses after extracting the final structured values.
+          </p>
+          <h3>PM Takeaway</h3>
+          <p>Context management should be designed as a lifecycle.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Stage</th><th>Context Action</th></tr></thead>
+              <tbody>
+                <tr><td>Start of task</td><td>Load task instructions and key data</td></tr>
+                <tr><td>During task</td><td>Add tool results and user clarifications</td></tr>
+                <tr><td>Midway</td><td>Summarize or compact old context</td></tr>
+                <tr><td>After tool use</td><td>Clear irrelevant raw outputs</td></tr>
+                <tr><td>Before final answer</td><td>Keep only evidence and decision logic</td></tr>
+                <tr><td>After task</td><td>Store summary and audit trail externally</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Do not let context grow randomly</p>
+            <p>Random context creates random behavior.</p>
+          </div>
+        </section>
+
+        <section id="extended-thinking" class="cg-article-section cg-reveal">
+          <h2>13. Extended Thinking and Context</h2>
+          <p>
+            Some models support extended thinking, where the model can spend more tokens on internal reasoning
+            before giving a final answer.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">For PMs</p>
+            <p>Reasoning also consumes budget. If you ask a model to think deeply, you must reserve room for that thinking and for the final answer.</p>
+          </div>
+          <h3>Where Extended Thinking Helps</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use Case</th><th>Why It Helps</th></tr></thead>
+              <tbody>
+                <tr><td>Complex claim adjudication</td><td>Multiple policy checks and deductions</td></tr>
+                <tr><td>Codebase analysis</td><td>Need to trace dependencies</td></tr>
+                <tr><td>Legal clause comparison</td><td>Need careful interpretation</td></tr>
+                <tr><td>Financial reconciliation</td><td>Multiple calculations and exceptions</td></tr>
+                <tr><td>Strategic planning</td><td>Needs trade-off analysis</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Where It May Be Unnecessary</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use Case</th><th>Why Not</th></tr></thead>
+              <tbody>
+                <tr><td>Simple rewrite</td><td>Low reasoning need</td></tr>
+                <tr><td>Basic classification</td><td>Short task</td></tr>
+                <tr><td>FAQ answer</td><td>RAG may be enough</td></tr>
+                <tr><td>Short summary</td><td>Fast response preferred</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Do not enable deep reasoning everywhere. Use it where accuracy and complexity justify cost and latency.</p>
+          </div>
+        </section>
+
+        <section id="tool-context" class="cg-article-section cg-reveal">
+          <h2>14. Tool Use Adds More Context Pressure</h2>
+          <p>AI agents often use tools. Tools are powerful, but they add context pressure.</p>
+          <p>A tool-using workflow may include:</p>
+          <ul class="cg-bento-list">
+            <li>tool definitions,</li>
+            <li>tool call request,</li>
+            <li>tool result,</li>
+            <li>assistant interpretation,</li>
+            <li>follow-up tool call,</li>
+            <li>additional result,</li>
+            <li>final response.</li>
+          </ul>
+          <p>Every tool call creates context overhead.</p>
+          <p>
+            If your AI agent calls too many tools, keeps too many raw results, or carries unnecessary history,
+            the workflow becomes expensive and fragile.
+          </p>
+          <h3>PM Questions for Tool-Based Products</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Question</th><th>Why It Matters</th></tr></thead>
+              <tbody>
+                <tr><td>Which tools should be available for this task?</td><td>Too many tools confuse and increase overhead</td></tr>
+                <tr><td>What fields should each tool return?</td><td>Raw payloads may waste context</td></tr>
+                <tr><td>Should tool results be summarized?</td><td>Reduces clutter</td></tr>
+                <tr><td>When should tool results be cleared?</td><td>Prevents context rot</td></tr>
+                <tr><td>Which actions need approval?</td><td>Controls risk</td></tr>
+                <tr><td>What should be logged outside context?</td><td>Supports audit</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Tool use is not just engineering. It is product behavior design.</p>
+          </div>
+        </section>
+
+        <section id="context-awareness" class="cg-article-section cg-reveal">
+          <h2>15. Context Awareness: Models Knowing Their Remaining Budget</h2>
+          <p>
+            Some newer models can be made aware of their remaining context budget during long workflows.
+            This matters because a model that knows its remaining budget can behave more intelligently.
+          </p>
+          <p>It can decide:</p>
+          <ul class="cg-bento-list">
+            <li>whether to be concise,</li>
+            <li>whether to summarize,</li>
+            <li>whether to continue,</li>
+            <li>whether to ask for prioritization,</li>
+            <li>whether to avoid unnecessary detail,</li>
+            <li>whether to save state before context runs out.</li>
+          </ul>
+          <h3>PM Takeaway</h3>
+          <p>Future AI products will not only manage user journeys. They will manage context journeys.</p>
+          <p>For long-running workflows, your system should know:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>State</th><th>Product Behavior</th></tr></thead>
+              <tbody>
+                <tr><td>Plenty of context left</td><td>Continue normal workflow</td></tr>
+                <tr><td>Moderate context left</td><td>Start being selective</td></tr>
+                <tr><td>Low context left</td><td>Summarize and compact</td></tr>
+                <tr><td>Near limit</td><td>Save state and restart</td></tr>
+                <tr><td>Exceeded limit</td><td>Recover gracefully</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Agentic products</p>
+            <p>
+              An AI agent without context management is like an employee working on a complex case
+              while their notes keep disappearing.
+            </p>
+          </div>
+        </section>
+
+        <section id="long-context-rag" class="cg-article-section cg-reveal">
+          <h2>16. Long Context vs RAG: Which Should a PM Choose?</h2>
+          <p>A common PM question is: If the model has a huge context window, do we still need RAG?</p>
+          <p>Yes, often you do.</p>
+          <p>Long context and RAG solve related but different problems.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Approach</th><th>Strength</th><th>Weakness</th></tr></thead>
+              <tbody>
+                <tr><td>Long context</td><td>Can process a large amount of material together</td><td>Expensive, slower, risk of context rot</td></tr>
+                <tr><td>RAG</td><td>Retrieves focused, relevant information</td><td>Depends on retrieval quality</td></tr>
+                <tr><td>Summarization</td><td>Reduces volume</td><td>May lose details</td></tr>
+                <tr><td>Tool use</td><td>Gets exact current data</td><td>Adds workflow complexity</td></tr>
+                <tr><td>Memory store</td><td>Preserves long-term state</td><td>Needs retrieval and governance</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Product Rule of Thumb</h3>
+          <ul class="cg-bento-list">
+            <li>Use long context when the model genuinely needs to reason across many pieces together.</li>
+            <li>Use RAG when the model needs the most relevant pieces from a larger knowledge base.</li>
+            <li>Use both when the task needs broad awareness and precise grounding.</li>
+          </ul>
+          <h3>Examples</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use Case</th><th>Better Approach</th></tr></thead>
+              <tbody>
+                <tr><td>Summarize one long contract</td><td>Long context</td></tr>
+                <tr><td>Answer policy question from 10,000 documents</td><td>RAG</td></tr>
+                <tr><td>Compare 20 uploaded claim documents</td><td>Long context + structured extraction</td></tr>
+                <tr><td>Customer support from knowledge base</td><td>RAG</td></tr>
+                <tr><td>Codebase migration planning</td><td>Long context + repo graph + retrieval</td></tr>
+                <tr><td>Agent running multi-step workflow</td><td>RAG + tools + compaction</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>A large context window does not remove the need for product architecture.</p>
+          </div>
+        </section>
+
+        <section id="poor-context" class="cg-article-section cg-reveal">
+          <h2>17. How Poor Context Design Creates Hallucination</h2>
+          <p>Hallucination is not only caused by weak models. It is often caused by poor context design.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Poor Context Design</th><th>Likely Failure</th></tr></thead>
+              <tbody>
+                <tr><td>Missing source document</td><td>Model guesses</td></tr>
+                <tr><td>Too many irrelevant documents</td><td>Model focuses on wrong detail</td></tr>
+                <tr><td>Old policy mixed with new policy</td><td>Model gives outdated answer</td></tr>
+                <tr><td>No source priority</td><td>Model treats weak source as strong</td></tr>
+                <tr><td>Raw OCR errors included</td><td>Model trusts bad extraction</td></tr>
+                <tr><td>Long chat history retained</td><td>Model follows stale instruction</td></tr>
+                <tr><td>Tool output too large</td><td>Model misses key fields</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>PM Takeaway</h3>
+          <p>When an AI answer is wrong, do not only blame the model. Ask:</p>
+          <ol class="cg-bento-list" style="list-style:decimal;">
+            <li>Was the right context retrieved?</li>
+            <li>Was irrelevant context removed?</li>
+            <li>Was the source current?</li>
+            <li>Was the context structured?</li>
+            <li>Was the model told which source to trust?</li>
+            <li>Was there enough output budget?</li>
+            <li>Was the task too broad?</li>
+          </ol>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Many AI failures are context failures.</p>
+          </div>
+        </section>
+
+        <section id="enterprise" class="cg-article-section cg-reveal">
+          <h2>18. Context Design for Enterprise Workflows</h2>
+          <p>
+            Enterprise AI products need stricter context design than consumer chatbots.
+            A consumer can tolerate a slightly vague answer. A business workflow often cannot.
+          </p>
+          <h3>Example: Pre-Auth Claim Review</h3>
+          <p>A good context package may include:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Context Item</th><th>Include?</th><th>Reason</th></tr></thead>
+              <tbody>
+                <tr><td>Current user question</td><td>Yes</td><td>Defines task</td></tr>
+                <tr><td>Policy number and product type</td><td>Yes</td><td>Defines coverage context</td></tr>
+                <tr><td>Admission date</td><td>Yes</td><td>Needed for eligibility</td></tr>
+                <tr><td>Diagnosis and procedure</td><td>Yes</td><td>Needed for medical decision</td></tr>
+                <tr><td>Relevant policy clauses</td><td>Yes</td><td>Grounding</td></tr>
+                <tr><td>Full policy booklet</td><td>Maybe</td><td>Only if targeted clauses are not enough</td></tr>
+                <tr><td>Hospital bill line items</td><td>Yes</td><td>Needed for deductions</td></tr>
+                <tr><td>Previous authorization history</td><td>Yes</td><td>Avoids duplicate decisioning</td></tr>
+                <tr><td>Raw email trail</td><td>Maybe</td><td>Only if communication issue exists</td></tr>
+                <tr><td>Old irrelevant claims</td><td>No</td><td>Adds noise</td></tr>
+                <tr><td>Internal notes</td><td>Yes, if relevant</td><td>Operational context</td></tr>
+                <tr><td>Tool logs</td><td>No, unless needed</td><td>Avoid clutter</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">How PMs should think</p>
+            <p>
+              Not "send everything." Not "send only the user query." Send the right context.
+            </p>
+          </div>
+        </section>
+
+        <section id="checklist" class="cg-article-section cg-reveal">
+          <h2>19. A PM Checklist for Tokens and Context Windows</h2>
+          <p>Before shipping an AI feature, ask:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Question</th><th>Why It Matters</th></tr></thead>
+              <tbody>
+                <tr><td>What is the maximum expected input size?</td><td>Avoid overflow</td></tr>
+                <tr><td>What is the expected output size?</td><td>Reserve generation budget</td></tr>
+                <tr><td>What documents enter context?</td><td>Control grounding</td></tr>
+                <tr><td>Who decides relevance?</td><td>Product or retrieval logic</td></tr>
+                <tr><td>What gets summarized?</td><td>Manage long sessions</td></tr>
+                <tr><td>What gets deleted from context?</td><td>Prevent clutter</td></tr>
+                <tr><td>How are old instructions handled?</td><td>Avoid conflict</td></tr>
+                <tr><td>How are tool results handled?</td><td>Prevent context bloat</td></tr>
+                <tr><td>What happens when limit is near?</td><td>Graceful fallback</td></tr>
+                <tr><td>How is token cost monitored?</td><td>Commercial viability</td></tr>
+                <tr><td>How is latency monitored?</td><td>User experience</td></tr>
+                <tr><td>How is context quality evaluated?</td><td>Accuracy and trust</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Add these questions to your AI PRDs. Tokens and context should not be afterthoughts.</p>
+        </section>
+
+        <section id="mental-model" class="cg-article-section cg-reveal">
+          <h2>20. Final Mental Model</h2>
+          <p style="font-size:1.1rem;color:var(--cg-text);line-height:1.7;margin:20px 0;">
+            Tokens are the units the model reads and writes.<br />
+            The context window is the model's working memory.<br />
+            A large context window gives capacity, but not automatic accuracy.<br />
+            More context can help, but bad context can hurt.
+          </p>
+          <p>
+            For product managers, the real skill is not simply asking:
+            "How many tokens does the model support?"
+          </p>
+          <p style="font-size:1.05rem;font-style:italic;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            The better question is: "What context does the model need to complete this task reliably?"
+          </p>
+          <p>That is the shift. AI product quality depends on context quality.</p>
+          <p>
+            The best AI products will not dump everything into the model.
+            They will curate, compress, retrieve, prioritize, clear, and preserve context deliberately.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM version</p>
+            <p>
+              Tokens and context windows are not just engineering details. They are product architecture.
+            </p>
+          </div>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM Understanding</th></tr></thead>
+              <tbody>
+                <tr><td>Token</td><td>The unit of text the model processes.</td></tr>
+                <tr><td>Context window</td><td>The model's working memory for the current request.</td></tr>
+                <tr><td>Training data vs context</td><td>Training data is learned earlier; context is what the model sees now.</td></tr>
+                <tr><td>Token budget</td><td>Planning how much room each part of the task gets.</td></tr>
+                <tr><td>Token counting</td><td>Estimating prompt size before execution.</td></tr>
+                <tr><td>Context rot</td><td>Accuracy and recall can degrade as context grows.</td></tr>
+                <tr><td>Long context</td><td>Useful capacity, but not a replacement for context design.</td></tr>
+                <tr><td>RAG</td><td>Retrieves relevant external knowledge into context.</td></tr>
+                <tr><td>Compaction</td><td>Summarizes older context so long workflows can continue.</td></tr>
+                <tr><td>Context editing</td><td>Removes unnecessary old tool results or blocks.</td></tr>
+                <tr><td>Extended thinking</td><td>Uses additional output tokens for deeper reasoning.</td></tr>
+                <tr><td>Tool use</td><td>Adds power but also context overhead.</td></tr>
+                <tr><td>Context awareness</td><td>Model capability to track remaining token budget.</td></tr>
+                <tr><td>PM role</td><td>Design what enters context, what stays out, and what happens near limits.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            In traditional software, product managers designed screens, flows, fields, and rules.
+            In AI products, product managers must also design context.
+          </p>
+          <p>
+            That means deciding what the model sees, what it ignores, what it retrieves, what it remembers,
+            what it forgets, and what it should do when the working memory gets crowded.
+          </p>
+          <p>This is not a small technical detail. This is one of the foundations of reliable AI product design.</p>
+          <p>
+            A model with a large context window can still fail if the product gives it the wrong context.
+            A smaller model with clean, relevant, well-structured context can often outperform
+            a larger model drowning in noise.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>Better context beats bigger context.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/from-transformers-to-llms-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 2: From Transformers to LLMs — The PM Version</h3>
+              <p>How Transformer architecture became the foundation of modern AI products.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <div class="cg-next-card" style="opacity:0.75;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-text-faint);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 4: Temperature, Top-p, and Sampling — The PM Version</h3>
+              <p>How sampling controls shape creativity, consistency, and product behavior in LLM outputs.</p>
+              <span class="cg-status-badge soon" style="width:fit-content;">Coming Soon</span>
+            </div>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/from-transformers-to-llms-the-pm-version/">← Chapter 02</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>
