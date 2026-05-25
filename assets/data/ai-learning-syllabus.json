@@ -72,30 +72,42 @@
         },
         {
           "number": "04",
+          "title": "AI Safety, RLHF, and Constitutional AI — The PM Version",
+          "slug": "ai-safety-rlhf-and-constitutional-ai-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "05",
+          "title": "InstructGPT and RLHF — The PM Version",
+          "slug": "instructgpt-and-rlhf-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "06",
           "title": "Temperature, Top-p and Sampling — Why Same Prompt Gives Different Outputs",
           "slug": "temperature-top-p-sampling",
           "status": "Coming Soon"
         },
         {
-          "number": "05",
+          "number": "07",
           "title": "Pre-training vs Fine-tuning vs RLHF",
           "slug": "pretraining-finetuning-rlhf",
           "status": "Coming Soon"
         },
         {
-          "number": "06",
+          "number": "08",
           "title": "Choosing Between GPT, Claude, Gemini and Llama",
           "slug": "choosing-model-families",
           "status": "Coming Soon"
         },
         {
-          "number": "07",
+          "number": "09",
           "title": "Hallucinations, Knowledge Cutoffs and Model Limitations",
           "slug": "hallucinations-limitations",
           "status": "Coming Soon"
         },
         {
-          "number": "08",
+          "number": "10",
           "title": "Benchmarks, Cost per Token and Model Tier Tradeoffs",
           "slug": "benchmarks-cost-tradeoffs",
           "status": "Coming Soon"

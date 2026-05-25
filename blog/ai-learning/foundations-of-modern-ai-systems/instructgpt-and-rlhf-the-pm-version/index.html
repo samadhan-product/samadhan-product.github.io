@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager friendly explanation of OpenAI's InstructGPT work, how RLHF makes language models follow instructions, and what PMs should learn about preference data, reward models, alignment, deployment safety, and product behavior design." />
+  <title>InstructGPT and RLHF — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 5: InstructGPT and RLHF — The PM Version" />
+  <meta property="og:description" content="How InstructGPT and RLHF turned base language models into instruction-following assistants — explained for product leaders." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 5: InstructGPT and RLHF — The PM Version",
+    "description": "A product-manager friendly explanation of OpenAI's InstructGPT work, how RLHF makes language models follow instructions, and what PMs should learn about preference data, reward models, alignment, deployment safety, and product behavior design.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 05", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/foundations-of-modern-ai-systems/">Foundations of Modern AI Systems</a><span class="sep">→</span>
+    <span class="current">Chapter 05</span>
+  </nav>
+
+  <!-- Editorial hero -->
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 05 · Module 01 · Beginner–Intermediate · 22–26 min</span>
+    <h1 class="cg-article-hero-title">Chapter 5: InstructGPT and RLHF — The PM Version</h1>
+    <p class="cg-article-lede">
+      How human feedback turned base language models into instruction-following assistants.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">22–26 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="InstructGPT flow: GPT-3 to demonstrations to rankings to assistant">
+      <span class="cg-token">GPT-3</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Demonstrations</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Rankings</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Assistant</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Four stages: capability → examples → preferences → product behavior</p>
+  </header>
+
+  <!-- Article shell -->
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <!-- Sidebar TOC -->
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#base-model-problem">1. The base model problem</a></li>
+            <li><a class="cg-toc-link" href="#instructgpt-fix">2. What InstructGPT fixed</a></li>
+            <li><a class="cg-toc-link" href="#size-lesson">3. The size lesson</a></li>
+            <li><a class="cg-toc-link" href="#rlhf-simple">4. RLHF in simple terms</a></li>
+            <li><a class="cg-toc-link" href="#pipeline">5. The InstructGPT pipeline</a></li>
+            <li><a class="cg-toc-link" href="#sft">6. Supervised fine-tuning</a></li>
+            <li><a class="cg-toc-link" href="#ranking">7. Rankings and preferences</a></li>
+            <li><a class="cg-toc-link" href="#reward-model">8. Reward models</a></li>
+            <li><a class="cg-toc-link" href="#ppo">9. PPO fine-tuning</a></li>
+            <li><a class="cg-toc-link" href="#not-just-safety">10. RLHF ≠ only safety</a></li>
+            <li><a class="cg-toc-link" href="#unlock-capability">11. RLHF unlocks capability</a></li>
+            <li><a class="cg-toc-link" href="#alignment-tax">12. The alignment tax</a></li>
+            <li><a class="cg-toc-link" href="#limitations">13. Limitations for PMs</a></li>
+            <li><a class="cg-toc-link" href="#labelers">14. Who are the labelers?</a></li>
+            <li><a class="cg-toc-link" href="#real-prompts">15. Real prompts vs demos</a></li>
+            <li><a class="cg-toc-link" href="#instruction-following">16. Instruction following</a></li>
+            <li><a class="cg-toc-link" href="#prompting-limits">17. Prompting limits</a></li>
+            <li><a class="cg-toc-link" href="#deployment">18. Deployment and safety</a></li>
+            <li><a class="cg-toc-link" href="#enterprise">19. Enterprise implications</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">20. Final mental model</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 22–26 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Article body -->
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/from-transformers-to-llms-the-pm-version/">Chapter 2</a>,
+            we saw how transformers became Large Language Models.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/">Chapter 3</a>,
+            we covered tokens and context windows — the working memory of an AI system.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/">Chapter 4</a>,
+            we introduced AI safety, RLHF, and Constitutional AI at a high level — why alignment matters, what human feedback does, and how principled training complements preference learning.
+          </p>
+          <p>
+            This chapter goes deeper into the work that made modern assistants feel usable:
+            <strong>InstructGPT</strong> and the RLHF pipeline behind it.
+          </p>
+          <p>
+            If Chapter 4 answered “Why should PMs care about alignment and feedback?”,
+            Chapter 5 answers “How did OpenAI actually turn GPT-3 into something that follows instructions?”
+          </p>
+          <p>
+            Many PMs hear “RLHF” as a safety buzzword. That is only half the story.
+            InstructGPT showed that human feedback is also a <strong>product behavior layer</strong> —
+            the step that converts raw language capability into assistants people want to use.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              Base models predict text.<br />
+              RLHF-trained models try to do what users actually asked for.
+            </p>
+          </div>
+        </section>
+
+        <section id="base-model-problem" class="cg-article-section cg-reveal">
+          <h2>1. The Base Model Problem</h2>
+          <p>
+            A <strong>base model</strong> (like early GPT-3) is trained to predict the next token on large text from the internet and books.
+            It learns language, facts, style, and patterns — but not necessarily how to behave as your product’s assistant.
+          </p>
+          <p>When you give a base model a user instruction, common failure modes include:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>User intent</th><th>Base model tendency</th></tr></thead>
+              <tbody>
+                <tr><td>“Summarize this in 3 bullets.”</td><td>Continues the document instead of summarizing</td></tr>
+                <tr><td>“Answer as a claims expert.”</td><td>Drifts into generic or theatrical tone</td></tr>
+                <tr><td>“Say you don’t know if evidence is missing.”</td><td>Still sounds confident</td></tr>
+                <tr><td>“Follow this JSON schema.”</td><td>Produces almost-right structure with subtle errors</td></tr>
+                <tr><td>“Refuse harmful requests.”</td><td>Sometimes complies because completion patterns dominate</td></tr>
+                <tr><td>“Be concise.”</td><td>Rambles because longer continuations were common in training</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            For PMs, the base model problem is a product gap:
+            <strong>capability ≠ usable behavior.</strong>
+            A model can score well on knowledge benchmarks and still feel broken in a chat UI.
+          </p>
+          <p>
+            Pre-ChatGPT era teams learned this quickly: impressive demos on completion APIs did not automatically translate into reliable workflow tools.
+            Users do not want “the most likely next paragraph.” They want an answer that matches the task.
+          </p>
+        </section>
+
+        <section id="instructgpt-fix" class="cg-article-section cg-reveal">
+          <h2>2. What InstructGPT Fixed</h2>
+          <p>
+            OpenAI’s <strong>InstructGPT</strong> work (2022) asked a practical question:
+            how do we align language models so they follow instructions, tell the truth more often, and cause less harm —
+            while staying useful?
+          </p>
+          <p>The headline product outcome was not a bigger model. It was a <strong>better-behaved</strong> model:</p>
+          <ul class="cg-bento-list">
+            <li>Follows explicit instructions more reliably,</li>
+            <li>Produces answers humans prefer in side-by-side comparisons,</li>
+            <li>Reduces toxic or unhelpful outputs,</li>
+            <li>Improves truthfulness on some factual prompts,</li>
+            <li>Feels more like an assistant and less like autocomplete.</li>
+          </ul>
+          <p>
+            InstructGPT did not replace pre-training. It added training stages on top of a capable base model,
+            using human demonstrations and human rankings to teach <em>how</em> to respond — not just <em>what</em> text is statistically likely.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              The breakthrough was behavioral alignment for real user prompts —
+              turning “language model” into “instruction-following product surface.”
+            </p>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Further reading</p>
+            <p>
+              OpenAI:
+              <a href="https://openai.com/index/instruction-following/" target="_blank" rel="noopener">Aligning language models to follow instructions</a>
+              — the original InstructGPT announcement and results.
+            </p>
+          </div>
+        </section>
+
+        <section id="size-lesson" class="cg-article-section cg-reveal">
+          <h2>3. The Size Lesson PMs Should Remember</h2>
+          <p>
+            One of the most important InstructGPT findings for product leaders:
+            <strong>a smaller aligned model can beat a much larger base model in human preference.</strong>
+          </p>
+          <p>
+            In OpenAI’s comparisons, labelers often preferred a 1.3B-parameter InstructGPT-style model over the raw 175B GPT-3 base model on prompts submitted by real API users.
+            Bigger was not automatically better for the product experience.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>What teams assume</th><th>What InstructGPT showed</th></tr></thead>
+              <tbody>
+                <tr><td>Largest model wins every UX test</td><td>Alignment training can matter more than raw scale</td></tr>
+                <tr><td>“Upgrade to 175B” fixes quality</td><td>Behavior tuning may deliver more user-visible lift</td></tr>
+                <tr><td>Cost is only about parameters</td><td>Preference training + inference policy shape unit economics</td></tr>
+                <tr><td>Benchmarks predict satisfaction</td><td>Human preference on real prompts is a different metric</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Before you pay for the biggest model tier, ask whether the product needs more knowledge or better instruction-following behavior.
+              Often the answer is both — but behavior tuning is not optional.
+            </p>
+          </div>
+        </section>
+
+        <section id="rlhf-simple" class="cg-article-section cg-reveal">
+          <h2>4. RLHF in Simple Terms</h2>
+          <p>
+            <strong>RLHF</strong> (Reinforcement Learning from Human Feedback) means:
+            use human judgments about which outputs are better, train a scoring model from those judgments,
+            then nudge the language model toward higher-scoring behavior.
+          </p>
+          <p>At a product level, think of three layers:</p>
+          <ol class="cg-bento-list" style="list-style:decimal;">
+            <li><strong>Show the model good examples</strong> (supervised fine-tuning on demonstrations).</li>
+            <li><strong>Teach a critic what humans prefer</strong> (reward model from rankings).</li>
+            <li><strong>Practice under that critic</strong> (reinforcement fine-tuning, often PPO).</li>
+          </ol>
+          <p>
+            Chapter 4 explained RLHF in the safety frame — helpful, honest, harmless.
+            InstructGPT adds the product frame: RLHF is how you make the model <strong>follow the user’s task</strong>,
+            not only avoid harm.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Key point</p>
+            <p>RLHF shapes behavior. It does not primarily teach new facts from scratch.</p>
+          </div>
+        </section>
+
+        <section id="pipeline" class="cg-article-section cg-reveal">
+          <h2>5. The InstructGPT Pipeline (PM Map)</h2>
+          <p>
+            You do not need to implement PPO to be a strong AI PM.
+            You do need to know the pipeline your vendor (or internal ML team) is approximating.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Stage</th><th>Input</th><th>Output</th><th>PM translation</th></tr></thead>
+              <tbody>
+                <tr><td>Pre-training</td><td>Massive text corpora</td><td>Base LLM</td><td>General capability</td></tr>
+                <tr><td>SFT</td><td>Human-written ideal responses</td><td>Instruction-tuned model</td><td>“Here is how we want answers to look.”</td></tr>
+                <tr><td>Reward model training</td><td>Human rankings of multiple answers</td><td>Preference scorer</td><td>“This answer is better than that one.”</td></tr>
+                <tr><td>RL fine-tuning (PPO)</td><td>Prompts + reward signal</td><td>Aligned assistant</td><td>“Optimize for preferred behavior at scale.”</td></tr>
+                <tr><td>Deployment layers</td><td>Policies, filters, tools, evals</td><td>Shipped product</td><td>“Behavior in production, not only in lab.”</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            InstructGPT’s public workflow used real prompts from API customers, human labelers, comparison data, and iterative evaluation.
+            That is why the resulting model felt closer to production reality than a benchmark-only fine-tune.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Further reading</p>
+            <p>
+              For the research narrative and metrics, see OpenAI’s
+              <a href="https://openai.com/index/instruction-following/" target="_blank" rel="noopener">Aligning language models to follow instructions</a>.
+            </p>
+          </div>
+        </section>
+
+        <section id="sft" class="cg-article-section cg-reveal">
+          <h2>6. Supervised Fine-Tuning (SFT)</h2>
+          <p>
+            <strong>Supervised fine-tuning</strong> is the teaching phase where humans write high-quality answers to prompts.
+            The model learns to imitate those demonstrations — format, tone, structure, refusal style, and task completion patterns.
+          </p>
+          <h3>What SFT is good at</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Behavior</th><th>Why it matters in product</th></tr></thead>
+              <tbody>
+                <tr><td>Instruction format</td><td>Answers the question asked, not a random continuation</td></tr>
+                <tr><td>Role adherence</td><td>Stays in “support agent,” “analyst,” or “coach” mode</td></tr>
+                <tr><td>Output structure</td><td>Bullets, tables, steps, JSON-like patterns</td></tr>
+                <tr><td>Domain tone</td><td>Professional vs casual as required</td></tr>
+                <tr><td>Baseline safety style</td><td>How refusals and caveats should read</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>What SFT does not guarantee</h3>
+          <ul class="cg-bento-list">
+            <li>Perfect factual accuracy on rare facts,</li>
+            <li>Robustness to adversarial prompts,</li>
+            <li>Optimal tradeoffs when instructions conflict,</li>
+            <li>Behavior on prompts unlike the demonstration set.</li>
+          </ul>
+          <p>
+            For enterprise PMs, SFT is closest to a <strong>golden response library</strong> —
+            curated prompt/answer pairs that encode how your product should behave in core workflows.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>SFT is “show, don’t tell.” Quality of demonstrations becomes quality of default behavior.</p>
+          </div>
+        </section>
+
+        <section id="ranking" class="cg-article-section cg-reveal">
+          <h2>7. Rankings and Preference Data</h2>
+          <p>
+            After SFT, InstructGPT-style training collects <strong>comparisons</strong>:
+            for the same prompt, labelers rank multiple model outputs from best to worst.
+          </p>
+          <p>Preference data captures nuances demonstrations miss:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Comparison dimension</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>Helpfulness</td><td>Complete answer vs vague answer</td></tr>
+                <tr><td>Clarity</td><td>Structured explanation vs wall of text</td></tr>
+                <tr><td>Truthfulness</td><td>States uncertainty vs invents details</td></tr>
+                <tr><td>Safety</td><td>Appropriate refusal vs unsafe compliance</td></tr>
+                <tr><td>Instruction match</td><td>Follows constraints vs ignores them</td></tr>
+                <tr><td>Verbosity</td><td>Right length for the task</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Rankings scale better than rewriting every answer from scratch.
+            They also encode tradeoffs: “Answer B is more helpful but slightly longer — still preferred.”
+          </p>
+          <p>
+            Product teams can mirror this internally with side-by-side evals:
+            same prompt, two configurations, human or expert judgment on which output wins for the workflow.
+          </p>
+        </section>
+
+        <section id="reward-model" class="cg-article-section cg-reveal">
+          <h2>8. Reward Models</h2>
+          <p>
+            A <strong>reward model</strong> learns to predict human preference scores from comparison data.
+            It becomes an automated critic: given a prompt and a candidate answer, it outputs how “good” that answer is likely to be.
+          </p>
+          <p>PM-friendly properties of reward models:</p>
+          <ul class="cg-bento-list">
+            <li>They compress thousands of human judgments into a reusable scoring function,</li>
+            <li>They enable reinforcement-style training at scale,</li>
+            <li>They make behavior objectives more explicit than “vibes from prompt engineering,”</li>
+            <li>They can be evaluated — if the reward model is wrong, alignment drifts.</li>
+          </ul>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Risk</th><th>Product symptom</th></tr></thead>
+              <tbody>
+                <tr><td>Reward hacking</td><td>Model optimizes for sounding good, not being correct</td></tr>
+                <tr><td>Short prompt bias</td><td>Great on demos, weak on long enterprise prompts</td></tr>
+                <tr><td>Labeler mismatch</td><td>Behavior fits generic users, not your domain experts</td></tr>
+                <tr><td>Stale preferences</td><td>Model feels outdated vs current policy or UI</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              The reward model is a proxy for your product’s definition of “better.”
+              If that definition is vague, alignment will be vague too.
+            </p>
+          </div>
+        </section>
+
+        <section id="ppo" class="cg-article-section cg-reveal">
+          <h2>9. PPO Fine-Tuning (What PMs Need to Know)</h2>
+          <p>
+            <strong>PPO</strong> (Proximal Policy Optimization) is a reinforcement learning algorithm used to update the language model using reward model scores.
+            You do not need the math — you need the product intuition.
+          </p>
+          <p>During this stage, the model generates answers, the reward model scores them, and training pushes the model toward higher rewards — within guardrails so it does not drift too far from the SFT model (which would break fluency or capabilities).</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>Plain-language meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Policy</td><td>The model’s current behavior policy (how it answers)</td></tr>
+                <tr><td>Reward signal</td><td>Automated score from human preference training</td></tr>
+                <tr><td>KL penalty / constraint</td><td>Don’t change behavior too wildly in one update</td></tr>
+                <tr><td>Iteration</td><td>Repeated generate → score → adjust cycles</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            For PMs, PPO is why “aligned” models can feel more polished than SFT-only models —
+            they have been optimized on many prompt variations against a preference objective, not only copied from static examples.
+          </p>
+        </section>
+
+        <section id="not-just-safety" class="cg-article-section cg-reveal">
+          <h2>10. RLHF Is Not Just a Safety Layer</h2>
+          <p>
+            Safety teams care about RLHF because it reduces toxicity and improves refusal behavior.
+            Product teams should care because it improves <strong>task success rate</strong>.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>RLHF effect</th><th>Product impact</th></tr></thead>
+              <tbody>
+                <tr><td>Better instruction following</td><td>Fewer “it ignored my request” tickets</td></tr>
+                <tr><td>Better formatting</td><td>Easier downstream parsing and UI rendering</td></tr>
+                <tr><td>Better tone control</td><td>Brand-consistent customer experiences</td></tr>
+                <tr><td>Better calibration</td><td>More appropriate confidence and caveats</td></tr>
+                <tr><td>Better refusals</td><td>Less legal/reputational exposure</td></tr>
+                <tr><td>Better user preference match</td><td>Higher retention and task completion</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Treating RLHF as “the safety team’s problem” leads to weak PRDs.
+            Treating RLHF as “how we define and optimize preferred behavior” leads to measurable product quality.
+          </p>
+        </section>
+
+        <section id="unlock-capability" class="cg-article-section cg-reveal">
+          <h2>11. How RLHF Unlocks Capability Users Actually Feel</h2>
+          <p>
+            Pre-training gives the model knowledge and language skill.
+            RLHF makes that skill <strong>callable</strong> through natural instructions.
+          </p>
+          <p>Examples of “unlocked” product behaviors:</p>
+          <ul class="cg-bento-list">
+            <li>Turning a messy email thread into action items with owners and dates,</li>
+            <li>Rewriting technical content for a non-technical executive,</li>
+            <li>Following “use only the attached policy PDF” more reliably,</li>
+            <li>Producing compare/contrast tables instead of narrative drift,</li>
+            <li>Stopping when the user asked for a one-sentence answer.</li>
+          </ul>
+          <p>
+            None of these are magic. They are the result of training on human judgments about what “good assistance” looks like across many prompt types — including prompts from real customers, which InstructGPT emphasized.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Users experience alignment as usability, not as an ethics whitepaper.</p>
+          </div>
+        </section>
+
+        <section id="alignment-tax" class="cg-article-section cg-reveal">
+          <h2>12. The Alignment Tax</h2>
+          <p>
+            OpenAI described an <strong>alignment tax</strong>:
+            making models more aligned can sometimes reduce performance on some capability benchmarks —
+            unless you invest in techniques that recover capability while preserving alignment gains.
+          </p>
+          <p>For PMs, “alignment tax” shows up in product tradeoffs:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Tradeoff</th><th>What users may notice</th></tr></thead>
+              <tbody>
+                <tr><td>More refusals</td><td>Safer, but more “I can’t help with that” friction</td></tr>
+                <tr><td>More caution</td><td>Less false certainty, but sometimes less decisive tone</td></tr>
+                <tr><td>More generic helpfulness</td><td>Polished answers that lack domain edge</td></tr>
+                <tr><td>Stricter style</td><td>Consistent brand voice, less creative variation</td></tr>
+                <tr><td>Training cost</td><td>Slower iteration cycles for behavior changes</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            A mature product team measures both sides: harm rate <em>and</em> task completion, expert approval <em>and</em> latency/cost.
+            The goal is not maximum refusal. The goal is maximum trustworthy usefulness.
+          </p>
+        </section>
+
+        <section id="limitations" class="cg-article-section cg-reveal">
+          <h2>13. Limitations PMs Should Know</h2>
+          <p>RLHF and InstructGPT-style training are powerful — and incomplete.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Limitation</th><th>Product risk</th></tr></thead>
+              <tbody>
+                <tr><td>Preference ≠ truth</td><td>Fluent, persuasive wrong answers can still win comparisons</td></tr>
+                <tr><td>Labeler distribution</td><td>Behavior reflects who labeled the data</td></tr>
+                <tr><td>Coverage gaps</td><td>Rare enterprise edge cases under-trained</td></tr>
+                <tr><td>Static training snapshot</td><td>Policies and products evolve faster than the model</td></tr>
+                <tr><td>Reward model errors</td><td>Systematic blind spots at scale</td></tr>
+                <tr><td>No substitute for tools/RAG</td><td>Behavior tuning does not fix missing sources</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:1.05rem;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            <strong>Weak PRD line:</strong> “We use an RLHF model, so answers will be correct.”<br />
+            <strong>Better requirement:</strong> Grounding, eval suites, human review for high-risk flows, telemetry on failure modes, and explicit behavior specs per workflow.
+          </p>
+        </section>
+
+        <section id="labelers" class="cg-article-section cg-reveal">
+          <h2>14. Who Are the Labelers?</h2>
+          <p>
+            Alignment data is shaped by the people who write demonstrations and rank outputs.
+            InstructGPT used trained labelers following guidelines — not random crowd votes without context.
+          </p>
+          <p>PM questions to ask your ML or vendor partner:</p>
+          <ul class="cg-bento-list">
+            <li>What instructions did labelers follow?</li>
+            <li>What cultures, domains, and languages are represented?</li>
+            <li>Were labelers generalists or domain experts for your use case?</li>
+            <li>How were disagreements resolved?</li>
+            <li>How often are guidelines updated?</li>
+          </ul>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Labeling approach</th><th>Best for</th><th>Watch-out</th></tr></thead>
+              <tbody>
+                <tr><td>General helpfulness labelers</td><td>Broad assistant products</td><td>May miss niche domain nuance</td></tr>
+                <tr><td>Domain expert reviewers</td><td>Healthcare, legal, finance workflows</td><td>Higher cost, slower throughput</td></tr>
+                <tr><td>Customer-success guided rubrics</td><td>Enterprise support tone and policy</td><td>Needs maintenance as policies change</td></tr>
+                <tr><td>Internal PM + SME review loops</td><td>Custom fine-tunes for one company</td><td>Must avoid overfitting to demo prompts</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Your product’s “values” show up in labeling guidelines — whether you write them or not.</p>
+          </div>
+        </section>
+
+        <section id="real-prompts" class="cg-article-section cg-reveal">
+          <h2>15. Real Prompts vs Lab Demos</h2>
+          <p>
+            A major InstructGPT design choice was training and evaluating on <strong>prompts submitted by real API users</strong>,
+            not only synthetic academic prompts.
+          </p>
+          <p>Why this matters for PMs:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Eval source</th><th>What it optimizes</th></tr></thead>
+              <tbody>
+                <tr><td>Clean lab prompts</td><td>Benchmark-friendly behavior</td></tr>
+                <tr><td>Real production prompts</td><td>Messy, ambiguous, multi-intent user behavior</td></tr>
+                <tr><td>Sales demo scripts</td><td>Overfitted wow moments</td></tr>
+                <tr><td>Support ticket replay sets</td><td>Actual failure modes and phrasing</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            If your eval set is only polished demos, you will ship a polished demo machine.
+            Build eval corpora from anonymized production logs (with privacy controls), escalations, and “tickets we lost sleep over.”
+          </p>
+        </section>
+
+        <section id="instruction-following" class="cg-article-section cg-reveal">
+          <h2>16. Instruction Following as a Product Feature</h2>
+          <p>
+            Instruction following is not a research metric only.
+            It is a <strong>feature requirement</strong> — as concrete as latency or export format.
+          </p>
+          <p>Define it per workflow:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Workflow</th><th>Instruction spec example</th></tr></thead>
+              <tbody>
+                <tr><td>Claims summary</td><td>Must use only retrieved claim fields; max 120 words; bullet format</td></tr>
+                <tr><td>Code review assistant</td><td>Must list severity-tagged findings; no drive-by refactors</td></tr>
+                <tr><td>Sales email draft</td><td>Must follow brand tone guide; no fabricated pricing</td></tr>
+                <tr><td>Policy Q&amp;A</td><td>Must cite clause IDs; must say “not found in sources” when missing</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            InstructGPT’s lesson: behavior improves when training targets match how users actually instruct the system.
+            Your fine-tune, eval, and prompt templates should target the same instruction distribution.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Write instruction-following acceptance tests the way you write functional requirements.</p>
+          </div>
+        </section>
+
+        <section id="prompting-limits" class="cg-article-section cg-reveal">
+          <h2>17. Why Prompting Alone Is Not Enough</h2>
+          <p>
+            Prompt engineering is essential — but it competes with billions of parameters trained on internet-scale text.
+            A system prompt can say “be concise,” while the base prior still favors long completions.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Approach</th><th>Strength</th><th>Limit</th></tr></thead>
+              <tbody>
+                <tr><td>Prompt-only</td><td>Fast to iterate</td><td>Fragile under edge cases and adversarial inputs</td></tr>
+                <tr><td>RAG / tools</td><td>Improves facts and actions</td><td>Does not fully fix tone, refusal, or format discipline</td></tr>
+                <tr><td>SFT / RLHF</td><td>Bakes preferred behavior into weights</td><td>Expensive; needs governance and evals</td></tr>
+                <tr><td>Runtime guardrails</td><td>Catches known failure classes</td><td>Can over-block legitimate work</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Modern AI products combine all layers.
+            InstructGPT is the historical proof that <strong>training-time alignment</strong> was necessary to make chat-based products mainstream — not just better prompts on a raw base model.
+          </p>
+        </section>
+
+        <section id="deployment" class="cg-article-section cg-reveal">
+          <h2>18. Deployment and Safety Layers</h2>
+          <p>
+            The model weights are not the whole product.
+            Deployment adds monitoring, moderation, rate limits, tool permissions, logging, and incident response.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Layer</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td>Aligned model (SFT + RLHF)</td><td>Default behavior prior</td></tr>
+                <tr><td>System + developer messages</td><td>Session-level policy and task framing</td></tr>
+                <tr><td>RAG / retrieval</td><td>Ground answers in approved sources</td></tr>
+                <tr><td>Tool gateways</td><td>Enforce what the model can execute</td></tr>
+                <tr><td>Output filters</td><td>Block known policy violations</td></tr>
+                <tr><td>Human review queues</td><td>Escalate uncertain or high-risk outputs</td></tr>
+                <tr><td>Telemetry + eval regression</td><td>Detect drift after model updates</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Chapter 4 covered red teaming and constitutional principles.
+            Here the PM move is operational: define what happens when the aligned model still fails in production — because it will, eventually, on a novel prompt.
+          </p>
+        </section>
+
+        <section id="enterprise" class="cg-article-section cg-reveal">
+          <h2>19. Enterprise Product Implications</h2>
+          <p>
+            Enterprise PMs rarely train frontier models from scratch.
+            You still inherit InstructGPT’s lessons when selecting vendors, designing fine-tunes, or shipping copilots.
+          </p>
+          <h3>Vendor diligence checklist</h3>
+          <ul class="cg-bento-list">
+            <li>Is the model instruction-tuned or primarily a base/completion model?</li>
+            <li>What human feedback pipeline exists (SFT, rankings, RL)?</li>
+            <li>How are refusals, PII, and policy violations evaluated?</li>
+            <li>Can you bring private preference data for domain alignment?</li>
+            <li>What regression tests run before model version bumps?</li>
+          </ul>
+          <h3>Build vs buy behavior</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Strategy</th><th>When it fits</th></tr></thead>
+              <tbody>
+                <tr><td>Use vendor-aligned model only</td><td>General assistant, low domain risk</td></tr>
+                <tr><td>SFT on internal golden sets</td><td>Repeated structured workflows</td></tr>
+                <tr><td>Preference eval + prompt/RAG tuning</td><td>Rapid iteration before full fine-tune</td></tr>
+                <tr><td>Custom reward objectives</td><td>Mature ML platform, high volume, clear rubric</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Also plan for <strong>versioning</strong>:
+            when the vendor ships a new aligned snapshot, your refusal rates, citation behavior, and JSON reliability can shift.
+            Treat model upgrades like API breaking-change reviews.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Enterprise trust comes from behavior specs + evals + controls — aligned weights are the foundation, not the finish line.</p>
+          </div>
+        </section>
+
+        <section id="mental-model" class="cg-article-section cg-reveal">
+          <h2>20. The PM Mental Model</h2>
+          <p style="font-size:1.1rem;color:var(--cg-text);line-height:1.7;margin:20px 0;">
+            InstructGPT is the bridge story between “large language model” and “assistant product.”<br />
+            RLHF is how you encode what “better” means — then optimize for it.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Stage</th><th>PM question to ask</th></tr></thead>
+              <tbody>
+                <tr><td>Base model</td><td>Do we have enough raw capability for this use case?</td></tr>
+                <tr><td>SFT</td><td>Do we have golden answers that define great behavior?</td></tr>
+                <tr><td>Rankings</td><td>Can experts or users compare outputs reliably?</td></tr>
+                <tr><td>Reward model</td><td>Does our scorer match business definitions of quality?</td></tr>
+                <tr><td>RL fine-tuning</td><td>Are we optimizing the right behaviors at scale?</td></tr>
+                <tr><td>Deployment</td><td>What happens when the model is wrong in production?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Chapter 4 taught that alignment is a product architecture concern.
+            Chapter 5 shows the historical mechanism: human demonstrations, human preferences, reward models, and reinforcement fine-tuning —
+            the stack behind instruction-following assistants.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM version</p>
+            <p>Users do not experience parameters. They experience whether the system did the task — safely, clearly, and on instruction.</p>
+          </div>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM understanding</th></tr></thead>
+              <tbody>
+                <tr><td>Base model problem</td><td>Capability without instruction-following is not a shippable assistant</td></tr>
+                <tr><td>InstructGPT</td><td>OpenAI’s aligned training story: demonstrations + rankings + RL</td></tr>
+                <tr><td>Size lesson</td><td>Smaller aligned models can beat larger base models in human preference</td></tr>
+                <tr><td>RLHF</td><td>Train preferred behavior using human feedback at scale</td></tr>
+                <tr><td>SFT</td><td>Teach the model ideal responses via demonstrations</td></tr>
+                <tr><td>Preference data</td><td>Rankings encode tradeoffs between candidate answers</td></tr>
+                <tr><td>Reward model</td><td>Automated critic learned from human comparisons</td></tr>
+                <tr><td>PPO</td><td>Reinforcement fine-tuning that optimizes against the reward model</td></tr>
+                <tr><td>Not just safety</td><td>RLHF improves usability, format, tone, and task completion</td></tr>
+                <tr><td>Alignment tax</td><td>Alignment gains can trade off with some capabilities unless managed</td></tr>
+                <tr><td>Labelers</td><td>Behavior reflects labeling guidelines and reviewer pool</td></tr>
+                <tr><td>Real prompts</td><td>Production-like eval data beats demo-only testing</td></tr>
+                <tr><td>Deployment</td><td>Aligned weights plus product guardrails earn trust</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            Before InstructGPT, many teams treated the base model as the product.
+            After InstructGPT, the industry learned that the product is the <strong>stack</strong>:
+            capability, demonstrations, preferences, optimization, and deployment discipline.
+          </p>
+          <p>
+            If you are a PM shipping an AI feature today, you are downstream of this story —
+            even if you never train a reward model yourself.
+            Your specs, eval rubrics, golden data, and workflow guardrails are how alignment shows up in your product.
+          </p>
+          <p>
+            The next step in this module is controlling <em>how</em> the model generates each token —
+            temperature, top-p, and sampling — the knobs that shape creativity versus consistency in live products.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>Instruction-following is trained, measured, and shipped — not wished into existence with a longer system prompt.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 4: AI Safety, RLHF, and Constitutional AI — The PM Version</h3>
+              <p>AI safety, alignment, RLHF, Constitutional AI, red teaming, and product architecture for trustworthy AI.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <div class="cg-next-card" style="opacity:0.75;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-text-faint);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 6: Temperature, Top-p, and Sampling — The PM Version</h3>
+              <p>How sampling controls shape creativity, consistency, and product behavior in LLM outputs.</p>
+              <span class="cg-status-badge soon" style="width:fit-content;">Coming Soon</span>
+            </div>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/">← Chapter 04</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>

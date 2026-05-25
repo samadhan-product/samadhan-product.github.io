@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager friendly explanation of AI safety, alignment, RLHF, Constitutional AI, scalable oversight, red teaming, and why safety must be designed as part of AI product architecture." />
+  <title>AI Safety, RLHF, and Constitutional AI — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 4: AI Safety, RLHF, and Constitutional AI — The PM Version" />
+  <meta property="og:description" content="Why AI safety, RLHF, and Constitutional AI matter when building trustworthy AI products — explained for product leaders." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 4: AI Safety, RLHF, and Constitutional AI — The PM Version",
+    "description": "A product-manager friendly explanation of AI safety, alignment, RLHF, Constitutional AI, scalable oversight, red teaming, and why safety must be designed as part of AI product architecture.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 04", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/foundations-of-modern-ai-systems/">Foundations of Modern AI Systems</a><span class="sep">→</span>
+    <span class="current">Chapter 04</span>
+  </nav>
+
+  <!-- Editorial hero -->
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 04 · Module 01 · Beginner–Intermediate · 24–28 min</span>
+    <h1 class="cg-article-hero-title">Chapter 4: AI Safety, RLHF, and Constitutional AI — The PM Version</h1>
+    <p class="cg-article-lede">
+      Why AI safety, RLHF, and Constitutional AI matter when building trustworthy AI products.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">24–28 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="Safety flow: base model to RLHF to principles to trusted product">
+      <span class="cg-token">Base model</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">RLHF</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Principles</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Trusted product</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Four layers: capability → preference → principles → trust</p>
+  </header>
+
+  <!-- Article shell -->
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <!-- Sidebar TOC -->
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#what-is-safety">1. What is AI safety?</a></li>
+            <li><a class="cg-toc-link" href="#core-problem">2. The core safety problem</a></li>
+            <li><a class="cg-toc-link" href="#alignment">3. Alignment</a></li>
+            <li><a class="cg-toc-link" href="#harder-capable">4. Safety vs capability</a></li>
+            <li><a class="cg-toc-link" href="#rlhf">5. RLHF</a></li>
+            <li><a class="cg-toc-link" href="#rlhf-good">6. What RLHF is good at</a></li>
+            <li><a class="cg-toc-link" href="#rlhf-limits">7. RLHF limits</a></li>
+            <li><a class="cg-toc-link" href="#scalable-oversight">8. Scalable oversight</a></li>
+            <li><a class="cg-toc-link" href="#constitutional-ai">9. Constitutional AI</a></li>
+            <li><a class="cg-toc-link" href="#cai-how">10. How Constitutional AI works</a></li>
+            <li><a class="cg-toc-link" href="#rlhf-vs-cai">11. RLHF vs Constitutional AI</a></li>
+            <li><a class="cg-toc-link" href="#cai-pm">12. CAI for PMs</a></li>
+            <li><a class="cg-toc-link" href="#not-refusal">13. Safety ≠ refusal</a></li>
+            <li><a class="cg-toc-link" href="#agent-safety">14. Agent safety</a></li>
+            <li><a class="cg-toc-link" href="#red-teaming">15. Red teaming</a></li>
+            <li><a class="cg-toc-link" href="#outcome-process">16. Outcome vs process</a></li>
+            <li><a class="cg-toc-link" href="#alignment-science">17. Alignment science</a></li>
+            <li><a class="cg-toc-link" href="#pm-framework">18. PM safety framework</a></li>
+            <li><a class="cg-toc-link" href="#what-not-to-do">19. What not to do</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">20. Final mental model</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 24–28 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Article body -->
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/from-transformers-to-llms-the-pm-version/">Chapter 2</a>,
+            we saw how transformers became Large Language Models.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/">Chapter 3</a>,
+            we covered tokens and context windows — the working memory of an AI system.
+          </p>
+          <p>
+            Now we turn to something that matters more as systems get more capable:
+            <strong>AI safety.</strong>
+          </p>
+          <p>
+            Many product managers treat AI safety as a compliance topic — legal, policy, security, or model labs.
+            That framing is incomplete.
+          </p>
+          <p><strong>AI safety is a product architecture topic.</strong></p>
+          <p>It shapes:</p>
+          <ul class="cg-bento-list">
+            <li>what the model is allowed to do,</li>
+            <li>what it should refuse,</li>
+            <li>how it behaves under pressure,</li>
+            <li>how much autonomy it gets,</li>
+            <li>how humans supervise it,</li>
+            <li>how mistakes are caught,</li>
+            <li>how risk is measured,</li>
+            <li>and how trust is built into the product.</li>
+          </ul>
+          <p>A weak AI product asks: “How do we make the model answer?”</p>
+          <p>A mature AI product asks: “How do we make the model behave safely, reliably, and usefully in real workflows?”</p>
+          <p>
+            This chapter explains AI safety, RLHF, and Constitutional AI from a product manager’s lens —
+            not as theory or fear, but as practical product design.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              Safety is not only about blocking bad prompts.<br />
+              It is about designing systems people can trust.
+            </p>
+          </div>
+        </section>
+
+        <section id="what-is-safety" class="cg-article-section cg-reveal">
+          <h2>1. What Does AI Safety Actually Mean?</h2>
+          <p>
+            AI safety means building systems that behave in ways that are useful, reliable, and aligned with human intentions —
+            especially when the system is powerful, widely deployed, or used in high-stakes workflows.
+          </p>
+          <p>At a simple level, AI safety tries to close the gap between:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>What We Want</th><th>What Can Go Wrong</th></tr></thead>
+              <tbody>
+                <tr><td>Helpful answers</td><td>Misleading or harmful answers</td></tr>
+                <tr><td>Honest behavior</td><td>Confident hallucination</td></tr>
+                <tr><td>Safe refusal</td><td>Over-refusal or unsafe compliance</td></tr>
+                <tr><td>User benefit</td><td>Manipulation or dependency</td></tr>
+                <tr><td>Business efficiency</td><td>Uncontrolled automation</td></tr>
+                <tr><td>Human supervision</td><td>Blind trust in the model</td></tr>
+                <tr><td>Policy compliance</td><td>Hidden violations</td></tr>
+                <tr><td>Reliable agents</td><td>Agents that drift from the task</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            For PMs, AI products fail not only when the model crashes.
+            They fail when the model behaves incorrectly while sounding confident — which is much harder to detect.
+          </p>
+        </section>
+
+        <section id="core-problem" class="cg-article-section cg-reveal">
+          <h2>2. The Core AI Safety Problem</h2>
+          <p style="font-size:1.05rem;font-style:italic;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            How do we train AI systems to robustly behave well, even as they become more capable?
+          </p>
+          <p>That sounds simple. It is not.</p>
+          <p>A model may behave well in demos and still fail under:</p>
+          <ul class="cg-bento-list">
+            <li>unusual user prompts,</li>
+            <li>conflicting instructions,</li>
+            <li>malicious inputs,</li>
+            <li>ambiguous business rules,</li>
+            <li>long context,</li>
+            <li>high-pressure workflows,</li>
+            <li>tool access,</li>
+            <li>sensitive domains,</li>
+            <li>or unfamiliar edge cases.</li>
+          </ul>
+          <p>In traditional software, we define rules explicitly: if condition A, do B.</p>
+          <p>
+            LLMs are learned systems. Behavior comes from training data, fine-tuning, feedback, prompts, context, tools, and guardrails.
+            Safety is harder because you are not only asking “Did we code the rule correctly?”
+            You are asking “Will this system generalize the right behavior in situations we did not script?”
+          </p>
+        </section>
+
+        <section id="alignment" class="cg-article-section cg-reveal">
+          <h2>3. Alignment: The Word PMs Should Actually Understand</h2>
+          <p>
+            <strong>AI alignment</strong> means making the model’s behavior match human goals, instructions, and values.
+            For PMs, alignment is a product requirement — not a philosophical buzzword.
+          </p>
+          <p>A claims assistant should not simply produce fluent text. It should:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Product Expectation</th><th>Alignment Requirement</th></tr></thead>
+              <tbody>
+                <tr><td>Follow policy rules</td><td>Ground decisions in approved sources</td></tr>
+                <tr><td>Protect users</td><td>Do not expose sensitive data</td></tr>
+                <tr><td>Support processors</td><td>Explain reasoning clearly</td></tr>
+                <tr><td>Avoid overreach</td><td>Do not approve claims without authority</td></tr>
+                <tr><td>Be useful</td><td>Do not refuse legitimate work unnecessarily</td></tr>
+                <tr><td>Be honest</td><td>State uncertainty when evidence is missing</td></tr>
+                <tr><td>Be auditable</td><td>Show what context and rules were used</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>The model should support the intended workflow — not just answer, but behave.</p>
+          </div>
+        </section>
+
+        <section id="harder-capable" class="cg-article-section cg-reveal">
+          <h2>4. Why Safety Gets Harder as Models Become More Capable</h2>
+          <p>A weak model can be unsafe because it is inaccurate. A strong model can be unsafe because it is capable.</p>
+          <p>As models improve at reasoning, coding, planning, persuasion, tool use, and autonomous execution, the risk profile changes.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Capability Improvement</th><th>Product Risk</th></tr></thead>
+              <tbody>
+                <tr><td>Better reasoning</td><td>More convincing wrong answers</td></tr>
+                <tr><td>Better coding</td><td>Ability to create harmful or insecure code</td></tr>
+                <tr><td>Better persuasion</td><td>Manipulative or overconfident outputs</td></tr>
+                <tr><td>Better tool use</td><td>Unsafe actions through APIs</td></tr>
+                <tr><td>Better autonomy</td><td>Workflow drift without supervision</td></tr>
+                <tr><td>Better memory/context</td><td>More sensitive data exposure</td></tr>
+                <tr><td>Better domain knowledge</td><td>More dangerous misuse potential</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>AI safety is not only about filtering bad words. The real question is: what can the system do, and what happens if it does the wrong thing?</p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Capability and risk must be discussed together.</p>
+          </div>
+        </section>
+
+        <section id="rlhf" class="cg-article-section cg-reveal">
+          <h2>5. RLHF: Reinforcement Learning from Human Feedback</h2>
+          <p>
+            <strong>RLHF</strong> stands for Reinforcement Learning from Human Feedback — a method to shape model behavior based on human preferences.
+          </p>
+          <p>The basic idea:</p>
+          <ol class="cg-bento-list" style="list-style:decimal;">
+            <li>The model generates multiple responses.</li>
+            <li>Human reviewers compare them.</li>
+            <li>Humans select which response is better.</li>
+            <li>A preference model learns what humans prefer.</li>
+            <li>The AI model is further trained to produce responses that score better against those preferences.</li>
+          </ol>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Key point</p>
+            <p>RLHF does not simply teach facts. It teaches preferred behavior.</p>
+          </div>
+          <h3>A Simple Example</h3>
+          <p>User asks: “Explain claim adjudication to a new employee.”</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Answer A</th><th>Answer B</th></tr></thead>
+              <tbody>
+                <tr><td>Claim adjudication is when claims are processed.</td><td>Claim adjudication is the process of checking policy eligibility, medical details, billing, deductions, exclusions, and final approval or rejection before settlement.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Most reviewers would prefer Answer B. Over many comparisons, the model learns patterns of helpfulness — clearer, more complete, safer, and more aligned with user intent.</p>
+        </section>
+
+        <section id="rlhf-good" class="cg-article-section cg-reveal">
+          <h2>6. What RLHF Is Good At</h2>
+          <p>RLHF helps convert a raw model into a better assistant. A base model may know language and facts but not behave like a polished product experience.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Behavior</th><th>Why It Matters</th></tr></thead>
+              <tbody>
+                <tr><td>Helpfulness</td><td>More useful responses</td></tr>
+                <tr><td>Instruction following</td><td>Better match to user intent</td></tr>
+                <tr><td>Tone</td><td>More natural and appropriate</td></tr>
+                <tr><td>Refusal behavior</td><td>Learns when not to comply</td></tr>
+                <tr><td>Harmlessness</td><td>Avoids unsafe outputs</td></tr>
+                <tr><td>Honesty</td><td>Less likely to make unsupported claims</td></tr>
+                <tr><td>User preference alignment</td><td>Better matches what users value</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>For PMs, RLHF explains why modern AI assistants feel more polished than raw completion models — one step in turning a language model into a usable product.</p>
+        </section>
+
+        <section id="rlhf-limits" class="cg-article-section cg-reveal">
+          <h2>7. What RLHF Is Not Good Enough For</h2>
+          <p>RLHF is useful, but it is not magic.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>RLHF Limitation</th><th>Product Risk</th></tr></thead>
+              <tbody>
+                <tr><td>Humans may miss subtle errors</td><td>Model rewarded for convincing but wrong answers</td></tr>
+                <tr><td>Human preferences vary</td><td>“Good answer” differs by user, culture, domain</td></tr>
+                <tr><td>Feedback is expensive</td><td>Hard to scale across edge cases</td></tr>
+                <tr><td>Reviewers may not be experts</td><td>Domain mistakes may pass</td></tr>
+                <tr><td>Model may optimize for approval</td><td>Sounds agreeable rather than truthful</td></tr>
+                <tr><td>It may over-refuse</td><td>Legitimate needs blocked</td></tr>
+                <tr><td>It may under-refuse</td><td>Unsafe requests slip through</td></tr>
+                <tr><td>It does not guarantee robustness</td><td>Edge cases still fail</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            RLHF can improve behavior, but it does not guarantee safety.
+            A model can still hallucinate, be manipulated, misunderstand context, misuse tools, or fail in new situations.
+          </p>
+          <p style="font-size:1.05rem;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            <strong>Weak PRD line:</strong> “The model is RLHF aligned, so safety is handled.”<br />
+            <strong>Better requirement:</strong> Workflow-level safety controls, source grounding, permissions, evaluation datasets, refusal testing, human review, and audit logs.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>RLHF is one layer. It is not the whole safety system.</p>
+          </div>
+        </section>
+
+        <section id="scalable-oversight" class="cg-article-section cg-reveal">
+          <h2>8. The Scalable Oversight Problem</h2>
+          <p>
+            As AI systems become more capable, humans may struggle to supervise them properly.
+            This is the <strong>scalable oversight</strong> problem:
+          </p>
+          <p style="font-size:1.05rem;font-style:italic;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            How do humans provide enough high-quality feedback to supervise systems that may become faster, broader, or more technically capable than the humans reviewing them?
+          </p>
+          <p>This shows up in normal enterprise AI products:</p>
+          <ul class="cg-bento-list">
+            <li>A coding assistant suggests a complex architecture change — can every reviewer judge security and compatibility?</li>
+            <li>A claims assistant recommends a deduction — can every processor verify insurer rules and medical context?</li>
+            <li>A legal assistant summarizes contract risk — can every business user verify the nuance?</li>
+          </ul>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Weak Supervision</th><th>Stronger Supervision</th></tr></thead>
+              <tbody>
+                <tr><td>Human only checks final answer</td><td>Human checks sources, assumptions, and reasoning</td></tr>
+                <tr><td>Generic reviewer</td><td>Domain expert reviewer</td></tr>
+                <tr><td>No audit trail</td><td>Full context and source trail</td></tr>
+                <tr><td>One-time feedback</td><td>Continuous quality monitoring</td></tr>
+                <tr><td>Manual sampling</td><td>Risk-based sampling</td></tr>
+                <tr><td>Trust the model</td><td>Verify through tools and evidence</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Scalable oversight is not only a research problem. It is an enterprise product problem.</p>
+          </div>
+        </section>
+
+        <section id="constitutional-ai" class="cg-article-section cg-reveal">
+          <h2>9. Constitutional AI: The High-Level Idea</h2>
+          <p>
+            <strong>Constitutional AI</strong> is Anthropic’s approach to training models using a set of principles — a “constitution” — to guide behavior.
+          </p>
+          <p>
+            Instead of relying only on humans to label every good or bad answer, the system uses explicit principles and AI feedback to improve behavior.
+          </p>
+          <p style="font-size:1.05rem;font-style:italic;color:var(--cg-text-muted);border:1px solid var(--cg-border);border-radius:8px;padding:14px 18px;background:var(--cg-dark-card);">
+            Can AI systems help supervise and improve other AI systems, based on explicit principles?
+          </p>
+          <p>
+            Human feedback is expensive, slow, inconsistent, and hard to scale.
+            A constitution gives training a more explicit standard: prefer responses that are helpful, honest, harmless, respectful, and aligned with defined principles.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Further reading</p>
+            <p>
+              See Anthropic’s
+              <a href="https://www.anthropic.com/news/core-views-on-ai-safety" target="_blank" rel="noopener">Core Views on AI Safety</a>
+              and
+              <a href="https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback" target="_blank" rel="noopener">Constitutional AI: Harmlessness from AI Feedback</a>.
+            </p>
+          </div>
+        </section>
+
+        <section id="cai-how" class="cg-article-section cg-reveal">
+          <h2>10. How Constitutional AI Works at a High Level</h2>
+          <p>You do not need the math. As a PM, understand the workflow.</p>
+          <h3>Phase 1: Critique and Revision</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Step</th><th>Simple Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Generate</td><td>Model gives an initial response</td></tr>
+                <tr><td>Critique</td><td>Model evaluates the response against principles</td></tr>
+                <tr><td>Revise</td><td>Model improves the response</td></tr>
+                <tr><td>Fine-tune</td><td>Model learns from revised responses</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Example: a user asks for something unsafe. The initial answer may be too direct.
+            Critique notes the response may enable harm; revision refuses the harmful part and offers a safer alternative.
+          </p>
+          <h3>Phase 2: AI Feedback</h3>
+          <p>
+            The model generates multiple responses. Another model evaluates which better follows the constitution.
+            That preference data trains the model further — similar to RLHF, but using AI-generated feedback guided by principles.
+            This is often called <strong>RLAIF</strong> (Reinforcement Learning from AI Feedback).
+          </p>
+        </section>
+
+        <section id="rlhf-vs-cai" class="cg-article-section cg-reveal">
+          <h2>11. RLHF vs Constitutional AI</h2>
+          <p>RLHF and Constitutional AI are related, but not the same.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Dimension</th><th>RLHF</th><th>Constitutional AI</th></tr></thead>
+              <tbody>
+                <tr><td>Main feedback source</td><td>Humans</td><td>AI feedback guided by principles</td></tr>
+                <tr><td>Core mechanism</td><td>Humans compare responses</td><td>AI critiques, revises, and compares responses</td></tr>
+                <tr><td>Strength</td><td>Captures human preferences directly</td><td>Scales feedback; makes principles explicit</td></tr>
+                <tr><td>Weakness</td><td>Expensive and hard to scale</td><td>Depends on quality of principles and model judgment</td></tr>
+                <tr><td>Best use</td><td>Helpfulness, tone, preference</td><td>Principled behavior and safer responses</td></tr>
+                <tr><td>Product lesson</td><td>Users define what “better” feels like</td><td>Product teams define what “acceptable behavior” means</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              RLHF asks: what do humans prefer?<br />
+              Constitutional AI asks: what principles should guide behavior?<br />
+              A good AI product needs both.
+            </p>
+          </div>
+        </section>
+
+        <section id="cai-pm" class="cg-article-section cg-reveal">
+          <h2>12. Why Constitutional AI Matters for Product Managers</h2>
+          <p>Constitutional AI makes one thing explicit: <strong>AI behavior should be governed by principles.</strong></p>
+          <p>Every serious AI product needs its own behavior constitution — not necessarily research-grade, but clear product rules.</p>
+          <p>Example principles for a healthcare claims AI assistant:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Principle</th><th>Product Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Be evidence-based</td><td>Do not recommend without source support</td></tr>
+                <tr><td>Be cautious in medical judgment</td><td>Escalate uncertain clinical cases</td></tr>
+                <tr><td>Respect authority boundaries</td><td>Do not approve or reject unless allowed</td></tr>
+                <tr><td>Protect privacy</td><td>Do not expose unnecessary patient data</td></tr>
+                <tr><td>Be transparent</td><td>Explain which policy clause or rule was used</td></tr>
+                <tr><td>Be useful</td><td>Suggest next action, not just refusal</td></tr>
+                <tr><td>Avoid false certainty</td><td>State missing information clearly</td></tr>
+                <tr><td>Preserve auditability</td><td>Keep trace of documents, rules, and outputs</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Without a product constitution, the AI will behave inconsistently.</p>
+          </div>
+        </section>
+
+        <section id="not-refusal" class="cg-article-section cg-reveal">
+          <h2>13. Safety Is Not the Same as Refusal</h2>
+          <p>Many teams equate safety with refusing more. That is incomplete.</p>
+          <p>A safe model should behave appropriately — not simply say “no” to everything risky.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>User Request</th><th>Bad Safety Behavior</th><th>Better Safety Behavior</th></tr></thead>
+              <tbody>
+                <tr><td>“Explain why this claim was rejected.”</td><td>Refuses because it involves decisioning</td><td>Explains based on policy/rule evidence</td></tr>
+                <tr><td>“Help me respond to a legal notice.”</td><td>Gives definitive legal advice</td><td>Structures facts; suggests lawyer review</td></tr>
+                <tr><td>“Summarize this medical report.”</td><td>Refuses completely</td><td>Summarizes without diagnosis overreach</td></tr>
+                <tr><td>“Check this code for security issues.”</td><td>Gives vague warning</td><td>Identifies issues and safe remediation steps</td></tr>
+                <tr><td>“Create a phishing email.”</td><td>Provides content</td><td>Refuses; offers security-awareness alternative</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Good safety balances helpfulness, honesty, harmlessness, user autonomy, compliance, and usefulness.
+              Over-refusal and unsafe compliance are both product failures.
+            </p>
+          </div>
+        </section>
+
+        <section id="agent-safety" class="cg-article-section cg-reveal">
+          <h2>14. Safety for AI Agents Is Harder Than Safety for Chatbots</h2>
+          <p>A chatbot mostly talks. An agent can act. That changes the risk.</p>
+          <p>
+            If an assistant only writes a summary, risk is limited to output quality.
+            If an agent can call tools, update systems, send emails, create tickets, approve transactions, or change data, safety becomes workflow design.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>AI Capability</th><th>Safety Question</th></tr></thead>
+              <tbody>
+                <tr><td>Read documents</td><td>Is the model allowed to access this data?</td></tr>
+                <tr><td>Retrieve records</td><td>Is access role-based?</td></tr>
+                <tr><td>Draft communication</td><td>Should human approval be required?</td></tr>
+                <tr><td>Send communication</td><td>Is there a review gate?</td></tr>
+                <tr><td>Update CRM/SFDC</td><td>Is there an audit trail?</td></tr>
+                <tr><td>Approve claim</td><td>Is this within model authority?</td></tr>
+                <tr><td>Trigger payment</td><td>Is this strictly controlled?</td></tr>
+                <tr><td>Escalate case</td><td>Is routing explainable?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Control</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td>Permissions</td><td>Defines what AI can access</td></tr>
+                <tr><td>Action boundaries</td><td>Defines what AI can do</td></tr>
+                <tr><td>Human approval gates</td><td>Prevents unsafe execution</td></tr>
+                <tr><td>Tool-level validation</td><td>Catches bad inputs before action</td></tr>
+                <tr><td>Audit logs</td><td>Tracks what happened</td></tr>
+                <tr><td>Rollback mechanisms</td><td>Handles mistakes</td></tr>
+                <tr><td>Monitoring</td><td>Detects abnormal behavior</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>AI agent safety is not just model safety. It is system safety.</p>
+          </div>
+        </section>
+
+        <section id="red-teaming" class="cg-article-section cg-reveal">
+          <h2>15. Red Teaming: Testing the Product Against Bad Behavior</h2>
+          <p>
+            <strong>Red teaming</strong> means actively trying to make the model or product fail — before users do.
+          </p>
+          <p>Tests may probe whether the model:</p>
+          <ul class="cg-bento-list">
+            <li>follows harmful instructions,</li>
+            <li>leaks sensitive data,</li>
+            <li>ignores system prompts,</li>
+            <li>mishandles ambiguous cases,</li>
+            <li>gives dangerous advice,</li>
+            <li>over-trusts bad sources,</li>
+            <li>misuses tools,</li>
+            <li>or fails under adversarial prompts.</li>
+          </ul>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Product Type</th><th>Red Team Test</th></tr></thead>
+              <tbody>
+                <tr><td>Customer support bot</td><td>Can user extract another customer’s data?</td></tr>
+                <tr><td>Claims assistant</td><td>Can model approve a claim without source evidence?</td></tr>
+                <tr><td>Coding agent</td><td>Can malicious instruction inside repo docs hijack behavior?</td></tr>
+                <tr><td>HR assistant</td><td>Can model reveal confidential employee information?</td></tr>
+                <tr><td>Finance bot</td><td>Can user trick it into wrong tax guidance?</td></tr>
+                <tr><td>Document assistant</td><td>Can hidden prompt injection in a PDF override instructions?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Add red teaming to your AI PRD. Define failure modes, adversarial prompts, sensitive data rules, approval requirements, logs to review, acceptable failure thresholds, and launch sign-off.</p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>A product that has not been red-teamed is not ready for serious AI workflows.</p>
+          </div>
+        </section>
+
+        <section id="outcome-process" class="cg-article-section cg-reveal">
+          <h2>16. Outcome-Based vs Process-Based Safety</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Type</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Outcome-based</td><td>Reward the final result</td></tr>
+                <tr><td>Process-based</td><td>Reward the steps used to reach the result</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>For high-risk workflows, process matters.</p>
+          <p>
+            If a claims assistant recommends approval, it is not enough that the recommendation looks correct.
+            You need to know whether it checked eligibility, waiting period, exclusions, diagnosis, sum insured, deductions, cited the right clause, and escalated uncertainty.
+          </p>
+          <p>A correct-looking answer reached through a bad process is still unsafe.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Evaluation Area</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>Source use</td><td>Did the model use approved documents?</td></tr>
+                <tr><td>Step completion</td><td>Did it follow required workflow steps?</td></tr>
+                <tr><td>Escalation</td><td>Did it escalate uncertain cases?</td></tr>
+                <tr><td>Tool use</td><td>Did it call the right tool?</td></tr>
+                <tr><td>Evidence</td><td>Did it cite the right facts?</td></tr>
+                <tr><td>Decision boundary</td><td>Did it avoid unauthorized final decisions?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Define acceptable reasoning workflows. Evaluate the process, not only the final answer.</p>
+          </div>
+        </section>
+
+        <section id="alignment-science" class="cg-article-section cg-reveal">
+          <h2>17. Alignment Science vs Product Safety</h2>
+          <p>Anthropic separates safety work into areas such as alignment capabilities and alignment science. For PMs, the distinction can be simplified.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Area</th><th>PM Translation</th></tr></thead>
+              <tbody>
+                <tr><td>Alignment capabilities</td><td>Techniques that make AI systems behave better</td></tr>
+                <tr><td>Alignment science</td><td>Techniques that test whether they are actually safe</td></tr>
+                <tr><td>Mechanistic interpretability</td><td>Understanding what happens inside the model</td></tr>
+                <tr><td>Red teaming</td><td>Trying to make the system fail before users do</td></tr>
+                <tr><td>Scalable oversight</td><td>Supervising models at scale</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Product teams do not need to run frontier safety research.
+            But they should borrow the mindset: do not only ask “Can we make the model behave well?” — also ask “How do we know it is behaving well?”
+          </p>
+        </section>
+
+        <section id="pm-framework" class="cg-article-section cg-reveal">
+          <h2>18. A PM Safety Framework for AI Products</h2>
+          <p>Use this framework before shipping any AI feature.</p>
+          <h3>Step 1: Define the AI’s Role</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Role</th><th>Safety Level</th></tr></thead>
+              <tbody>
+                <tr><td>Writer</td><td>Low to medium</td></tr>
+                <tr><td>Summarizer</td><td>Medium</td></tr>
+                <tr><td>Recommender</td><td>Medium to high</td></tr>
+                <tr><td>Decision support</td><td>High</td></tr>
+                <tr><td>Autonomous actor</td><td>Very high</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The more authority the AI has, the stronger the safety controls must be.</p>
+          <h3>Step 2: Define the Failure Cost</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Failure Type</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>Low cost</td><td>Awkward wording</td></tr>
+                <tr><td>Medium cost</td><td>Incomplete summary</td></tr>
+                <tr><td>High cost</td><td>Wrong customer advice</td></tr>
+                <tr><td>Very high cost</td><td>Incorrect claim decision</td></tr>
+                <tr><td>Critical cost</td><td>Financial, legal, medical, or safety harm</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Step 3: Define the Behavior Constitution</h3>
+          <ul class="cg-bento-list">
+            <li>The AI must use only approved sources.</li>
+            <li>The AI must state uncertainty when evidence is missing.</li>
+            <li>The AI must not make final decisions beyond its authority.</li>
+            <li>The AI must protect sensitive data.</li>
+            <li>The AI must ask for human review in high-risk cases.</li>
+            <li>The AI must explain its recommendation.</li>
+            <li>The AI must log source documents and tool results.</li>
+          </ul>
+          <h3>Step 4: Define Evaluation</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Evaluation Type</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td>Golden test cases</td><td>Check expected behavior</td></tr>
+                <tr><td>Edge cases</td><td>Check difficult scenarios</td></tr>
+                <tr><td>Adversarial prompts</td><td>Check misuse resistance</td></tr>
+                <tr><td>Bias tests</td><td>Check fairness</td></tr>
+                <tr><td>Source-grounding tests</td><td>Check evidence use</td></tr>
+                <tr><td>Tool-use tests</td><td>Check action reliability</td></tr>
+                <tr><td>Human review</td><td>Check domain judgment</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Step 5: Define Runtime Controls</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Control</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td>Access control</td><td>Prevent unauthorized data access</td></tr>
+                <tr><td>Tool permissions</td><td>Limit what AI can do</td></tr>
+                <tr><td>Approval gates</td><td>Keep humans in charge</td></tr>
+                <tr><td>Monitoring</td><td>Detect abnormal behavior</td></tr>
+                <tr><td>Escalation</td><td>Route uncertainty</td></tr>
+                <tr><td>Audit logs</td><td>Support accountability</td></tr>
+                <tr><td>Rollback</td><td>Recover from mistakes</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>This is how safety becomes product design.</p>
+          </div>
+        </section>
+
+        <section id="what-not-to-do" class="cg-article-section cg-reveal">
+          <h2>19. What PMs Should Not Do</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Bad Habit</th><th>Why It Is Dangerous</th></tr></thead>
+              <tbody>
+                <tr><td>“The model is aligned, so we are safe.”</td><td>Alignment is not a guarantee</td></tr>
+                <tr><td>“We added a refusal prompt.”</td><td>Prompt-only safety is weak</td></tr>
+                <tr><td>“The vendor handles safety.”</td><td>Product context creates new risks</td></tr>
+                <tr><td>“Human review exists somewhere.”</td><td>Review must be designed into workflow</td></tr>
+                <tr><td>“We will test after launch.”</td><td>Unsafe patterns may reach users</td></tr>
+                <tr><td>“The AI only recommends.”</td><td>Users may still over-trust recommendations</td></tr>
+                <tr><td>“The model gave citations.”</td><td>Citations can be wrong or incomplete</td></tr>
+                <tr><td>“It passed 10 test prompts.”</td><td>Real users create messy edge cases</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>AI safety is not a checkbox. It is an operating discipline.</p>
+          </div>
+        </section>
+
+        <section id="mental-model" class="cg-article-section cg-reveal">
+          <h2>20. The PM Mental Model</h2>
+          <p style="font-size:1.1rem;color:var(--cg-text);line-height:1.7;margin:20px 0;">
+            AI safety is not about making models timid.<br />
+            It is about making AI systems trustworthy.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Quality</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Helpful</td><td>Solves the user’s problem</td></tr>
+                <tr><td>Honest</td><td>Does not fake certainty</td></tr>
+                <tr><td>Harmless</td><td>Avoids enabling damage</td></tr>
+                <tr><td>Grounded</td><td>Uses approved sources</td></tr>
+                <tr><td>Bounded</td><td>Respects authority limits</td></tr>
+                <tr><td>Auditable</td><td>Leaves a trace</td></tr>
+                <tr><td>Reviewable</td><td>Allows human oversight</td></tr>
+                <tr><td>Recoverable</td><td>Can handle mistakes</td></tr>
+                <tr><td>Measurable</td><td>Has quality and safety metrics</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            RLHF helps models learn preferred behavior. Constitutional AI helps models learn from explicit principles.
+            Red teaming exposes weaknesses. Scalable oversight keeps supervision aligned with capability.
+          </p>
+          <p>
+            The PM’s job is to bring all of this into product architecture — so safe behavior is easier than unsafe behavior.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM version</p>
+            <p>The model is only one layer. The product system must earn trust.</p>
+          </div>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM Understanding</th></tr></thead>
+              <tbody>
+                <tr><td>AI Safety</td><td>Designing AI systems to behave usefully, reliably, and safely</td></tr>
+                <tr><td>Alignment</td><td>Making model behavior match human goals and product intent</td></tr>
+                <tr><td>RLHF</td><td>Training models using human preference feedback</td></tr>
+                <tr><td>Constitutional AI</td><td>Training models using explicit principles and AI-generated feedback</td></tr>
+                <tr><td>RLAIF</td><td>Reinforcement learning from AI feedback</td></tr>
+                <tr><td>Scalable Oversight</td><td>The challenge of supervising increasingly capable AI systems</td></tr>
+                <tr><td>Red Teaming</td><td>Testing the system by trying to make it fail</td></tr>
+                <tr><td>Process-Based Safety</td><td>Evaluating the steps, not just the final answer</td></tr>
+                <tr><td>Agent Safety</td><td>Controlling what AI can access and do</td></tr>
+                <tr><td>Product Constitution</td><td>A clear set of principles for AI behavior in a product</td></tr>
+                <tr><td>PM Role</td><td>Convert safety ideas into workflow, permissions, evaluation, and governance</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            The biggest mistake a product team can make is treating AI safety as something outside the product.
+            Safety shows up every time the model answers, refuses, recommends, summarizes, escalates, retrieves, or acts.
+          </p>
+          <p>
+            RLHF and Constitutional AI matter because they show that model behavior can be shaped.
+            The deeper lesson for PMs: AI behavior must be designed, tested, governed, and continuously improved.
+          </p>
+          <p>
+            A safe AI product is not created by one prompt, one vendor setting, or one model choice.
+            It is created by the system around the model.
+          </p>
+          <p>
+            The future of AI product management will not only be about building intelligent features.
+            It will be about building intelligent features that users can trust.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>Trust is a product outcome — not a model checkbox.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 3: Tokens and Context Windows — The PM Version</h3>
+              <p>Tokens, context windows, budgeting, and context engineering for reliable AI products.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 5: InstructGPT and RLHF — The PM Version</h3>
+              <p>How human feedback turned base models into instruction-following assistants.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/">← Chapter 03</a>
+            <a class="cg-btn primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/">Chapter 05 →</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>
