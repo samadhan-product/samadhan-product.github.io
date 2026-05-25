@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager friendly explanation of how pre-training, fine-tuning, and RLHF differ, how they shape model behavior, and what PMs should understand before building AI products." />
+  <title>Pre-training vs Fine-tuning vs RLHF — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/pre-training-vs-fine-tuning-vs-rlhf-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 10: Pre-training vs Fine-tuning vs RLHF — The PM Version" />
+  <meta property="og:description" content="How pre-training, fine-tuning, and RLHF turn a raw language model into a useful assistant." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/pre-training-vs-fine-tuning-vs-rlhf-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 10: Pre-training vs Fine-tuning vs RLHF — The PM Version",
+    "description": "A product-manager friendly explanation of how pre-training, fine-tuning, and RLHF differ, how they shape model behavior, and what PMs should understand before building AI products.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/pre-training-vs-fine-tuning-vs-rlhf-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 10", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/pre-training-vs-fine-tuning-vs-rlhf-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/foundations-of-modern-ai-systems/">Foundations of Modern AI Systems</a><span class="sep">→</span>
+    <span class="current">Chapter 10</span>
+  </nav>
+
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 10 · Module 01 · Beginner–Intermediate · 22–26 min</span>
+    <h1 class="cg-article-hero-title">Chapter 10: Pre-training vs Fine-tuning vs RLHF — The PM Version</h1>
+    <p class="cg-article-lede">
+      How pre-training, fine-tuning, and RLHF turn a raw language model into a useful assistant.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">22–26 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="Training pipeline: pre-train, fine-tune, RLHF, product">
+      <span class="cg-token">Pre-train</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Fine-tune</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">RLHF</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Product</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Training builds capability; your product builds trust</p>
+  </header>
+
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#simple-comparison">1. Simple comparison</a></li>
+            <li><a class="cg-toc-link" href="#pretraining">2. Pre-training</a></li>
+            <li><a class="cg-toc-link" href="#pretraining-good">3. What pre-training is good for</a></li>
+            <li><a class="cg-toc-link" href="#pretraining-limits">4. Pre-training limits</a></li>
+            <li><a class="cg-toc-link" href="#finetuning">5. Fine-tuning</a></li>
+            <li><a class="cg-toc-link" href="#finetuning-good">6. What fine-tuning is good for</a></li>
+            <li><a class="cg-toc-link" href="#finetuning-limits">7. Fine-tuning limits</a></li>
+            <li><a class="cg-toc-link" href="#rlhf">8. RLHF</a></li>
+            <li><a class="cg-toc-link" href="#rlhf-good">9. What RLHF is good for</a></li>
+            <li><a class="cg-toc-link" href="#rlhf-limits">10. RLHF limits</a></li>
+            <li><a class="cg-toc-link" href="#side-by-side">11. Side-by-side</a></li>
+            <li><a class="cg-toc-link" href="#prompting-fits">12. Where prompting fits</a></li>
+            <li><a class="cg-toc-link" href="#claims-example">13. Claims example</a></li>
+            <li><a class="cg-toc-link" href="#support-example">14. Support example</a></li>
+            <li><a class="cg-toc-link" href="#decision-framework">15. Decision framework</a></li>
+            <li><a class="cg-toc-link" href="#mistakes">16. Common PM mistakes</a></li>
+            <li><a class="cg-toc-link" href="#prd-layer">17. PRD layer map</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">18. Mental model</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 22–26 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/">Chapter 5</a>,
+            we walked through InstructGPT and the RLHF pipeline — how human feedback turns a base model into an instruction-following assistant.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/">Chapter 6</a>,
+            we compared prompting, fine-tuning, RAG, and tools — the product layers you control after a vendor ships a model.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/">Chapter 8</a>,
+            we covered hallucination — why fluent text is not proof, and how grounding and verification reduce risk.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/">Chapter 9</a>,
+            we covered long context — capacity vs focus, and why bigger windows do not replace context design.
+          </p>
+          <p>Now we zoom out to the training stack that happens <em>before</em> your product ever sends a prompt:</p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Pre-training, fine-tuning, and RLHF — what each stage actually changes.</strong>
+          </p>
+          <p>
+            PMs hear these terms in roadmap reviews, vendor decks, and compliance conversations.
+            They are often lumped together as “the model.” In practice they solve different problems:
+            general capability, specialized behavior, and human-preferred behavior.
+          </p>
+          <p>
+            This chapter is not a machine learning course. It is a map of what you are buying, what you can still change in product,
+            and what mistakes to avoid when you scope AI features.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              Pre-training teaches language and broad knowledge.<br />
+              Fine-tuning teaches patterns and formats.<br />
+              RLHF teaches what humans prefer.<br />
+              Your product still owns prompts, context, tools, and verification.
+            </p>
+          </div>
+        </section>
+
+        <section id="simple-comparison" class="cg-article-section cg-reveal">
+          <h2>1. The Simple Comparison: Three Training Layers</h2>
+          <p>
+            Think of a modern assistant as a stack. Each layer is expensive, slow to change, and owned by different teams.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Stage</th><th>One-line PM meaning</th><th>Who usually owns it</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Pre-training</strong></td><td>Learn language and world patterns from huge text</td><td>Foundation model lab / vendor</td></tr>
+                <tr><td><strong>Fine-tuning</strong></td><td>Specialize behavior on a smaller, curated dataset</td><td>Vendor or your ML platform team</td></tr>
+                <tr><td><strong>RLHF</strong></td><td>Optimize for human-preferred answers at scale</td><td>Vendor alignment team</td></tr>
+                <tr><td><strong>Product layers</strong></td><td>Prompt, RAG, tools, policies, UI, human review</td><td>Your product + engineering</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            When a user says “the model is wrong,” ask which layer failed:
+            missing knowledge (pre-training + retrieval), wrong format (fine-tuning or prompting),
+            unhelpful tone (RLHF or prompting), or missing live data (tools, not training).
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Training stages set the ceiling. Product layers determine what users actually experience in production.</p>
+          </div>
+        </section>
+
+        <section id="pretraining" class="cg-article-section cg-reveal">
+          <h2>2. Pre-training: Building the Base Model</h2>
+          <p>
+            <strong>Pre-training</strong> is the first large training pass. The model reads enormous amounts of text (web, books, code, etc.)
+            and learns to predict the next token. That objective teaches grammar, reasoning patterns, style, and a wide slice of factual associations.
+          </p>
+          <p>
+            The output is often called a <strong>base model</strong> or <strong>foundation model</strong>.
+            It is powerful but not yet tuned for your chat UI, brand, or workflow.
+          </p>
+          <h3>PM analogy</h3>
+          <p>
+            Pre-training is like hiring a brilliant generalist who has read the internet — but has never worked in your company,
+            never used your forms, and does not know your escalation rules.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Property</th><th>Typical scale</th></tr></thead>
+              <tbody>
+                <tr><td>Data</td><td>Trillions of tokens</td></tr>
+                <tr><td>Compute</td><td>Very large clusters, weeks to months</td></tr>
+                <tr><td>Cost</td><td>Millions of dollars for frontier models</td></tr>
+                <tr><td>PM access</td><td>Usually none — you pick a vendor model</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Most product teams do not pre-train. They choose GPT, Claude, Gemini, Llama, or an enterprise-hosted variant.
+            Your leverage is model selection, version pinning, and everything above the base weights.
+          </p>
+        </section>
+
+        <section id="pretraining-good" class="cg-article-section cg-reveal">
+          <h2>3. What Pre-training Is Good For</h2>
+          <p>Pre-training establishes the raw capabilities your product inherits:</p>
+          <ul class="cg-bento-list">
+            <li>broad language fluency across domains,</li>
+            <li>general reasoning and explanation ability,</li>
+            <li>coding, math, and structured text patterns,</li>
+            <li>multilingual coverage (varies by model),</li>
+            <li>world knowledge frozen at a training cutoff date.</li>
+          </ul>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Product need</th><th>Pre-training contribution</th></tr></thead>
+              <tbody>
+                <tr><td>Draft a clear paragraph</td><td>Strong — core language skill</td></tr>
+                <tr><td>Explain insurance concepts in plain English</td><td>Strong — if concepts were in training data</td></tr>
+                <tr><td>Know today’s claim status</td><td>Weak — needs tools or RAG</td></tr>
+                <tr><td>Follow your JSON schema every time</td><td>Variable — often needs fine-tuning or strict prompting</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Pre-training is why the model feels “smart.” It is not why the model feels “on brand” or “connected to your systems.”</p>
+          </div>
+        </section>
+
+        <section id="pretraining-limits" class="cg-article-section cg-reveal">
+          <h2>4. Pre-training Limits PMs Should Plan For</h2>
+          <p>Base models come with structural limits that later stages only partially fix:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Limit</th><th>What users experience</th><th>Product response</th></tr></thead>
+              <tbody>
+                <tr><td>Knowledge cutoff</td><td>Outdated facts, wrong “current” events</td><td>RAG, tools, disclaimers — see Chapter 11</td></tr>
+                <tr><td>No private data</td><td>Cannot know your member’s claim by default</td><td>Retrieval + authenticated APIs</td></tr>
+                <tr><td>Completion bias</td><td>Keeps writing instead of answering</td><td>Instruction tuning (RLHF/SFT) + prompts</td></tr>
+                <tr><td>Hallucination risk</td><td>Fluent guesses when uncertain</td><td>Grounding, citations, human review — Chapter 8</td></tr>
+                <tr><td>Unsafe completions</td><td>Harmful or non-compliant text</td><td>RLHF, filters, policy layers — Chapters 4–5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Upgrading from “8B base” to “70B base” can help quality, but it does not replace product architecture.
+            Bigger pre-trained models still need alignment, context, and verification for enterprise workflows.
+          </p>
+        </section>
+
+        <section id="finetuning" class="cg-article-section cg-reveal">
+          <h2>5. Fine-tuning: Specializing Behavior</h2>
+          <p>
+            <strong>Fine-tuning</strong> continues training on a smaller, curated dataset so the model adapts to a task, domain tone, or output structure.
+            Weights change — but far less than in pre-training.
+          </p>
+          <p>Common types product teams encounter:</p>
+          <ul class="cg-bento-list">
+            <li><strong>Supervised fine-tuning (SFT)</strong> — learn from example input/output pairs,</li>
+            <li><strong>Domain fine-tunes</strong> — legal, medical, code, enterprise vocabulary,</li>
+            <li><strong>Adapter / LoRA fine-tunes</strong> — cheaper partial updates on top of a frozen base,</li>
+            <li><strong>Distillation</strong> — train a smaller model to mimic a larger one (cost/latency play).</li>
+          </ul>
+          <p>
+            Chapter 6 focused on when <em>your team</em> should fine-tune vs prompt.
+            This chapter focuses on what fine-tuning <em>is</em> in the vendor stack — and how it differs from RLHF.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Key distinction</p>
+            <p>Fine-tuning teaches patterns from examples. It is not a reliable way to inject fast-changing facts at scale.</p>
+          </div>
+        </section>
+
+        <section id="finetuning-good" class="cg-article-section cg-reveal">
+          <h2>6. What Fine-tuning Is Good For</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Why fine-tuning helps</th></tr></thead>
+              <tbody>
+                <tr><td>Stable output schema</td><td>Model internalizes JSON / field layout</td></tr>
+                <tr><td>Consistent adjudication wording</td><td>Repeats approved phrasing patterns</td></tr>
+                <tr><td>Domain classification</td><td>Learns labels from historical examples</td></tr>
+                <tr><td>Brand voice on short replies</td><td>Tone becomes default, not re-prompted every call</td></tr>
+                <tr><td>Lower latency via smaller specialist model</td><td>Distilled or fine-tuned mini model for one task</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Fine-tuning shines when the task is <strong>repeated</strong>, <strong>measurable</strong>, and you have <strong>high-quality labeled data</strong>.
+            If SMEs can write 500 excellent examples and evals are clear, fine-tuning may beat a giant prompt.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Fine-tune for behavior and format stability — not as a substitute for a knowledge base or live APIs.</p>
+          </div>
+        </section>
+
+        <section id="finetuning-limits" class="cg-article-section cg-reveal">
+          <h2>7. Fine-tuning Limits and Risks</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Risk</th><th>What goes wrong</th></tr></thead>
+              <tbody>
+                <tr><td>Stale knowledge baked in</td><td>Model confidently cites old policy version</td></tr>
+                <tr><td>Small bad dataset</td><td>Learns wrong shortcuts (“always deny”)</td></tr>
+                <tr><td>Overfitting</td><td>Great on eval set, brittle in production</td></tr>
+                <tr><td>Regression on general tasks</td><td>Specialist becomes worse outside niche</td></tr>
+                <tr><td>Operational cost</td><td>Retrain cycles, versioning, monitoring overhead</td></tr>
+                <tr><td>Compliance drift</td><td>Examples disagree with current legal text</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Chapter 8 called out a common hallucination driver: using fine-tuning to add facts.
+            Facts belong in retrieval or systems of record; fine-tuning should teach <em>how to use</em> evidence, not replace evidence.
+          </p>
+          <p>
+            If policy changes monthly, prefer RAG + citation UI over retraining monthly —
+            unless you have a rigorous MLOps pipeline and legal sign-off on each release.
+          </p>
+        </section>
+
+        <section id="rlhf" class="cg-article-section cg-reveal">
+          <h2>8. RLHF: Learning What Humans Prefer</h2>
+          <p>
+            <strong>RLHF</strong> (Reinforcement Learning from Human Feedback) nudges the model toward responses humans rank higher.
+            It typically follows demonstration fine-tuning: humans write ideal answers, rank alternatives, a reward model learns preferences,
+            then reinforcement fine-tuning (often PPO) optimizes against that reward.
+          </p>
+          <p>
+            Chapter 5 mapped the InstructGPT pipeline in detail. Here is the PM-level purpose:
+            <strong>make the model act like an assistant users want to talk to</strong> — helpful, clear, appropriately cautious, and aligned with policy.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>RLHF optimizes for</th><th>RLHF does not primarily add</th></tr></thead>
+              <tbody>
+                <tr><td>Instruction following</td><td>Your proprietary database records</td></tr>
+                <tr><td>Preferred tone and structure</td><td>Guaranteed factual correctness</td></tr>
+                <tr><td>Reduced toxicity / policy violations</td><td>Real-time inventory counts</td></tr>
+                <tr><td>Refusal behavior when appropriate</td><td>Perfect recall of 200-page PDFs without context</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="rlhf-good" class="cg-article-section cg-reveal">
+          <h2>9. What RLHF Is Good For</h2>
+          <ul class="cg-bento-list">
+            <li>Chat UX that feels responsive to user intent,</li>
+            <li>fewer blatantly unhelpful or rambling answers,</li>
+            <li>better refusals on unsafe or out-of-scope requests,</li>
+            <li>answers that win side-by-side preference tests,</li>
+            <li>behavior that matches vendor safety policies.</li>
+          </ul>
+          <p>
+            InstructGPT’s lesson for PMs still applies: a smaller RLHF-tuned model can beat a much larger raw base model on real user prompts.
+            Alignment training can matter more than parameter count for perceived quality.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>When users say “GPT feels better than the raw API,” they are often describing RLHF + product layers — not pre-training alone.</p>
+          </div>
+        </section>
+
+        <section id="rlhf-limits" class="cg-article-section cg-reveal">
+          <h2>10. RLHF Limits PMs Should Not Ignore</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Limit</th><th>Product symptom</th></tr></thead>
+              <tbody>
+                <tr><td>Helpfulness vs truth tension</td><td>Model answers instead of saying “I don’t know”</td></tr>
+                <tr><td>Preference bias</td><td>Verbose, generic answers that score well with raters</td></tr>
+                <tr><td>Over-refusal</td><td>Blocks legitimate business tasks</td></tr>
+                <tr><td>Opaque tradeoffs</td><td>Hard to predict change across model versions</td></tr>
+                <tr><td>Not your preferences</td><td>Vendor alignment ≠ your brand or jurisdiction</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            RLHF reduces some failure modes; it does not remove hallucination.
+            Pair vendor alignment with your evals, grounding, and human review — especially in regulated workflows.
+          </p>
+          <p>
+            See
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/">Chapter 4</a>
+            for safety framing and
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/">Chapter 5</a>
+            for pipeline detail.
+          </p>
+        </section>
+
+        <section id="side-by-side" class="cg-article-section cg-reveal">
+          <h2>11. Side-by-Side: Pre-training vs Fine-tuning vs RLHF</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Dimension</th><th>Pre-training</th><th>Fine-tuning</th><th>RLHF</th></tr></thead>
+              <tbody>
+                <tr><td>Primary goal</td><td>General capability</td><td>Specialized behavior</td><td>Human-preferred behavior</td></tr>
+                <tr><td>Data scale</td><td>Massive, noisy web-scale</td><td>Smaller, curated</td><td>Rankings + demonstrations</td></tr>
+                <tr><td>Typical owner</td><td>Foundation lab</td><td>Lab or enterprise ML</td><td>Lab alignment team</td></tr>
+                <tr><td>Changes weights?</td><td>Full model from scratch</td><td>Partial or full update</td><td>Further update on top</td></tr>
+                <tr><td>Best for facts?</td><td>Broad, dated associations</td><td>Risky for volatile facts</td><td>Not designed for facts</td></tr>
+                <tr><td>Best for tone?</td><td>Imitates internet average</td><td>Can encode brand patterns</td><td>Optimizes “sounds helpful”</td></tr>
+                <tr><td>PM iteration speed</td><td>Slow (vendor releases)</td><td>Medium (retrain cycles)</td><td>Slow (vendor releases)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Stack order:</strong> Pre-train → Fine-tune (often SFT) → RLHF → Your product (prompt, RAG, tools, UI).
+          </p>
+        </section>
+
+        <section id="prompting-fits" class="cg-article-section cg-reveal">
+          <h2>12. Where Prompting Fits (After Training)</h2>
+          <p>
+            Prompting does not change model weights. It is still one of the highest-leverage layers for product teams —
+            especially because you can ship prompt changes in hours, not months.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Problem</th><th>Try first</th><th>Training-stage note</th></tr></thead>
+              <tbody>
+                <tr><td>Need today’s policy clause</td><td>RAG + citation</td><td>Pre-training cutoff is irrelevant if retrieval is right</td></tr>
+                <tr><td>Need strict JSON every time</td><td>Schema + prompt; then fine-tune if still flaky</td><td>Fine-tuning helps when prompts max out</td></tr>
+                <tr><td>Model too verbose</td><td>Prompt + sampling settings</td><td>RLHF may already bias toward long answers</td></tr>
+                <tr><td>Wrong tool choice in agents</td><td>Tool design + context engineering</td><td>Chapter 9 — not solved by bigger base model</td></tr>
+                <tr><td>Enterprise tone</td><td>System prompt; fine-tune if stable across thousands of calls</td><td>RLHF sets vendor default, not yours</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Chapter 6 is the deep dive on prompting vs fine-tuning vs RAG vs tools.
+            This chapter’s job is to clarify what the vendor already baked in before your prompt runs.
+          </p>
+        </section>
+
+        <section id="claims-example" class="cg-article-section cg-reveal">
+          <h2>13. Practical Example: Claims Adjudication Assistant</h2>
+          <p><strong>Pre-training layer:</strong> Model understands medical terms, insurance language, and how to summarize documents.</p>
+          <p><strong>Fine-tuning layer (optional):</strong> Internal fine-tune on historical adjudication notes so JSON shortfall codes and phrasing match your operations manual.</p>
+          <p><strong>RLHF layer (vendor):</strong> Model follows instructions, refuses obvious harm, sounds helpful in chat.</p>
+          <p><strong>Product layers (you):</strong></p>
+          <ul class="cg-bento-list">
+            <li>RAG for current policy PDF and checklist,</li>
+            <li>tool calls for claim status and member eligibility,</li>
+            <li>system prompt for escalation and “no final denial without human,”</li>
+            <li>low-temperature extraction subtasks,</li>
+            <li>human review gate before customer-facing output.</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Do not fine-tune the model on policy PDFs if RAG plus citation is safer. Fine-tune on <em>behavior</em> when format and tone must be identical every time.</p>
+          </div>
+        </section>
+
+        <section id="support-example" class="cg-article-section cg-reveal">
+          <h2>14. Practical Example: Customer Support Copilot</h2>
+          <p><strong>Pre-training layer:</strong> Drafts empathetic replies, understands product categories, multilingual support (model-dependent).</p>
+          <p><strong>Fine-tuning layer (optional):</strong> Train on redacted ticket history so replies match macros, tagging, and resolution steps.</p>
+          <p><strong>RLHF layer (vendor):</strong> Polite, instruction-following chat behavior; baseline safety refusals.</p>
+          <p><strong>Product layers (you):</strong></p>
+          <ul class="cg-bento-list">
+            <li>retrieve help-center articles and account facts at answer time,</li>
+            <li>inject CRM context in the prompt,</li>
+            <li>force citations for refund policy claims,</li>
+            <li>agent UI with edit-before-send,</li>
+            <li>eval suite on real ticket types weekly.</li>
+          </ul>
+          <p>
+            Support PMs often ask for “fine-tune on all tickets.” Engineering should ask:
+            is the gap knowledge (retrieval), behavior (fine-tune), or preference (prompt + RLHF already there)?
+          </p>
+        </section>
+
+        <section id="decision-framework" class="cg-article-section cg-reveal">
+          <h2>15. Decision Framework: Five Questions for Roadmap Reviews</h2>
+          <ol class="cg-bento-list" style="list-style:decimal;padding-left:1.25rem;">
+            <li><strong>What failure are we seeing?</strong> — Knowledge, format, tone, safety, or missing live data.</li>
+            <li><strong>Is it repeated at scale?</strong> — One-off fixes belong in prompts; repeated patterns may justify fine-tuning.</li>
+            <li><strong>Do we own the data?</strong> — Fine-tuning and evals need rights-cleared, representative examples.</li>
+            <li><strong>How fast does truth change?</strong> — Volatile facts → RAG/tools; stable behavior → fine-tune.</li>
+            <li><strong>What does the vendor already provide?</strong> — New base + RLHF release may solve it without custom training.</li>
+          </ol>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>If the gap is…</th><th>Lean toward…</th></tr></thead>
+              <tbody>
+                <tr><td>Wrong or missing facts</td><td>RAG, tools, verification (Ch 8, 11)</td></tr>
+                <tr><td>Wrong JSON / labels every time</td><td>Prompt + schema; then fine-tune</td></tr>
+                <tr><td>Rude or off-policy chat</td><td>Prompt + vendor model upgrade; rarely custom RLHF</td></tr>
+                <tr><td>Too expensive at volume</td><td>Smaller model, distillation, task routing</td></tr>
+                <tr><td>Context overload in agents</td><td>Context design (Ch 9), not bigger pre-train</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="mistakes" class="cg-article-section cg-reveal">
+          <h2>16. Common PM Mistakes</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Mistake</th><th>Why it fails</th></tr></thead>
+              <tbody>
+                <tr><td>“We’ll fine-tune on the policy wiki”</td><td>Stale facts; hallucination risk</td></tr>
+                <tr><td>“RLHF means the model is truthful”</td><td>Preference ≠ verification</td></tr>
+                <tr><td>“Bigger pre-train fixes our agent”</td><td>Context and tools may be the bottleneck</td></tr>
+                <tr><td>“Prompting is temporary, fine-tune is real”</td><td>Prompts are permanent product surface</td></tr>
+                <tr><td>“We need custom RLHF”</td><td>Extremely expensive; vendor defaults first</td></tr>
+                <tr><td>No version pin on model family</td><td>Surprise behavior shifts after vendor update</td></tr>
+                <tr><td>Same strategy for MVP and compliance tier</td><td>High-risk flows need stricter grounding</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="prd-layer" class="cg-article-section cg-reveal">
+          <h2>17. PRD Layer Map: What to Specify</h2>
+          <p>When you write requirements, name the layer explicitly so engineering and legal align:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>PRD section</th><th>Specify</th></tr></thead>
+              <tbody>
+                <tr><td>Model baseline</td><td>Vendor, model ID, version, knowledge cutoff</td></tr>
+                <tr><td>Training assumptions</td><td>“Uses vendor RLHF chat model” vs “custom fine-tune v3”</td></tr>
+                <tr><td>Knowledge</td><td>RAG sources, refresh SLA, citation required Y/N</td></tr>
+                <tr><td>Behavior</td><td>Output schema, refusal rules, escalation paths</td></tr>
+                <tr><td>Evals</td><td>Golden sets per layer — not one vague “accuracy” metric</td></tr>
+                <tr><td>Change management</td><td>What happens when base model or fine-tune version bumps</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Ambiguous “improve the model” tickets become expensive. Split work by layer: retrieval bug vs prompt vs fine-tune retrain.</p>
+          </div>
+        </section>
+
+        <section id="mental-model" class="cg-article-section cg-reveal">
+          <h2>18. The PM Mental Model</h2>
+          <p style="font-size:1.1rem;color:var(--cg-text);line-height:1.7;margin:20px 0;">
+            Pre-training gives capability.<br />
+            Fine-tuning gives specialization.<br />
+            RLHF gives preferred assistant behavior.<br />
+            Your product gives truth in context.
+          </p>
+          <div class="cg-token-flow" aria-label="Training to product pipeline" style="margin:24px 0;">
+            <span class="cg-token">Pre-train</span>
+            <span class="cg-token-arrow">→</span>
+            <span class="cg-token">Fine-tune</span>
+            <span class="cg-token-arrow">→</span>
+            <span class="cg-token">RLHF</span>
+            <span class="cg-token-arrow">→</span>
+            <span class="cg-token">Product</span>
+          </div>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Layer</th><th>Your main PM question</th></tr></thead>
+              <tbody>
+                <tr><td>Pre-training</td><td>Which foundation model and cutoff fit our domain?</td></tr>
+                <tr><td>Fine-tuning</td><td>Do we have stable examples worth baking into weights?</td></tr>
+                <tr><td>RLHF</td><td>Does the vendor chat model meet safety and UX bar?</td></tr>
+                <tr><td>Prompt + context</td><td>What must the model see this request? (Ch 9)</td></tr>
+                <tr><td>RAG + tools</td><td>Where do fresh facts live? (Ch 6, 8)</td></tr>
+                <tr><td>Verification</td><td>What requires human or automated check before ship?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>You rarely control pre-training or RLHF. You always control what happens after the model loads.</strong>
+          </p>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM understanding</th></tr></thead>
+              <tbody>
+                <tr><td>Pre-training</td><td>Builds general language and knowledge; vendor-scale</td></tr>
+                <tr><td>Fine-tuning</td><td>Specializes behavior; risky for volatile facts</td></tr>
+                <tr><td>RLHF</td><td>Aligns to human-preferred assistant behavior</td></tr>
+                <tr><td>Stack order</td><td>Pre-train → fine-tune → RLHF → product layers</td></tr>
+                <tr><td>Prompting</td><td>Runtime lever; complements all training stages</td></tr>
+                <tr><td>Claims / support patterns</td><td>RAG + tools for facts; fine-tune for stable format</td></tr>
+                <tr><td>PM role</td><td>Name the layer in PRDs, evals, and incident reviews</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            Vendor slides blur the stack into one word: “GPT-4” or “Claude.” Your job is to unblur it for the team.
+            When quality shifts after a model upgrade, ask whether pre-training, alignment, or your retrieval layer moved.
+          </p>
+          <p>
+            The organizations that ship reliable AI products treat training stages as constraints and product layers as craft —
+            prompts, context, tools, evals, and review — built on top of whatever foundation the lab provides.
+          </p>
+          <p>
+            The next chapter covers hallucinations, knowledge cutoffs, and model limitations —
+            what happens when the stack’s knowledge is wrong, missing, or out of date, and how PMs design around that reality.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>Training builds the assistant. Your product decides whether users can trust it.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 9: Long Context Window Tradeoffs — The PM Version</h3>
+              <p>Why bigger context windows help — and why sending everything still fails.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 11: Hallucinations, Knowledge Cutoffs, and Model Limitations — The PM Version</h3>
+              <p>What happens when model knowledge is wrong, missing, or stale — and how PMs design around cutoffs and limits.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/">← Chapter 09</a>
+            <a class="cg-btn primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version/">Chapter 11 →</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version/">Chapter 11 →</a>
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>

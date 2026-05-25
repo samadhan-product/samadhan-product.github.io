@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager friendly explanation of long context windows, context rot, attention budget, context engineering, compaction, structured note-taking, just-in-time retrieval, sub-agents, and why bigger context is not automatically better for AI products." />
+  <title>Long Context Window Tradeoffs — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 9: Long Context Window Tradeoffs — The PM Version" />
+  <meta property="og:description" content="Why bigger context windows help — and why sending everything still fails." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 9: Long Context Window Tradeoffs — The PM Version",
+    "description": "A product-manager friendly explanation of long context windows, context rot, attention budget, context engineering, compaction, structured note-taking, just-in-time retrieval, sub-agents, and why bigger context is not automatically better for AI products.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 09", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/foundations-of-modern-ai-systems/">Foundations of Modern AI Systems</a><span class="sep">→</span>
+    <span class="current">Chapter 09</span>
+  </nav>
+
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 09 · Module 01 · Beginner–Intermediate · 26–30 min</span>
+    <h1 class="cg-article-hero-title">Chapter 9: Long Context Window Tradeoffs — The PM Version</h1>
+    <p class="cg-article-lede">
+      Why bigger context windows help — and why sending everything still fails.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">26–30 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="Context pipeline: capacity, curation, retrieval, focus">
+      <span class="cg-token">Capacity</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Curation</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Retrieval</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Focus</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">A larger window is not a substitute for context design</p>
+  </header>
+
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#promise">1. The PM promise</a></li>
+            <li><a class="cg-toc-link" href="#capacity-focus">2. Capacity vs focus</a></li>
+            <li><a class="cg-toc-link" href="#context-rot">3. Context rot</a></li>
+            <li><a class="cg-toc-link" href="#attention-budget">4. Attention budget</a></li>
+            <li><a class="cg-toc-link" href="#prompt-vs-context">5. Prompt vs context</a></li>
+            <li><a class="cg-toc-link" href="#high-signal">6. High-signal context</a></li>
+            <li><a class="cg-toc-link" href="#system-prompts">7. System prompts</a></li>
+            <li><a class="cg-toc-link" href="#few-shot">8. Few-shot examples</a></li>
+            <li><a class="cg-toc-link" href="#tool-context">9. Tool context</a></li>
+            <li><a class="cg-toc-link" href="#jit-retrieval">10. Just-in-time retrieval</a></li>
+            <li><a class="cg-toc-link" href="#progressive-disclosure">11. Progressive disclosure</a></li>
+            <li><a class="cg-toc-link" href="#compaction">12. Compaction</a></li>
+            <li><a class="cg-toc-link" href="#structured-notes">13. Structured notes</a></li>
+            <li><a class="cg-toc-link" href="#sub-agents">14. Sub-agents</a></li>
+            <li><a class="cg-toc-link" href="#multi-agent">15. Multi-agent context</a></li>
+            <li><a class="cg-toc-link" href="#long-horizon">16. Long-horizon workflows</a></li>
+            <li><a class="cg-toc-link" href="#long-vs-rag">17. Long context vs RAG</a></li>
+            <li><a class="cg-toc-link" href="#cost-latency">18. Cost and latency</a></li>
+            <li><a class="cg-toc-link" href="#debuggability">19. Debuggability</a></li>
+            <li><a class="cg-toc-link" href="#product-patterns">20. Product patterns</a></li>
+            <li><a class="cg-toc-link" href="#claims-example">21. Claims example</a></li>
+            <li><a class="cg-toc-link" href="#codebase-example">22. Codebase example</a></li>
+            <li><a class="cg-toc-link" href="#research-example">23. Research example</a></li>
+            <li><a class="cg-toc-link" href="#what-not-to-do">24. What PMs should not do</a></li>
+            <li><a class="cg-toc-link" href="#decision-framework">25. Decision framework</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">26. Final mental model</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 26–30 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/">Chapter 3</a>,
+            we covered tokens and context windows — the working memory limit of an AI system and why every token has a cost.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/">Chapter 7</a>,
+            we covered sampling — why the same prompt can produce different outputs and how randomness affects reliability.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/">Chapter 8</a>,
+            we covered hallucination — why fluent language is not proof, and how grounding, retrieval, and verification reduce product risk.
+          </p>
+          <p>Now we go deeper into a topic that sounds like good news in every vendor slide deck:</p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Longer context windows.</strong>
+          </p>
+          <p>
+            Model providers keep announcing larger context limits — hundreds of thousands or millions of tokens.
+            Product teams hear that and think: “Great, we can finally send everything.”
+          </p>
+          <p>
+            That instinct is understandable. It is also dangerous.
+          </p>
+          <p>
+            A long context window increases <em>capacity</em>. It does not automatically increase <em>focus</em>, <em>accuracy</em>, or <em>trust</em>.
+            Many production failures happen inside the window — when context is noisy, stale, duplicated, or poorly prioritized.
+          </p>
+          <p>
+            This chapter explains the tradeoffs product managers must own: context rot, attention budget, context engineering,
+            compaction, structured notes, just-in-time retrieval, sub-agents, and when long context beats RAG — or does not.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              Bigger context is a bigger desk — not a cleaner desk.<br />
+              Capacity → Curation → Retrieval → Focus.<br />
+              Design what enters context, not only how much fits.
+            </p>
+          </div>
+        </section>
+
+        <section id="promise" class="cg-article-section cg-reveal">
+          <h2>1. The PM Promise: What This Chapter Helps You Decide</h2>
+          <p>
+            After reading this chapter, you should be able to explain to engineering, design, and leadership:
+          </p>
+          <ul class="cg-bento-list">
+            <li>why a 1M-token window does not mean “upload the entire knowledge base,”</li>
+            <li>why agent workflows degrade even when they technically fit in context,</li>
+            <li>when to use long context, RAG, tools, compaction, or sub-agents,</li>
+            <li>how context choices affect cost, latency, hallucination, and debuggability,</li>
+            <li>what to specify in PRDs beyond “use the biggest model.”</li>
+          </ul>
+          <p>
+            The goal is not to memorize context limits. The goal is to make better product decisions when context is the bottleneck — which it often is.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Long context is a design constraint and a product lever. Treat it like capacity planning, not a magic feature flag.</p>
+          </div>
+        </section>
+
+        <section id="capacity-focus" class="cg-article-section cg-reveal">
+          <h2>2. Capacity vs Focus: Bigger Window, Same Attention Problem</h2>
+          <p>
+            A context window is the maximum amount of text (measured in tokens) the model can process in one request — input plus output.
+            A <strong>long</strong> context window means more room for documents, chat history, tool results, and instructions at once.
+          </p>
+          <p>That capacity is genuinely useful when:</p>
+          <ul class="cg-bento-list">
+            <li>the model must compare several long documents in one pass,</li>
+            <li>a codebase slice must be reasoned about together,</li>
+            <li>an agent needs recent tool results plus task state without constant re-fetching,</li>
+            <li>a user expects continuity across a long working session.</li>
+          </ul>
+          <p>
+            But capacity is not the same as focus. The model still has to decide what matters inside a large pile of text.
+            More text often means more competition for attention — not automatically better answers.
+          </p>
+          <h3>PM analogy</h3>
+          <p>
+            Giving an analyst a bigger desk does not help if you also dump every email, draft, and duplicate PDF on that desk before they start.
+            They may have space to work — and still miss the one clause that decides the case.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Question</th><th>Weak PM answer</th><th>Better PM answer</th></tr></thead>
+              <tbody>
+                <tr><td>Can we fit it?</td><td>“Yes, the window is huge.”</td><td>“Yes, but should we send it all at once?”</td></tr>
+                <tr><td>Will quality improve?</td><td>“More context = smarter.”</td><td>“Only if context is relevant and structured.”</td></tr>
+                <tr><td>What is the cost?</td><td>“Engineering will optimize later.”</td><td>“We budget tokens per task and per user tier.”</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Specify focus requirements, not only capacity requirements. “Fits in context” is not a success metric.</p>
+          </div>
+        </section>
+
+        <section id="context-rot" class="cg-article-section cg-reveal">
+          <h2>3. Context Rot: When More Context Makes Answers Worse</h2>
+          <p>
+            <strong>Context rot</strong> is the degradation in model behavior as the context window fills with low-value, stale, or conflicting information —
+            even before you hit the hard token limit.
+          </p>
+          <p>Anthropic and other teams use this term to describe a practical product reality: performance can fall as clutter grows.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Symptom</th><th>What users see</th></tr></thead>
+              <tbody>
+                <tr><td>Missed instruction</td><td>Model ignores a rule from early in the thread</td></tr>
+                <tr><td>Lost fact</td><td>Model forgets a detail from a uploaded document</td></tr>
+                <tr><td>Wrong emphasis</td><td>Model answers from an old or irrelevant section</td></tr>
+                <tr><td>Shallow reasoning</td><td>Model summarizes instead of comparing</td></tr>
+                <tr><td>Tool confusion</td><td>Agent calls the wrong tool or repeats calls</td></tr>
+                <tr><td>Workflow drift</td><td>Task goal shifts mid-session</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Example: claims review</h3>
+          <p>
+            You pass policy PDF, hospital bill, discharge summary, email trail, OCR dump, prior notes, and processor comments.
+            Token count may be under the limit. The model may still fail to prioritize the waiting-period clause that drives the decision.
+          </p>
+          <p>
+            Context rot connects directly to
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/">Chapter 8</a>:
+            when the model loses the right evidence, it fills gaps with plausible language.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Measure quality vs context size — not only overflow errors. Rot is a silent failure mode.</p>
+          </div>
+        </section>
+
+        <section id="attention-budget" class="cg-article-section cg-reveal">
+          <h2>4. Attention Budget: Every Token Competes for Focus</h2>
+          <p>
+            Transformers use attention to relate tokens to each other. You do not need the math to manage the product —
+            you need the metaphor: <strong>attention budget</strong>.
+          </p>
+          <p>
+            Every instruction, example, document chunk, tool definition, tool result, and chat turn consumes budget.
+            High-value tokens (task goal, authoritative source, current user question) compete with noise (old tool JSON, duplicate summaries, verbose logs).
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Context component</th><th>Budget impact</th></tr></thead>
+              <tbody>
+                <tr><td>System prompt + policies</td><td>Fixed overhead every call</td></tr>
+                <tr><td>Tool schemas (many tools)</td><td>Large hidden tax on agents</td></tr>
+                <tr><td>Raw API responses</td><td>Often high volume, low signal</td></tr>
+                <tr><td>Few-shot examples</td><td>Helpful but expensive if bloated</td></tr>
+                <tr><td>Retrieved chunks</td><td>Good if ranked well; harmful if noisy</td></tr>
+                <tr><td>Output reservation</td><td>Must leave room for the answer</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Product requirement: define a token budget per workflow stage — what must stay, what can be summarized, what must be cleared after use.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Attention budget is shared. Adding context is not free — it steals focus from something else.</p>
+          </div>
+        </section>
+
+        <section id="prompt-vs-context" class="cg-article-section cg-reveal">
+          <h2>5. Prompt Engineering vs Context Engineering</h2>
+          <p>
+            <strong>Prompt engineering</strong> asks: What instruction should the model follow?<br />
+            <strong>Context engineering</strong> asks: What information should the model see — and in what shape — before it answers?
+          </p>
+          <p>
+            For enterprise and agentic products, the second question usually matters more.
+            A perfect prompt cannot compensate for missing policy clauses, wrong retrieval, or ten thousand tokens of stale tool output.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Layer</th><th>PM owns</th></tr></thead>
+              <tbody>
+                <tr><td>Prompt</td><td>Task, tone, output format, refusal rules</td></tr>
+                <tr><td>Context selection</td><td>Which sources enter this request</td></tr>
+                <tr><td>Context ordering</td><td>What appears first (authority, recency)</td></tr>
+                <tr><td>Context lifecycle</td><td>When to summarize, compact, or clear</td></tr>
+                <tr><td>Context verification</td><td>Citations, tools, human review gates</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Further reading</p>
+            <p>
+              <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener noreferrer">Anthropic Engineering: Effective context engineering for AI agents</a><br />
+              <a href="https://platform.claude.com/docs/en/build-with-claude/context-windows" target="_blank" rel="noopener noreferrer">Anthropic Docs: Context windows</a>
+            </p>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Write PRDs that specify context rules, not only prompt text. “Be accurate” is not a context strategy.</p>
+          </div>
+        </section>
+
+        <section id="high-signal" class="cg-article-section cg-reveal">
+          <h2>6. High-Signal Context: Less Volume, More Decision Value</h2>
+          <p>
+            <strong>High-signal context</strong> is information that directly changes the answer or the next action.
+            Low-signal context is technically related but not needed for this step.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Low signal</th><th>High signal</th></tr></thead>
+              <tbody>
+                <tr><td>Full email thread</td><td>Latest customer question + claim ID</td></tr>
+                <tr><td>Entire policy PDF</td><td>Relevant clauses + exclusions for this diagnosis</td></tr>
+                <tr><td>Raw CRM export</td><td>Member status, plan tier, effective dates</td></tr>
+                <tr><td>Complete repo tree</td><td>Files touched by the bug + test failures</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Design pipelines that extract, rank, and format before the model call — not dump-then-hope.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Define “minimum sufficient context” per task type. That becomes your default retrieval and UI behavior.</p>
+          </div>
+        </section>
+
+        <section id="system-prompts" class="cg-article-section cg-reveal">
+          <h2>7. System Prompts: Stable Rules in a Crowded Window</h2>
+          <p>
+            The system prompt (or developer instructions) sets durable behavior: role, safety, output schema, escalation, citation rules.
+            It is loaded on every call and competes for attention budget.
+          </p>
+          <p>Common PM mistakes:</p>
+          <ul class="cg-bento-list">
+            <li>system prompt grows into a 20-page policy manual,</li>
+            <li>duplicate rules appear in system prompt and user message,</li>
+            <li>conflicting instructions between system, tools, and retrieved docs,</li>
+            <li>no versioning when compliance updates.</li>
+          </ul>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Belongs in system prompt</th><th>Belongs elsewhere</th></tr></thead>
+              <tbody>
+                <tr><td>Role, tone, refusal boundaries</td><td>Full policy PDF → retrieval</td></tr>
+                <tr><td>Output JSON schema</td><td>Live claim status → tool/API</td></tr>
+                <tr><td>Citation required for factual claims</td><td>Case-specific facts → context block</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Keep system prompts lean and versioned. Push volatile knowledge to retrieval or tools.</p>
+          </div>
+        </section>
+
+        <section id="few-shot" class="cg-article-section cg-reveal">
+          <h2>8. Few-Shot Examples: Useful, Expensive, Easy to Bloat</h2>
+          <p>
+            Few-shot examples teach format and behavior by demonstration. They work — and they consume tokens fast.
+            Three long examples can cost more than a retrieved policy summary.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>When few-shot helps</th><th>When to avoid</th></tr></thead>
+              <tbody>
+                <tr><td>Strict JSON extraction</td><td>Task is simple classification</td></tr>
+                <tr><td>Consistent adjudication wording</td><td>Examples contradict updated policy</td></tr>
+                <tr><td>Brand tone for short replies</td><td>You need live data from APIs</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Prefer one canonical example plus schema validation over ten similar examples.
+            Refresh examples when rules change — stale few-shot is a silent compliance bug.
+          </p>
+        </section>
+
+        <section id="tool-context" class="cg-article-section cg-reveal">
+          <h2>9. Tool Context: Definitions, Calls, and Raw Results</h2>
+          <p>
+            Agents add tool definitions, call arguments, raw responses, and follow-up reasoning to context.
+            Each tool call can multiply token use and rot risk.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Design choice</th><th>Product effect</th></tr></thead>
+              <tbody>
+                <tr><td>Fewer tools per task</td><td>Less schema noise, better tool choice</td></tr>
+                <tr><td>Narrow tool responses</td><td>Less raw JSON in context</td></tr>
+                <tr><td>Summarize after tool use</td><td>Keeps facts, drops payload</td></tr>
+                <tr><td>Clear old tool results</td><td>Reduces rot in long sessions</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Specify in requirements: which tools exist per workflow, max calls per turn, what fields return, and when results leave context.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Tool design is context design. Bloated tools are a tax on every agent step.</p>
+          </div>
+        </section>
+
+        <section id="jit-retrieval" class="cg-article-section cg-reveal">
+          <h2>10. Just-in-Time Retrieval: Fetch When Needed, Not Up Front</h2>
+          <p>
+            <strong>Just-in-time (JIT) retrieval</strong> loads documents or data only when the task needs them —
+            often via search, RAG, or tool calls during the conversation — instead of pre-loading everything into context.
+          </p>
+          <p>Benefits:</p>
+          <ul class="cg-bento-list">
+            <li>lower cost per turn,</li>
+            <li>fresher data (query at answer time),</li>
+            <li>less rot from irrelevant material,</li>
+            <li>clearer audit trail (“retrieved clause 4.3 at 10:42”).</li>
+          </ul>
+          <p>
+            Tradeoff: retrieval quality must be good. JIT does not remove the need for ranking, versioning, and fallback when nothing relevant is found.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Default to JIT for large corpora. Reserve long context for tasks that truly need cross-document reasoning in one pass.</p>
+          </div>
+        </section>
+
+        <section id="progressive-disclosure" class="cg-article-section cg-reveal">
+          <h2>11. Progressive Disclosure: Reveal Detail in Stages</h2>
+          <p>
+            <strong>Progressive disclosure</strong> in AI products means showing summary first, then letting the user or agent drill into sections, attachments, or tool-backed detail.
+          </p>
+          <p>
+            Example: policy assistant shows “Maternity waiting period may apply — see Clause 4.3” with expand-to-source,
+            instead of injecting the full 200-page booklet on every question.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>UI pattern</th><th>Context effect</th></tr></thead>
+              <tbody>
+                <tr><td>Summary card + “View source”</td><td>Small default context</td></tr>
+                <tr><td>User picks documents</td><td>Explicit focus</td></tr>
+                <tr><td>Agent requests next file</td><td>JIT expansion</td></tr>
+                <tr><td>Section-level chunking</td><td>Targeted retrieval</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>UX and context engineering are the same decision. Disclosure patterns control token load.</p>
+          </div>
+        </section>
+
+        <section id="compaction" class="cg-article-section cg-reveal">
+          <h2>12. Compaction: Shrink History Without Losing the Thread</h2>
+          <p>
+            <strong>Compaction</strong> replaces long chat history or tool traces with a shorter summary while preserving goals, decisions, open questions, and constraints.
+          </p>
+          <p>Compaction is not “delete everything.” Bad compaction drops audit-critical facts.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Keep in compact state</th><th>Safe to drop</th></tr></thead>
+              <tbody>
+                <tr><td>User goal, claim ID, constraints</td><td>Verbose tool stderr</td></tr>
+                <tr><td>Decisions made, pending approvals</td><td>Duplicate retrieved chunks</td></tr>
+                <tr><td>Source IDs for cited facts</td><td>Intermediate draft paragraphs</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Trigger compaction at predictable points: N turns, M tokens, after tool-heavy subtasks, or before handoff to another agent.
+          </p>
+        </section>
+
+        <section id="structured-notes" class="cg-article-section cg-reveal">
+          <h2>13. Structured Note-Taking: Memory Outside the Window</h2>
+          <p>
+            Instead of keeping everything in the model’s working memory, agents can write <strong>structured notes</strong> —
+            JSON, tables, or task logs stored outside context and re-injected when needed.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Field</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>task_id</td><td>CLM-2026-8841</td></tr>
+                <tr><td>finding</td><td>Discharge summary missing</td></tr>
+                <tr><td>evidence</td><td>Checklist §3.2; upload scan empty</td></tr>
+                <tr><td>next_action</td><td>Raise shortfall</td></tr>
+                <tr><td>confidence</td><td>high</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Structured notes support human review, replay, and compliance — and they re-enter context as small high-signal blocks, not raw logs.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Define the note schema in the PRD. Unstructured agent scratchpads do not scale to production.</p>
+          </div>
+        </section>
+
+        <section id="sub-agents" class="cg-article-section cg-reveal">
+          <h2>14. Sub-Agents: Fresh Context for Heavy Subtasks</h2>
+          <p>
+            A <strong>sub-agent</strong> runs a focused subtask in a separate context — research one topic, extract one document, run one tool chain —
+            then returns a compact result to the main agent.
+          </p>
+          <p>Why PMs should care:</p>
+          <ul class="cg-bento-list">
+            <li>isolates rot (research noise does not pollute main thread),</li>
+            <li>allows different models or budgets per subtask,</li>
+            <li>improves debuggability (subtask inputs/outputs are bounded).</li>
+          </ul>
+          <p>
+            Example: main claims agent keeps decision state; sub-agent reads only the policy PDF and returns clause list + citations.
+          </p>
+        </section>
+
+        <section id="multi-agent" class="cg-article-section cg-reveal">
+          <h2>15. Multi-Agent Context: Handoffs, Duplication, and Drift</h2>
+          <p>
+            Multiple agents multiply context risk: duplicated instructions, conflicting summaries, and handoffs that drop evidence.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Risk</th><th>Control</th></tr></thead>
+              <tbody>
+                <tr><td>Duplicate system prompts</td><td>Shared policy pack, role-specific deltas only</td></tr>
+                <tr><td>Lost citations on handoff</td><td>Pass source IDs, not paraphrases only</td></tr>
+                <tr><td>Contradictory summaries</td><td>Single structured state object</td></tr>
+                <tr><td>Runaway token use</td><td>Per-agent budgets and max turns</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Multi-agent architecture needs a context contract between agents — what must survive every handoff.</p>
+          </div>
+        </section>
+
+        <section id="long-horizon" class="cg-article-section cg-reveal">
+          <h2>16. Long-Horizon Workflows: Sessions That Outlive One Window</h2>
+          <p>
+            Real products run for hours or days: coding agents, claims investigations, research projects.
+            No single context window holds the entire journey.
+          </p>
+          <p>Product patterns:</p>
+          <ul class="cg-bento-list">
+            <li>checkpoint structured state to database,</li>
+            <li>compact conversation at milestones,</li>
+            <li>restart context with summary + open tasks,</li>
+            <li>expose “session memory” the user can edit or delete.</li>
+          </ul>
+          <p>
+            Pair with
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/">Chapter 7</a>
+            for stable factual steps (low temperature) on compaction and extraction subtasks.
+          </p>
+        </section>
+
+        <section id="long-vs-rag" class="cg-article-section cg-reveal">
+          <h2>17. Long Context vs RAG: When to Use Which</h2>
+          <p>
+            Long context and RAG are complements, not substitutes.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Approach</th><th>Strength</th><th>Weakness</th></tr></thead>
+              <tbody>
+                <tr><td>Long context</td><td>Cross-doc reasoning in one pass</td><td>Cost, latency, rot risk</td></tr>
+                <tr><td>RAG</td><td>Finds relevant slices from huge corpus</td><td>Bad retrieval → bad answers</td></tr>
+                <tr><td>Tools / APIs</td><td>Current system-of-record data</td><td>Workflow complexity</td></tr>
+                <tr><td>Both</td><td>Broad awareness + precise grounding</td><td>Engineering and eval overhead</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Lean toward</th></tr></thead>
+              <tbody>
+                <tr><td>Compare 5 clauses in one contract</td><td>Long context (bounded set)</td></tr>
+                <tr><td>Answer from 50k internal policies</td><td>RAG + citation</td></tr>
+                <tr><td>Live claim status</td><td>Tool/API, not static context</td></tr>
+                <tr><td>Repo-wide refactor plan</td><td>RAG + graph + sub-agents</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Do not choose long context because RAG is hard. Fix retrieval — or use long context for bounded, high-value bundles only.</p>
+          </div>
+        </section>
+
+        <section id="cost-latency" class="cg-article-section cg-reveal">
+          <h2>18. Cost and Latency: Context Is a Unit Economics Problem</h2>
+          <p>
+            Providers often price by tokens in and out. Long context requests cost more and often run slower — especially with large input plus reasoning or tools.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Driver</th><th>PM action</th></tr></thead>
+              <tbody>
+                <tr><td>Input size</td><td>Cap uploads; default summarization</td></tr>
+                <tr><td>Output size</td><td>Structured short fields vs essays</td></tr>
+                <tr><td>Model tier</td><td>Route simple steps to smaller models</td></tr>
+                <tr><td>Agent loops</td><td>Max turns; stop conditions</td></tr>
+                <tr><td>Caching</td><td>Reuse stable system + doc prefixes where supported</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            See
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/">Chapter 3</a>
+            for token fundamentals. This chapter adds the tradeoff lens: bigger context is a product pricing decision, not only a technical one.
+          </p>
+        </section>
+
+        <section id="debuggability" class="cg-article-section cg-reveal">
+          <h2>19. Debuggability: Can You Explain What the Model Saw?</h2>
+          <p>
+            When an answer is wrong, teams ask: bad model, bad prompt, or bad context?
+            Without visibility, PMs and engineers guess.
+          </p>
+          <p>Minimum observability for context-heavy products:</p>
+          <ul class="cg-bento-list">
+            <li>token count per component (system, retrieval, tools, history),</li>
+            <li>retrieved chunk IDs and scores,</li>
+            <li>compaction events (before/after summary),</li>
+            <li>tool call trace with redacted payloads,</li>
+            <li>version of policy / knowledge index.</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Require “context replay” in eval and support tooling. If you cannot replay context, you cannot fix rot.</p>
+          </div>
+        </section>
+
+        <section id="product-patterns" class="cg-article-section cg-reveal">
+          <h2>20. Product Patterns That Manage Context Well</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Pattern</th><th>Behavior</th></tr></thead>
+              <tbody>
+                <tr><td>Select before send</td><td>User or system picks relevant docs</td></tr>
+                <tr><td>Summarize then reason</td><td>Map-reduce for very large inputs</td></tr>
+                <tr><td>Retrieve then answer</td><td>RAG with citation UI</td></tr>
+                <tr><td>Compact at milestones</td><td>Scheduled context shrink</td></tr>
+                <tr><td>Sub-agent isolation</td><td>Heavy read in child context</td></tr>
+                <tr><td>Graceful overflow</td><td>Offer split, batch, or priority — not raw error</td></tr>
+                <tr><td>Source-first UX</td><td>Show what was used; allow challenge</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Pick patterns per risk tier: brainstorming can be loose; claims and compliance cannot.</p>
+        </section>
+
+        <section id="claims-example" class="cg-article-section cg-reveal">
+          <h2>21. Practical Example: Claims Adjudication Assistant</h2>
+          <p><strong>Weak design:</strong> Upload all documents every turn; 400k tokens of PDFs and emails in one call.</p>
+          <p><strong>Better design:</strong></p>
+          <ul class="cg-bento-list">
+            <li>structured case header (claim type, dates, diagnosis codes),</li>
+            <li>JIT retrieval of policy clauses by procedure,</li>
+            <li>tool fetch for member eligibility and prior auth status,</li>
+            <li>structured note: missing docs, cited checklist rows,</li>
+            <li>low-temperature extraction sub-agent; main agent decides next action,</li>
+            <li>human review gate before customer-facing denial.</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Context design reduces hallucination risk from Chapter 8 — the model sees the right evidence, not the largest pile.</p>
+          </div>
+        </section>
+
+        <section id="codebase-example" class="cg-article-section cg-reveal">
+          <h2>22. Practical Example: Codebase Assistant</h2>
+          <p>
+            Developers want “whole repo” understanding. Dumping the entire repository into context fails on cost, rot, and stale files.
+          </p>
+          <p><strong>Better design:</strong></p>
+          <ul class="cg-bento-list">
+            <li>retrieve symbols and files related to stack trace or ticket,</li>
+            <li>sub-agent explores test failures in isolated context,</li>
+            <li>progressive disclosure: summary of architecture, expand file on click,</li>
+            <li>compact after each fix attempt — keep test output summary, not full logs,</li>
+            <li>cite file paths and line ranges in answers.</li>
+          </ul>
+          <p>Long context helps for a bounded slice (e.g. one service’s core files), not the monorepo zip.</p>
+        </section>
+
+        <section id="research-example" class="cg-article-section cg-reveal">
+          <h2>23. Practical Example: Research and Legal Review</h2>
+          <p>
+            Research workflows tempt “load all papers.” Better: JIT retrieval by query, structured notes per source (claim, method, limitation, citation),
+            sub-agent per paper for extraction, main agent synthesizes with explicit uncertainty.
+          </p>
+          <p>
+            Legal review: long context for one agreement’s interconnected clauses; RAG across precedent library; never mix unlabeled draft and executed contract in one undifferentiated block.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Synthesis quality depends on note quality, not on maximum PDF count in one prompt.</p>
+          </div>
+        </section>
+
+        <section id="what-not-to-do" class="cg-article-section cg-reveal">
+          <h2>24. What PMs Should Not Do</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Mistake</th><th>Why it fails</th></tr></thead>
+              <tbody>
+                <tr><td>“We have 1M context — send everything”</td><td>Rot, cost, and missed focus</td></tr>
+                <tr><td>Skip retrieval because window grew</td><td>Corpus still too large; stale chunks</td></tr>
+                <tr><td>Never compact agent sessions</td><td>Drift and tool noise accumulate</td></tr>
+                <tr><td>Giant system prompt as knowledge base</td><td>Stale rules; attention waste</td></tr>
+                <tr><td>No token or context telemetry</td><td>Cannot debug wrong answers</td></tr>
+                <tr><td>Same context strategy for all tiers</td><td>Enterprise needs stricter curation</td></tr>
+                <tr><td>Assume long context fixes hallucination</td><td>More text can increase unsupported claims</td></tr>
+                <tr><td>Ignore output reservation</td><td>Truncated or empty answers</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Context strategy is a product discipline — not a model marketing checkbox.</p>
+        </section>
+
+        <section id="decision-framework" class="cg-article-section cg-reveal">
+          <h2>25. Decision Framework: Five Questions Before Every Feature</h2>
+          <ol class="cg-bento-list" style="list-style:decimal;padding-left:1.25rem;">
+            <li><strong>What decision does this step support?</strong> — Only include context that changes that decision.</li>
+            <li><strong>What is authoritative?</strong> — Policy PDF vs email rumor; system of record vs chat memory.</li>
+            <li><strong>What must be fresh?</strong> — JIT tool or retrieval vs static upload.</li>
+            <li><strong>What fits the budget?</strong> — Token cap, compaction triggers, sub-agent split.</li>
+            <li><strong>How will we verify?</strong> — Citations, structured output, human review — per Chapter 8.</li>
+          </ol>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>If…</th><th>Then lean toward…</th></tr></thead>
+              <tbody>
+                <tr><td>Corpus is huge, question is narrow</td><td>RAG + JIT</td></tr>
+                <tr><td>Few long docs must be compared</td><td>Bounded long context</td></tr>
+                <tr><td>Session runs many tool steps</td><td>Compaction + structured notes</td></tr>
+                <tr><td>Task is exploratory / creative</td><td>Smaller context OK; higher sampling OK</td></tr>
+                <tr><td>High-risk factual output</td><td>Minimal context + verify + human gate</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="mental-model" class="cg-article-section cg-reveal">
+          <h2>26. The PM Mental Model</h2>
+          <p style="font-size:1.1rem;color:var(--cg-text);line-height:1.7;margin:20px 0;">
+            Long context gives capacity. Reliable products need curation, retrieval, and focus.<br />
+            Capacity → Curation → Retrieval → Focus.<br />
+            Context engineering is how you spend attention budget wisely.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Layer</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td>Capacity</td><td>Know the window and reserve output space</td></tr>
+                <tr><td>Curation</td><td>High-signal, ordered, authoritative context</td></tr>
+                <tr><td>Retrieval</td><td>JIT and RAG for large or fresh knowledge</td></tr>
+                <tr><td>Compaction</td><td>Shrink history without losing decisions</td></tr>
+                <tr><td>Structured notes</td><td>State outside the window</td></tr>
+                <tr><td>Sub-agents</td><td>Isolate heavy reads</td></tr>
+                <tr><td>Observability</td><td>Replay what the model saw</td></tr>
+                <tr><td>Verification</td><td>Citations and review for factual claims</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Do not buy a bigger window and call it a strategy. Design the path from capacity to focus.</strong>
+          </p>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM understanding</th></tr></thead>
+              <tbody>
+                <tr><td>Long context window</td><td>More capacity, not automatic quality</td></tr>
+                <tr><td>Context rot</td><td>Performance degrades as clutter grows</td></tr>
+                <tr><td>Attention budget</td><td>Every token competes for focus</td></tr>
+                <tr><td>Context engineering</td><td>What the model sees, not only what it is told</td></tr>
+                <tr><td>JIT retrieval</td><td>Fetch when needed; stay fresh</td></tr>
+                <tr><td>Compaction</td><td>Shrink history; keep decisions and sources</td></tr>
+                <tr><td>Structured notes</td><td>Auditable state outside the window</td></tr>
+                <tr><td>Sub-agents</td><td>Isolate heavy subtasks</td></tr>
+                <tr><td>Long context vs RAG</td><td>Use each for the right problem</td></tr>
+                <tr><td>Cost and latency</td><td>Context size drives unit economics</td></tr>
+                <tr><td>PM role</td><td>Define context rules, budgets, and fallbacks in the product</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            Vendor announcements will keep pushing larger context numbers. Your job is to translate that into product behavior users can trust.
+          </p>
+          <p>
+            Users do not experience “tokens.” They experience whether the assistant remembered the right clause, ignored the wrong email,
+            cited the current policy, and stayed on task after the twentieth tool call.
+          </p>
+          <p>
+            The teams that win treat context like product infrastructure: curated, retrieved, compacted, observable, and matched to risk —
+            with hallucination controls from Chapter 8 still in place.
+          </p>
+          <p>
+            The next chapter compares model families — how to choose between GPT, Claude, Gemini, Llama, and others when context strategy, cost, and quality requirements differ by use case.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>A bigger window is permission to design better — not permission to stop designing.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 8: Why LLMs Hallucinate — The PM Version</h3>
+              <p>Why LLMs sound confident when they are wrong — and how product teams design around hallucination.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/pre-training-vs-fine-tuning-vs-rlhf-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 10: Pre-training vs Fine-tuning vs RLHF — The PM Version</h3>
+              <p>How pre-training, fine-tuning, and RLHF differ — and what each layer means for AI products.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/">← Chapter 08</a>
+            <a class="cg-btn primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/pre-training-vs-fine-tuning-vs-rlhf-the-pm-version/">Chapter 10 →</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>

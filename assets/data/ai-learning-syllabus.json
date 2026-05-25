@@ -96,24 +96,36 @@
         },
         {
           "number": "08",
-          "title": "Pre-training vs Fine-tuning vs RLHF",
-          "slug": "pretraining-finetuning-rlhf",
-          "status": "Coming Soon"
+          "title": "Why LLMs Hallucinate — The PM Version",
+          "slug": "why-llms-hallucinate-the-pm-version",
+          "status": "Active"
         },
         {
           "number": "09",
+          "title": "Long Context Window Tradeoffs — The PM Version",
+          "slug": "long-context-window-tradeoffs-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "10",
+          "title": "Pre-training vs Fine-tuning vs RLHF — The PM Version",
+          "slug": "pre-training-vs-fine-tuning-vs-rlhf-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "11",
+          "title": "Hallucinations, Knowledge Cutoffs, and Model Limitations — The PM Version",
+          "slug": "hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "12",
           "title": "Choosing Between GPT, Claude, Gemini and Llama",
           "slug": "choosing-model-families",
           "status": "Coming Soon"
         },
         {
-          "number": "10",
-          "title": "Hallucinations, Knowledge Cutoffs and Model Limitations",
-          "slug": "hallucinations-limitations",
-          "status": "Coming Soon"
-        },
-        {
-          "number": "11",
+          "number": "13",
           "title": "Benchmarks, Cost per Token and Model Tier Tradeoffs",
           "slug": "benchmarks-cost-tradeoffs",
           "status": "Coming Soon"

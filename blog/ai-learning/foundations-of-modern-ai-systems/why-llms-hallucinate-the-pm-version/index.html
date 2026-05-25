@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager friendly explanation of why LLMs hallucinate, including data issues, missing context, fine-tuning risks, unknown knowledge, sampling, calibration, RAG, attribution, and product controls for reducing hallucination risk." />
+  <title>Why LLMs Hallucinate — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 8: Why LLMs Hallucinate — The PM Version" />
+  <meta property="og:description" content="Why LLMs sound confident when they are wrong — and how product teams design around hallucination." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 8: Why LLMs Hallucinate — The PM Version",
+    "description": "A product-manager friendly explanation of why LLMs hallucinate, including data issues, missing context, fine-tuning risks, unknown knowledge, sampling, calibration, RAG, attribution, and product controls for reducing hallucination risk.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 08", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/foundations-of-modern-ai-systems/">Foundations of Modern AI Systems</a><span class="sep">→</span>
+    <span class="current">Chapter 08</span>
+  </nav>
+
+  <!-- Editorial hero -->
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 08 · Module 01 · Beginner–Intermediate · 26–30 min</span>
+    <h1 class="cg-article-hero-title">Chapter 8: Why LLMs Hallucinate — The PM Version</h1>
+    <p class="cg-article-lede">
+      Why LLMs sound confident when they are wrong — and how product teams design around hallucination.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">26–30 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="Hallucination pipeline: generate, guess, ground, verify">
+      <span class="cg-token">Generate</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Guess</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Ground</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Verify</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Plausible language is not proof — product layers make answers accountable</p>
+  </header>
+
+  <!-- Article shell -->
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <!-- Sidebar TOC -->
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#what-is">1. What is hallucination?</a></li>
+            <li><a class="cg-toc-link" href="#two-types">2. Two important types</a></li>
+            <li><a class="cg-toc-link" href="#predicting-not-truth">3. Predicting text, not truth</a></li>
+            <li><a class="cg-toc-link" href="#pretraining-data">4. Pre-training data issues</a></li>
+            <li><a class="cg-toc-link" href="#unknown-knowledge">5. Unknown knowledge</a></li>
+            <li><a class="cg-toc-link" href="#finetuning-risk">6. Fine-tuning risk</a></li>
+            <li><a class="cg-toc-link" href="#sampling">7. Sampling and factual drift</a></li>
+            <li><a class="cg-toc-link" href="#long-outputs">8. Long outputs drift</a></li>
+            <li><a class="cg-toc-link" href="#rag-failures">9. When RAG fails</a></li>
+            <li><a class="cg-toc-link" href="#similar-entities">10. Similar entities</a></li>
+            <li><a class="cg-toc-link" href="#helpfulness">11. Helpfulness vs factuality</a></li>
+            <li><a class="cg-toc-link" href="#retrieval-check">12. Retrieval-based checking</a></li>
+            <li><a class="cg-toc-link" href="#multi-sample">13. Multi-sample consistency</a></li>
+            <li><a class="cg-toc-link" href="#indirect-queries">14. Indirect queries</a></li>
+            <li><a class="cg-toc-link" href="#calibration">15. Calibration and confidence</a></li>
+            <li><a class="cg-toc-link" href="#rag-attribution">16. RAG with attribution</a></li>
+            <li><a class="cg-toc-link" href="#verification">17. Verification before answer</a></li>
+            <li><a class="cg-toc-link" href="#refusal">18. Refusal and “I don’t know”</a></li>
+            <li><a class="cg-toc-link" href="#atomic-outputs">19. Atomic outputs</a></li>
+            <li><a class="cg-toc-link" href="#human-review">20. Human review</a></li>
+            <li><a class="cg-toc-link" href="#metrics">21. Hallucination metrics</a></li>
+            <li><a class="cg-toc-link" href="#claims-example">22. Claims shortfall example</a></li>
+            <li><a class="cg-toc-link" href="#policy-example">23. Policy Q&amp;A example</a></li>
+            <li><a class="cg-toc-link" href="#blog-example">24. Blog writing example</a></li>
+            <li><a class="cg-toc-link" href="#what-not-to-do">25. What PMs should not do</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">26. Final mental model</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 26–30 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Article body -->
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/from-transformers-to-llms-the-pm-version/">Chapter 2</a>,
+            we saw how transformers became Large Language Models.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/">Chapter 3</a>,
+            we covered tokens and context windows — the working memory of an AI system.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/">Chapter 4</a>,
+            we introduced AI safety, RLHF, and Constitutional AI — why alignment matters and how human feedback shapes behavior.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/">Chapter 5</a>,
+            we went deeper into InstructGPT and the RLHF pipeline that turned base models into instruction-following assistants.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/">Chapter 6</a>,
+            we compared prompting, fine-tuning, RAG, and tools — the layers that shape what the model knows and how it behaves.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/">Chapter 7</a>,
+            we covered temperature, top-p, and sampling — why the same prompt can produce different answers and how randomness affects reliability.
+          </p>
+          <p>
+            Now we address one of the biggest concerns in AI products:
+          </p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Hallucination.</strong>
+          </p>
+          <p>
+            Hallucination is when an AI model generates content that sounds valid, confident, and well-written, but is not actually grounded in the provided context or verified world knowledge.
+          </p>
+          <p>
+            For product managers, hallucination is not just a model defect. It is a product risk. It affects user trust, decision quality, compliance, workflow safety, customer experience, auditability, and adoption.
+          </p>
+          <p>
+            A chatbot hallucinating a fun fact is annoying. A claims assistant hallucinating a policy clause is dangerous. A legal assistant hallucinating a case reference is risky. A medical assistant hallucinating a diagnosis is unacceptable.
+          </p>
+          <p>
+            This chapter explains why hallucinations happen and how product teams should design around them — not by telling the model to “be accurate,” but by building architecture that makes truthful behavior easier and unsupported claims harder.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              The model generates plausible language, not guaranteed truth.<br />
+              Ground answers in sources. Verify claims. Allow uncertainty.<br />
+              Treat hallucination as a product discipline, not a one-time model fix.
+            </p>
+          </div>
+        </section>
+
+        <section id="what-is" class="cg-article-section cg-reveal">
+          <h2>1. What Is Hallucination?</h2>
+          <p>
+            Hallucination usually means the model produces content that is fabricated, unsupported, inconsistent, unfaithful to the provided context, or presented as fact without evidence.
+          </p>
+          <p>
+            A hallucination is not just any mistake. A spelling error is not necessarily hallucination. A formatting issue is not necessarily hallucination.
+          </p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>The model says something as if it is true, but that claim is not grounded in the available evidence.</strong>
+          </p>
+          <h3>Examples</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>User request</th><th>Hallucinated output</th></tr></thead>
+              <tbody>
+                <tr><td>“Summarize this policy document.”</td><td>Adds a coverage benefit not in the document</td></tr>
+                <tr><td>“List missing claim documents.”</td><td>Mentions a document not required for this case</td></tr>
+                <tr><td>“Cite the source.”</td><td>Invents a source or clause number</td></tr>
+                <tr><td>“Summarize this legal notice.”</td><td>Adds an allegation not present in the notice</td></tr>
+                <tr><td>“Write a biography.”</td><td>Invents awards, dates, or affiliations</td></tr>
+                <tr><td>“Explain this API error.”</td><td>Makes up a nonexistent function or config</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The dangerous part is not only that the output is wrong. The dangerous part is that it may sound polished and confident.
+          </p>
+        </section>
+
+        <section id="two-types" class="cg-article-section cg-reveal">
+          <h2>2. Two Important Types of Hallucination</h2>
+          <p>
+            A useful distinction separates hallucinations by where the failure happens — in the provided context or in world knowledge.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Type</th><th>Simple meaning</th></tr></thead>
+              <tbody>
+                <tr><td>In-context hallucination</td><td>Output conflicts with or adds unsupported information beyond the provided context</td></tr>
+                <tr><td>Extrinsic hallucination</td><td>Output is not grounded in external world knowledge or verified sources</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>In-context hallucination</h3>
+          <p>
+            This happens when the model is given source material but produces something not supported by that source.
+          </p>
+          <p>
+            Example: you give the model a hospital discharge summary. The model says “The patient had diabetes.” But the discharge summary does not mention diabetes. That is an in-context hallucination — the model failed to stay faithful to the provided document.
+          </p>
+          <h3>Extrinsic hallucination</h3>
+          <p>
+            This happens when the model makes a claim about the world that is not grounded in verified external knowledge.
+          </p>
+          <p>
+            Example: the user asks “Who founded this company?” The model confidently gives a name, but the name is wrong. That is an extrinsic hallucination.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Hallucination type</th><th>Product fix</th></tr></thead>
+              <tbody>
+                <tr><td>In-context</td><td>Better document grounding, citation, extraction validation</td></tr>
+                <tr><td>Extrinsic</td><td>RAG, search, trusted knowledge base, refusal when unknown</td></tr>
+                <tr><td>Both</td><td>Evaluation, human review, source attribution, confidence controls</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Further reading</p>
+            <p>
+              <a href="https://lilianweng.github.io/posts/2024-07-07-hallucination/" target="_blank" rel="noopener noreferrer">Lilian Weng: Extrinsic Hallucinations in LLMs</a>
+            </p>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>You cannot fix all hallucinations with one generic prompt. The fix depends on the type.</p>
+          </div>
+        </section>
+
+        <section id="predicting-not-truth" class="cg-article-section cg-reveal">
+          <h2>3. Why Hallucination Happens: The Model Is Predicting Text, Not Verifying Truth</h2>
+          <p>
+            LLMs are trained to generate likely text. They are not naturally trained to verify truth against reality. This is the root problem.
+          </p>
+          <p>
+            The model asks: “What response is likely given this prompt?” It does not automatically ask: “Can I prove this claim from trusted evidence?”
+          </p>
+          <p>
+            A fluent answer can be statistically likely and factually wrong.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM analogy</p>
+            <p>
+              Imagine a very well-read employee who is excellent at writing but does not always check the source before answering.
+              If they are unsure, they may still produce something that sounds plausible.
+              The issue is not lack of language skill — it is lack of grounding.
+            </p>
+          </div>
+          <p>
+            For factual products, the model should not be treated as the final source of truth. It should be connected to trusted documents, databases, search, policy systems, rule engines, APIs, or human reviewers.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>The model should generate from evidence, not from vibes.</p>
+          </div>
+        </section>
+
+        <section id="pretraining-data" class="cg-article-section cg-reveal">
+          <h2>4. Cause 1: Pre-Training Data Can Be Missing, Wrong, or Outdated</h2>
+          <p>
+            LLMs are trained on massive data collected from books, websites, code, articles, forums, documentation, and other sources. That data is not perfect.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Data issue</th><th>Product impact</th></tr></thead>
+              <tbody>
+                <tr><td>Missing information</td><td>Model may guess</td></tr>
+                <tr><td>Outdated information</td><td>Model may give old answer</td></tr>
+                <tr><td>Incorrect information</td><td>Model may learn wrong pattern</td></tr>
+                <tr><td>Contradictory information</td><td>Model may blend conflicting claims</td></tr>
+                <tr><td>Biased information</td><td>Model may reproduce bias</td></tr>
+                <tr><td>Low-quality content</td><td>Model may learn unreliable patterns</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            If the model learned an old version of a policy, law, product description, or company detail, it may continue to answer from that stale pattern — and may not know the information is stale.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Need</th><th>Better design</th></tr></thead>
+              <tbody>
+                <tr><td>Latest policy</td><td>Retrieve latest approved policy</td></tr>
+                <tr><td>Current customer data</td><td>Query system of record</td></tr>
+                <tr><td>Latest regulation</td><td>Search trusted source</td></tr>
+                <tr><td>Updated pricing</td><td>API lookup</td></tr>
+                <tr><td>Internal SOP</td><td>Knowledge base retrieval</td></tr>
+                <tr><td>Claim status</td><td>Workflow system integration</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>For any product relying on current or company-specific information, do not depend on model memory. Model memory is not a reliable knowledge system.</p>
+          </div>
+        </section>
+
+        <section id="unknown-knowledge" class="cg-article-section cg-reveal">
+          <h2>5. Cause 2: The Model May Not Know What It Does Not Know</h2>
+          <p>
+            A major hallucination driver is poor uncertainty handling. The model may be asked a question where the correct answer is “I don’t know.” But instead, it generates a plausible answer.
+          </p>
+          <p>
+            Language models are often optimized to be helpful and answer questions. Admitting uncertainty may not always be naturally rewarded.
+          </p>
+          <h3>Example</h3>
+          <p>
+            User asks: “What was the exact internal approval reason for this claim?”
+          </p>
+          <p>
+            If the model does not have access to the claim system, the correct answer is: “I do not have access to that information.”
+            A hallucinating model may instead infer a reason from context and present it as fact.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Situation</th><th>Desired AI behavior</th></tr></thead>
+              <tbody>
+                <tr><td>Source missing</td><td>Say source is missing</td></tr>
+                <tr><td>Evidence weak</td><td>State uncertainty</td></tr>
+                <tr><td>Data unavailable</td><td>Ask for access or upload</td></tr>
+                <tr><td>Conflicting sources</td><td>Show conflict</td></tr>
+                <tr><td>Not authorized</td><td>Refuse or escalate</td></tr>
+                <tr><td>High-risk decision</td><td>Ask for human review</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              A model that always answers is not always helpful. Sometimes the safest and most accurate answer is:
+              “I cannot determine this from the available information.”
+            </p>
+          </div>
+        </section>
+
+        <section id="finetuning-risk" class="cg-article-section cg-reveal">
+          <h2>6. Cause 3: Fine-Tuning New Knowledge Can Create Risk</h2>
+          <p>
+            Fine-tuning is useful for teaching behavior. But using fine-tuning to insert new factual knowledge can be risky.
+            Fine-tuning usually uses much less compute and much smaller datasets than pre-training. The model may not reliably integrate new facts in a stable way.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Problem</th><th>Risk</th></tr></thead>
+              <tbody>
+                <tr><td>Some rules are outdated</td><td>Model learns stale behavior</td></tr>
+                <tr><td>Rules are incomplete</td><td>Model fills gaps</td></tr>
+                <tr><td>Examples conflict</td><td>Model becomes inconsistent</td></tr>
+                <tr><td>Rules change later</td><td>Fine-tuned model becomes outdated</td></tr>
+                <tr><td>Training data is small</td><td>Model overfits</td></tr>
+                <tr><td>Model blends old and new knowledge</td><td>Hallucination risk increases</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Problem</th><th>Better first solution</th></tr></thead>
+              <tbody>
+                <tr><td>Need latest policy</td><td>RAG</td></tr>
+                <tr><td>Need live claim data</td><td>API / tool</td></tr>
+                <tr><td>Need consistent summary format</td><td>Fine-tuning may help</td></tr>
+                <tr><td>Need brand tone</td><td>Fine-tuning may help</td></tr>
+                <tr><td>Need current regulation</td><td>Search / retrieval</td></tr>
+                <tr><td>Need decision rule</td><td>Rule engine / workflow</td></tr>
+                <tr><td>Need factual answer</td><td>Retrieval + citation</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            This connects directly to
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/">Chapter 6</a>.
+            Fine-tuning is not a knowledge management system.
+          </p>
+        </section>
+
+        <section id="sampling" class="cg-article-section cg-reveal">
+          <h2>7. Cause 4: Sampling and Randomness Can Increase Factual Drift</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/">Chapter 7</a>,
+            we covered temperature, top-p, and sampling. Those settings matter for hallucination.
+          </p>
+          <p>
+            When the model samples more creatively, it may choose less likely tokens. That can be useful for brainstorming. But for factual workflows, more randomness can increase the risk of unsupported claims.
+          </p>
+          <h3>Example</h3>
+          <p>
+            Prompt: “Summarize this policy clause.” With higher randomness, the model may paraphrase too freely, add interpretations, overgeneralize, or make the summary sound more complete than the clause allows.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Sampling direction</th></tr></thead>
+              <tbody>
+                <tr><td>Data extraction</td><td>Very low randomness</td></tr>
+                <tr><td>Policy summary</td><td>Low randomness</td></tr>
+                <tr><td>Claims decision support</td><td>Low randomness</td></tr>
+                <tr><td>Medical / legal / finance</td><td>Low randomness</td></tr>
+                <tr><td>Marketing copy</td><td>Medium to high randomness</td></tr>
+                <tr><td>Brainstorming</td><td>Higher randomness acceptable</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Sampling settings will not eliminate hallucination. But poor sampling settings can make hallucination worse.</p>
+          </div>
+        </section>
+
+        <section id="long-outputs" class="cg-article-section cg-reveal">
+          <h2>8. Cause 5: Long Outputs Can Drift Away from Facts</h2>
+          <p>
+            Hallucination risk can increase as a generated response becomes longer. Every sentence creates more opportunities to add unsupported claims.
+          </p>
+          <p>
+            Example: user asks for a detailed founder biography. The model may correctly state the name and company in the first paragraph, then invent awards, education, previous roles, funding milestones, or media mentions. More claims mean more verification burden.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              For factual outputs, prefer concise answers, atomic facts, cited claims, structured fields, and source-backed summaries.
+              Long is not automatically better — in factual AI products, long can be dangerous.
+            </p>
+          </div>
+        </section>
+
+        <section id="rag-failures" class="cg-article-section cg-reveal">
+          <h2>9. Cause 6: RAG Can Reduce Hallucination, But Bad RAG Can Still Fail</h2>
+          <p>
+            RAG (Retrieval-Augmented Generation) reduces hallucination by giving the model relevant external context before it answers. But RAG is not magic. Bad retrieval can still produce bad answers.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Failure</th><th>What happens</th></tr></thead>
+              <tbody>
+                <tr><td>Wrong document retrieved</td><td>Model answers from irrelevant source</td></tr>
+                <tr><td>Old version retrieved</td><td>Model gives outdated answer</td></tr>
+                <tr><td>Important chunk missing</td><td>Model fills the gap</td></tr>
+                <tr><td>Chunk too small</td><td>Context is incomplete</td></tr>
+                <tr><td>Chunk too large</td><td>Model loses focus</td></tr>
+                <tr><td>Conflicting sources retrieved</td><td>Model blends contradictions</td></tr>
+                <tr><td>No citation requirement</td><td>User cannot verify answer</td></tr>
+                <tr><td>Poor ranking</td><td>Most relevant source not used</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Capability</th><th>Why it matters</th></tr></thead>
+              <tbody>
+                <tr><td>Source versioning</td><td>Avoid stale answers</td></tr>
+                <tr><td>Relevance ranking</td><td>Retrieve the right document</td></tr>
+                <tr><td>Chunk strategy</td><td>Preserve enough context</td></tr>
+                <tr><td>Citation display</td><td>Build trust</td></tr>
+                <tr><td>Source priority rules</td><td>Resolve conflicts</td></tr>
+                <tr><td>Fallback behavior</td><td>Avoid guessing</td></tr>
+                <tr><td>Retrieval evaluation</td><td>Measure whether RAG works</td></tr>
+                <tr><td>Human review</td><td>Handle high-risk cases</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Do not say “We added RAG, so hallucination is solved.” RAG reduces risk only if the retrieval system is good.</p>
+          </div>
+        </section>
+
+        <section id="similar-entities" class="cg-article-section cg-reveal">
+          <h2>10. Cause 7: The Model May Confuse Similar Entities</h2>
+          <p>
+            Hallucination often happens when entities are rare, similar, or ambiguous — two companies with similar names, similar policy clauses, similar hospital names, similar claim IDs, or similar legal sections.
+          </p>
+          <p>
+            Example: a user asks about “Aster Whitefield Health Priority Pass.” The model may mix it with another Aster service or hospital package unless the source context is clear.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Risk</th><th>Product control</th></tr></thead>
+              <tbody>
+                <tr><td>Similar names</td><td>Ask clarifying question</td></tr>
+                <tr><td>Similar policies</td><td>Show matched source</td></tr>
+                <tr><td>Similar claim IDs</td><td>Validate against database</td></tr>
+                <tr><td>Similar users</td><td>Use unique identifiers</td></tr>
+                <tr><td>Similar hospitals</td><td>Use provider master data</td></tr>
+                <tr><td>Similar products</td><td>Use product catalog lookup</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Do not rely on model memory for entity resolution. Use system-of-record data.</p>
+          </div>
+        </section>
+
+        <section id="helpfulness" class="cg-article-section cg-reveal">
+          <h2>11. Cause 8: The Model May Be Optimized for Helpfulness Over Factuality</h2>
+          <p>
+            RLHF and instruction tuning can make models more helpful. But helpfulness and factuality are not always the same.
+            A human may prefer a detailed, confident answer — but a detailed answer is not necessarily more factual.
+          </p>
+          <p>
+            Sometimes the most factual answer is short and cautious: “The provided documents do not contain enough information to answer this.” That may feel less satisfying, but it is more honest.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Quality</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td>Correctness</td><td>Truth matters</td></tr>
+                <tr><td>Grounding</td><td>Evidence matters</td></tr>
+                <tr><td>Appropriate uncertainty</td><td>Avoids fake confidence</td></tr>
+                <tr><td>Source citation</td><td>Supports audit</td></tr>
+                <tr><td>Conciseness</td><td>Reduces unsupported claims</td></tr>
+                <tr><td>Escalation</td><td>Handles unknowns safely</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>A helpful hallucination is still a hallucination. Be careful what your product rewards.</p>
+          </div>
+        </section>
+
+        <section id="retrieval-check" class="cg-article-section cg-reveal">
+          <h2>12. Hallucination Detection: Retrieval-Based Checking</h2>
+          <p>
+            One way to detect hallucination is to break the answer into factual claims and check each claim against a trusted source — similar to how a careful reviewer works.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Step</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Generate answer</td></tr>
+                <tr><td>2</td><td>Extract factual claims</td></tr>
+                <tr><td>3</td><td>Retrieve evidence for each claim</td></tr>
+                <tr><td>4</td><td>Check whether evidence supports the claim</td></tr>
+                <tr><td>5</td><td>Mark unsupported claims</td></tr>
+                <tr><td>6</td><td>Revise or reject answer</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>PM example</h3>
+          <p>AI answer: “The claim is eligible because maternity coverage starts after 9 months.”</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Claim</th><th>Evidence needed</th></tr></thead>
+              <tbody>
+                <tr><td>Claim is eligible</td><td>Policy rule + member data</td></tr>
+                <tr><td>Maternity coverage applies</td><td>Diagnosis / procedure</td></tr>
+                <tr><td>Waiting period is 9 months</td><td>Policy clause</td></tr>
+                <tr><td>Waiting period completed</td><td>Policy start date + admission date</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>For high-risk workflows, do not only generate. Verify.</p>
+          </div>
+        </section>
+
+        <section id="multi-sample" class="cg-article-section cg-reveal">
+          <h2>13. Hallucination Detection: Multiple-Sample Consistency</h2>
+          <p>
+            Another approach is to ask the model multiple times and check whether the answers are consistent. If the model gives different factual answers across runs, that is a warning sign.
+          </p>
+          <p>
+            Question: “Who authored this paper?” Run 1: “John Smith and Maria Lee.” Run 2: “David Chen and Priya Rao.” Run 3: “The authors are not available.” That inconsistency signals uncertainty.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td>Reference checking</td><td>Fake references may vary</td></tr>
+                <tr><td>Biography generation</td><td>Invented facts may be inconsistent</td></tr>
+                <tr><td>Open-ended factual questions</td><td>Answers may drift</td></tr>
+                <tr><td>Unknown questions</td><td>Model may guess differently</td></tr>
+                <tr><td>High-risk answers</td><td>Repeated variation is a warning</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>This is not a complete solution. But it is useful as a risk signal.</p>
+          </div>
+        </section>
+
+        <section id="indirect-queries" class="cg-article-section cg-reveal">
+          <h2>14. Hallucination Detection: Indirect Queries</h2>
+          <p>
+            Sometimes asking directly is not enough. A model may say a fake reference exists if asked directly. Indirect queries can help.
+          </p>
+          <p>
+            Instead of “Is this paper real?” ask: “Who are the authors?” “Which journal published it?” “What year was it published?” “What is the DOI?”
+            If the model cannot consistently answer supporting details, the reference may be hallucinated.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Generated claim</th><th>Indirect check</th></tr></thead>
+              <tbody>
+                <tr><td>Paper title</td><td>Authors, venue, year</td></tr>
+                <tr><td>Legal case</td><td>Court, date, citation number</td></tr>
+                <tr><td>Policy clause</td><td>Clause text, page number, section</td></tr>
+                <tr><td>Medical code</td><td>Code description, classification source</td></tr>
+                <tr><td>Claim rule</td><td>Rule ID, policy source, effective date</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Citations should be verified, not decorated.</p>
+          </div>
+        </section>
+
+        <section id="calibration" class="cg-article-section cg-reveal">
+          <h2>15. Hallucination Detection: Calibration and Confidence</h2>
+          <p>
+            A well-calibrated model should express uncertainty when it is uncertain. Poor calibration means the model sounds confident even when it is likely wrong. Users tend to trust confident answers.
+          </p>
+          <h3>Bad behavior</h3>
+          <p>“Yes, this claim is eligible.” — when the evidence is incomplete.</p>
+          <h3>Better behavior</h3>
+          <p>“Eligibility cannot be confirmed from the available documents. The policy clause and admission date are required.”</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Confidence situation</th><th>Product behavior</th></tr></thead>
+              <tbody>
+                <tr><td>Strong evidence</td><td>Answer with source</td></tr>
+                <tr><td>Partial evidence</td><td>State uncertainty</td></tr>
+                <tr><td>Conflicting evidence</td><td>Show conflict</td></tr>
+                <tr><td>No evidence</td><td>Do not guess</td></tr>
+                <tr><td>High-risk task</td><td>Escalate</td></tr>
+                <tr><td>Low-risk task</td><td>Provide caveat</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>A confidence score alone is not enough. The product must define what happens at each confidence level.</p>
+          </div>
+        </section>
+
+        <section id="rag-attribution" class="cg-article-section cg-reveal">
+          <h2>16. Mitigation 1: Use RAG with Attribution</h2>
+          <p>
+            RAG helps reduce hallucination by grounding the answer in retrieved sources. But the answer also needs attribution — showing which source supports which claim.
+          </p>
+          <h3>Weak vs better answer</h3>
+          <p><strong>Weak:</strong> “This claim requires a shortfall.”</p>
+          <p><strong>Better:</strong> “This claim may require a shortfall because the discharge summary is missing. Source: Document checklist, Section 3.2.”</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Output element</th><th>Source needed</th></tr></thead>
+              <tbody>
+                <tr><td>Claim recommendation</td><td>Rule / policy / source document</td></tr>
+                <tr><td>Missing document</td><td>Checklist / SOP</td></tr>
+                <tr><td>Deduction</td><td>Policy clause or billing rule</td></tr>
+                <tr><td>Medical summary</td><td>Discharge summary / source line</td></tr>
+                <tr><td>Customer advice</td><td>Approved FAQ / policy</td></tr>
+                <tr><td>Compliance statement</td><td>Legal / regulatory source</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>No source, no confident claim. That should be the rule.</p>
+          </div>
+        </section>
+
+        <section id="verification" class="cg-article-section cg-reveal">
+          <h2>17. Mitigation 2: Verification Before Final Answer</h2>
+          <p>
+            A good AI system should not always answer immediately. For factual tasks, it may need a verification step.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Step</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Draft answer</td></tr>
+                <tr><td>2</td><td>Extract claims</td></tr>
+                <tr><td>3</td><td>Check claims against sources</td></tr>
+                <tr><td>4</td><td>Remove unsupported claims</td></tr>
+                <tr><td>5</td><td>Add citations</td></tr>
+                <tr><td>6</td><td>State uncertainty</td></tr>
+                <tr><td>7</td><td>Produce final answer</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Verification need</th></tr></thead>
+              <tbody>
+                <tr><td>Legal summary</td><td>High</td></tr>
+                <tr><td>Medical summary</td><td>High</td></tr>
+                <tr><td>Claim decision support</td><td>High</td></tr>
+                <tr><td>Financial advice</td><td>High</td></tr>
+                <tr><td>Internal policy Q&amp;A</td><td>Medium to high</td></tr>
+                <tr><td>Marketing copy</td><td>Low</td></tr>
+                <tr><td>Brainstorming</td><td>Low</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Not every AI feature needs heavy verification. But high-risk workflows do — even if verification adds latency.</p>
+          </div>
+        </section>
+
+        <section id="refusal" class="cg-article-section cg-reveal">
+          <h2>18. Mitigation 3: Design Refusal and “I Don’t Know” Behavior</h2>
+          <p>
+            A good AI product must know when not to answer. This does not mean refusing everything. It means refusing unsupported certainty.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Situation</th><th>Good response</th></tr></thead>
+              <tbody>
+                <tr><td>Source missing</td><td>“I cannot determine this without the policy document.”</td></tr>
+                <tr><td>Data unavailable</td><td>“I do not have access to the claim record.”</td></tr>
+                <tr><td>Ambiguous entity</td><td>“Which hospital do you mean?”</td></tr>
+                <tr><td>Conflicting sources</td><td>“The documents conflict; human review is needed.”</td></tr>
+                <tr><td>High-risk uncertainty</td><td>“This should be escalated for review.”</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Design fallback responses for missing context, weak evidence, source conflict, unknown answer, restricted data, unsafe requests, and high-risk decisions. Do not leave them to chance.
+          </p>
+        </section>
+
+        <section id="atomic-outputs" class="cg-article-section cg-reveal">
+          <h2>19. Mitigation 4: Keep Outputs Atomic and Checkable</h2>
+          <p>
+            Long paragraphs hide hallucinations. Atomic outputs expose them. Instead of asking for a detailed explanation, ask for facts, source, confidence, next action, and missing evidence.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Field</th><th>Output</th></tr></thead>
+              <tbody>
+                <tr><td>Finding</td><td>Discharge summary is missing</td></tr>
+                <tr><td>Source</td><td>Document checklist</td></tr>
+                <tr><td>Evidence</td><td>No discharge summary found in uploaded documents</td></tr>
+                <tr><td>Confidence</td><td>High</td></tr>
+                <tr><td>Recommended action</td><td>Raise shortfall</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              For serious workflows, prefer structured outputs: tables, checklists, field-level extraction, source mapping, and confidence labels.
+              Do not ask the model to write a beautiful essay when the product needs a verifiable decision aid.
+            </p>
+          </div>
+        </section>
+
+        <section id="human-review" class="cg-article-section cg-reveal">
+          <h2>20. Mitigation 5: Use Human Review Where Failure Cost Is High</h2>
+          <p>
+            No hallucination control is perfect. For high-risk workflows, humans remain necessary.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Scenario</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td>Claim approval / rejection</td><td>Financial and customer impact</td></tr>
+                <tr><td>Medical interpretation</td><td>Clinical risk</td></tr>
+                <tr><td>Legal drafting</td><td>Legal risk</td></tr>
+                <tr><td>Compliance decisions</td><td>Regulatory risk</td></tr>
+                <tr><td>Payment triggers</td><td>Financial risk</td></tr>
+                <tr><td>Customer-facing sensitive reply</td><td>Reputation risk</td></tr>
+                <tr><td>Unclear evidence</td><td>Judgment required</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Human-in-the-loop is not a weakness — it is a safety layer.
+              Make review efficient by showing AI recommendation, supporting evidence, missing evidence, confidence, source links, audit trail, and suggested next action.
+            </p>
+          </div>
+        </section>
+
+        <section id="metrics" class="cg-article-section cg-reveal">
+          <h2>21. Hallucination Metrics PMs Should Track</h2>
+          <p>
+            If hallucination matters to your product, measure it. Do not rely on anecdotal feedback.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Metric</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Unsupported claim rate</td><td>Percentage of claims without source support</td></tr>
+                <tr><td>Citation accuracy</td><td>Whether cited source actually supports the claim</td></tr>
+                <tr><td>Factual error rate</td><td>Human-reviewed factual mistakes</td></tr>
+                <tr><td>Refusal correctness</td><td>Whether model refused when it should</td></tr>
+                <tr><td>Over-refusal rate</td><td>Whether model refused legitimate requests</td></tr>
+                <tr><td>Escalation rate</td><td>How often human review is triggered</td></tr>
+                <tr><td>Override rate</td><td>How often humans change AI output</td></tr>
+                <tr><td>Source retrieval accuracy</td><td>Whether correct document was retrieved</td></tr>
+                <tr><td>Format validity</td><td>Whether structured output is usable</td></tr>
+                <tr><td>Repeated-run consistency</td><td>Whether same input gives stable facts</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>A hallucination strategy without metrics is wishful thinking. Build factuality evaluation into the product lifecycle.</p>
+          </div>
+        </section>
+
+        <section id="claims-example" class="cg-article-section cg-reveal">
+          <h2>22. Practical Example: Claims Shortfall Assistant</h2>
+          <p>User asks: “Should we raise a shortfall for this claim?”</p>
+          <p>
+            <strong>Weak system:</strong> “Yes, raise a shortfall because the final bill and discharge summary are missing.” — but how does it know?
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Field</th><th>Output</th></tr></thead>
+              <tbody>
+                <tr><td>Recommendation</td><td>Raise shortfall</td></tr>
+                <tr><td>Missing documents</td><td>Discharge summary, final bill</td></tr>
+                <tr><td>Evidence</td><td>Not found in uploaded document set</td></tr>
+                <tr><td>Source checked</td><td>Claim document checklist, uploaded files</td></tr>
+                <tr><td>Confidence</td><td>High</td></tr>
+                <tr><td>Decision boundary</td><td>Processor approval required</td></tr>
+                <tr><td>Next action</td><td>Send shortfall template for missing documents</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>The product should force the model to show its evidence. If it cannot show evidence, it should not give a confident recommendation.</p>
+          </div>
+        </section>
+
+        <section id="policy-example" class="cg-article-section cg-reveal">
+          <h2>23. Practical Example: Policy Q&amp;A Assistant</h2>
+          <p>User asks: “Does this policy cover maternity after 9 months?”</p>
+          <p><strong>Weak answer:</strong> “Yes, maternity is covered after 9 months.”</p>
+          <p>
+            <strong>Better answer:</strong> “I found a maternity waiting-period clause in the policy document. It states that maternity coverage applies after 9 months, subject to the listed exclusions and sub-limits. Please review Clause 4.3 before using this for a customer-facing decision.”
+          </p>
+          <p>
+            <strong>Best answer if source is missing:</strong> “I cannot confirm this because the policy document is not available in the current context.”
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              The system should not answer policy questions from memory when the policy document is available or required.
+              For enterprise AI, source-grounded answers should be the default.
+            </p>
+          </div>
+        </section>
+
+        <section id="blog-example" class="cg-article-section cg-reveal">
+          <h2>24. Practical Example: Blog Writing Assistant</h2>
+          <p>
+            Hallucination is not only a problem in high-risk domains. Content products can invent awards, investor names, revenue, universities, media mentions, or acquisition history — damaging credibility.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Content type</th><th>Control</th></tr></thead>
+              <tbody>
+                <tr><td>Opinion</td><td>Creative freedom allowed</td></tr>
+                <tr><td>Biography</td><td>Source required</td></tr>
+                <tr><td>Company history</td><td>Source required</td></tr>
+                <tr><td>Technical explanation</td><td>Source or caveat required</td></tr>
+                <tr><td>Case study</td><td>Verified data required</td></tr>
+                <tr><td>Marketing copy</td><td>Claims must be approved</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Creativity is acceptable. Fake facts are not.</p>
+          </div>
+        </section>
+
+        <section id="what-not-to-do" class="cg-article-section cg-reveal">
+          <h2>25. What PMs Should Not Do</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Mistake</th><th>Why it is bad</th></tr></thead>
+              <tbody>
+                <tr><td>Assuming better model means no hallucination</td><td>Even strong models can hallucinate</td></tr>
+                <tr><td>Using fine-tuning for changing knowledge</td><td>Can go stale or increase risk</td></tr>
+                <tr><td>Trusting citations blindly</td><td>Citations can be fabricated or weak</td></tr>
+                <tr><td>Adding RAG without evaluating retrieval</td><td>Bad retrieval creates bad answers</td></tr>
+                <tr><td>Rewarding long answers</td><td>More claims mean more risk</td></tr>
+                <tr><td>Hiding uncertainty</td><td>Users over-trust confident answers</td></tr>
+                <tr><td>Skipping human review in high-risk workflows</td><td>Unsafe decisions may slip</td></tr>
+                <tr><td>Measuring only user satisfaction</td><td>Users may like wrong answers</td></tr>
+                <tr><td>Treating hallucination as only engineering issue</td><td>Product design controls the risk</td></tr>
+                <tr><td>Thinking low temperature guarantees truth</td><td>It only reduces randomness</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Hallucination management is not a single feature. It is a product discipline.</p>
+        </section>
+
+        <section id="mental-model" class="cg-article-section cg-reveal">
+          <h2>26. The PM Mental Model</h2>
+          <p style="font-size:1.1rem;color:var(--cg-text);line-height:1.7;margin:20px 0;">
+            Hallucination happens because LLMs generate plausible language, not guaranteed truth.<br />
+            Generate → Guess → Ground → Verify.<br />
+            The solution is not one trick — it is a system.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Layer</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td>RAG</td><td>Bring trusted knowledge into context</td></tr>
+                <tr><td>Attribution</td><td>Show evidence</td></tr>
+                <tr><td>Verification</td><td>Check claims</td></tr>
+                <tr><td>Low randomness</td><td>Reduce factual drift</td></tr>
+                <tr><td>Structured output</td><td>Make claims checkable</td></tr>
+                <tr><td>Confidence behavior</td><td>Handle uncertainty</td></tr>
+                <tr><td>Refusal design</td><td>Avoid unsupported answers</td></tr>
+                <tr><td>Human review</td><td>Control high-risk decisions</td></tr>
+                <tr><td>Metrics</td><td>Measure factuality</td></tr>
+                <tr><td>Monitoring</td><td>Catch production failures</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Do not ask the model to be magically truthful. Build a product system that makes truthful behavior easier and unsupported claims harder.</strong>
+          </p>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM understanding</th></tr></thead>
+              <tbody>
+                <tr><td>Hallucination</td><td>Fabricated or unsupported content presented as fact</td></tr>
+                <tr><td>In-context hallucination</td><td>Output not faithful to provided source context</td></tr>
+                <tr><td>Extrinsic hallucination</td><td>Output not grounded in external world knowledge</td></tr>
+                <tr><td>Pre-training data issues</td><td>Training data may be missing, wrong, stale, or contradictory</td></tr>
+                <tr><td>Unknown knowledge</td><td>Model may answer even when it should say it does not know</td></tr>
+                <tr><td>Fine-tuning risk</td><td>Fine-tuning new knowledge can increase hallucination risk</td></tr>
+                <tr><td>Sampling risk</td><td>More randomness can increase factual drift</td></tr>
+                <tr><td>Long output risk</td><td>More generated claims create more chances for errors</td></tr>
+                <tr><td>RAG</td><td>Helps ground answers, but must be evaluated</td></tr>
+                <tr><td>Attribution</td><td>Links claims to supporting sources</td></tr>
+                <tr><td>Verification</td><td>Checks factual claims before final output</td></tr>
+                <tr><td>Calibration</td><td>Model should express uncertainty appropriately</td></tr>
+                <tr><td>Human review</td><td>Required where failure cost is high</td></tr>
+                <tr><td>PM role</td><td>Design the system that prevents, detects, and manages hallucination</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            Hallucination is one of the most misunderstood problems in AI product development. It is tempting to think “A better model will solve it.” Sometimes better models help — but hallucination is not only a model-size problem.
+          </p>
+          <p>
+            It is a grounding problem, a context problem, a retrieval problem, a feedback problem, a sampling problem, a workflow problem, and a product design problem.
+          </p>
+          <p>
+            For product managers, the most important shift is this: do not ask the model to be magically truthful.
+            Build a product system that makes truthful behavior easier and unsupported claims harder.
+          </p>
+          <p>
+            That means giving the model the right sources, forcing evidence, checking claims, allowing uncertainty, controlling randomness, and keeping humans in the loop where the stakes are high.
+          </p>
+          <p>
+            A reliable AI product is not one where the model never hallucinates.
+            It is one where hallucinations are anticipated, reduced, detected, and prevented from causing harm.
+          </p>
+          <p>
+            The next chapter in this module compares pre-training, fine-tuning, and RLHF — how each training stage shapes what a model knows and how it behaves before generation and grounding layers apply.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>Anticipate hallucination. Design around it. Measure it. Do not pretend it will disappear.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 7: Temperature, Top-p, and Sampling — The PM Version</h3>
+              <p>Why the same prompt can produce different answers — and how temperature and top-p shape product reliability.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 9: Long Context Window Tradeoffs — The PM Version</h3>
+              <p>Why bigger context helps — and why context engineering matters for reliable agents.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/">← Chapter 07</a>
+            <a class="cg-btn primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/">Chapter 09 →</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>

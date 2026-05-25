@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager friendly explanation of hallucinations, knowledge cutoffs, stale knowledge, uncertainty, context dependency, reasoning limits, and why product teams must design around model limitations." />
+  <title>Hallucinations, Knowledge Cutoffs, and Model Limitations — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 11: Hallucinations, Knowledge Cutoffs, and Model Limitations — The PM Version" />
+  <meta property="og:description" content="Why strong models still fail — and how PMs design around cutoffs and limits." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 11: Hallucinations, Knowledge Cutoffs, and Model Limitations — The PM Version",
+    "description": "A product-manager friendly explanation of hallucinations, knowledge cutoffs, stale knowledge, uncertainty, context dependency, reasoning limits, and why product teams must design around model limitations.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 11", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/foundations-of-modern-ai-systems/">Foundations of Modern AI Systems</a><span class="sep">→</span>
+    <span class="current">Chapter 11</span>
+  </nav>
+
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 11 · Module 01 · Beginner–Intermediate · 26–30 min</span>
+    <h1 class="cg-article-hero-title">Chapter 11: Hallucinations, Knowledge Cutoffs, and Model Limitations — The PM Version</h1>
+    <p class="cg-article-lede">
+      Why strong models still fail — and how PMs design around cutoffs and limits.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">26–30 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="Limitations pipeline: capability, cutoff, limits, architecture">
+      <span class="cg-token">Capability</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Cutoff</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Limits</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Architecture</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Impressive demos are not production guarantees — design the stack around what models cannot do alone</p>
+  </header>
+
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#hallucination-recap">1. Hallucination recap</a></li>
+            <li><a class="cg-toc-link" href="#knowledge-cutoff">2. Knowledge cutoffs</a></li>
+            <li><a class="cg-toc-link" href="#private-knowledge">3. Private knowledge</a></li>
+            <li><a class="cg-toc-link" href="#stale-knowledge">4. Stale knowledge</a></li>
+            <li><a class="cg-toc-link" href="#not-sor">5. Not the system of record</a></li>
+            <li><a class="cg-toc-link" href="#context-dependency">6. Context dependency</a></li>
+            <li><a class="cg-toc-link" href="#reasoning-limits">7. Reasoning limits</a></li>
+            <li><a class="cg-toc-link" href="#arithmetic">8. Arithmetic and computation</a></li>
+            <li><a class="cg-toc-link" href="#instruction-limits">9. Instruction limits</a></li>
+            <li><a class="cg-toc-link" href="#prompt-sensitivity">10. Prompt sensitivity</a></li>
+            <li><a class="cg-toc-link" href="#nondeterminism">11. Nondeterminism</a></li>
+            <li><a class="cg-toc-link" href="#overconfidence">12. Overconfidence</a></li>
+            <li><a class="cg-toc-link" href="#multimodal">13. Multimodal limits</a></li>
+            <li><a class="cg-toc-link" href="#tool-limits">14. Tool limits</a></li>
+            <li><a class="cg-toc-link" href="#bias">15. Bias and representation</a></li>
+            <li><a class="cg-toc-link" href="#domain-limits">16. Domain limits</a></li>
+            <li><a class="cg-toc-link" href="#eval-limits">17. Evaluation limits</a></li>
+            <li><a class="cg-toc-link" href="#limitations-stack">18. The limitations stack</a></li>
+            <li><a class="cg-toc-link" href="#product-controls">19. Product controls</a></li>
+            <li><a class="cg-toc-link" href="#mistakes">20. What PMs should not do</a></li>
+            <li><a class="cg-toc-link" href="#decision-framework">21. Decision framework</a></li>
+            <li><a class="cg-toc-link" href="#policy-example">22. Policy Q&amp;A example</a></li>
+            <li><a class="cg-toc-link" href="#preauth-example">23. Prior auth example</a></li>
+            <li><a class="cg-toc-link" href="#content-example">24. Content workflow example</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">25. Final mental model</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 26–30 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/why-llms-hallucinate-the-pm-version/">Chapter 8</a>,
+            we covered hallucination in depth — why fluent language is not proof, how grounding and verification reduce risk, and what product controls belong in the architecture.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/long-context-window-tradeoffs-the-pm-version/">Chapter 9</a>,
+            we covered context engineering — why bigger windows do not remove the need for curation, retrieval, and focus.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/pre-training-vs-fine-tuning-vs-rlhf-the-pm-version/">Chapter 10</a>,
+            we covered how pre-training, fine-tuning, and RLHF shape what a model knows and how it behaves before your product layer runs.
+          </p>
+          <p>Now we connect those ideas to a practical PM reality:</p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Even strong models have hard limits.</strong>
+          </p>
+          <p>
+            Demos look omniscient. Production surfaces knowledge cutoffs, stale training data, missing private facts, weak reasoning on edge cases, arithmetic slips, tool failures, and overconfident tone — often in the same workflow.
+          </p>
+          <p>
+            This chapter does <em>not</em> repeat Chapter 8’s treatment of hallucination mechanics. It explains how cutoffs and structural limitations interact with hallucination risk, and how PMs design products that assume limits instead of fighting them with bigger prompts.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              Capability → Cutoff → Limits → Architecture.<br />
+              The model is a component, not the system of record.<br />
+              Your product owns freshness, authority, verification, and fallbacks.
+            </p>
+          </div>
+        </section>
+
+        <section id="hallucination-recap" class="cg-article-section cg-reveal">
+          <h2>1. Hallucination Recap — Without Repeating Chapter 8</h2>
+          <p>
+            Hallucination is when the model states something as fact without support in provided context or verified knowledge.
+            Chapter 8 covered causes (training data, missing context, sampling, RAG failures) and mitigations (attribution, verification, refusal, human review).
+          </p>
+          <p>For this chapter, keep three PM anchors from Chapter 8:</p>
+          <ul class="cg-bento-list">
+            <li><strong>Plausible ≠ true</strong> — fluency is not evidence.</li>
+            <li><strong>Ground or verify</strong> — high-risk answers need sources or checks.</li>
+            <li><strong>Product owns risk tiers</strong> — brainstorming and claims adjudication cannot share the same bar.</li>
+          </ul>
+          <p>
+            Cutoffs and limitations <em>increase</em> hallucination pressure: the model fills gaps with patterns from old training, ignores missing private data, or extrapolates beyond reasoning depth.
+            The fix is still architectural — not “try harder to be accurate.”
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>When you hit a cutoff or capability limit, expect hallucination-shaped failures. Design retrieval, tools, and verification for that tier.</p>
+          </div>
+        </section>
+
+        <section id="knowledge-cutoff" class="cg-article-section cg-reveal">
+          <h2>2. Knowledge Cutoffs — What the Model Cannot Know Yet</h2>
+          <p>
+            A <strong>knowledge cutoff</strong> is the date through which a base model’s pre-training data is current.
+            Events, regulations, product releases, and pricing after that date are not reliably “known” unless you inject them via context, tools, or retrieval.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>User assumption</th><th>Reality</th></tr></thead>
+              <tbody>
+                <tr><td>“It’s the latest GPT — it knows 2026.”</td><td>Cutoff + your context determine freshness</td></tr>
+                <tr><td>“It answered confidently.”</td><td>Confidence does not imply post-cutoff facts</td></tr>
+                <tr><td>“We’ll mention the date in the prompt.”</td><td>Prompts do not add missing world knowledge</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>PM questions to ask vendors and engineering:</p>
+          <ul class="cg-bento-list">
+            <li>What is the documented cutoff for each model tier we ship?</li>
+            <li>Which features use browsing, RAG, or tools to bypass cutoff for fresh facts?</li>
+            <li>What UX copy sets user expectations about timeliness?</li>
+          </ul>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Publish cutoff-aware behavior in the PRD: when the product must retrieve, call APIs, or refuse rather than guess.</p>
+          </div>
+        </section>
+
+        <section id="private-knowledge" class="cg-article-section cg-reveal">
+          <h2>3. Private Knowledge — What Was Never in Training</h2>
+          <p>
+            Models were not trained on your member database, unreleased roadmap, internal incident postmortems, or customer-specific contract amendments.
+            <strong>Private knowledge</strong> must enter via context, RAG, tools, or fine-tuning on permitted data — each with tradeoffs from Chapters 6 and 9.
+          </p>
+          <p>Failure mode: the model invents a plausible internal policy ID, discount rule, or account status because the question sounds like something it should know.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Data type</th><th>Typical product path</th></tr></thead>
+              <tbody>
+                <tr><td>Static internal handbook</td><td>RAG + versioned index</td></tr>
+                <tr><td>Per-user state</td><td>Tool call to system of record</td></tr>
+                <tr><td>Rare phrasing / labels</td><td>Fine-tune or few-shot on approved examples</td></tr>
+                <tr><td>Secrets</td><td>Never in prompts; redact in logs</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>If the answer depends on data the model never saw, the PRD must name the injection mechanism — not assume “the AI will know.”</p>
+          </div>
+        </section>
+
+        <section id="stale-knowledge" class="cg-article-section cg-reveal">
+          <h2>4. Stale Knowledge — Right Once, Wrong Now</h2>
+          <p>
+            Even before the hard cutoff, training data can be stale: old formularies, superseded APIs, deprecated SKUs, prior regulatory guidance.
+            <strong>Stale knowledge</strong> is especially dangerous because answers sound authoritative and may have been true in training.
+          </p>
+          <p>Stale failures show up when:</p>
+          <ul class="cg-bento-list">
+            <li>RAG indexes lag behind policy publishes,</li>
+            <li>cached embeddings serve old chunks,</li>
+            <li>fine-tunes encode last year’s process,</li>
+            <li>users upload an outdated PDF beside the current policy.</li>
+          </ul>
+          <p>Product mitigations: version tags on sources, “effective date” in UI, scheduled re-index, tool fetch for authoritative records, and explicit stale-source warnings in support tooling.</p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Freshness is a product SLA — index lag and cache TTL belong in requirements, not only in ops runbooks.</p>
+          </div>
+        </section>
+
+        <section id="not-sor" class="cg-article-section cg-reveal">
+          <h2>5. The Model Is Not the System of Record</h2>
+          <p>
+            The <strong>system of record (SOR)</strong> is where truth lives for a domain: eligibility engine, billing ledger, CRM, policy admin, content CMS.
+            The LLM is a reasoning and language layer over that truth — not a database.
+          </p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>If a decision affects money, access, compliance, or safety, the SOR (or a verified read of it) must win.</strong>
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Layer</th><th>Role</th></tr></thead>
+              <tbody>
+                <tr><td>LLM</td><td>Draft, explain, route, summarize</td></tr>
+                <tr><td>Tools / APIs</td><td>Read and write authoritative state</td></tr>
+                <tr><td>Human review</td><td>Approve high-impact actions</td></tr>
+                <tr><td>Audit log</td><td>Replay inputs, sources, and decisions</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Write acceptance criteria: “assistant must not finalize X without SOR confirmation.”</p>
+          </div>
+        </section>
+
+        <section id="context-dependency" class="cg-article-section cg-reveal">
+          <h2>6. Context Dependency — Answers Only as Good as What You Send</h2>
+          <p>
+            Models do not have persistent memory of your org unless you build it.
+            Every answer is conditioned on the current prompt, system instructions, retrieved chunks, tool outputs, and chat history in window — per Chapter 9.
+          </p>
+          <p>Context dependency means:</p>
+          <ul class="cg-bento-list">
+            <li>omit the clause → wrong conclusion,</li>
+            <li>duplicate conflicting docs → arbitrary preference,</li>
+            <li>bury the signal in noise → context rot,</li>
+            <li>truncate history → forgotten constraints.</li>
+          </ul>
+          <p>Limitation is not only “model IQ” — it is “what did we put in front of it this turn?”</p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Observability must show context replay. If support cannot see retrieved chunks and tool JSON, you cannot explain wrong answers.</p>
+          </div>
+        </section>
+
+        <section id="reasoning-limits" class="cg-article-section cg-reveal">
+          <h2>7. Reasoning Limits — Depth, Planning, and Edge Cases</h2>
+          <p>
+            LLMs excel at language-heavy tasks with patterns in training data.
+            They are weaker on multi-step planning under tight constraints, novel combinatorics, and tasks requiring exhaustive case analysis without tools.
+          </p>
+          <p>Reasoning limits appear as:</p>
+          <ul class="cg-bento-list">
+            <li>skipping a branch in a decision tree,</li>
+            <li>merging incompatible rules,</li>
+            <li>losing track of constraints in long chains,</li>
+            <li>“sounds right” logic that fails formal checks.</li>
+          </ul>
+          <p>Mitigations: decompose into steps, structured outputs, external validators, calculators, rules engines for hard gates, human review for exceptions.</p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Match workflow depth to model + tools. Do not ship “full autonomous adjudication” on language reasoning alone.</p>
+          </div>
+        </section>
+
+        <section id="arithmetic" class="cg-article-section cg-reveal">
+          <h2>8. Arithmetic and Structured Computation</h2>
+          <p>
+            Models can do mental math on small numbers in demos and still fail on totals, tiered pricing, pro-rations, or ledger reconciliation.
+            <strong>Arithmetic</strong> and tabular math should run in code, spreadsheets engines, or dedicated tools — with the model formatting inputs and explaining outputs.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Task</th><th>Prefer</th></tr></thead>
+              <tbody>
+                <tr><td>Sum of line items</td><td>Calculator tool / backend</td></tr>
+                <tr><td>Benefit accumulator</td><td>Eligibility API</td></tr>
+                <tr><td>Date math across time zones</td><td>Date library in code</td></tr>
+                <tr><td>Explain result to user</td><td>LLM narrative on verified numbers</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Never accept “the model calculated it” for money-moving fields without a deterministic check.</p>
+          </div>
+        </section>
+
+        <section id="instruction-limits" class="cg-article-section cg-reveal">
+          <h2>9. Instruction Limits — Following Rules Under Pressure</h2>
+          <p>
+            Instruction-tuned models follow system prompts well — until context is huge, tools return noisy payloads, users jailbreak, or conflicting rules appear in retrieved text.
+            <strong>Instruction limits</strong> mean priority and consistency are not guaranteed across long agent runs.
+          </p>
+          <p>Strengthen instructions with:</p>
+          <ul class="cg-bento-list">
+            <li>short, ordered system rules (not a 40-page policy dump),</li>
+            <li>structured output schemas for machine-checkable fields,</li>
+            <li>hard gates in code (“if missing auth doc → status = pending”),</li>
+            <li>separation of “style” vs “must never” rules.</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Critical constraints belong in code or workflow engine — not only in prose the model might dilute.</p>
+          </div>
+        </section>
+
+        <section id="prompt-sensitivity" class="cg-article-section cg-reveal">
+          <h2>10. Prompt Sensitivity — Small Wording, Different Outcomes</h2>
+          <p>
+            Outputs shift with phrasing, example order, language, and implicit tone.
+            <strong>Prompt sensitivity</strong> makes “works on my prompt” fragile across locales, accessibility needs, and messy real user text.
+          </p>
+          <p>Product implications:</p>
+          <ul class="cg-bento-list">
+            <li>eval suites with paraphrases and typos,</li>
+            <li>canoncial user intents mapped to stable internal prompts,</li>
+            <li>guardrails for empty, hostile, or ambiguous inputs,</li>
+            <li>documented prompt versions tied to model version.</li>
+          </ul>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Treat prompts like config: versioned, reviewed, and tested — not one engineer’s notebook.</p>
+          </div>
+        </section>
+
+        <section id="nondeterminism" class="cg-article-section cg-reveal">
+          <h2>11. Nondeterminism — Same Input, Different Paths</h2>
+          <p>
+            Sampling (Chapter 7), tool latency, retrieval ranking, and parallel agents introduce variance.
+            <strong>Nondeterminism</strong> is a feature for brainstorming and a defect for regulated extraction unless bounded.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Sampling stance</th></tr></thead>
+              <tbody>
+                <tr><td>Marketing drafts</td><td>Higher temperature OK with human edit</td></tr>
+                <tr><td>JSON extraction</td><td>Low temperature + schema validation</td></tr>
+                <tr><td>Policy interpretation</td><td>Low temperature + cite sources</td></tr>
+                <tr><td>Agent planning</td><td>Deterministic tools + logged branches</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Define per-feature temperature and retry policy in the PRD — not one global default.</p>
+          </div>
+        </section>
+
+        <section id="overconfidence" class="cg-article-section cg-reveal">
+          <h2>12. Overconfidence — Tone Without Calibration</h2>
+          <p>
+            RLHF-trained assistants are helpful and fluent — which users read as certainty.
+            <strong>Overconfidence</strong> is a UX and safety problem: users skip verification when the voice sounds authoritative.
+          </p>
+          <p>Product patterns that help:</p>
+          <ul class="cg-bento-list">
+            <li>explicit uncertainty language when evidence is thin,</li>
+            <li>confidence tied to source coverage (“2 of 5 required docs found”),</li>
+            <li>“verify before send” for customer-facing outputs,</li>
+            <li>refusal paths that explain what is missing — per Chapter 8.</li>
+          </ul>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Design tone for trust calibration, not impressiveness. A hedged correct answer beats a confident wrong one.</p>
+          </div>
+        </section>
+
+        <section id="multimodal" class="cg-article-section cg-reveal">
+          <h2>13. Multimodal Limits — Vision, Audio, and Documents</h2>
+          <p>
+            Multimodal models can read images, slides, and scans — with limits on resolution, handwriting, charts, and rare layouts.
+            <strong>Multimodal</strong> failures look like misread table cells, wrong legend colors, or skipped fine print in PDFs.
+          </p>
+          <p>Mitigations: OCR pipeline for critical fields, human review on low-confidence parses, separate extraction agent with structured schema, never trust vision-only for dosage or legal amounts.</p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Specify document types in scope. Out-of-scope formats should fail gracefully with human routing.</p>
+          </div>
+        </section>
+
+        <section id="tool-limits" class="cg-article-section cg-reveal">
+          <h2>14. Tool Limits — APIs Break, Agents Loop</h2>
+          <p>
+            Tools extend the model past cutoffs — when they work.
+            <strong>Tool limits</strong> include timeouts, partial JSON, rate limits, ambiguous schemas, and agent loops that burn tokens without progress.
+          </p>
+          <ul class="cg-bento-list">
+            <li>cap tool calls per turn and per session,</li>
+            <li>idempotent writes with confirmation steps,</li>
+            <li>fallback UX when SOR is down,</li>
+            <li>redacted logging for PII in tool payloads.</li>
+          </ul>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Tooling is part of reliability SLAs. “Model was fine, API failed” is still your incident.</p>
+          </div>
+        </section>
+
+        <section id="bias" class="cg-article-section cg-reveal">
+          <h2>15. Bias and Representation Limits</h2>
+          <p>
+            Training data and feedback loops encode historical bias, uneven coverage of languages and dialects, and skewed portrayals of groups.
+            <strong>Bias</strong> affects ranking suggestions, hiring support copy, clinical triage language, and moderation — even with safety tuning.
+          </p>
+          <p>PM responsibilities: harm tiers, prohibited use cases, eval slices by demographic proxy where appropriate, human review for sensitive domains, transparency on limitations in user-facing docs.</p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Bias is not only an ethics ticket — it is a product quality and legal exposure issue with measurable evals.</p>
+          </div>
+        </section>
+
+        <section id="domain-limits" class="cg-article-section cg-reveal">
+          <h2>16. Domain Limits — Expertise Boundaries</h2>
+          <p>
+            General models are broad and shallow in regulated domains unless you add retrieval, fine-tunes, and experts in the loop.
+            <strong>Domain limits</strong> show up in medicine, law, tax, insurance, and engineering standards where wrong advice has asymmetric harm.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Domain</th><th>Typical product stance</th></tr></thead>
+              <tbody>
+                <tr><td>Clinical</td><td>Decision support only; no diagnosis claims</td></tr>
+                <tr><td>Legal</td><td>Research aid; cite sources; no filing automation without review</td></tr>
+                <tr><td>Insurance</td><td>Policy-grounded; SOR for eligibility</td></tr>
+                <tr><td>Developer tools</td><td>Suggest code; run tests in CI</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Scope the product claim: “assists with X under Y constraints” — not “expert in everything.”</p>
+          </div>
+        </section>
+
+        <section id="eval-limits" class="cg-article-section cg-reveal">
+          <h2>17. Evaluation Limits — Benchmarks ≠ Your Workflow</h2>
+          <p>
+            Leaderboard scores rarely predict behavior on your documents, tools, and user phrasing.
+            <strong>Eval limits</strong> mean you need task-specific golden sets, production shadow metrics, and regression when models or prompts change.
+          </p>
+          <p>Minimum eval dimensions for limitation-aware products:</p>
+          <ul class="cg-bento-list">
+            <li>freshness (post-cutoff questions),</li>
+            <li>private-knowledge cases (should retrieve or refuse),</li>
+            <li>adversarial missing context,</li>
+            <li>arithmetic and structured fields,</li>
+            <li>tool failure injection.</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Ship criteria: “no release without regression on limitation suite for tier-1 flows.”</p>
+          </div>
+        </section>
+
+        <section id="limitations-stack" class="cg-article-section cg-reveal">
+          <h2>18. The Limitations Stack — How Failures Compound</h2>
+          <p>
+            Production failures are rarely one limitation. They stack:
+          </p>
+          <ol class="cg-bento-list" style="list-style:decimal;padding-left:1.25rem;">
+            <li>stale RAG chunk (stale knowledge),</li>
+            <li>missing eligibility tool call (not SOR),</li>
+            <li>long chat history noise (context dependency),</li>
+            <li>confident summary (overconfidence),</li>
+            <li>user trusts and acts (product risk).</li>
+          </ol>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Layer</th><th>What it constrains</th></tr></thead>
+              <tbody>
+                <tr><td>Training cutoff</td><td>World facts after date</td></tr>
+                <tr><td>Private data path</td><td>Org-specific truth</td></tr>
+                <tr><td>Context design</td><td>What the model sees this turn</td></tr>
+                <tr><td>Reasoning + tools</td><td>Correct multi-step outcomes</td></tr>
+                <tr><td>UX + policy</td><td>What users are allowed to do with output</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Capability → Cutoff → Limits → Architecture</strong> is how you unstack failures into owned layers.
+          </p>
+        </section>
+
+        <section id="product-controls" class="cg-article-section cg-reveal">
+          <h2>19. Product Controls — What to Build Around Limits</h2>
+          <p>Across Chapters 8–10, controls repeat. Here is the limitation-focused set:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Control</th><th>Addresses</th></tr></thead>
+              <tbody>
+                <tr><td>RAG with versioned index</td><td>Cutoff, stale, private docs</td></tr>
+                <tr><td>Tool calls to SOR</td><td>Private knowledge, arithmetic</td></tr>
+                <tr><td>Structured outputs + validation</td><td>Reasoning, instruction drift</td></tr>
+                <tr><td>Human review gates</td><td>Domain risk, overconfidence</td></tr>
+                <tr><td>Refusal + missing-info UX</td><td>Hallucination under uncertainty</td></tr>
+                <tr><td>Context replay telemetry</td><td>Context dependency, eval</td></tr>
+                <tr><td>Risk-tiered sampling</td><td>Nondeterminism</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Pick controls per tier in the PRD — not “enable RAG” as a checkbox without freshness, auth, and attribution rules.</p>
+          </div>
+        </section>
+
+        <section id="mistakes" class="cg-article-section cg-reveal">
+          <h2>20. What PMs Should Not Do</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Mistake</th><th>Why it fails</th></tr></thead>
+              <tbody>
+                <tr><td>Assume latest model knows current events</td><td>Cutoff + missing retrieval</td></tr>
+                <tr><td>Use the LLM as billing or eligibility SOR</td><td>Not auditable; arithmetic drift</td></tr>
+                <tr><td>Skip freshness SLAs on RAG</td><td>Stale knowledge failures</td></tr>
+                <tr><td>One eval set from public benchmarks only</td><td>Misses domain and tool paths</td></tr>
+                <tr><td>Hide limitations in marketing copy</td><td>Trust collapse on first wrong answer</td></tr>
+                <tr><td>Rely on “be careful” in system prompt</td><td>Instruction limits under load</td></tr>
+                <tr><td>Treat hallucination chapter as enough</td><td>Cutoffs need architecture too</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="decision-framework" class="cg-article-section cg-reveal">
+          <h2>21. Decision Framework — Five Questions per Feature</h2>
+          <ol class="cg-bento-list" style="list-style:decimal;padding-left:1.25rem;">
+            <li><strong>What facts must be fresh?</strong> — If yes, tools/RAG/browse; never rely on weights alone.</li>
+            <li><strong>What facts are private?</strong> — Name injection path and access control.</li>
+            <li><strong>What is authoritative?</strong> — SOR wins; model drafts only.</li>
+            <li><strong>What failure is acceptable?</strong> — Sets review, refusal, and sampling.</li>
+            <li><strong>How will we detect regression?</strong> — Limitation eval suite + context replay.</li>
+          </ol>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>If the answer needs…</th><th>Lean toward…</th></tr></thead>
+              <tbody>
+                <tr><td>Today’s public news</td><td>Browse or news API + cite</td></tr>
+                <tr><td>Internal policy clause</td><td>Versioned RAG + effective date</td></tr>
+                <tr><td>Member-specific status</td><td>SOR tool call</td></tr>
+                <tr><td>Exact dollars</td><td>Calculator / billing engine</td></tr>
+                <tr><td>Creative marketing</td><td>Higher sampling + human edit</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="policy-example" class="cg-article-section cg-reveal">
+          <h2>22. Practical Example: Policy Q&amp;A Assistant</h2>
+          <p><strong>Weak design:</strong> Single chat over base model; users ask “what’s our 2026 deductible policy for Plan X?”</p>
+          <p><strong>Failure modes:</strong> pre-cutoff training guess, stale PDF in upload folder, no citation, confident wrong dollar amount.</p>
+          <p><strong>Better design:</strong></p>
+          <ul class="cg-bento-list">
+            <li>RAG over versioned policy corp with effective dates in metadata,</li>
+            <li>refusal when no chunk above score threshold,</li>
+            <li>answers show clause ID + link to source PDF,</li>
+            <li>human-reviewed diffs when policy team publishes updates,</li>
+            <li>wording in UI: “Answers use documents indexed as of [date].”</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Policy Q&amp;A is a freshness and attribution product — not a general knowledge chatbot.</p>
+          </div>
+        </section>
+
+        <section id="preauth-example" class="cg-article-section cg-reveal">
+          <h2>23. Practical Example: Prior Authorization Assistant</h2>
+          <p><strong>Weak design:</strong> Model reads free-text notes and decides approve/deny from memory of “similar cases.”</p>
+          <p><strong>Better design:</strong></p>
+          <ul class="cg-bento-list">
+            <li>tool fetch: member benefits, auth history, formulary from SOR,</li>
+            <li>RAG: medical necessity criteria for the requested procedure,</li>
+            <li>structured checklist output (missing docs, criteria met/not met/unclear),</li>
+            <li>arithmetic only via benefits engine — not LLM,</li>
+            <li>human nurse/doctor review before denial letters send,</li>
+            <li>audit log with context replay for appeals.</li>
+          </ul>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Prior auth is a limitations stack in one workflow — cutoff, private data, reasoning, tools, and domain risk together.</p>
+          </div>
+        </section>
+
+        <section id="content-example" class="cg-article-section cg-reveal">
+          <h2>24. Practical Example: Marketing Content Workflow</h2>
+          <p>
+            Content teams want speed. Limits still apply: brand guidelines (private), factual claims about product (cutoff/stale), regulated claims (domain).
+          </p>
+          <p><strong>Weak design:</strong> One-shot “write launch email for feature Y” with no grounding.</p>
+          <p><strong>Better design:</strong></p>
+          <ul class="cg-bento-list">
+            <li>RAG over approved messaging kit and legal footnotes,</li>
+            <li>tool pull for feature availability dates from product CMS,</li>
+            <li>higher sampling for variants with human editor,</li>
+            <li>blocked terms list enforced in post-processing,</li>
+            <li>separate tier: external stats require cited source snippet in draft.</li>
+          </ul>
+          <p>Here, hallucination risk is reputational and regulatory — controls are lighter than prior auth but still explicit.</p>
+        </section>
+
+        <section id="mental-model" class="cg-article-section cg-reveal">
+          <h2>25. The PM Mental Model</h2>
+          <p style="font-size:1.1rem;color:var(--cg-text);line-height:1.7;margin:20px 0;">
+            Impressive capability does not remove cutoff dates, private data gaps, or reasoning boundaries.<br />
+            Capability → Cutoff → Limits → Architecture.<br />
+            Your product supplies what the model cannot hold alone.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Stage</th><th>PM owns</th></tr></thead>
+              <tbody>
+                <tr><td>Capability</td><td>Choose model tier and modality for the task</td></tr>
+                <tr><td>Cutoff</td><td>Freshness paths for time-sensitive facts</td></tr>
+                <tr><td>Limits</td><td>Honest scope, evals, and failure UX</td></tr>
+                <tr><td>Architecture</td><td>RAG, tools, SOR, review, telemetry</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Do not ship “the model will handle it.” Ship the stack that makes limits visible and recoverable.</strong>
+          </p>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM understanding</th></tr></thead>
+              <tbody>
+                <tr><td>Hallucination (Ch8)</td><td>Plausible language without evidence — controls still apply here</td></tr>
+                <tr><td>Knowledge cutoff</td><td>Training ends at a date; fresh facts need injection</td></tr>
+                <tr><td>Private knowledge</td><td>Never trained; needs RAG, tools, or approved fine-tune</td></tr>
+                <tr><td>Stale knowledge</td><td>Was true once; index and cache SLAs matter</td></tr>
+                <tr><td>Not SOR</td><td>Authoritative systems win for decisions</td></tr>
+                <tr><td>Context dependency</td><td>Answers follow what you send this turn</td></tr>
+                <tr><td>Reasoning &amp; arithmetic limits</td><td>Decompose; validate; use code and APIs</td></tr>
+                <tr><td>Overconfidence</td><td>Calibrate UX and require verification</td></tr>
+                <tr><td>Limitations stack</td><td>Failures compound — design layers</td></tr>
+                <tr><td>PM role</td><td>Architecture around cutoffs, not bigger prompts alone</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            Users experience limitations as betrayal: “I thought it knew our policy,” “it denied auth wrong,” “the numbers didn’t match the bill.”
+            Those moments are predictable when products treat models like omniscient teammates.
+          </p>
+          <p>
+            Strong PMs name limits in requirements, instrument context, tie decisions to systems of record, and align tone with evidence —
+            building on hallucination controls from Chapter 8 without pretending one chapter solves production risk.
+          </p>
+          <p>
+            The next chapter compares model families — how to choose between GPT, Claude, Gemini, Llama, and others when capability, cost, context, and safety profiles differ by use case.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>Design for what the model cannot do alone — then choose the model that fits the stack.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/pre-training-vs-fine-tuning-vs-rlhf-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 10: Pre-training vs Fine-tuning vs RLHF — The PM Version</h3>
+              <p>How each training stage shapes what a model knows and how it behaves before your product layer runs.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <div class="cg-next-card" style="opacity:0.75;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-text-faint);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 12: Choosing Between GPT, Claude, Gemini, and Llama — The PM Version</h3>
+              <p>How to compare model families on quality, cost, context, safety, and fit for your workflows.</p>
+              <span class="cg-status-badge soon" style="width:fit-content;">Coming Soon</span>
+            </div>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/pre-training-vs-fine-tuning-vs-rlhf-the-pm-version/">← Chapter 10</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>
