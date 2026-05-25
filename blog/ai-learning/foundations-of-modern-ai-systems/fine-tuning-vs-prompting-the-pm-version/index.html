@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager friendly explanation of prompting, fine-tuning, RAG, evaluation, cost, latency, data readiness, and how PMs should decide which model optimization strategy to use." />
+  <title>Fine-Tuning vs Prompting — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 6: Fine-Tuning vs Prompting — The PM Version" />
+  <meta property="og:description" content="When to use prompting, fine-tuning, RAG, and tools — a PM decision framework for model optimization." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 6: Fine-Tuning vs Prompting — The PM Version",
+    "description": "A product-manager friendly explanation of prompting, fine-tuning, RAG, evaluation, cost, latency, data readiness, and how PMs should decide which model optimization strategy to use.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 06", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/foundations-of-modern-ai-systems/">Foundations of Modern AI Systems</a><span class="sep">→</span>
+    <span class="current">Chapter 06</span>
+  </nav>
+
+  <!-- Editorial hero -->
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 06 · Module 01 · Beginner–Intermediate · 24–28 min</span>
+    <h1 class="cg-article-hero-title">Chapter 6: Fine-Tuning vs Prompting — The PM Version</h1>
+    <p class="cg-article-lede">
+      When to use prompting, fine-tuning, RAG, and tools — a PM decision framework.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">24–28 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="Optimization layers: prompt, RAG, tools, fine-tune">
+      <span class="cg-token">Prompt</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">RAG</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Tools</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Fine-tune</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Four layers: instruction → knowledge → action → learned behavior</p>
+  </header>
+
+  <!-- Article shell -->
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <!-- Sidebar TOC -->
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#simple-difference">1. The simple difference</a></li>
+            <li><a class="cg-toc-link" href="#prompting">2. Prompting</a></li>
+            <li><a class="cg-toc-link" href="#prompting-best">3. What prompting is best for</a></li>
+            <li><a class="cg-toc-link" href="#prompting-limits">4. Limits of prompting</a></li>
+            <li><a class="cg-toc-link" href="#fine-tuning">5. Fine-tuning</a></li>
+            <li><a class="cg-toc-link" href="#ft-best">6. What fine-tuning is best for</a></li>
+            <li><a class="cg-toc-link" href="#not-knowledge">7. Not for fresh knowledge</a></li>
+            <li><a class="cg-toc-link" href="#vs-rag">8. Prompting vs RAG vs FT</a></li>
+            <li><a class="cg-toc-link" href="#evals">9. Evaluation-first mindset</a></li>
+            <li><a class="cg-toc-link" href="#optimization-loop">10. Product optimization loop</a></li>
+            <li><a class="cg-toc-link" href="#data-readiness">11. Data readiness</a></li>
+            <li><a class="cg-toc-link" href="#shorter-prompts">12. Shorter prompts at scale</a></li>
+            <li><a class="cg-toc-link" href="#consistency-truth">13. Consistency ≠ truth</a></li>
+            <li><a class="cg-toc-link" href="#debug-prompt">14. Prompting is easier to debug</a></li>
+            <li><a class="cg-toc-link" href="#ft-commitment">15. Fine-tuning is a commitment</a></li>
+            <li><a class="cg-toc-link" href="#when-prompt">16. When prompting fits</a></li>
+            <li><a class="cg-toc-link" href="#when-ft">17. When fine-tuning fits</a></li>
+            <li><a class="cg-toc-link" href="#when-rag">18. When RAG fits</a></li>
+            <li><a class="cg-toc-link" href="#when-tools">19. When tools fit</a></li>
+            <li><a class="cg-toc-link" href="#decision-framework">20. PM decision framework</a></li>
+            <li><a class="cg-toc-link" href="#claims-example">21. Claims shortfall example</a></li>
+            <li><a class="cg-toc-link" href="#brand-example">22. Brand voice example</a></li>
+            <li><a class="cg-toc-link" href="#policy-example">23. Policy Q&amp;A example</a></li>
+            <li><a class="cg-toc-link" href="#what-not-to-do">24. What PMs should not do</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">25. Final mental model</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 24–28 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Article body -->
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/from-transformers-to-llms-the-pm-version/">Chapter 2</a>,
+            we saw how transformers became Large Language Models.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/">Chapter 3</a>,
+            we covered tokens and context windows — the working memory of an AI system.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/">Chapter 4</a>,
+            we introduced AI safety, RLHF, and Constitutional AI — why alignment matters and how human feedback shapes behavior.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/">Chapter 5</a>,
+            we went deeper into InstructGPT and the RLHF pipeline that turned base models into instruction-following assistants.
+          </p>
+          <p>
+            Now we come to a decision every AI product manager will face:
+          </p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Should we solve this with prompting, or should we fine-tune the model?</strong>
+          </p>
+          <p>
+            This question sounds technical. It is not only technical. It is a product strategy question.
+            The answer affects cost, latency, quality, reliability, data requirements, release timelines, maintainability, evaluation design, and long-term scalability.
+          </p>
+          <p>
+            A weak product team jumps to one extreme: “Let’s fine-tune the model” or “We can solve everything with better prompts.”
+            A strong product team asks: <strong>What behavior are we trying to improve, and what is the cheapest, safest, most maintainable way to improve it?</strong>
+          </p>
+          <p>
+            This chapter explains prompting vs fine-tuning from a PM lens — not as a machine learning tutorial, but as a practical product decision framework.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              Prompt first. Evaluate early. Retrieve knowledge. Use tools for exactness.<br />
+              Fine-tune only when behavior is repeated, measurable, stable, and valuable.
+            </p>
+          </div>
+        </section>
+
+        <section id="simple-difference" class="cg-article-section cg-reveal">
+          <h2>1. The Simple Difference</h2>
+          <p>
+            <strong>Prompting</strong> means you guide the model at runtime.
+            <strong>Fine-tuning</strong> means you change the model’s learned behavior through training.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Approach</th><th>Simple meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Prompting</td><td>Tell the model what to do in the input</td></tr>
+                <tr><td>Fine-tuning</td><td>Train the model on examples so it learns the behavior</td></tr>
+                <tr><td>RAG</td><td>Retrieve external knowledge and give it to the model as context</td></tr>
+                <tr><td>Tools</td><td>Let the model call APIs, databases, calculators, or workflows</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            These are not mutually exclusive. Good AI products often use a combination.
+            A simple product may use only prompting; a mature enterprise product may use prompting, RAG, tools, fine-tuning, evals, monitoring, human review, and audit logs.
+          </p>
+          <p>The key is knowing which layer solves which problem.</p>
+        </section>
+
+        <section id="prompting" class="cg-article-section cg-reveal">
+          <h2>2. Prompting: The Fastest Way to Shape Behavior</h2>
+          <p>
+            Prompting is the first lever most product teams should use.
+            A prompt gives the model instructions, context, examples, constraints, and output format.
+          </p>
+          <p>
+            Example: “Summarize this claim document in five bullet points. Highlight missing documents, policy risks, and next action. Do not make a final approval decision.”
+            The model is not retrained. Its weights do not change. You are giving it better instructions for this request.
+          </p>
+          <h3>Why prompting is powerful</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Prompting strength</th><th>Product benefit</th></tr></thead>
+              <tbody>
+                <tr><td>Fast to test</td><td>Quick iteration</td></tr>
+                <tr><td>No training data required</td><td>Good for early discovery</td></tr>
+                <tr><td>Easy to modify</td><td>PMs and SMEs can participate</td></tr>
+                <tr><td>Low upfront cost</td><td>Useful for MVPs</td></tr>
+                <tr><td>Works well with strong models</td><td>Good for many general tasks</td></tr>
+                <tr><td>Can include current context</td><td>Useful with RAG and tools</td></tr>
+                <tr><td>Transparent</td><td>Easy to inspect and debug</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>For most early-stage AI features, prompting should be the default starting point.</p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              If you are still discovering the user problem, do not fine-tune first. Prompt first.
+              Use prompting to understand what users ask, where the model fails, what context is needed, what format users prefer, what edge cases appear, and what evaluation criteria matter.
+            </p>
+          </div>
+        </section>
+
+        <section id="prompting-best" class="cg-article-section cg-reveal">
+          <h2>3. What Prompting Is Best For</h2>
+          <p>
+            Prompting works well when the behavior change is mostly about instruction, context, or output format.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Why prompting works</th></tr></thead>
+              <tbody>
+                <tr><td>Summarization</td><td>Model already knows how to summarize</td></tr>
+                <tr><td>Rewriting</td><td>Model already understands tone and language</td></tr>
+                <tr><td>Structured output</td><td>Format can be specified in prompt</td></tr>
+                <tr><td>Basic classification</td><td>Instructions and examples may be enough</td></tr>
+                <tr><td>Drafting emails</td><td>Strong models handle this well</td></tr>
+                <tr><td>Explaining concepts</td><td>Model already has general knowledge</td></tr>
+                <tr><td>One-off tasks</td><td>Fine-tuning would be overkill</td></tr>
+                <tr><td>Rapid experimentation</td><td>Prompts are easy to change</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Example: an AI feature that rewrites customer support replies in a more polite tone.
+            Prompting may be enough: “Rewrite this reply in a polite, concise, professional tone. Keep all factual details unchanged.”
+            No fine-tuning needed at the start.
+          </p>
+          <h3>Prompting works best when</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Condition</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Task is simple or moderately complex</td><td>The model already has the ability</td></tr>
+                <tr><td>Data is limited</td><td>No training set exists yet</td></tr>
+                <tr><td>Behavior changes often</td><td>Prompts are easier to update</td></tr>
+                <tr><td>Use case is exploratory</td><td>Product is still evolving</td></tr>
+                <tr><td>Context changes every request</td><td>RAG/prompting may be better</td></tr>
+                <tr><td>Risk is manageable</td><td>Human review can catch issues</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Prompting is flexible. That flexibility is its biggest advantage.</p>
+        </section>
+
+        <section id="prompting-limits" class="cg-article-section cg-reveal">
+          <h2>4. The Limits of Prompting</h2>
+          <p>
+            Prompting is not magic. At some point, prompts become too long, too fragile, or too hard to maintain.
+          </p>
+          <p>You may see this when:</p>
+          <ul class="cg-bento-list">
+            <li>the prompt becomes a giant rulebook,</li>
+            <li>the model ignores some instructions,</li>
+            <li>output format keeps drifting,</li>
+            <li>examples do not fit in the context window,</li>
+            <li>behavior changes across model versions,</li>
+            <li>latency increases due to long prompts,</li>
+            <li>token cost becomes high at scale,</li>
+            <li>edge cases require many examples,</li>
+            <li>or the same mistakes happen repeatedly.</li>
+          </ul>
+          <h3>Signs prompting is reaching its limit</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Symptom</th><th>What it means</th></tr></thead>
+              <tbody>
+                <tr><td>Prompt is becoming very long</td><td>You are encoding too much behavior at runtime</td></tr>
+                <tr><td>Model keeps missing the same pattern</td><td>It may need training examples</td></tr>
+                <tr><td>Output format is inconsistent</td><td>Prompt may not be strong enough</td></tr>
+                <tr><td>You need many few-shot examples</td><td>Context window is being used as a training set</td></tr>
+                <tr><td>Latency is too high</td><td>Prompt size may be too large</td></tr>
+                <tr><td>Cost is rising</td><td>Repeated examples cost tokens every call</td></tr>
+                <tr><td>SMEs keep patching instructions</td><td>Product behavior is not stable</td></tr>
+                <tr><td>Different models behave differently</td><td>Prompt is brittle</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>This is where fine-tuning may become relevant.</p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Prompting is best for steering. Fine-tuning is better when you need behavior to become more native, repeatable, and consistent.</p>
+          </div>
+        </section>
+
+        <section id="fine-tuning" class="cg-article-section cg-reveal">
+          <h2>5. Fine-Tuning: Teaching the Model Through Examples</h2>
+          <p>
+            Fine-tuning means training a model on examples of the behavior you want.
+            Instead of writing a giant prompt that says “Always respond like this…,” you give the model many examples showing:
+            “When the input looks like this, the output should look like that.”
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Input</th><th>Desired output</th></tr></thead>
+              <tbody>
+                <tr><td>Raw claim note</td><td>Structured claim summary</td></tr>
+                <tr><td>Customer complaint</td><td>Correct category and escalation priority</td></tr>
+                <tr><td>Internal SOP question</td><td>Approved style answer</td></tr>
+                <tr><td>Messy support message</td><td>Clean response in company tone</td></tr>
+                <tr><td>Product feedback</td><td>Feature theme classification</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Fine-tuning changes the model’s learned behavior for the target task. It is not just instruction. It is training.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM analogy</p>
+            <p>
+              Prompting is like giving an employee instructions before each task.
+              Fine-tuning is like training the employee over time using repeated examples.
+              If the task happens once, instructions are enough. If it happens thousands of times, training may be better.
+            </p>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">Further reading</p>
+            <p>
+              OpenAI:
+              <a href="https://platform.openai.com/docs/guides/fine-tuning" target="_blank" rel="noopener">Fine-tuning guide</a>
+              — when and how to fine-tune models for your use case.
+            </p>
+            <p style="margin-top:8px;">
+              Weights &amp; Biases:
+              <a href="https://docs.wandb.ai/guides/integrations/openai/" target="_blank" rel="noopener">OpenAI fine-tuning integration</a>
+              — track training runs, datasets, and model versions.
+            </p>
+          </div>
+        </section>
+
+        <section id="ft-best" class="cg-article-section cg-reveal">
+          <h2>6. What Fine-Tuning Is Best For</h2>
+          <p>
+            Fine-tuning works best when you need repeatable behavior across many similar tasks.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Why fine-tuning helps</th></tr></thead>
+              <tbody>
+                <tr><td>Consistent output format</td><td>Model learns the structure</td></tr>
+                <tr><td>Brand or domain tone</td><td>Model learns repeated style</td></tr>
+                <tr><td>Repeated classification</td><td>Model learns decision pattern</td></tr>
+                <tr><td>Domain-specific extraction</td><td>Model learns field patterns</td></tr>
+                <tr><td>Shorter prompts at scale</td><td>Less need for repeated examples</td></tr>
+                <tr><td>Lower latency</td><td>Smaller prompts can reduce request size</td></tr>
+                <tr><td>Smaller model specialization</td><td>A cheaper model may perform well on one task</td></tr>
+                <tr><td>Correcting repeated instruction failures</td><td>Model learns what prompt alone cannot fix</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Fine-tuning is especially useful when the model already has the general capability but does not perform the task consistently enough.
+          </p>
+          <h3>Example: customer support tone</h3>
+          <p>
+            Prompting: “Reply in our brand tone: warm, direct, calm, non-defensive, no over-apology.” This may work.
+            But if the product generates thousands of replies every day and tone consistency is critical, fine-tuning on approved examples may produce more reliable behavior.
+          </p>
+          <h3>Example: claims summary format</h3>
+          <p>
+            Prompting: “Summarize the claim in this exact structure…” may work for a demo.
+            If the model keeps missing fields or producing inconsistent labels, fine-tuning on hundreds or thousands of approved summaries may help.
+          </p>
+        </section>
+
+        <section id="not-knowledge" class="cg-article-section cg-reveal">
+          <h2>7. Fine-Tuning Is Not for Adding Fresh Knowledge</h2>
+          <p>
+            This is one of the most important PM lessons. Fine-tuning is often misunderstood as a way to “upload knowledge into the model.”
+            That is usually the wrong mental model.
+          </p>
+          <p>
+            If your problem is “The model does not know our latest policy, product catalog, SOP, or insurer guideline,”
+            your first solution should usually not be fine-tuning. It should usually be RAG, database lookup, or tool use.
+          </p>
+          <p>
+            Business knowledge changes. Policies change. Pricing changes. SOPs change. Regulations change.
+            Product features change. Customer data changes. Claim status changes.
+            You do not want to retrain a model every time business knowledge changes.
+          </p>
+          <h3>PM rule</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Problem</th><th>Better first approach</th></tr></thead>
+              <tbody>
+                <tr><td>Model needs latest policy</td><td>RAG</td></tr>
+                <tr><td>Model needs customer record</td><td>Database/API tool</td></tr>
+                <tr><td>Model needs claim status</td><td>System integration</td></tr>
+                <tr><td>Model needs live price</td><td>API lookup</td></tr>
+                <tr><td>Model needs latest regulation</td><td>Retrieval/search</td></tr>
+                <tr><td>Model needs current inventory</td><td>Tool call</td></tr>
+                <tr><td>Model needs internal SOP</td><td>RAG/document index</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Fine-tuning is better for behavior. RAG and tools are better for knowledge.</p>
+          <h3>Clear mental model</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Need</th><th>Best fit</th></tr></thead>
+              <tbody>
+                <tr><td>Teach behavior</td><td>Fine-tuning</td></tr>
+                <tr><td>Provide current facts</td><td>RAG</td></tr>
+                <tr><td>Fetch live data</td><td>Tool/API</td></tr>
+                <tr><td>Enforce business rules</td><td>Rule engine/workflow</td></tr>
+                <tr><td>Improve wording</td><td>Prompting or fine-tuning</td></tr>
+                <tr><td>Improve repeated format</td><td>Fine-tuning</td></tr>
+                <tr><td>Improve one-off answer</td><td>Prompting</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Do not fine-tune when the problem is missing context. Pass the context.</p>
+          </div>
+        </section>
+
+        <section id="vs-rag" class="cg-article-section cg-reveal">
+          <h2>8. Fine-Tuning vs Prompting vs RAG</h2>
+          <p>
+            A mature PM should not compare only prompting and fine-tuning.
+            The real choice is usually between prompting, RAG, fine-tuning, tools, or a combination.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Problem</th><th>Prompting</th><th>RAG</th><th>Fine-tuning</th><th>Tools</th></tr></thead>
+              <tbody>
+                <tr><td>Need better instruction-following</td><td>Good first step</td><td>Not enough alone</td><td>Strong if repeated failure</td><td>Not relevant</td></tr>
+                <tr><td>Need current knowledge</td><td>Weak</td><td>Strong</td><td>Weak</td><td>Strong</td></tr>
+                <tr><td>Need consistent format</td><td>Good first step</td><td>Not enough</td><td>Strong</td><td>Not relevant</td></tr>
+                <tr><td>Need live system data</td><td>Weak</td><td>Maybe</td><td>Weak</td><td>Strong</td></tr>
+                <tr><td>Need domain tone</td><td>Good</td><td>Not enough</td><td>Strong</td><td>Not relevant</td></tr>
+                <tr><td>Need exact calculation</td><td>Weak</td><td>Not enough</td><td>Weak</td><td>Strong</td></tr>
+                <tr><td>Need repeated classification</td><td>Good first step</td><td>Maybe</td><td>Strong</td><td>Maybe</td></tr>
+                <tr><td>Need auditability</td><td>Prompt helps</td><td>Strong with citations</td><td>Needs evals</td><td>Strong with logs</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Do not ask “Prompting or fine-tuning?” Ask: “Is the problem instruction, context, behavior, knowledge, calculation, or action?”
+              Then choose the right layer.
+            </p>
+          </div>
+        </section>
+
+        <section id="evals" class="cg-article-section cg-reveal">
+          <h2>9. The Evaluation-First Mindset</h2>
+          <p>
+            Before deciding to fine-tune, build an evaluation set. This is non-negotiable.
+            If you cannot measure the model’s failure, you cannot prove fine-tuning helped.
+          </p>
+          <p>
+            A proper evaluation set contains representative inputs and expected behavior.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Eval component</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>Normal cases</td><td>Common user requests</td></tr>
+                <tr><td>Edge cases</td><td>Ambiguous, incomplete, messy inputs</td></tr>
+                <tr><td>High-risk cases</td><td>Compliance-sensitive examples</td></tr>
+                <tr><td>Format checks</td><td>JSON/table/field-level validation</td></tr>
+                <tr><td>Ground truth</td><td>Expert-approved expected outputs</td></tr>
+                <tr><td>Failure categories</td><td>Hallucination, wrong format, missed field</td></tr>
+                <tr><td>Scoring method</td><td>Human review, rubric, automated grader</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Without evals, teams argue based on vibes. One person says the fine-tuned model feels better; another says the prompt version is good enough.
+            That is not product management. That is opinion management.
+          </p>
+          <p>Before fine-tuning, define:</p>
+          <ol class="cg-bento-list" style="list-style:decimal;">
+            <li>What does good output mean?</li>
+            <li>What are the top failure modes?</li>
+            <li>What score are we trying to improve?</li>
+            <li>What is the baseline prompt performance?</li>
+            <li>How will we compare the fine-tuned model?</li>
+            <li>What trade-offs are acceptable?</li>
+            <li>What happens if fine-tuning improves one metric but hurts another?</li>
+          </ol>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Fine-tuning without evals is gambling.</p>
+          </div>
+        </section>
+
+        <section id="optimization-loop" class="cg-article-section cg-reveal">
+          <h2>10. The Product Optimization Loop</h2>
+          <p>
+            A healthy AI product does not jump directly from prompt to fine-tune. It follows a loop.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Step</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Define task and success criteria</td></tr>
+                <tr><td>2</td><td>Build baseline prompt</td></tr>
+                <tr><td>3</td><td>Run evals on real-world-like data</td></tr>
+                <tr><td>4</td><td>Analyze failure patterns</td></tr>
+                <tr><td>5</td><td>Improve prompt/context/RAG/tools</td></tr>
+                <tr><td>6</td><td>Re-run evals</td></tr>
+                <tr><td>7</td><td>Decide whether fine-tuning is justified</td></tr>
+                <tr><td>8</td><td>Build fine-tuning dataset</td></tr>
+                <tr><td>9</td><td>Train and evaluate</td></tr>
+                <tr><td>10</td><td>Monitor in production</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Many failures are not fine-tuning problems. They are product design problems.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Failure</th><th>Real fix</th></tr></thead>
+              <tbody>
+                <tr><td>Model gives outdated policy</td><td>RAG, not fine-tuning</td></tr>
+                <tr><td>Model misses customer data</td><td>API integration, not fine-tuning</td></tr>
+                <tr><td>Model cannot calculate correctly</td><td>Calculator/tool, not fine-tuning</td></tr>
+                <tr><td>Model output format drifts</td><td>Prompt first, fine-tune if repeated</td></tr>
+                <tr><td>Model tone is inconsistent</td><td>Prompt first, fine-tune if scale justifies</td></tr>
+                <tr><td>Model fails edge classification</td><td>Fine-tuning may help</td></tr>
+                <tr><td>Model hallucinates missing docs</td><td>Context and source grounding first</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Fine-tuning should be a decision after diagnosis — not a reflex.</p>
+          </div>
+        </section>
+
+        <section id="data-readiness" class="cg-article-section cg-reveal">
+          <h2>11. Data Readiness: The Hidden Cost of Fine-Tuning</h2>
+          <p>
+            Fine-tuning requires data — not just any data, but good data. That is where many teams fail.
+            “We have a lot of data” is not the same as “We have clean, representative, labeled examples.”
+          </p>
+          <h3>Good fine-tuning data should be</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Requirement</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Representative</td><td>Matches real production inputs</td></tr>
+                <tr><td>High-quality</td><td>Outputs are correct and approved</td></tr>
+                <tr><td>Consistent</td><td>Similar cases are labeled similarly</td></tr>
+                <tr><td>Diverse</td><td>Covers normal and edge cases</td></tr>
+                <tr><td>Safe</td><td>Does not include unnecessary sensitive data</td></tr>
+                <tr><td>Versioned</td><td>Dataset changes are tracked</td></tr>
+                <tr><td>Reviewed</td><td>SMEs validate examples</td></tr>
+                <tr><td>Measurable</td><td>Supports evaluation</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Bad data trains bad behavior. If your historical data contains inconsistent human decisions, messy formatting, outdated policies, or operational shortcuts, fine-tuning may teach the model the wrong thing.
+          </p>
+          <h3>Questions to ask before fine-tuning</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Question</th><th>Why it matters</th></tr></thead>
+              <tbody>
+                <tr><td>Do we have approved examples?</td><td>Model learns from examples</td></tr>
+                <tr><td>Are examples current?</td><td>Avoid outdated behavior</td></tr>
+                <tr><td>Are labels consistent?</td><td>Avoid confusing training signal</td></tr>
+                <tr><td>Are edge cases included?</td><td>Improve robustness</td></tr>
+                <tr><td>Has SME reviewed the dataset?</td><td>Ensure domain correctness</td></tr>
+                <tr><td>Is sensitive data minimized?</td><td>Reduce privacy risk</td></tr>
+                <tr><td>Is dataset versioned?</td><td>Support traceability</td></tr>
+                <tr><td>Is there a separate test set?</td><td>Avoid self-deception</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Fine-tuning is only as good as the dataset.</p>
+        </section>
+
+        <section id="shorter-prompts" class="cg-article-section cg-reveal">
+          <h2>12. Fine-Tuning Can Reduce Prompt Length</h2>
+          <p>
+            One real benefit of fine-tuning is that it can reduce the amount of instruction and examples you need to send in every request.
+            Without fine-tuning, you may need a long system prompt, many rules, several examples, detailed formatting instructions, tone guidance, and edge-case handling.
+            With fine-tuning, some of that behavior can be learned by the model.
+          </p>
+          <p>Shorter prompts may reduce token cost, latency, context clutter, and prompt maintenance burden.</p>
+          <h3>Example</h3>
+          <p>
+            Before fine-tuning: a 2,000-token prompt with 8 examples and strict formatting instructions.<br />
+            After fine-tuning: a 300-token prompt with the task and current context.
+          </p>
+          <p>This can matter at scale.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Condition</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td>High request volume</td><td>Token savings compound</td></tr>
+                <tr><td>Long repeated prompts</td><td>Fine-tuning can internalize examples</td></tr>
+                <tr><td>Latency matters</td><td>Shorter prompts can help</td></tr>
+                <tr><td>Format consistency matters</td><td>Learned structure reduces drift</td></tr>
+                <tr><td>Smaller model can be used</td><td>Cost may drop significantly</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Do the math. Fine-tuning has upfront training and maintenance cost. The savings must justify the complexity.</p>
+          </div>
+        </section>
+
+        <section id="consistency-truth" class="cg-article-section cg-reveal">
+          <h2>13. Fine-Tuning Can Improve Consistency, Not Guarantee Truth</h2>
+          <p>
+            Fine-tuning can make outputs more consistent. But consistency is not the same as truth.
+            A fine-tuned model may consistently produce the wrong answer if trained on poor data.
+            It may consistently follow a structure while still hallucinating facts.
+            It may consistently sound like your brand while missing policy nuance.
+          </p>
+          <h3>Example</h3>
+          <p>
+            A claims AI model fine-tuned on old claim summaries may become very good at writing summaries in your preferred format.
+            But if policy rules changed, it may still produce outdated reasoning unless it receives current context.
+          </p>
+          <p>Fine-tuning improves behavior patterns. It does not remove the need for RAG, source grounding, live data, validation, human review, and monitoring.</p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              A fine-tuned model can still be wrong. It may just be wrong more consistently.
+              That is dangerous if you do not evaluate it.
+            </p>
+          </div>
+        </section>
+
+        <section id="debug-prompt" class="cg-article-section cg-reveal">
+          <h2>14. Prompting Is Easier to Debug</h2>
+          <p>
+            Prompting has one big advantage: it is visible. You can inspect the prompt and say:
+            this instruction is unclear, this example is wrong, this rule conflicts with another rule, this context is missing.
+          </p>
+          <p>
+            Fine-tuning is less transparent. If a fine-tuned model behaves badly, it may be harder to know why —
+            the data, the labels, the training method, the base model, the evaluation set, the deployment prompt, or the model update.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Use prompting while product behavior is still changing.
+              Use fine-tuning only when behavior is stable, failures are repeated, examples are available, evals are ready, and the business case is clear.
+              Fine-tuning too early creates a slower product learning loop.
+            </p>
+          </div>
+        </section>
+
+        <section id="ft-commitment" class="cg-article-section cg-reveal">
+          <h2>15. Fine-Tuning Is a Product Commitment</h2>
+          <p>
+            A prompt can be edited quickly. A fine-tuned model must be managed: dataset management, training jobs, validation, deployment, rollback, versioning, monitoring, governance, retraining, and cost tracking.
+          </p>
+          <p>You need traceability:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Artifact</th><th>Why it matters</th></tr></thead>
+              <tbody>
+                <tr><td>Training dataset</td><td>What did the model learn from?</td></tr>
+                <tr><td>Validation dataset</td><td>How was it tested?</td></tr>
+                <tr><td>Model version</td><td>Which version is in production?</td></tr>
+                <tr><td>Training configuration</td><td>How was it trained?</td></tr>
+                <tr><td>Evaluation results</td><td>Did it improve?</td></tr>
+                <tr><td>Deployment date</td><td>When did behavior change?</td></tr>
+                <tr><td>Rollback version</td><td>What if performance drops?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Fine-tuning turns model behavior into a managed product asset.</p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Do not fine-tune unless you are ready to own the lifecycle.
+              Fine-tuning is not a one-time experiment. It is a product operations responsibility.
+            </p>
+          </div>
+        </section>
+
+        <section id="when-prompt" class="cg-article-section cg-reveal">
+          <h2>16. When Prompting Is the Right Choice</h2>
+          <p>
+            Prompting is the right choice when speed, flexibility, and learning matter more than hard-coded consistency.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Situation</th><th>Why prompting fits</th></tr></thead>
+              <tbody>
+                <tr><td>MVP or prototype</td><td>Fast iteration</td></tr>
+                <tr><td>Task is still evolving</td><td>Easy to change</td></tr>
+                <tr><td>Few examples exist</td><td>No dataset yet</td></tr>
+                <tr><td>User context changes often</td><td>Runtime context matters</td></tr>
+                <tr><td>Output does not need extreme consistency</td><td>Prompt is enough</td></tr>
+                <tr><td>Human review exists</td><td>Mistakes can be caught</td></tr>
+                <tr><td>Volume is low</td><td>Token cost is manageable</td></tr>
+                <tr><td>Need current information</td><td>Use prompt + RAG</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Example</h3>
+          <p>
+            You are building an AI assistant that helps product managers draft PRDs.
+            Prompting is probably enough at first. The product is exploratory, user expectations vary, the format may evolve, and examples are still being collected.
+            Fine-tuning would be premature.
+          </p>
+        </section>
+
+        <section id="when-ft" class="cg-article-section cg-reveal">
+          <h2>17. When Fine-Tuning Is the Right Choice</h2>
+          <p>
+            Fine-tuning is the right choice when the task is stable, repeated, measurable, and valuable enough to justify training.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Situation</th><th>Why fine-tuning fits</th></tr></thead>
+              <tbody>
+                <tr><td>Same task repeats frequently</td><td>Training value compounds</td></tr>
+                <tr><td>Output format must be consistent</td><td>Model learns structure</td></tr>
+                <tr><td>Tone/style must be highly specific</td><td>Examples teach style</td></tr>
+                <tr><td>Prompt is too long</td><td>Fine-tuning can reduce examples</td></tr>
+                <tr><td>Model repeats same failure</td><td>Training may correct behavior</td></tr>
+                <tr><td>You have high-quality examples</td><td>Dataset is ready</td></tr>
+                <tr><td>Evaluation is clear</td><td>Improvement can be measured</td></tr>
+                <tr><td>Scale justifies cost</td><td>Business case exists</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Example</h3>
+          <p>
+            You are building a customer support reply generator for a high-volume operation.
+            The brand tone is specific. The answer format is stable. Thousands of examples exist.
+            Human agents already edit responses. Acceptance and edit rates can be measured.
+            Fine-tuning may be justified.
+          </p>
+        </section>
+
+        <section id="when-rag" class="cg-article-section cg-reveal">
+          <h2>18. When RAG Is the Right Choice</h2>
+          <p>
+            RAG is the right choice when the model needs current or private knowledge.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Situation</th><th>Why RAG fits</th></tr></thead>
+              <tbody>
+                <tr><td>Knowledge changes often</td><td>Retrieval stays current</td></tr>
+                <tr><td>Source citation is needed</td><td>Retrieved docs can be shown</td></tr>
+                <tr><td>Documents are large</td><td>Retrieve relevant chunks</td></tr>
+                <tr><td>User asks factual questions</td><td>Ground answer in source</td></tr>
+                <tr><td>Internal knowledge base exists</td><td>Index and retrieve</td></tr>
+                <tr><td>Compliance needs traceability</td><td>Cite source documents</td></tr>
+                <tr><td>Fine-tuning would go stale</td><td>RAG separates knowledge from behavior</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Example</h3>
+          <p>
+            You are building an internal policy assistant. Policy documents change monthly.
+            Fine-tuning on old policies would be risky. RAG lets the model retrieve the latest approved policy document at runtime.
+          </p>
+        </section>
+
+        <section id="when-tools" class="cg-article-section cg-reveal">
+          <h2>19. When Tools Are the Right Choice</h2>
+          <p>
+            Tools are the right choice when the model needs to do something exact or interact with a system.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Situation</th><th>Why tools fit</th></tr></thead>
+              <tbody>
+                <tr><td>Need live data</td><td>Query API/database</td></tr>
+                <tr><td>Need calculation</td><td>Use calculator/code</td></tr>
+                <tr><td>Need transaction</td><td>Trigger workflow</td></tr>
+                <tr><td>Need validation</td><td>Call rules engine</td></tr>
+                <tr><td>Need lookup</td><td>Search records</td></tr>
+                <tr><td>Need action</td><td>Create ticket/update system</td></tr>
+                <tr><td>Need audit</td><td>Log tool call and result</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Example</h3>
+          <p>
+            User asks: “Is this claim eligible for approval?” The model should not guess.
+            It may need tools to fetch policy details, check member eligibility, calculate sum insured balance, check waiting period, validate hospital network status, and retrieve prior authorization history.
+            That is not a fine-tuning problem. That is a system integration problem.
+          </p>
+        </section>
+
+        <section id="decision-framework" class="cg-article-section cg-reveal">
+          <h2>20. The PM Decision Framework</h2>
+          <p>Use this framework before deciding.</p>
+          <h3>Step 1: Identify the failure</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Failure type</th><th>Likely solution</th></tr></thead>
+              <tbody>
+                <tr><td>Model does not understand instruction</td><td>Better prompt first</td></tr>
+                <tr><td>Model lacks current knowledge</td><td>RAG</td></tr>
+                <tr><td>Model needs live data</td><td>Tool/API</td></tr>
+                <tr><td>Model gives inconsistent format</td><td>Prompt first, then fine-tune if repeated</td></tr>
+                <tr><td>Model tone is inconsistent</td><td>Prompt first, fine-tune if scale matters</td></tr>
+                <tr><td>Model makes repeated domain classification errors</td><td>Fine-tuning may help</td></tr>
+                <tr><td>Model calculates incorrectly</td><td>Tool/calculator</td></tr>
+                <tr><td>Model acts without permission</td><td>Workflow control</td></tr>
+                <tr><td>Model hallucinates</td><td>RAG, citations, evals, guardrails</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Step 2: Check data readiness</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Question</th><th>If no</th></tr></thead>
+              <tbody>
+                <tr><td>Do we have high-quality examples?</td><td>Do not fine-tune yet</td></tr>
+                <tr><td>Are outputs SME-approved?</td><td>Build review process first</td></tr>
+                <tr><td>Is data representative?</td><td>Collect more samples</td></tr>
+                <tr><td>Is task stable?</td><td>Use prompting</td></tr>
+                <tr><td>Is evaluation ready?</td><td>Build evals first</td></tr>
+                <tr><td>Is privacy handled?</td><td>Clean/redact data first</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Step 3: Compare cost and complexity</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Approach</th><th>Upfront cost</th><th>Runtime cost</th><th>Maintenance</th></tr></thead>
+              <tbody>
+                <tr><td>Prompting</td><td>Low</td><td>Can rise with long prompts</td><td>Easy</td></tr>
+                <tr><td>RAG</td><td>Medium</td><td>Moderate</td><td>Requires document pipeline</td></tr>
+                <tr><td>Fine-tuning</td><td>Higher</td><td>Can reduce prompt cost</td><td>Requires model lifecycle</td></tr>
+                <tr><td>Tools</td><td>Medium to high</td><td>Depends on calls</td><td>Requires integration governance</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Step 4: Choose the minimum sufficient strategy</h3>
+          <p>
+            Do not choose the most advanced strategy. Choose the minimum strategy that reliably solves the product problem.
+          </p>
+        </section>
+
+        <section id="claims-example" class="cg-article-section cg-reveal">
+          <h2>21. A Practical Example: Claims Shortfall Assistant</h2>
+          <p>
+            Product goal: build an AI assistant that reviews claim documents and suggests whether a shortfall should be raised.
+          </p>
+          <h3>Problem components</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Need</th><th>Best strategy</th></tr></thead>
+              <tbody>
+                <tr><td>Understand user instruction</td><td>Prompting</td></tr>
+                <tr><td>Read claim documents</td><td>OCR + RAG/context</td></tr>
+                <tr><td>Know latest policy rules</td><td>RAG/rule engine</td></tr>
+                <tr><td>Identify missing documents</td><td>Prompt + rules + examples</td></tr>
+                <tr><td>Format shortfall reason</td><td>Prompt or fine-tuning</td></tr>
+                <tr><td>Use consistent tone</td><td>Prompt first, fine-tune later if needed</td></tr>
+                <tr><td>Check eligibility</td><td>Tool/API</td></tr>
+                <tr><td>Avoid final unauthorized decision</td><td>Workflow guardrail</td></tr>
+                <tr><td>Improve repeated classification</td><td>Fine-tuning if data exists</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Likely architecture</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Layer</th><th>Role</th></tr></thead>
+              <tbody>
+                <tr><td>Prompt</td><td>Defines task and output format</td></tr>
+                <tr><td>RAG</td><td>Provides relevant policy/SOP clauses</td></tr>
+                <tr><td>Tools</td><td>Fetch live claim/member data</td></tr>
+                <tr><td>Rules engine</td><td>Handles deterministic checks</td></tr>
+                <tr><td>Fine-tuning</td><td>Optional later for repeated summary/shortfall patterns</td></tr>
+                <tr><td>Human review</td><td>Final approval</td></tr>
+                <tr><td>Evals</td><td>Measure correctness and safety</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Notice the answer is not “fine-tune” or “prompt.” The answer is product architecture.
+          </p>
+        </section>
+
+        <section id="brand-example" class="cg-article-section cg-reveal">
+          <h2>22. A Practical Example: Brand Voice Assistant</h2>
+          <p>Product goal: generate customer replies in a very specific brand voice.</p>
+          <h3>Early stage</h3>
+          <p>
+            Use prompting: “Rewrite this in a calm, direct, helpful tone. Avoid apology-heavy language. Keep the answer under 120 words.”
+            Collect examples. Measure edit rate. Ask users to approve/reject.
+          </p>
+          <h3>Later stage</h3>
+          <p>If the task scales and tone consistency matters, fine-tune on approved examples.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Signal</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>High volume</td><td>Fine-tuning may save cost</td></tr>
+                <tr><td>Repeated tone edits</td><td>Prompt not enough</td></tr>
+                <tr><td>Stable brand guidelines</td><td>Training target is clear</td></tr>
+                <tr><td>Approved examples exist</td><td>Dataset ready</td></tr>
+                <tr><td>Acceptance rate measurable</td><td>Eval ready</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>This is a good fine-tuning candidate.</p>
+        </section>
+
+        <section id="policy-example" class="cg-article-section cg-reveal">
+          <h2>23. A Practical Example: Policy Q&amp;A Assistant</h2>
+          <p>Product goal: answer employee questions from internal policy documents.</p>
+          <p>Do not start with fine-tuning. Start with RAG — because the issue is knowledge retrieval, not behavior learning.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Requirement</th><th>Best strategy</th></tr></thead>
+              <tbody>
+                <tr><td>Use latest policy</td><td>RAG</td></tr>
+                <tr><td>Cite source</td><td>RAG</td></tr>
+                <tr><td>Avoid outdated answers</td><td>RAG with versioning</td></tr>
+                <tr><td>Answer in simple language</td><td>Prompting</td></tr>
+                <tr><td>Refuse unsupported answer</td><td>Prompt + guardrail</td></tr>
+                <tr><td>Track usage</td><td>Analytics</td></tr>
+                <tr><td>Improve repeated phrasing</td><td>Maybe fine-tune later</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Fine-tuning on policies may go stale. RAG keeps knowledge external and updateable.</p>
+        </section>
+
+        <section id="what-not-to-do" class="cg-article-section cg-reveal">
+          <h2>24. What PMs Should Not Do</h2>
+          <p>Avoid these mistakes.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Mistake</th><th>Why it is bad</th></tr></thead>
+              <tbody>
+                <tr><td>Fine-tuning before evals</td><td>No proof of improvement</td></tr>
+                <tr><td>Fine-tuning to add current knowledge</td><td>Knowledge may become stale</td></tr>
+                <tr><td>Using prompting for everything forever</td><td>Prompts become bloated and brittle</td></tr>
+                <tr><td>Ignoring data quality</td><td>Model learns bad behavior</td></tr>
+                <tr><td>Skipping human review</td><td>High-risk outputs may slip</td></tr>
+                <tr><td>Comparing models by demo only</td><td>Demos hide edge cases</td></tr>
+                <tr><td>Not tracking versions</td><td>Cannot explain behavior changes</td></tr>
+                <tr><td>Not measuring cost</td><td>Product may become commercially unviable</td></tr>
+                <tr><td>Not testing against real data</td><td>Lab performance may not match production</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Fine-tuning is powerful. But badly managed fine-tuning creates expensive confusion.</p>
+        </section>
+
+        <section id="mental-model" class="cg-article-section cg-reveal">
+          <h2>25. The PM Mental Model</h2>
+          <p style="font-size:1.1rem;color:var(--cg-text);line-height:1.7;margin:20px 0;">
+            Prompting is instruction.<br />
+            RAG is knowledge.<br />
+            Tools are action.<br />
+            Fine-tuning is behavior learning.<br />
+            Evals are measurement.<br />
+            Monitoring is production truth.
+          </p>
+          <p>
+            If you remember only one thing from this chapter, remember this:
+          </p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Prompt first. Evaluate early. Retrieve knowledge. Use tools for exactness. Fine-tune only when the behavior is repeated, measurable, stable, and valuable.</strong>
+          </p>
+          <p>That is the practical PM answer.</p>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM understanding</th></tr></thead>
+              <tbody>
+                <tr><td>Prompting</td><td>Runtime instructions that guide model behavior</td></tr>
+                <tr><td>Fine-tuning</td><td>Training the model on examples to learn repeated behavior</td></tr>
+                <tr><td>RAG</td><td>Bringing current or private knowledge into context</td></tr>
+                <tr><td>Tools</td><td>APIs or systems the model can call for exact data/actions</td></tr>
+                <tr><td>Evals</td><td>Measurement layer before and after optimization</td></tr>
+                <tr><td>Prompt limits</td><td>Long, fragile, expensive, inconsistent prompts</td></tr>
+                <tr><td>Fine-tuning value</td><td>Consistency, shorter prompts, repeated behavior, scale</td></tr>
+                <tr><td>Fine-tuning risk</td><td>Data quality, lifecycle cost, harder debugging</td></tr>
+                <tr><td>Data readiness</td><td>Fine-tuning needs clean, representative, approved examples</td></tr>
+                <tr><td>Minimum sufficient strategy</td><td>Use the simplest architecture that solves the problem reliably</td></tr>
+                <tr><td>PM role</td><td>Diagnose the failure before choosing prompting, RAG, tools, or fine-tuning</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            Fine-tuning vs prompting is the wrong question if asked too early.
+            The better question is: <strong>What problem are we actually trying to solve?</strong>
+          </p>
+          <p>
+            If the model needs clearer instructions, prompt it.
+            If it needs current knowledge, retrieve it.
+            If it needs exact data or actions, give it tools.
+            If it repeatedly fails at a stable behavior and you have good examples, fine-tune it.
+          </p>
+          <p>
+            That is how product managers should think.
+            The goal is not to use the most advanced AI technique.
+            The goal is to build the most reliable product system.
+          </p>
+          <p>
+            Fine-tuning is not a magic upgrade. Prompting is not a permanent shortcut. Both are tools.
+            The product manager’s job is to know when each tool is the right one.
+          </p>
+          <p>
+            The next step in this module is controlling <em>how</em> the model generates each token —
+            temperature, top-p, and sampling — the knobs that shape creativity versus consistency in live products.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>Choose the minimum sufficient strategy — not the most impressive one on a slide deck.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 5: InstructGPT and RLHF — The PM Version</h3>
+              <p>How InstructGPT and RLHF turned base language models into instruction-following assistants.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 7: Temperature, Top-p, and Sampling — The PM Version</h3>
+              <p>Why the same prompt can give different answers — and how sampling shapes reliability.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/">← Chapter 05</a>
+            <a class="cg-btn primary" href="/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/">Chapter 07 →</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>

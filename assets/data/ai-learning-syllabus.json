@@ -84,30 +84,36 @@
         },
         {
           "number": "06",
-          "title": "Temperature, Top-p and Sampling — Why Same Prompt Gives Different Outputs",
-          "slug": "temperature-top-p-sampling",
-          "status": "Coming Soon"
+          "title": "Fine-Tuning vs Prompting — The PM Version",
+          "slug": "fine-tuning-vs-prompting-the-pm-version",
+          "status": "Active"
         },
         {
           "number": "07",
+          "title": "Temperature, Top-p, and Sampling — The PM Version",
+          "slug": "temperature-top-p-and-sampling-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "08",
           "title": "Pre-training vs Fine-tuning vs RLHF",
           "slug": "pretraining-finetuning-rlhf",
           "status": "Coming Soon"
         },
         {
-          "number": "08",
+          "number": "09",
           "title": "Choosing Between GPT, Claude, Gemini and Llama",
           "slug": "choosing-model-families",
           "status": "Coming Soon"
         },
         {
-          "number": "09",
+          "number": "10",
           "title": "Hallucinations, Knowledge Cutoffs and Model Limitations",
           "slug": "hallucinations-limitations",
           "status": "Coming Soon"
         },
         {
-          "number": "10",
+          "number": "11",
           "title": "Benchmarks, Cost per Token and Model Tier Tradeoffs",
           "slug": "benchmarks-cost-tradeoffs",
           "status": "Coming Soon"

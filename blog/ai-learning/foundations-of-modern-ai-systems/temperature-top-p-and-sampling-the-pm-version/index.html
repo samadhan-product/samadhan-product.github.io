@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager friendly explanation of temperature, top-p, sampling, deterministic outputs, creative outputs, and why the same prompt can produce different responses in AI products." />
+  <title>Temperature, Top-p, and Sampling — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 7: Temperature, Top-p, and Sampling — The PM Version" />
+  <meta property="og:description" content="Why the same prompt can produce different answers — and how temperature and top-p shape product reliability." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 7: Temperature, Top-p, and Sampling — The PM Version",
+    "description": "A product-manager friendly explanation of temperature, top-p, sampling, deterministic outputs, creative outputs, and why the same prompt can produce different responses in AI products.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Foundations of Modern AI Systems", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 07", "item": "https://samadhanmishra.com/blog/ai-learning/foundations-of-modern-ai-systems/temperature-top-p-and-sampling-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/foundations-of-modern-ai-systems/">Foundations of Modern AI Systems</a><span class="sep">→</span>
+    <span class="current">Chapter 07</span>
+  </nav>
+
+  <!-- Editorial hero -->
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 07 · Module 01 · Beginner–Intermediate · 22–26 min</span>
+    <h1 class="cg-article-hero-title">Chapter 7: Temperature, Top-p, and Sampling — The PM Version</h1>
+    <p class="cg-article-lede">
+      Why the same prompt can produce different answers — and how temperature and top-p shape product reliability.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">22–26 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="Generation pipeline: tokens, temperature, top-p, output">
+      <span class="cg-token">Tokens</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Temperature</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Top-p</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Output</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Probabilities become picks — and picks become product behavior</p>
+  </header>
+
+  <!-- Article shell -->
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <!-- Sidebar TOC -->
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#different-answers">1. Why the same prompt gives different answers</a></li>
+            <li><a class="cg-toc-link" href="#probabilities-to-picks">2. From probabilities to picks</a></li>
+            <li><a class="cg-toc-link" href="#what-is-sampling">3. What is sampling?</a></li>
+            <li><a class="cg-toc-link" href="#greedy-decoding">4. Greedy decoding</a></li>
+            <li><a class="cg-toc-link" href="#temperature">5. Temperature</a></li>
+            <li><a class="cg-toc-link" href="#top-p">6. Top-p (nucleus sampling)</a></li>
+            <li><a class="cg-toc-link" href="#top-k">7. Top-k</a></li>
+            <li><a class="cg-toc-link" href="#deterministic-vs-creative">8. Deterministic vs creative modes</a></li>
+            <li><a class="cg-toc-link" href="#reliability-trust">9. Reliability and user trust</a></li>
+            <li><a class="cg-toc-link" href="#low-temperature">10. When low temperature matters</a></li>
+            <li><a class="cg-toc-link" href="#high-temperature">11. When higher temperature helps</a></li>
+            <li><a class="cg-toc-link" href="#temp-and-top-p">12. Using temperature and top-p together</a></li>
+            <li><a class="cg-toc-link" href="#across-versions">13. Sampling across models and versions</a></li>
+            <li><a class="cg-toc-link" href="#vs-prompting-ft">14. Sampling vs prompting and fine-tuning</a></li>
+            <li><a class="cg-toc-link" href="#product-scenarios">15. Common product scenarios</a></li>
+            <li><a class="cg-toc-link" href="#structured-output">16. Structured output and sampling</a></li>
+            <li><a class="cg-toc-link" href="#max-tokens-seeds">17. Max tokens, stop sequences, seeds</a></li>
+            <li><a class="cg-toc-link" href="#starting-points">18. Recommended starting points</a></li>
+            <li><a class="cg-toc-link" href="#multi-output-ux">19. Designing multi-output UX</a></li>
+            <li><a class="cg-toc-link" href="#sampling-evals">20. Sampling and evaluation</a></li>
+            <li><a class="cg-toc-link" href="#user-controls">21. Should users control temperature?</a></li>
+            <li><a class="cg-toc-link" href="#decision-framework">22. PM decision framework</a></li>
+            <li><a class="cg-toc-link" href="#what-not-to-do">23. What PMs should not do</a></li>
+            <li><a class="cg-toc-link" href="#mental-model">24. Final mental model</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Foundations of Modern AI Systems</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 22–26 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/foundations-of-modern-ai-systems/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Article body -->
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/from-transformers-to-llms-the-pm-version/">Chapter 2</a>,
+            we saw how transformers became Large Language Models.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/tokens-and-context-windows-the-pm-version/">Chapter 3</a>,
+            we covered tokens and context windows — the working memory of an AI system.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/ai-safety-rlhf-and-constitutional-ai-the-pm-version/">Chapter 4</a>,
+            we introduced AI safety, RLHF, and Constitutional AI — why alignment matters and how human feedback shapes behavior.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/instructgpt-and-rlhf-the-pm-version/">Chapter 5</a>,
+            we went deeper into InstructGPT and the RLHF pipeline that turned base models into instruction-following assistants.
+          </p>
+          <p>
+            In
+            <a href="/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/">Chapter 6</a>,
+            we compared prompting, fine-tuning, RAG, and tools — the layers that shape what the model knows and how it behaves.
+          </p>
+          <p>
+            Now we turn to a question that confuses users, frustrates QA teams, and surprises many product managers:
+          </p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Why does the same prompt sometimes produce different answers?</strong>
+          </p>
+          <p>
+            The answer is not randomness for its own sake. It is sampling — the process by which a language model turns probability scores into the next token, one token at a time.
+            Temperature, top-p, and related controls determine how adventurous or conservative that process is.
+          </p>
+          <p>
+            This matters for product managers because sampling settings directly affect reliability, regression risk, user trust, evaluation design, structured output stability, and whether your feature feels “consistent” or “creative.”
+            A support bot and a brainstorming assistant should not use the same generation settings — even if they share the same base model.
+          </p>
+          <p>
+            This chapter explains temperature, top-p, and sampling from a PM lens — not as a math lecture, but as a practical product control framework.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              Low temperature and tight top-p for reliability.<br />
+              Higher temperature for variation and creativity.<br />
+              Match sampling to the product job — not to what feels interesting in a demo.
+            </p>
+          </div>
+        </section>
+
+        <section id="different-answers" class="cg-article-section cg-reveal">
+          <h2>1. Why the Same Prompt Gives Different Answers</h2>
+          <p>
+            A user submits the same question twice. The model gives two different answers.
+            A PM runs the same eval prompt ten times. Three runs pass; seven fail.
+            A demo looks great on Monday and flaky on Tuesday.
+          </p>
+          <p>
+            This is normal behavior for most LLM products — unless you deliberately configure the system for repeatability.
+          </p>
+          <h3>Common reasons outputs vary</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Cause</th><th>What it means for PMs</th></tr></thead>
+              <tbody>
+                <tr><td>Sampling is enabled</td><td>The model randomly picks among likely tokens</td></tr>
+                <tr><td>Temperature is above zero</td><td>Less likely tokens get a real chance</td></tr>
+                <tr><td>Top-p allows multiple paths</td><td>Output can branch early and diverge</td></tr>
+                <tr><td>No seed or seed not supported</td><td>Runs are not guaranteed to repeat</td></tr>
+                <tr><td>Model or API version changed</td><td>Probabilities shifted under the hood</td></tr>
+                <tr><td>Context changed slightly</td><td>Even small input differences matter</td></tr>
+                <tr><td>Streaming or truncation</td><td>Max tokens or stop sequences cut output differently</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Users often interpret variation as “the AI is confused.”
+            Engineers often interpret it as “expected sampling behavior.”
+            Product managers need a third view: <strong>Is this variation acceptable for this feature?</strong>
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Different answers are not always a bug. Sometimes they are a product choice.
+              Your job is to decide whether a feature should be repeatable, exploratory, or both — and configure sampling accordingly.
+            </p>
+          </div>
+        </section>
+
+        <section id="probabilities-to-picks" class="cg-article-section cg-reveal">
+          <h2>2. From Probabilities to Picks: How Generation Works</h2>
+          <p>
+            At each step, the model does not “know” the full answer upfront.
+            It predicts a probability distribution over possible next tokens, then picks one.
+            That token is appended to the output. The process repeats until the model stops.
+          </p>
+          <p>A simplified view of one generation step:</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Model reads prompt + generated text so far</td></tr>
+                <tr><td>2</td><td>Model scores every candidate next token</td></tr>
+                <tr><td>3</td><td>Scores become probabilities</td></tr>
+                <tr><td>4</td><td>Sampling rules filter or reshape those probabilities</td></tr>
+                <tr><td>5</td><td>One token is selected</td></tr>
+                <tr><td>6</td><td>Loop continues until stop condition</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            This is why small early differences compound.
+            If the model chooses “However” instead of “Therefore” on token three, the rest of the answer may follow a different path.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM analogy</p>
+            <p>
+              Think of autocomplete on your phone, but at every word the keyboard ranks many options and sometimes picks a less obvious one on purpose.
+              That “on purpose” part is sampling policy — and it is configurable.
+            </p>
+          </div>
+        </section>
+
+        <section id="what-is-sampling" class="cg-article-section cg-reveal">
+          <h2>3. What Is Sampling?</h2>
+          <p>
+            <strong>Sampling</strong> is the rule for choosing the next token from a probability distribution.
+            Without sampling controls, a model would always pick the single highest-probability token — predictable, but often repetitive and dull.
+            With sampling, the model can explore plausible alternatives.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Term</th><th>Plain-language meaning</th></tr></thead>
+              <tbody>
+                <tr><td>Probability distribution</td><td>Ranked list of likely next tokens</td></tr>
+                <tr><td>Sampling</td><td>How one token is chosen from that list</td></tr>
+                <tr><td>Deterministic decoding</td><td>Always pick the top choice</td></tr>
+                <tr><td>Stochastic decoding</td><td>Allow randomness among likely choices</td></tr>
+                <tr><td>Seed</td><td>Fixed starting point for randomness, when supported</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Sampling is not the same as intelligence.
+            It does not make the model smarter.
+            It changes how the model expresses uncertainty — more conservatively or more creatively.
+          </p>
+          <p>For PMs, the key question is:</p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Should this feature explore alternatives, or should it converge on one reliable answer?</strong>
+          </p>
+        </section>
+
+        <section id="greedy-decoding" class="cg-article-section cg-reveal">
+          <h2>4. Greedy Decoding and Deterministic Outputs</h2>
+          <p>
+            <strong>Greedy decoding</strong> means always selecting the highest-probability token at each step.
+            It is the most deterministic common strategy — though “deterministic” still depends on model version, infrastructure, and whether other randomness exists.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Trait</th><th>Effect</th></tr></thead>
+              <tbody>
+                <tr><td>Most predictable path</td><td>Same prompt often yields same output</td></tr>
+                <tr><td>Low creativity</td><td>Repetitive phrasing is more likely</td></tr>
+                <tr><td>Good for structured tasks</td><td>Classification, extraction, JSON-like outputs</td></tr>
+                <tr><td>Not a guarantee of correctness</td><td>Top choice can still be wrong</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            In practice, many API products achieve near-greedy behavior with <strong>temperature = 0</strong> (or the provider’s equivalent “deterministic” setting).
+            Some providers also expose an explicit seed parameter for stronger repeatability.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              If your feature breaks when wording changes slightly — policy Q&amp;A, form filling, routing labels, compliance summaries — start with low or zero temperature.
+              Do not assume users want creative variation in operational workflows.
+            </p>
+          </div>
+        </section>
+
+        <section id="temperature" class="cg-article-section cg-reveal">
+          <h2>5. Temperature: The Creativity Knob</h2>
+          <p>
+            <strong>Temperature</strong> scales the model’s probability distribution before sampling.
+            Low temperature sharpens the distribution — top tokens dominate.
+            High temperature flattens it — lower-ranked tokens become more likely.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Temperature</th><th>Typical behavior</th><th>Product feel</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>Most deterministic</td><td>Reliable, repetitive</td></tr>
+                <tr><td>0.1–0.3</td><td>Mostly conservative</td><td>Stable assistant</td></tr>
+                <tr><td>0.5–0.7</td><td>Balanced variation</td><td>General-purpose chat</td></tr>
+                <tr><td>0.8–1.0</td><td>More diverse wording</td><td>Brainstorming, drafting</td></tr>
+                <tr><td>&gt; 1.0</td><td>High randomness</td><td>Experimental, risky for production</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Temperature does not change what the model knows.
+            It changes how willing the system is to choose less obvious continuations.
+          </p>
+          <h3>Example</h3>
+          <p>
+            Prompt: “Suggest three subject lines for a renewal email.”
+            At temperature 0.2, subject lines may be safe and similar across runs.
+            At temperature 0.9, subject lines may vary widely — useful for ideation, risky if brand tone must stay tightly controlled.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>Temperature controls expressiveness, not factual accuracy. A confident wrong answer at temperature 0 is still wrong.</p>
+          </div>
+        </section>
+
+        <section id="top-p" class="cg-article-section cg-reveal">
+          <h2>6. Top-p (Nucleus Sampling)</h2>
+          <p>
+            <strong>Top-p</strong>, also called nucleus sampling, limits choices to the smallest set of tokens whose combined probability mass reaches p.
+            Instead of considering every possible next token, the model samples only from the “nucleus” of plausible options.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Top-p value</th><th>What it does</th></tr></thead>
+              <tbody>
+                <tr><td>0.1</td><td>Very narrow set of candidates — conservative</td></tr>
+                <tr><td>0.5</td><td>Moderate candidate pool</td></tr>
+                <tr><td>0.9</td><td>Broader pool — more variation</td></tr>
+                <tr><td>1.0</td><td>No nucleus filter — full distribution after other rules</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Top-p is often more adaptive than top-k because the candidate set size changes with context.
+            When one token is overwhelmingly likely, top-p may effectively behave like greedy decoding.
+            When probabilities are spread out, top-p allows more alternatives.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Top-p is a quality filter on randomness.
+              It helps prevent the model from selecting bizarre low-probability tokens while still allowing useful variation.
+              Many production systems use moderate top-p with low temperature.
+            </p>
+          </div>
+        </section>
+
+        <section id="top-k" class="cg-article-section cg-reveal">
+          <h2>7. Top-k: A Simpler Filter</h2>
+          <p>
+            <strong>Top-k</strong> sampling restricts selection to the k highest-probability tokens, then samples from that fixed shortlist.
+            For example, top-k = 40 means only the top 40 candidates are eligible.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Approach</th><th>How it filters</th><th>PM note</th></tr></thead>
+              <tbody>
+                <tr><td>Top-k</td><td>Fixed number of candidates</td><td>Simple, but less adaptive</td></tr>
+                <tr><td>Top-p</td><td>Dynamic candidate set by probability mass</td><td>Usually preferred in modern APIs</td></tr>
+                <tr><td>Temperature</td><td>Reshapes all probabilities</td><td>Often used together with top-p</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Some providers expose top-k; others emphasize top-p.
+            As a PM, you do not need to master every decoding algorithm.
+            You need to know which controls your stack exposes and what behavior they produce in evals.
+          </p>
+          <p>
+            In most product discussions, top-p and temperature are the primary levers.
+            Top-k matters when your engineering team or model host explicitly recommends it.
+          </p>
+        </section>
+
+        <section id="deterministic-vs-creative" class="cg-article-section cg-reveal">
+          <h2>8. Deterministic vs Creative Product Modes</h2>
+          <p>
+            Mature AI products often behave like they have modes — even if users never see the underlying parameters.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Product mode</th><th>Sampling posture</th><th>Example features</th></tr></thead>
+              <tbody>
+                <tr><td>Deterministic / precise</td><td>Low temperature, low top-p, optional seed</td><td>Classification, extraction, routing, JSON output</td></tr>
+                <tr><td>Balanced assistant</td><td>Moderate temperature and top-p</td><td>General chat, summarization, email drafting</td></tr>
+                <tr><td>Creative / exploratory</td><td>Higher temperature, broader top-p</td><td>Brainstorming, marketing copy, story ideas</td></tr>
+                <tr><td>Multi-option generation</td><td>Moderate to high variation with n &gt; 1</td><td>Regenerate, compare alternatives, A/B drafts</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The mistake is using one global setting for the entire product.
+            A single “temperature = 0.7” default may be fine for open chat and harmful for structured workflows.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Design sampling per feature, not per model.
+              Your support classifier and your campaign copy generator should not share the same defaults by accident.
+            </p>
+          </div>
+        </section>
+
+        <section id="reliability-trust" class="cg-article-section cg-reveal">
+          <h2>9. Reliability, Regression, and User Trust</h2>
+          <p>
+            Users trust AI features when outputs feel stable enough to act on.
+            Sampling instability erodes trust quickly — especially in high-stakes workflows.
+          </p>
+          <h3>How sampling affects trust</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>User observation</th><th>Likely sampling issue</th><th>Product risk</th></tr></thead>
+              <tbody>
+                <tr><td>“It gave a different answer this time”</td><td>Non-zero temperature or no seed</td><td>Perceived unreliability</td></tr>
+                <tr><td>“It was correct in staging”</td><td>Eval ran once, not multiple times</td><td>False confidence</td></tr>
+                <tr><td>“Regenerate made it worse”</td><td>High variation is working as configured</td><td>UX mismatch</td></tr>
+                <tr><td>“The JSON broke overnight”</td><td>Sampling + parser fragility</td><td>Production incident</td></tr>
+                <tr><td>“Demo and prod behave differently”</td><td>Different defaults across environments</td><td>Release risk</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Reliability is not only about correctness.
+            It is about predictable behavior under repeated use.
+            A PM should define acceptable variance before launch — not after users complain.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              For operational features, document expected repeatability.
+              If variation is intentional, explain it in the UX: “Regenerate for alternatives,” not silent inconsistency.
+            </p>
+          </div>
+        </section>
+
+        <section id="low-temperature" class="cg-article-section cg-reveal">
+          <h2>10. When Low Temperature Matters</h2>
+          <p>
+            Use low temperature when the product job rewards consistency over novelty.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Why low temperature</th></tr></thead>
+              <tbody>
+                <tr><td>Intent classification</td><td>Labels should not drift between runs</td></tr>
+                <tr><td>Data extraction</td><td>Field values must stay stable</td></tr>
+                <tr><td>Policy Q&amp;A</td><td>Users expect the same question to get the same guidance</td></tr>
+                <tr><td>Structured JSON output</td><td>Reduces format and key variation</td></tr>
+                <tr><td>Routing and triage</td><td>Downstream workflows depend on stable labels</td></tr>
+                <tr><td>Compliance summaries</td><td>Language should not change meaning on rerun</td></tr>
+                <tr><td>Automated eval baselines</td><td>Reduces noise when comparing prompt versions</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Low temperature reduces randomness. It does not eliminate all failure modes.
+            You still need good prompts, grounding, validation, and evals.
+          </p>
+          <ul class="cg-bento-list">
+            <li>Start with temperature 0 for structured workflows.</li>
+            <li>Increase only if outputs feel too repetitive <em>and</em> repetition is a user problem.</li>
+            <li>Pair low temperature with schema validation or post-processing checks.</li>
+          </ul>
+        </section>
+
+        <section id="high-temperature" class="cg-article-section cg-reveal">
+          <h2>11. When Higher Temperature Helps</h2>
+          <p>
+            Higher temperature is useful when the product goal is exploration, diversity, or fresh wording — not strict repeatability.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Why higher temperature</th></tr></thead>
+              <tbody>
+                <tr><td>Brainstorming</td><td>Users want multiple distinct ideas</td></tr>
+                <tr><td>Marketing copy variants</td><td>Variation helps compare tone and hooks</td></tr>
+                <tr><td>Creative writing aids</td><td>Predictable output feels stale</td></tr>
+                <tr><td>Workshop facilitation</td><td>Diverse prompts spark discussion</td></tr>
+                <tr><td>Regenerate button</td><td>Users expect a meaningfully different alternative</td></tr>
+                <tr><td>Idea expansion</td><td>Exploring adjacent concepts is the value</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The product contract matters.
+            If the UI says “Generate alternatives,” variation is a feature.
+            If the UI says “Get the answer,” variation feels like a bug.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Higher temperature is not free creativity.
+              It increases the chance of off-brand language, unsupported claims, and parser failures.
+              Use it where divergence is desired — and guardrail elsewhere.
+            </p>
+          </div>
+        </section>
+
+        <section id="temp-and-top-p" class="cg-article-section cg-reveal">
+          <h2>12. Using Temperature and Top-p Together</h2>
+          <p>
+            Temperature and top-p are often configured together.
+            Temperature reshapes probabilities; top-p limits which tokens are eligible.
+            Used well, they balance stability and flexibility.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Configuration</th><th>Typical result</th><th>Good for</th></tr></thead>
+              <tbody>
+                <tr><td>Temp 0 + top-p 1.0</td><td>Near-greedy, most stable</td><td>Structured tasks, eval baselines</td></tr>
+                <tr><td>Temp 0.2 + top-p 0.9</td><td>Mostly stable with slight phrasing flexibility</td><td>Support replies, summaries</td></tr>
+                <tr><td>Temp 0.7 + top-p 0.95</td><td>Noticeable variation</td><td>General assistant chat</td></tr>
+                <tr><td>Temp 1.0 + top-p 0.95</td><td>High diversity</td><td>Brainstorming, creative drafts</td></tr>
+                <tr><td>Temp 0 + top-p 0.5</td><td>Very constrained even before greedy pick</td><td>Hard stability requirements</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Do not tune both blindly.
+            Change one variable at a time in evals.
+            Otherwise you cannot explain why behavior improved or regressed.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">Practical starting pattern</p>
+            <p>
+              For production assistants: moderate top-p (0.8–0.95) with low-to-moderate temperature (0.2–0.5), tuned per feature.<br />
+              For operational extraction/classification: temperature 0 with validation.
+            </p>
+          </div>
+        </section>
+
+        <section id="across-versions" class="cg-article-section cg-reveal">
+          <h2>13. Sampling Across Models and API Versions</h2>
+          <p>
+            Identical sampling settings do not guarantee identical outputs across model families, model sizes, or provider updates.
+            The probability landscape changes when the model changes.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Change</th><th>What may happen</th></tr></thead>
+              <tbody>
+                <tr><td>New model version</td><td>Same prompt, different default behavior</td></tr>
+                <tr><td>Switch from GPT to Claude to Gemini</td><td>Optimal temperature differs by stack</td></tr>
+                <tr><td>Smaller model replaces larger model</td><td>More brittle outputs at same settings</td></tr>
+                <tr><td>Provider changes decoding defaults</td><td>Silent behavior shift</td></tr>
+                <tr><td>Fine-tuned model deployed</td><td>Distribution narrows or shifts</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            This is why sampling settings should be versioned alongside prompts and eval suites.
+            When you upgrade a model, re-run evals at the intended temperature and top-p — not just once, but multiple times per test case if variation matters.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Treat sampling config as part of release management.
+              “We kept temperature at 0.2” is not enough if the model underneath changed.
+            </p>
+          </div>
+        </section>
+
+        <section id="vs-prompting-ft" class="cg-article-section cg-reveal">
+          <h2>14. Sampling vs Prompting and Fine-Tuning</h2>
+          <p>
+            Sampling controls <em>how</em> the model chooses among plausible continuations.
+            Prompting and fine-tuning shape <em>what</em> the model is likely to say in the first place.
+            These layers solve different problems.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Problem</th><th>Sampling change</th><th>Prompt / fine-tune change</th></tr></thead>
+              <tbody>
+                <tr><td>Output varies too much run-to-run</td><td>Lower temperature / top-p</td><td>Prompt may help, but may not fix randomness</td></tr>
+                <tr><td>Output is repetitive and dull</td><td>Raise temperature modestly</td><td>Prompt examples can also increase diversity</td></tr>
+                <tr><td>Wrong task behavior</td><td>Sampling will not fix</td><td>Better instructions or fine-tuning</td></tr>
+                <tr><td>Wrong facts</td><td>Sampling will not fix</td><td>RAG, tools, grounding</td></tr>
+                <tr><td>Inconsistent JSON keys</td><td>Lower temperature helps</td><td>Prompt schema + validation helps more</td></tr>
+                <tr><td>Off-brand tone</td><td>Slight effect</td><td>Prompt or fine-tuning is primary fix</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            A common PM mistake is trying to solve a behavior problem by tweaking temperature.
+            If the model consistently misunderstands the task, fix the prompt, context, or training — not randomness alone.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Prompting shapes intent. Fine-tuning shapes learned behavior. Sampling shapes variation.
+              Use the right layer for the failure you actually see.
+            </p>
+          </div>
+        </section>
+
+        <section id="product-scenarios" class="cg-article-section cg-reveal">
+          <h2>15. Common Product Scenarios</h2>
+          <p>
+            Here is how sampling choices often map to real product features.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Feature</th><th>Recommended posture</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td>Customer support classifier</td><td>Temperature 0</td><td>Stable routing labels</td></tr>
+                <tr><td>Claims field extraction</td><td>Temperature 0 + validation</td><td>Parser and workflow depend on structure</td></tr>
+                <tr><td>FAQ assistant</td><td>Low temperature</td><td>Users expect consistent guidance</td></tr>
+                <tr><td>Email rewrite assistant</td><td>Low to moderate</td><td>Some phrasing flexibility, not chaos</td></tr>
+                <tr><td>Subject line generator</td><td>Moderate to high</td><td>Variation is the product value</td></tr>
+                <tr><td>PRD brainstorming copilot</td><td>Moderate to high</td><td>Diverse ideas help discovery</td></tr>
+                <tr><td>Code explanation tool</td><td>Low</td><td>Accuracy and clarity over novelty</td></tr>
+                <tr><td>Regenerate button in chat</td><td>Moderate+</td><td>Users expect a different alternative</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Notice that the same product can contain multiple features with different sampling policies.
+            That is normal and desirable.
+          </p>
+        </section>
+
+        <section id="structured-output" class="cg-article-section cg-reveal">
+          <h2>16. Structured Output and Sampling</h2>
+          <p>
+            Structured output — JSON, tables, fixed field schemas — is especially sensitive to sampling variation.
+            A single different key, trailing comma, or reordered field can break downstream parsers.
+          </p>
+          <p>
+            Best practice for structured workflows:
+          </p>
+          <ul class="cg-bento-list">
+            <li>Use low or zero temperature.</li>
+            <li>Specify schema clearly in the prompt or use provider schema modes when available.</li>
+            <li>Validate output before passing it to business logic.</li>
+            <li>Retry with repair prompt only when validation fails — not on every request.</li>
+          </ul>
+          <h3>Example: claim summary JSON</h3>
+          <p>Prompt asks for structured output. At low temperature, the model reliably returns parseable JSON:</p>
+          <pre><code>{
+  "claim_id": "CLM-2026-10482",
+  "summary": "Hospitalization claim for appendectomy. Discharge summary present.",
+  "missing_documents": ["itemized_bill"],
+  "recommended_action": "request_missing_docs",
+  "confidence": "medium"
+}</code></pre>
+          <p>
+            At higher temperature, the same prompt may produce acceptable content in a broken envelope:
+          </p>
+          <ul class="cg-bento-list">
+            <li>Different key names (<code>missingDocs</code> vs <code>missing_documents</code>)</li>
+            <li>Extra commentary outside the JSON block</li>
+            <li>Valid JSON with a different schema shape</li>
+            <li>Markdown fences that parsers do not expect</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              For anything consumed by code, treat sampling as part of the contract.
+              Low temperature reduces variation; schema validation catches what sampling cannot.
+            </p>
+          </div>
+        </section>
+
+        <section id="max-tokens-seeds" class="cg-article-section cg-reveal">
+          <h2>17. Max Tokens, Stop Sequences, and Seeds</h2>
+          <p>
+            Sampling is not the only generation control PMs should know.
+            These adjacent parameters also shape product behavior.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Parameter</th><th>What it does</th><th>PM relevance</th></tr></thead>
+              <tbody>
+                <tr><td>Max tokens</td><td>Limits response length</td><td>Prevents runaway cost and overly long outputs</td></tr>
+                <tr><td>Stop sequences</td><td>Ends generation when specific text appears</td><td>Useful for section boundaries and tool-call formats</td></tr>
+                <tr><td>Seed</td><td>Fixes randomness source when supported</td><td>Improves repeatability for tests and audits</td></tr>
+                <tr><td>Presence / frequency penalties</td><td>Reduces repetition</td><td>Can help long-form drafting features</td></tr>
+                <tr><td>n / best_of</td><td>Generate multiple candidates</td><td>Powers compare-and-choose UX</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Max tokens is a product decision, not just an engineering safeguard.
+            If users need concise support replies, a tight max tokens limit enforces brevity even when the model would otherwise ramble.
+          </p>
+          <p>
+            Seeds are valuable for QA and regression testing, but support varies by provider and may not promise identical outputs across infrastructure changes.
+            Use seeds to reduce variance in evals — not as a permanent substitute for validation.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Think of generation config as a bundle: temperature, top-p, max tokens, stop sequences, and optional seed.
+              Document the bundle per feature.
+            </p>
+          </div>
+        </section>
+
+        <section id="starting-points" class="cg-article-section cg-reveal">
+          <h2>18. Recommended Starting Points</h2>
+          <p>
+            Defaults should be intentional.
+            Use this table as a starting point, then tune with evals.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Use case</th><th>Temperature</th><th>Top-p</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr><td>Classification / routing</td><td>0</td><td>1.0 or provider default</td><td>Validate label set strictly</td></tr>
+                <tr><td>Extraction to JSON</td><td>0</td><td>1.0</td><td>Schema validation required</td></tr>
+                <tr><td>Policy / compliance Q&amp;A</td><td>0–0.2</td><td>0.8–0.95</td><td>Prioritize consistency</td></tr>
+                <tr><td>Support reply drafting</td><td>0.2–0.4</td><td>0.85–0.95</td><td>Human review still recommended</td></tr>
+                <tr><td>General assistant chat</td><td>0.5–0.7</td><td>0.9–0.95</td><td>Balance helpfulness and stability</td></tr>
+                <tr><td>Summarization</td><td>0.2–0.5</td><td>0.85–0.95</td><td>Lower if summaries feed workflows</td></tr>
+                <tr><td>Marketing copy variants</td><td>0.7–1.0</td><td>0.9–1.0</td><td>Expect divergence by design</td></tr>
+                <tr><td>Brainstorming / ideation</td><td>0.8–1.1</td><td>0.95–1.0</td><td>Guardrail claims and facts separately</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            These are starting points, not universal laws.
+            Your model, prompt, and eval data should drive the final settings.
+          </p>
+        </section>
+
+        <section id="multi-output-ux" class="cg-article-section cg-reveal">
+          <h2>19. Designing Multi-Output UX</h2>
+          <p>
+            Sampling variation becomes a feature when the UX is designed for it.
+            Poor multi-output UX feels broken; good multi-output UX feels intentional.
+          </p>
+          <h3>Common patterns</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Pattern</th><th>What it does</th><th>Sampling implication</th></tr></thead>
+              <tbody>
+                <tr><td>Regenerate</td><td>User asks for another answer</td><td>Needs enough variation to feel fresh</td></tr>
+                <tr><td>n variants upfront</td><td>Show 2–3 options immediately</td><td>Use n &gt; 1 or multiple sampled calls</td></tr>
+                <tr><td>Compare view</td><td>Side-by-side diff of alternatives</td><td>Helpful for copy and strategy tools</td></tr>
+                <tr><td>Pin / accept answer</td><td>User locks one option</td><td>Turns variation into choice, not confusion</td></tr>
+                <tr><td>History of attempts</td><td>Prior outputs remain visible</td><td>Reduces distrust when answers differ</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>UX principles for multi-output features:</p>
+          <ol class="cg-bento-list" style="list-style:decimal;">
+            <li>Label variation as intentional (“Try another version”).</li>
+            <li>Show what changed — not just a new blob of text.</li>
+            <li>Let users accept, edit, or reject an output.</li>
+            <li>Do not regenerate automatically in high-stakes flows.</li>
+            <li>Log which sampling config produced each variant.</li>
+          </ol>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Regenerate is a product promise.
+              If temperature is 0, regenerate may disappoint.
+              If temperature is too high, regenerate may destabilize trust.
+              Match the control to the promise.
+            </p>
+          </div>
+        </section>
+
+        <section id="sampling-evals" class="cg-article-section cg-reveal">
+          <h2>20. Sampling and Evaluation</h2>
+          <p>
+            Evaluating an LLM feature once per test case is often insufficient when sampling is enabled.
+            You need to measure both quality and consistency.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Metric / concept</th><th>What it tells you</th></tr></thead>
+              <tbody>
+                <tr><td>Pass@1</td><td>Success rate on a single run</td></tr>
+                <tr><td>Pass@k</td><td>Probability that at least one of k runs succeeds</td></tr>
+                <tr><td>Consistency rate</td><td>How often key fields or labels match across runs</td></tr>
+                <tr><td>Format validity rate</td><td>How often output parses against schema</td></tr>
+                <tr><td>Semantic variance</td><td>Whether meaning changes, not just wording</td></tr>
+                <tr><td>Regression suite</td><td>Repeat critical prompts after model or config changes</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Example: a classification feature may score 92% pass@1 but only 78% consistency across five runs at temperature 0.4.
+            That gap is a product signal — not a footnote.
+          </p>
+          <h3>Eval practices for PMs</h3>
+          <ul class="cg-bento-list">
+            <li>Run high-risk prompts multiple times before launch.</li>
+            <li>Track format failures separately from factual errors.</li>
+            <li>Compare configs side by side: temp 0 vs temp 0.3 vs temp 0.7.</li>
+            <li>Include “regenerate” scenarios in eval sets for creative features.</li>
+            <li>Version sampling config in eval reports.</li>
+          </ul>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              A feature can be “good on average” and still fail in production because variation is too high.
+              Measure consistency explicitly.
+            </p>
+          </div>
+        </section>
+
+        <section id="user-controls" class="cg-article-section cg-reveal">
+          <h2>21. Should Users Control Temperature?</h2>
+          <p>
+            Most consumer users do not think in terms of temperature or top-p.
+            Exposing raw sliders creates confusion, support burden, and inconsistent outcomes.
+          </p>
+          <p>
+            A better pattern is user-facing presets that map to backend sampling configs.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>User-facing preset</th><th>Backend posture</th><th>Best for</th></tr></thead>
+              <tbody>
+                <tr><td>Precise</td><td>Temperature 0–0.2, tighter top-p</td><td>Factual answers, structured tasks</td></tr>
+                <tr><td>Balanced</td><td>Temperature 0.4–0.6, moderate top-p</td><td>Everyday assistant use</td></tr>
+                <tr><td>Creative</td><td>Temperature 0.8+, broader top-p</td><td>Brainstorming, drafting alternatives</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Advanced controls can exist in developer settings or admin panels — not in the default consumer path.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Translate knobs into outcomes.
+              Users choose “More creative,” not “temperature 0.9.”
+              Your team owns the mapping and validates it with evals.
+            </p>
+          </div>
+        </section>
+
+        <section id="decision-framework" class="cg-article-section cg-reveal">
+          <h2>22. PM Decision Framework</h2>
+          <p>Use this framework when choosing sampling settings for a feature.</p>
+          <h3>Step 1: Define the product job</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Question</th><th>If yes</th><th>If no</th></tr></thead>
+              <tbody>
+                <tr><td>Must output be repeatable?</td><td>Favor temperature 0</td><td>Variation may be acceptable</td></tr>
+                <tr><td>Does code parse the output?</td><td>Low temperature + validation</td><td>More flexibility allowed</td></tr>
+                <tr><td>Do users want alternatives?</td><td>Design multi-output UX</td><td>Optimize for single best answer</td></tr>
+                <tr><td>Is wording novelty valuable?</td><td>Moderate to high temperature</td><td>Keep temperature low</td></tr>
+                <tr><td>Is factual stability critical?</td><td>Low temperature + grounding</td><td>Creativity can be prioritized</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Step 2: Choose the minimum sufficient randomness</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Failure observed</th><th>First lever</th></tr></thead>
+              <tbody>
+                <tr><td>Same answer feels stale</td><td>Slightly raise temperature or add regenerate</td></tr>
+                <tr><td>Answers change too much</td><td>Lower temperature and/or top-p</td></tr>
+                <tr><td>JSON breaks intermittently</td><td>Temperature 0 + schema validation</td></tr>
+                <tr><td>Regenerate feels identical</td><td>Increase variation modestly</td></tr>
+                <tr><td>Model ignores instructions</td><td>Fix prompt — not temperature first</td></tr>
+                <tr><td>Facts are wrong</td><td>RAG/tools — not temperature first</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Step 3: Validate with repeated runs</h3>
+          <p>
+            Before shipping, run representative prompts multiple times.
+            If unacceptable divergence appears, tighten sampling or add validation — do not rely on “usually works.”
+          </p>
+        </section>
+
+        <section id="what-not-to-do" class="cg-article-section cg-reveal">
+          <h2>23. What PMs Should Not Do</h2>
+          <p>Avoid these common sampling mistakes.</p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Mistake</th><th>Why it is bad</th></tr></thead>
+              <tbody>
+                <tr><td>Using one global temperature for the whole product</td><td>Different features need different stability</td></tr>
+                <tr><td>Raising temperature to fix factual errors</td><td>Randomness does not add truth</td></tr>
+                <tr><td>Testing a prompt only once before launch</td><td>Hides sampling variance</td></tr>
+                <tr><td>Exposing raw temperature sliders to all users</td><td>Creates confusion and support load</td></tr>
+                <tr><td>Assuming temperature 0 means “production safe”</td><td>Correctness and grounding still matter</td></tr>
+                <tr><td>Ignoring config drift across environments</td><td>Staging and prod behave differently</td></tr>
+                <tr><td>Shipping structured output without validation</td><td>Intermittent parser failures become incidents</td></tr>
+                <tr><td>Changing temperature and top-p together during debugging</td><td>You cannot tell what helped</td></tr>
+                <tr><td>Not logging generation settings</td><td>Impossible to debug user reports</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Sampling is a powerful control.
+            Used carelessly, it creates the illusion of progress while leaving the real product problem untouched.
+          </p>
+        </section>
+
+        <section id="mental-model" class="cg-article-section cg-reveal">
+          <h2>24. Final Mental Model</h2>
+          <p style="font-size:1.1rem;color:var(--cg-text);line-height:1.7;margin:20px 0;">
+            The model predicts probabilities.<br />
+            Sampling turns probabilities into picks.<br />
+            Temperature controls how adventurous the picks are.<br />
+            Top-p controls how many options are allowed.<br />
+            Prompting shapes what is likely.<br />
+            Validation ensures the product can trust the result.
+          </p>
+          <p>
+            If you remember only one thing from this chapter, remember this:
+          </p>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>Match sampling to the job: low randomness for reliability, higher randomness for exploration — and never confuse variation with understanding.</strong>
+          </p>
+          <p>That is the practical PM answer.</p>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM understanding</th></tr></thead>
+              <tbody>
+                <tr><td>Sampling</td><td>How the model chooses the next token from probabilities</td></tr>
+                <tr><td>Why outputs vary</td><td>Randomness, settings, model version, and context differences</td></tr>
+                <tr><td>Greedy decoding</td><td>Always pick the top token — most deterministic common mode</td></tr>
+                <tr><td>Temperature</td><td>Creativity knob — lower is stable, higher is varied</td></tr>
+                <tr><td>Top-p</td><td>Limits choices to a nucleus of plausible tokens</td></tr>
+                <tr><td>Top-k</td><td>Fixed shortlist filter — simpler, less adaptive than top-p</td></tr>
+                <tr><td>Deterministic vs creative modes</td><td>Product features need different defaults</td></tr>
+                <tr><td>Structured output</td><td>Low temperature plus schema validation</td></tr>
+                <tr><td>Seeds and max tokens</td><td>Part of the full generation config bundle</td></tr>
+                <tr><td>Multi-output UX</td><td>Regenerate and variants should be intentional, not accidental</td></tr>
+                <tr><td>Evals</td><td>Measure pass@k and consistency — not just one-run accuracy</td></tr>
+                <tr><td>User controls</td><td>Presets like Precise / Balanced / Creative beat raw sliders</td></tr>
+                <tr><td>PM role</td><td>Choose the minimum sufficient randomness for each feature</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            Users ask why the AI “changed its mind.”
+            Often the answer is not that the model learned something new overnight.
+            It is that the product allowed a different path through the same probability landscape.
+          </p>
+          <p>
+            That is not inherently bad.
+            Creativity, brainstorming, and regenerate flows depend on exactly this behavior.
+            But operational AI — routing, extraction, compliance, structured workflows — depends on the opposite.
+          </p>
+          <p>
+            Product managers do not need to implement sampling algorithms.
+            They do need to decide which features deserve stability, which deserve exploration, and how the UX makes that contract clear.
+          </p>
+          <p>
+            Get that decision right, and temperature stops being a mysterious engineering knob.
+            It becomes a product design choice — one you can explain, evaluate, and defend.
+          </p>
+          <p>
+            The next chapter in this module compares pre-training, fine-tuning, and RLHF — how each stage shapes what a model knows and how it behaves before sampling ever enters the picture.
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>Control randomness on purpose. Accidental variation is a bug; intentional variation is a feature.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 6: Fine-Tuning vs Prompting — The PM Version</h3>
+              <p>When to use prompting, fine-tuning, RAG, and tools — a PM decision framework for model optimization.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <div class="cg-next-card" style="opacity:0.75;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-text-faint);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 8: Pre-training vs Fine-tuning vs RLHF — The PM Version</h3>
+              <p>How each training stage shapes what a model knows and how it behaves before generation settings apply.</p>
+              <span class="cg-status-badge soon" style="width:fit-content;">Coming Soon</span>
+            </div>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/fine-tuning-vs-prompting-the-pm-version/">← Chapter 06</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>
