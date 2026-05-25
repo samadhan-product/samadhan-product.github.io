@@ -60,36 +60,42 @@
         },
         {
           "number": "02",
+          "title": "From Transformers to LLMs — The PM Version",
+          "slug": "from-transformers-to-llms-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "03",
           "title": "Tokenization and Context Windows for Product Leaders",
           "slug": "tokenization-context-windows",
           "status": "Coming Soon"
         },
         {
-          "number": "03",
+          "number": "04",
           "title": "Temperature, Top-p and Sampling — Why Same Prompt Gives Different Outputs",
           "slug": "temperature-top-p-sampling",
           "status": "Coming Soon"
         },
         {
-          "number": "04",
+          "number": "05",
           "title": "Pre-training vs Fine-tuning vs RLHF",
           "slug": "pretraining-finetuning-rlhf",
           "status": "Coming Soon"
         },
         {
-          "number": "05",
+          "number": "06",
           "title": "Choosing Between GPT, Claude, Gemini and Llama",
           "slug": "choosing-model-families",
           "status": "Coming Soon"
         },
         {
-          "number": "06",
+          "number": "07",
           "title": "Hallucinations, Knowledge Cutoffs and Model Limitations",
           "slug": "hallucinations-limitations",
           "status": "Coming Soon"
         },
         {
-          "number": "07",
+          "number": "08",
           "title": "Benchmarks, Cost per Token and Model Tier Tradeoffs",
           "slug": "benchmarks-cost-tradeoffs",
           "status": "Coming Soon"
