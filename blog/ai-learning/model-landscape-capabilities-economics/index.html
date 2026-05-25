@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Module 02 of AI Learning: model landscape, capabilities, multimodal AI, benchmarks, cost per token, model tiers, and model selection economics for AI product leaders." />
+  <title>Model Landscape, Capabilities & Economics | AI Product Leader Syllabus</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Model Landscape, Capabilities & Economics | AI Learning" />
+  <meta property="og:description" content="Module 02 — Multimodal, model tiers, benchmarks, and cost modelling for model selection." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Model Landscape, Capabilities & Economics", "item": "https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <span class="current">Model Landscape, Capabilities & Economics</span>
+  </nav>
+
+  <header class="cg-hero cg-hero-compact cg-reveal">
+    <div class="cg-hero-content" style="max-width:720px;">
+      <span class="cg-pill">Module 02 · Weeks 3–4 · Model Selection &amp; Economics</span>
+      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3.2rem);">Model Landscape, Capabilities & Economics</h1>
+      <p class="cg-hero-subtitle">
+        Multimodal capabilities, model tiers, benchmarks, and cost modelling — compare models like infrastructure choices, not brand fandom.
+      </p>
+      <div class="cg-stat-strip" style="margin:24px 0;">
+        <div class="cg-stat-item"><span class="cg-stat-label">Theme</span><span class="cg-stat-num" style="font-size:1rem;">Model Selection &amp; Economics</span></div>
+        <div class="cg-stat-item"><span class="cg-stat-label">Duration</span><span class="cg-stat-num" style="font-size:1rem;">Weeks 3–4</span></div>
+        <div class="cg-stat-item"><span class="cg-stat-label">Status</span><span class="cg-stat-num" style="font-size:1rem;color:var(--cg-green);">Active</span></div>
+      </div>
+      <div class="cg-hero-actions">
+        <a class="cg-btn primary" href="/blog/ai-learning/model-landscape-capabilities-economics/model-families-and-the-competitive-landscape-the-pm-version/">Start Chapter 01</a>
+        <a class="cg-btn secondary" href="/blog/ai-learning/">← AI Learning</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="cg-main">
+
+    <section class="cg-section cg-reveal">
+      <div class="cg-bento-grid">
+        <div class="cg-card span-6">
+          <h3>PM-specific focus</h3>
+          <p>Compare models like infrastructure choices, not brand fandom. Families, tiers, deployment paths, and unit economics belong in the same conversation as quality.</p>
+        </div>
+        <div class="cg-card span-6">
+          <h3>Deliverable</h3>
+          <p><strong>Model selection memo:</strong> use case, quality requirements, cost estimate at scale, chosen model + rationale, risks, and fallback path.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cg-section cg-reveal">
+      <div class="cg-section-header">
+        <span class="cg-kicker">Outcomes</span>
+        <h2 class="cg-section-title">Learning outcomes</h2>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span class="cg-chip">Map foundation model families</span>
+        <span class="cg-chip">Run reproducible model comparisons</span>
+        <span class="cg-chip">Interpret benchmarks without hype</span>
+        <span class="cg-chip">Model unit economics at scale</span>
+        <span class="cg-chip">Write a defensible selection memo</span>
+      </div>
+    </section>
+
+    <section class="cg-section cg-reveal">
+      <div class="cg-section-header">
+        <span class="cg-kicker">Topics</span>
+        <h2 class="cg-section-title">Core topic map</h2>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span class="cg-chip">Model families</span>
+        <span class="cg-chip">Closed vs open-weight</span>
+        <span class="cg-chip">Multimodal</span>
+        <span class="cg-chip">Benchmarks</span>
+        <span class="cg-chip">Cost per token</span>
+        <span class="cg-chip">Model tiers</span>
+        <span class="cg-chip">Selection memo</span>
+      </div>
+    </section>
+
+    <section class="cg-section cg-reveal">
+      <div class="cg-bento-grid">
+        <div class="cg-card span-6">
+          <h3>Tools &amp; frameworks</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+            <span class="cg-chip">LMSYS Chatbot Arena</span>
+            <span class="cg-chip">Provider pricing pages</span>
+            <span class="cg-chip">Model cards</span>
+            <span class="cg-chip">Internal eval harness</span>
+          </div>
+        </div>
+        <div class="cg-card span-6">
+          <h3>Resources</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+            <span class="cg-chip">Anthropic model docs</span>
+            <span class="cg-chip">OpenAI model docs</span>
+            <span class="cg-chip">Google Gemini docs</span>
+            <span class="cg-chip">Meta Llama model card</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cg-section cg-reveal" id="chapters">
+      <div class="cg-section-header">
+        <span class="cg-kicker">Chapters</span>
+        <h2 class="cg-section-title">Chapter path</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+            <a class="cg-card glow is-link" href="/blog/ai-learning/model-landscape-capabilities-economics/model-families-and-the-competitive-landscape-the-pm-version/">
+              <span class="cg-status-badge live" style="width:fit-content;">Chapter 01 · Active</span>
+              <h3>Model Families and the Competitive Landscape — The PM Version</h3>
+              <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+                <span style="font-size:14px;color:var(--cg-text-dim);">Beginner–Intermediate</span>
+                <span style="font-size:14px;color:var(--cg-text-dim);">24–28 min read</span>
+              </div>
+              <span class="cg-read-link" style="margin-top:12px;">Read now →</span>
+            </a>
+            <a class="cg-card glow is-link" href="/blog/ai-learning/model-landscape-capabilities-economics/choosing-between-gpt-claude-gemini-and-llama-the-pm-version/">
+              <span class="cg-status-badge live" style="width:fit-content;">Chapter 02 · Active</span>
+              <h3>Choosing Between GPT, Claude, Gemini, and Llama — The PM Version</h3>
+              <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+                <span style="font-size:14px;color:var(--cg-text-dim);">Beginner–Intermediate</span>
+                <span style="font-size:14px;color:var(--cg-text-dim);">26–30 min read</span>
+              </div>
+              <span class="cg-read-link" style="margin-top:12px;">Read now →</span>
+            </a>
+            <a class="cg-card glow is-link" href="/blog/ai-learning/model-landscape-capabilities-economics/multimodal-ai-vision-audio-code-and-documents-the-pm-version/">
+              <span class="cg-status-badge live" style="width:fit-content;">Chapter 03 · Active</span>
+              <h3>Multimodal AI: Vision, Audio, Code, and Documents — The PM Version</h3>
+              <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+                <span style="font-size:14px;color:var(--cg-text-dim);">Beginner–Intermediate</span>
+                <span style="font-size:14px;color:var(--cg-text-dim);">26–30 min read</span>
+              </div>
+              <span class="cg-read-link" style="margin-top:12px;">Read now →</span>
+            </a>
+            <a class="cg-card glow is-link" href="/blog/ai-learning/model-landscape-capabilities-economics/benchmarks-what-pms-should-and-shouldnt-trust-the-pm-version/">
+              <span class="cg-status-badge live" style="width:fit-content;">Chapter 04 · Active</span>
+              <h3>Benchmarks: What PMs Should and Shouldn't Trust — The PM Version</h3>
+              <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+                <span style="font-size:14px;color:var(--cg-text-dim);">Beginner–Intermediate</span>
+                <span style="font-size:14px;color:var(--cg-text-dim);">26–30 min read</span>
+              </div>
+              <span class="cg-read-link" style="margin-top:12px;">Read now →</span>
+            </a>
+            <a class="cg-card glow is-link" href="/blog/ai-learning/model-landscape-capabilities-economics/cost-per-token-latency-and-model-tier-tradeoffs-the-pm-version/">
+              <span class="cg-status-badge live" style="width:fit-content;">Chapter 05 · Active</span>
+              <h3>Cost per Token, Latency, and Model Tier Tradeoffs — The PM Version</h3>
+              <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+                <span style="font-size:14px;color:var(--cg-text-dim);">Beginner–Intermediate</span>
+                <span style="font-size:14px;color:var(--cg-text-dim);">28–32 min read</span>
+              </div>
+              <span class="cg-read-link" style="margin-top:12px;">Read now →</span>
+            </a>
+            <a class="cg-card glow is-link" href="/blog/ai-learning/model-landscape-capabilities-economics/the-model-selection-memo-the-pm-version/">
+              <span class="cg-status-badge live" style="width:fit-content;">Chapter 06 · Active</span>
+              <h3>The Model Selection Memo — The PM Version</h3>
+              <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+                <span style="font-size:14px;color:var(--cg-text-dim);">Beginner–Intermediate</span>
+                <span style="font-size:14px;color:var(--cg-text-dim);">28–32 min read</span>
+              </div>
+              <span class="cg-read-link" style="margin-top:12px;">Read now →</span>
+            </a>
+      </div>
+    </section>
+
+    <section class="cg-section cg-reveal">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <a class="cg-btn secondary" href="/blog/ai-learning/">← Back to AI Learning</a>
+        <a class="cg-btn secondary" href="/blog/ai-learning/foundations-of-modern-ai-systems/hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version/">← Module 01 Ch11</a>
+        <a class="cg-btn primary" href="/blog/ai-learning/model-landscape-capabilities-economics/model-families-and-the-competitive-landscape-the-pm-version/">Start Chapter 01</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>

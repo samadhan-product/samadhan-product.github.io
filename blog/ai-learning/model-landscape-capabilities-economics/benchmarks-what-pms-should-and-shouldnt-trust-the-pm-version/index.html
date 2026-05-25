@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A product-manager guide to AI benchmarks: MMLU, HumanEval, SWE-bench, GPQA, MMMU, and Chatbot Arena — what they measure, what they miss, how to design product-specific evals, and a practical interpretation framework without leaderboard hype." />
+  <title>Benchmarks: What PMs Should and Shouldn't Trust — The PM Version | AI Learning</title>
+  <link rel="canonical" href="https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/benchmarks-what-pms-should-and-shouldnt-trust-the-pm-version/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chapter 4: Benchmarks — What PMs Should and Shouldn't Trust — The PM Version" />
+  <meta property="og:description" content="What public AI benchmarks actually measure — and how product teams build evaluation that predicts real workflow quality." />
+  <meta property="og:url" content="https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/benchmarks-what-pms-should-and-shouldnt-trust-the-pm-version/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 4: Benchmarks — What PMs Should and Shouldn't Trust — The PM Version",
+    "description": "A product-manager guide to AI benchmarks: MMLU, HumanEval, SWE-bench, GPQA, MMMU, and Chatbot Arena — what they measure, what they miss, how to design product-specific evals, and a practical interpretation framework without leaderboard hype.",
+    "author": { "@type": "Person", "name": "Samadhan Mishra" },
+    "publisher": { "@type": "Person", "name": "Samadhan Mishra" },
+    "mainEntityOfPage": "https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/benchmarks-what-pms-should-and-shouldnt-trust-the-pm-version/",
+    "dateModified": "2026-05-21",
+    "inLanguage": "en",
+    "isPartOf": { "@type": "Book", "name": "AI Learning", "url": "https://samadhanmishra.com/blog/ai-learning/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://samadhanmishra.com/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AI Learning", "item": "https://samadhanmishra.com/blog/ai-learning/" },
+      { "@type": "ListItem", "position": 4, "name": "Model Landscape, Capabilities & Economics", "item": "https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/" },
+      { "@type": "ListItem", "position": 5, "name": "Chapter 04", "item": "https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/benchmarks-what-pms-should-and-shouldnt-trust-the-pm-version/" }
+    ]
+  }
+  </script>
+</head>
+<body class="cg-blog-theme portal-page" data-page="blog">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+
+  <header class="site-nav" data-testid="top-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="/">
+        <span class="site-logo-box">SM</span>
+        <span class="site-brand-text">/ Samadhan</span>
+      </a>
+      <nav class="site-menu" aria-label="Primary">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+      <div class="site-nav-meta">
+        <div class="site-time" aria-live="polite">
+          <span class="site-time-dot" aria-hidden="true"></span>
+          <span data-nav-clock></span>
+        </div>
+        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-toggle-icon">◑</span>
+        </button>
+        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+          <span class="site-nav-toggle-bar"></span>
+          <span class="site-nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="site-nav-mobile" data-nav-mobile hidden>
+      <nav aria-label="Mobile">
+        <a class="site-menu-link" href="/" data-nav="home">Home</a>
+        <a class="site-menu-link" href="/#work" data-nav="work">Work</a>
+        <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+        <a class="site-menu-link" href="/#projects" data-nav="projects">Projects</a>
+        <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+        <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
+        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">→</span>
+    <a href="/blog/">Blog</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/">AI Learning</a><span class="sep">→</span>
+    <a href="/blog/ai-learning/model-landscape-capabilities-economics/">Model Landscape, Capabilities &amp; Economics</a><span class="sep">→</span>
+    <span class="current">Chapter 04</span>
+  </nav>
+
+  <header class="cg-article-hero cg-reveal">
+    <span class="cg-pill">Chapter 04 · Module 02 · Beginner–Intermediate · 26–30 min</span>
+    <h1 class="cg-article-hero-title">Chapter 4: Benchmarks — What PMs Should and Shouldn't Trust — The PM Version</h1>
+    <p class="cg-article-lede">
+      What MMLU, HumanEval, SWE-bench, and Chatbot Arena actually tell you — and why your product still needs its own golden set.
+    </p>
+    <div class="cg-article-meta">
+      <span class="cg-article-badge">Book: AI Learning</span>
+      <span class="cg-article-badge">Beginner–Intermediate</span>
+      <span class="cg-article-badge">26–30 min</span>
+    </div>
+    <div class="cg-hero-actions" style="margin-top:24px;">
+      <a class="cg-btn primary" href="#article-start">Start reading</a>
+      <a class="cg-btn secondary" href="/blog/ai-learning/model-landscape-capabilities-economics/">Back to module</a>
+    </div>
+    <div class="cg-token-flow" aria-label="Evaluation flow: benchmark, question, your eval, ship">
+      <span class="cg-token">Benchmark</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Question</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Your eval</span>
+      <span class="cg-token-arrow">→</span>
+      <span class="cg-token">Ship</span>
+    </div>
+    <p style="font-size:13px;color:var(--cg-text-faint);text-align:center;margin:8px 0 0;">Public scores are a compass, not a contract — product eval is the map of your terrain</p>
+  </header>
+
+  <div class="cg-article-shell" id="article-start">
+    <div class="cg-article-grid">
+
+      <aside class="cg-article-sidebar">
+        <nav class="cg-article-toc" aria-label="Table of contents">
+          <p class="cg-toc-title">On this page</p>
+          <ol class="cg-toc-list">
+            <li><a class="cg-toc-link" href="#intro">Introduction</a></li>
+            <li><a class="cg-toc-link" href="#why-benchmarks">1. Why benchmarks exist</a></li>
+            <li><a class="cg-toc-link" href="#mmlu">2. MMLU</a></li>
+            <li><a class="cg-toc-link" href="#humaneval">3. HumanEval</a></li>
+            <li><a class="cg-toc-link" href="#swe-bench">4. SWE-bench</a></li>
+            <li><a class="cg-toc-link" href="#gpqa">5. GPQA</a></li>
+            <li><a class="cg-toc-link" href="#mmmu">6. MMMU</a></li>
+            <li><a class="cg-toc-link" href="#chatbot-arena">7. Chatbot Arena</a></li>
+            <li><a class="cg-toc-link" href="#what-benchmarks-miss">8. What benchmarks miss</a></li>
+            <li><a class="cg-toc-link" href="#product-eval">9. Product-specific eval design</a></li>
+            <li><a class="cg-toc-link" href="#interpretation-framework">10. Interpretation framework</a></li>
+            <li><a class="cg-toc-link" href="#common-mistakes">11. Common mistakes</a></li>
+            <li><a class="cg-toc-link" href="#hands-on">12. Hands-on exercise</a></li>
+            <li><a class="cg-toc-link" href="#summary">Chapter summary</a></li>
+            <li><a class="cg-toc-link" href="#closing">Closing thought</a></li>
+            <li><a class="cg-toc-link" href="#next">Next chapter</a></li>
+          </ol>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--cg-border);font-size:13px;color:var(--cg-text-faint);">
+            <p style="margin:0 0 4px;"><strong style="color:var(--cg-text-dim);">Module:</strong> Model Landscape, Capabilities &amp; Economics</p>
+            <p style="margin:0 0 12px;"><strong style="color:var(--cg-text-dim);">Reading time:</strong> 26–30 min</p>
+            <a class="cg-read-link" href="/blog/ai-learning/model-landscape-capabilities-economics/">← Back to module</a>
+          </div>
+        </nav>
+      </aside>
+
+      <article class="cg-article-content">
+
+        <section id="intro" class="cg-article-section cg-reveal">
+          <h2>Introduction</h2>
+          <p>
+            In
+            <a href="/blog/ai-learning/model-landscape-capabilities-economics/multimodal-ai-vision-audio-code-and-documents-the-pm-version/">Chapter 3</a>,
+            we covered multimodal inputs — documents, images, audio, and code — and why production workflows need validation beyond the model call.
+          </p>
+          <p>
+            When you compare models with engineering or leadership, someone will eventually say:
+            “Model X is #1 on the benchmark.”
+          </p>
+          <p>
+            Benchmarks are useful. They are also narrow, dated, and sometimes gamed.
+            They rarely predict whether your claims assistant, codegen copilot, or policy Q&amp;A will work on <em>your</em> data with <em>your</em> tools and <em>your</em> prompts.
+          </p>
+          <p>
+            This chapter gives you a PM-level map of the benchmarks you will hear most often — what each one measures, what it does not measure, and how to build evaluation you can defend in a roadmap review.
+          </p>
+          <p>
+            We intentionally avoid quoting current leaderboard ranks or point scores. Those numbers change weekly and distract from the structural question: <strong>does this metric correlate with my product outcome?</strong>
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The simple PM version</p>
+            <p>
+              Public benchmarks = standardized lab tests.<br />
+              Product eval = driving test on your roads.<br />
+              Ship decisions need both — but only one is about your users.
+            </p>
+          </div>
+        </section>
+
+        <section id="why-benchmarks" class="cg-article-section cg-reveal">
+          <h2>1. Why Benchmarks Exist</h2>
+          <p>
+            Before benchmarks, comparing models meant subjective blog posts and cherry-picked demos.
+            Benchmarks try to make comparison repeatable: fixed questions, fixed scoring, multiple models run the same way.
+          </p>
+          <p>
+            For PMs, benchmarks serve three legitimate purposes:
+          </p>
+          <ul class="cg-bento-list">
+            <li><strong>Capability direction</strong> — rough sense of whether a model class is strong on knowledge, code, or multimodal tasks.</li>
+            <li><strong>Vendor communication</strong> — shared vocabulary with ML teams (“our target is SWE-bench-class coding assist”).</li>
+            <li><strong>Regression guardrails</strong> — when you change model version, public suites can flag large capability swings.</li>
+          </ul>
+          <p>
+            They are weaker for: pricing, latency, safety in your domain, tool-use with your APIs, retrieval on your documents, or user satisfaction in your UI.
+          </p>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Ask “what behavior does this benchmark approximate?” not “who is winning this week?”
+              Rankings are marketing fuel; task fit is product work.
+            </p>
+          </div>
+        </section>
+
+        <section id="mmlu" class="cg-article-section cg-reveal">
+          <h2>2. MMLU — Broad Knowledge Q&amp;A</h2>
+          <p>
+            <strong>MMLU</strong> (Massive Multitask Language Understanding) is a large set of multiple-choice questions across academic and professional topics — history, law, medicine, math, and more.
+            Models pick an answer (A/B/C/D) and accuracy is reported.
+          </p>
+          <h3>What it measures</h3>
+          <ul class="cg-bento-list">
+            <li>Breadth of factual and conceptual knowledge in text.</li>
+            <li>Ability to follow a short question and select one label.</li>
+          </ul>
+          <h3>What it misses</h3>
+          <ul class="cg-bento-list">
+            <li>Your company’s private policies and data.</li>
+            <li>Long documents, tools, agents, or multi-turn workflows.</li>
+            <li>Calibration — a wrong answer looks the same as a right one in the score.</li>
+            <li>User phrasing — real users do not write exam-style stems.</li>
+          </ul>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Product signal</th><th>If MMLU is high…</th><th>Still validate…</th></tr></thead>
+              <tbody>
+                <tr><td>General Q&amp;A assistant</td><td>May handle diverse topics</td><td>Hallucination rate on open questions</td></tr>
+                <tr><td>Domain copilot (claims, legal)</td><td>Weak signal alone</td><td>RAG on your corpus + citation accuracy</td></tr>
+                <tr><td>Structured extraction</td><td>Almost no signal</td><td>Field-level golden files</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="humaneval" class="cg-article-section cg-reveal">
+          <h2>3. HumanEval — Short Python Function Completion</h2>
+          <p>
+            <strong>HumanEval</strong> gives the model a function signature and docstring; the model writes code; unit tests pass or fail.
+            The headline metric is usually <strong>pass@k</strong> — if you generate several samples, did at least one pass the tests?
+          </p>
+          <h3>What it measures</h3>
+          <ul class="cg-bento-list">
+            <li>Small algorithmic puzzles in Python.</li>
+            <li>Single-function correctness under automated tests.</li>
+          </ul>
+          <h3>What it misses</h3>
+          <ul class="cg-bento-list">
+            <li>Reading a large repo, your frameworks, or internal libraries.</li>
+            <li>Security, performance, style guides, code review norms.</li>
+            <li>Integration tests, flaky CI, or cross-file refactors.</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              HumanEval is a sanity check for “can this model write small correct functions?”
+              It is not proof your dev-tool feature will ship safe patches across a monorepo.
+            </p>
+          </div>
+        </section>
+
+        <section id="swe-bench" class="cg-article-section cg-reveal">
+          <h2>4. SWE-bench — Real GitHub Issues in Codebases</h2>
+          <p>
+            <strong>SWE-bench</strong> (and variants such as verified or lite subsets) asks models to fix real open-source issues: read the repo context, produce a patch, run tests.
+            It is closer to “software engineering” than HumanEval, but still a controlled open-source setting.
+          </p>
+          <h3>What it measures</h3>
+          <ul class="cg-bento-list">
+            <li>Locating relevant files and editing multi-file projects.</li>
+            <li>Whether the patch makes the project’s tests pass.</li>
+          </ul>
+          <h3>What it misses</h3>
+          <ul class="cg-bento-list">
+            <li>Private repos, proprietary build systems, and org-specific conventions.</li>
+            <li>Product decisions — what not to change, feature flags, release trains.</li>
+            <li>Human review culture and incident response when CI is ambiguous.</li>
+          </ul>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Feature type</th><th>SWE-bench relevance</th></tr></thead>
+              <tbody>
+                <tr><td>Autonomous bug-fix agent</td><td>High — but replicate on your repos</td></tr>
+                <tr><td>Inline suggest in IDE</td><td>Medium — pair with local eval</td></tr>
+                <tr><td>Explain error in logs</td><td>Low — different task shape</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="gpqa" class="cg-article-section cg-reveal">
+          <h2>5. GPQA — Hard Science Q&amp;A</h2>
+          <p>
+            <strong>GPQA</strong> targets very difficult questions in biology, physics, and chemistry, often written by domain experts.
+            It is designed to be hard for non-experts and challenging for models without strong reasoning.
+          </p>
+          <h3>What it measures</h3>
+          <ul class="cg-bento-list">
+            <li>Deep reasoning on expert-level science text.</li>
+            <li>Resistance to shallow pattern-matching on niche facts.</li>
+          </ul>
+          <h3>What it misses</h3>
+          <ul class="cg-bento-list">
+            <li>Everyday consumer or enterprise workflows.</li>
+            <li>Multimodal clinical PDFs, lab scans, or instrument outputs unless separately tested.</li>
+            <li>Tool access — calculators, literature search, or internal lab systems.</li>
+          </ul>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              GPQA is a “ceiling” signal for hard reasoning marketing.
+              If your product is not expert science tutoring, treat it as background noise unless legal/compliance explicitly cares.
+            </p>
+          </div>
+        </section>
+
+        <section id="mmmu" class="cg-article-section cg-reveal">
+          <h2>6. MMMU — Multimodal University-Level Tasks</h2>
+          <p>
+            <strong>MMMU</strong> tests multimodal understanding across disciplines — questions may include diagrams, charts, sheet music, chemical structures, or other visuals plus text.
+            It stresses perception + reasoning together.
+          </p>
+          <h3>What it measures</h3>
+          <ul class="cg-bento-list">
+            <li>Whether the model can use visual information to answer hard questions.</li>
+            <li>Cross-domain multimodal reasoning (not only OCR).</li>
+          </ul>
+          <h3>What it misses</h3>
+          <ul class="cg-bento-list">
+            <li>Your users’ phone photos of invoices, not textbook diagrams.</li>
+            <li>Production limits: DPI, page count, compression, latency cost per page.</li>
+            <li>Workflow validation — extraction to system of record.</li>
+          </ul>
+          <p>
+            Pairs with
+            <a href="/blog/ai-learning/model-landscape-capabilities-economics/multimodal-ai-vision-audio-code-and-documents-the-pm-version/">Chapter 3</a>:
+            MMMU tells you multimodal reasoning headroom; your golden PDFs tell you shipping readiness.
+          </p>
+        </section>
+
+        <section id="chatbot-arena" class="cg-article-section cg-reveal">
+          <h2>7. Chatbot Arena (LMSYS) — Human Preference on Open Chat</h2>
+          <p>
+            <strong>Chatbot Arena</strong> lets users chat with anonymous models side by side and vote which answer they prefer.
+            Rankings are built from aggregated pairwise preferences (often reported as Elo-style ratings).
+          </p>
+          <h3>What it measures</h3>
+          <ul class="cg-bento-list">
+            <li>Subjective quality on open-ended prompts in a chat UI.</li>
+            <li>Helpfulness, style, and perceived intelligence in comparison.</li>
+          </ul>
+          <h3>What it misses</h3>
+          <ul class="cg-bento-list">
+            <li>Your system prompt, tools, RAG, and guardrails.</li>
+            <li>Structured tasks — JSON extraction, eligibility rules, audit trails.</li>
+            <li>Safety failures that users do not notice in a short chat.</li>
+            <li>Representativeness — voters are not your user segment.</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Arena is useful for “which base model feels better in chat?”
+              It is weak for “will our production agent reduce handle time by 20%?”
+              Replicate preference tests on <em>your</em> prompts with <em>your</em> reviewers.
+            </p>
+          </div>
+        </section>
+
+        <section id="what-benchmarks-miss" class="cg-article-section cg-reveal">
+          <h2>8. What Benchmarks Miss — The System You Actually Ship</h2>
+          <p>
+            Production quality is a stack. Benchmarks usually score the base model in isolation.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Layer</th><th>Usually in public benchmarks?</th><th>Usually in product eval?</th></tr></thead>
+              <tbody>
+                <tr><td>Base model weights</td><td>Yes</td><td>Partially</td></tr>
+                <tr><td>System prompt &amp; policies</td><td>No</td><td>Yes</td></tr>
+                <tr><td>RAG / retrieval quality</td><td>Rarely on your docs</td><td>Yes</td></tr>
+                <tr><td>Tool calling &amp; APIs</td><td>Limited generic tools</td><td>Yes</td></tr>
+                <tr><td>UI &amp; workflow</td><td>No</td><td>Yes</td></tr>
+                <tr><td>Latency &amp; cost</td><td>No</td><td>Yes</td></tr>
+                <tr><td>Safety &amp; compliance</td><td>Partial / generic</td><td>Yes — domain specific</td></tr>
+                <tr><td>Monitoring &amp; drift</td><td>No</td><td>Yes</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            <strong>A model can benchmark well and fail your product</strong> because retrieval is stale, tools are wrong, or the UX hides uncertainty.
+            The reverse also happens — a “weaker” model with better grounding wins in production.
+          </p>
+        </section>
+
+        <section id="product-eval" class="cg-article-section cg-reveal">
+          <h2>9. Product-Specific Eval Design</h2>
+          <p>
+            Your eval is the contract between PM, design, ML, and engineering on what “good” means.
+            Build it early — not the week before launch.
+          </p>
+          <h3>Golden set ingredients</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Ingredient</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>Representative inputs</td><td>Real (redacted) prompts, files, and tool states — not only clean demos</td></tr>
+                <tr><td>Expected outputs</td><td>Reference answers, JSON schemas, or rubric criteria</td></tr>
+                <tr><td>Risk tiers</td><td>Tier 1 flows block release on regression; tier 2 warns</td></tr>
+                <tr><td>Negative cases</td><td>Missing docs, ambiguous IDs, adversarial prompts</td></tr>
+                <tr><td>Version tags</td><td>Model ID, prompt version, retrieval index date</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Metric types PMs should recognize</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Metric type</th><th>Example</th><th>When to use</th></tr></thead>
+              <tbody>
+                <tr><td>Exact match</td><td>Field equals gold JSON</td><td>Structured extraction</td></tr>
+                <tr><td>Contains / regex</td><td>Must cite clause ID</td><td>Policy answers</td></tr>
+                <tr><td>LLM-as-judge</td><td>Rubric score 1–5</td><td>Summaries — with human spot checks</td></tr>
+                <tr><td>Human label</td><td>Reviewer pass/fail</td><td>High-risk workflows</td></tr>
+                <tr><td>Downstream success</td><td>Ticket resolved without edit</td><td>Production shadow mode</td></tr>
+                <tr><td>Safety</td><td>Refusal when context missing</td><td>Compliance features</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Minimum release bar (template)</h3>
+          <ul class="cg-bento-list">
+            <li>No regression on tier-1 golden set vs current production baseline.</li>
+            <li>Hallucination / unsupported-claim rate below agreed threshold on grounded tasks.</li>
+            <li>P95 latency and cost per successful task within PRD bounds.</li>
+            <li>Human override rate in pilot within expected band.</li>
+          </ul>
+          <div class="cg-callout product">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              Write eval criteria in the PRD next to user stories.
+              “Uses GPT-4 class model” is not acceptance criteria — “≥92% field accuracy on golden claims set v3” is.
+            </p>
+          </div>
+        </section>
+
+        <section id="interpretation-framework" class="cg-article-section cg-reveal">
+          <h2>10. Interpretation Framework — When a Benchmark Matters</h2>
+          <p>
+            Use this table in model selection meetings.
+            Score each benchmark 1–3 for <em>your</em> feature: Low / Medium / High relevance — based on task shape, not hype.
+          </p>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Benchmark</th><th>Measures</th><th>High relevance when your feature…</th><th>Low relevance when your feature…</th><th>Always pair with</th></tr></thead>
+              <tbody>
+                <tr><td>MMLU</td><td>Broad multiple-choice knowledge</td><td>Open-domain educational Q&amp;A</td><td>Tool + RAG on private docs only</td><td>Freshness + citation eval</td></tr>
+                <tr><td>HumanEval</td><td>Small Python functions</td><td>Snippet codegen in Python</td><td>Multi-language repo tools</td><td>CI pass rate on your samples</td></tr>
+                <tr><td>SWE-bench</td><td>Repo-level patches</td><td>Autonomous fix agents</td><td>Copy / support chat</td><td>Private repo golden issues</td></tr>
+                <tr><td>GPQA</td><td>Hard science reasoning</td><td>Expert science tutoring</td><td>Scheduling, CRM, ops bots</td><td>Domain expert review</td></tr>
+                <tr><td>MMMU</td><td>Multimodal academic tasks</td><td>Diagram-heavy analysis products</td><td>Plain text email triage</td><td>Your PDF/image golden set</td></tr>
+                <tr><td>Chatbot Arena</td><td>Open chat preference</td><td>Consumer chat UX quality</td><td>Structured backend automation</td><td>Blind review on your prompts</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Decision flow (quick)</h3>
+          <ol class="cg-bento-list" style="list-style:decimal;padding-left:1.25rem;">
+            <li>Write the user job in one sentence.</li>
+            <li>List inputs (text, file, tools) and failure cost.</li>
+            <li>Mark which benchmarks approximate that job.</li>
+            <li>Run product golden set — treat benchmark as tie-breaker, not primary evidence.</li>
+            <li>Log model version, prompt, and retrieval index with every eval run.</li>
+          </ol>
+        </section>
+
+        <section id="common-mistakes" class="cg-article-section cg-reveal">
+          <h2>11. Common Mistakes PMs Should Avoid</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Mistake</th><th>Why it fails</th><th>Do instead</th></tr></thead>
+              <tbody>
+                <tr><td>Choosing model from leaderboard screenshot</td><td>Task mismatch; scores change</td><td>Map benchmark → job → golden set</td></tr>
+                <tr><td>No golden set before pilot</td><td>Cannot prove regression</td><td>20–50 cases per tier-1 flow minimum</td></tr>
+                <tr><td>Eval only happy paths</td><td>Production is messy</td><td>Add missing context &amp; conflict cases</td></tr>
+                <tr><td>Trusting LLM-as-judge alone</td><td>Judge biases track generator</td><td>Human audit sample weekly</td></tr>
+                <tr><td>Comparing models with different prompts</td><td>Confounds the result</td><td>Freeze prompt + retrieval per run</td></tr>
+                <tr><td>Ignoring cost and latency</td><td>Best model may be unprofitable</td><td>Score “quality per dollar per second”</td></tr>
+                <tr><td>Announcing “SOTA” to customers</td><td>Benchmark ≠ their outcome</td><td>Publish what you tested on their workflow</td></tr>
+                <tr><td>One eval before launch, never again</td><td>Drift when models update</td><td>CI regression + production monitoring</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="hands-on" class="cg-article-section cg-reveal">
+          <h2>12. Hands-On Exercise — Build a One-Page Eval Brief</h2>
+          <p>
+            Time: 45–60 minutes. You can do this solo or with one engineer and one domain reviewer.
+          </p>
+          <h3>Step 1 — Pick one real feature</h3>
+          <p>
+            Example: “Summarize uploaded policy PDF and answer coverage questions with citations.”
+            Or pick your own in-flight AI feature.
+          </p>
+          <h3>Step 2 — Fill the brief</h3>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Section</th><th>Your notes</th></tr></thead>
+              <tbody>
+                <tr><td>Job story</td><td>As a [role], I need [outcome] when [input]</td></tr>
+                <tr><td>Risk tier</td><td>Low / Medium / High + why</td></tr>
+                <tr><td>Benchmarks that might correlate</td><td>MMLU / MMMU / none — and why</td></tr>
+                <tr><td>Benchmarks that do not apply</td><td>e.g. HumanEval for policy PDF feature</td></tr>
+                <tr><td>Golden set plan</td><td>How many files/prompts; who labels; refresh cadence</td></tr>
+                <tr><td>Primary metric</td><td>One number leadership will track</td></tr>
+                <tr><td>Guardrail metrics</td><td>Hallucination, refusal correctness, cost, latency</td></tr>
+                <tr><td>Release bar</td><td>What blocks ship vs warns</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Step 3 — Run a micro comparison</h3>
+          <p>
+            Take 5 golden cases. Run two model configurations you are considering (same prompt, same retrieval).
+            Score with your rubric — not with public benchmark scores.
+          </p>
+          <h3>Step 4 — Write the decision memo paragraph</h3>
+          <p style="font-size:1.05rem;color:var(--cg-text);border-left:3px solid var(--cg-blue);padding-left:16px;margin:20px 0;">
+            Template: “We chose [model/tier] because on golden set [name] it improved [primary metric] from A to B without regressing [guardrail]. Public [benchmark] was directionally consistent but not decisive. Remaining risk: [X]. Next eval: [date].”
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">PM takeaway</p>
+            <p>
+              If you cannot write that paragraph, you are not ready to defend the model choice in exec review — regardless of what any leaderboard says.
+            </p>
+          </div>
+        </section>
+
+        <section id="summary" class="cg-article-section cg-reveal">
+          <h2>Chapter Summary</h2>
+          <div class="cg-table-wrap">
+            <table class="cg-table">
+              <thead><tr><th>Concept</th><th>PM understanding</th></tr></thead>
+              <tbody>
+                <tr><td>MMLU</td><td>Broad knowledge MCQ — weak alone for enterprise copilots</td></tr>
+                <tr><td>HumanEval</td><td>Small Python functions — not whole-repo engineering</td></tr>
+                <tr><td>SWE-bench</td><td>Open-source issue fixes — replicate on private repos</td></tr>
+                <tr><td>GPQA</td><td>Hard science — niche product relevance</td></tr>
+                <tr><td>MMMU</td><td>Multimodal academic — complement with your files</td></tr>
+                <tr><td>Chatbot Arena</td><td>Chat preference — not your production stack</td></tr>
+                <tr><td>Product eval</td><td>Golden set + metrics + release bar</td></tr>
+                <tr><td>PM role</td><td>Translate benchmarks to task fit; own the eval contract</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="closing" class="cg-article-section cg-reveal">
+          <h2>Closing Thought</h2>
+          <p>
+            Benchmarks helped the industry move past pure vibes. They also created a new vibes layer — leaderboard anxiety.
+          </p>
+          <p>
+            Your stakeholders want certainty. The honest message is:
+            public benchmarks narrow the search space; product eval proves fit on your terrain.
+          </p>
+          <p>
+            When someone sends a screenshot of a ranking, ask three questions:
+            What task does that benchmark approximate?
+            Does our feature look like that task?
+            What did our golden set say last week?
+          </p>
+          <p>
+            Next we connect capability to economics — cost per token, latency, and model tier tradeoffs — where “best model” meets “best unit economics.”
+          </p>
+          <div class="cg-callout insight">
+            <p class="cg-callout-title">The real PM lesson</p>
+            <p>Benchmark → Question → Your eval → Ship. Never skip the middle two steps.</p>
+          </div>
+        </section>
+
+        <section id="next" class="cg-article-section cg-reveal">
+          <h2>Chapter navigation</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;">
+            <a class="cg-next-card" href="/blog/ai-learning/model-landscape-capabilities-economics/multimodal-ai-vision-audio-code-and-documents-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">← Previous</span>
+              <h3>Chapter 3: Multimodal AI — Vision, Audio, Code, and Documents — The PM Version</h3>
+              <p>What multimodal means in production — and when OCR pipelines still win.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+            <a class="cg-next-card" href="/blog/ai-learning/model-landscape-capabilities-economics/cost-per-token-latency-and-model-tier-tradeoffs-the-pm-version/" style="text-decoration:none;display:block;">
+              <span style="font-size:13px;font-weight:700;color:var(--cg-blue);text-transform:uppercase;letter-spacing:0.06em;">Next →</span>
+              <h3>Chapter 5: Cost per Token, Latency, and Model Tier Tradeoffs — The PM Version</h3>
+              <p>How to match model tier to SLA and unit economics — not just benchmark scores.</p>
+              <span class="cg-read-link">Read chapter →</span>
+            </a>
+          </div>
+          <div class="cg-chapter-nav">
+            <a class="cg-btn secondary" href="/blog/ai-learning/model-landscape-capabilities-economics/multimodal-ai-vision-audio-code-and-documents-the-pm-version/">← Chapter 03</a>
+            <a class="cg-btn primary" href="/blog/ai-learning/model-landscape-capabilities-economics/cost-per-token-latency-and-model-tier-tradeoffs-the-pm-version/">Chapter 05 →</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/model-landscape-capabilities-economics/">Back to Module</a>
+            <a class="cg-btn secondary" href="/blog/">Back to Blog</a>
+            <a class="cg-btn secondary" href="/blog/ai-learning/">AI Learning</a>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <footer class="cg-footer">© 2026 Samadhan Mishra</footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>

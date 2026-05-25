@@ -96,4 +96,46 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/model-families-and-the-competitive-landscape-the-pm-version/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/choosing-between-gpt-claude-gemini-and-llama-the-pm-version/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/multimodal-ai-vision-audio-code-and-documents-the-pm-version/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/benchmarks-what-pms-should-and-shouldnt-trust-the-pm-version/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/cost-per-token-latency-and-model-tier-tradeoffs-the-pm-version/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://samadhanmishra.com/blog/ai-learning/model-landscape-capabilities-economics/the-model-selection-memo-the-pm-version/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

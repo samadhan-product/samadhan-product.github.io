@@ -2,12 +2,12 @@
   "bookTitle": "AI Learning",
   "description": "A structured AI Product Leader learning book for understanding modern AI systems, prompting, token economics, RAG, agents, MCP, production AI infrastructure, and applied AI product strategy.",
   "overview": {
-    "modules": 8,
+    "modules": 9,
     "weeks": "18–22",
     "hoursPerWeek": "8–10",
     "lens": "Product-first"
   },
-  "sourceNote": "Generated from AI_Product_Leader_Syllabus.xlsx Master Syllabus tab. Module 01 marked Active (live chapter); Modules 02–08 marked Coming Soon.",
+  "sourceNote": "Generated from AI_Product_Leader_Syllabus.xlsx Master Syllabus tab. Modules 01–02 Active with live chapters; Modules 03–09 marked Coming Soon.",
   "modules": [
     {
       "number": "01",
@@ -117,23 +117,86 @@
           "title": "Hallucinations, Knowledge Cutoffs, and Model Limitations — The PM Version",
           "slug": "hallucinations-knowledge-cutoffs-and-model-limitations-the-pm-version",
           "status": "Active"
-        },
-        {
-          "number": "12",
-          "title": "Choosing Between GPT, Claude, Gemini and Llama",
-          "slug": "choosing-model-families",
-          "status": "Coming Soon"
-        },
-        {
-          "number": "13",
-          "title": "Benchmarks, Cost per Token and Model Tier Tradeoffs",
-          "slug": "benchmarks-cost-tradeoffs",
-          "status": "Coming Soon"
         }
       ]
     },
     {
       "number": "02",
+      "title": "Model Landscape, Capabilities & Economics",
+      "slug": "model-landscape-capabilities-economics",
+      "theme": "Model Selection & Economics",
+      "subtitle": "Multimodal, model tiers, benchmarks, cost modelling",
+      "weeks": "3–4",
+      "duration": "2 weeks",
+      "status": "Active",
+      "coreTopics": [
+        "Model families & competitive landscape",
+        "GPT, Claude, Gemini, Llama comparison",
+        "Multimodal AI",
+        "Benchmarks & product evals",
+        "Cost per token & unit economics",
+        "Model selection memo"
+      ],
+      "tools": [
+        "LMSYS Chatbot Arena",
+        "Provider pricing pages",
+        "Model cards"
+      ],
+      "pmFocus": "Compare models like infrastructure choices, not brand fandom. Your eval set and unit economics matter more than leaderboard rank.",
+      "deliverable": "One-page model selection memo: use case, quality, latency, cost, models compared, rationale, risks, monitoring",
+      "learningOutcomes": [
+        "Compare model families by product criteria",
+        "Interpret benchmarks without over-trusting leaderboards",
+        "Model monthly AI cost for a feature",
+        "Write a credible model selection memo"
+      ],
+      "resources": [
+        "Provider model cards and pricing pages",
+        "LMSYS Chatbot Arena",
+        "MMLU, HumanEval, SWE-bench overviews",
+        "Stanford AI Index"
+      ],
+      "chapters": [
+        {
+          "number": "01",
+          "title": "Model Families and the Competitive Landscape — The PM Version",
+          "slug": "model-families-and-the-competitive-landscape-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "02",
+          "title": "Choosing Between GPT, Claude, Gemini, and Llama — The PM Version",
+          "slug": "choosing-between-gpt-claude-gemini-and-llama-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "03",
+          "title": "Multimodal AI: Vision, Audio, Code, and Documents — The PM Version",
+          "slug": "multimodal-ai-vision-audio-code-and-documents-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "04",
+          "title": "Benchmarks: What PMs Should and Shouldn't Trust — The PM Version",
+          "slug": "benchmarks-what-pms-should-and-shouldnt-trust-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "05",
+          "title": "Cost per Token, Latency, and Model Tier Tradeoffs — The PM Version",
+          "slug": "cost-per-token-latency-and-model-tier-tradeoffs-the-pm-version",
+          "status": "Active"
+        },
+        {
+          "number": "06",
+          "title": "The Model Selection Memo — The PM Version",
+          "slug": "the-model-selection-memo-the-pm-version",
+          "status": "Active"
+        }
+      ]
+    },
+    {
+      "number": "03",
       "title": "Prompt Engineering — Techniques & Structure",
       "slug": "prompt-engineering-techniques-structure",
       "theme": "Prompting Craft",
@@ -179,7 +242,7 @@
       "chapters": []
     },
     {
-      "number": "03",
+      "number": "04",
       "title": "Token-Efficient Prompting",
       "slug": "token-efficient-prompting",
       "theme": "Cost Optimization",
@@ -225,7 +288,7 @@
       "chapters": []
     },
     {
-      "number": "04",
+      "number": "05",
       "title": "Retrieval-Augmented Generation (RAG)",
       "slug": "retrieval-augmented-generation",
       "theme": "Knowledge Grounding",
@@ -278,7 +341,7 @@
       "chapters": []
     },
     {
-      "number": "05",
+      "number": "06",
       "title": "AI Agents & Agentic Systems",
       "slug": "ai-agents-agentic-systems",
       "theme": "Autonomous AI",
@@ -335,7 +398,7 @@
       "chapters": []
     },
     {
-      "number": "06",
+      "number": "07",
       "title": "Model Context Protocol (MCP)",
       "slug": "model-context-protocol",
       "theme": "Agent Connectivity",
@@ -384,7 +447,7 @@
       "chapters": []
     },
     {
-      "number": "07",
+      "number": "08",
       "title": "AI Infrastructure & the Production Stack",
       "slug": "ai-infrastructure-production-stack",
       "theme": "Production AI",
@@ -439,7 +502,7 @@
       "chapters": []
     },
     {
-      "number": "08",
+      "number": "09",
       "title": "AI Product Strategy & Applied Practice",
       "slug": "ai-product-strategy-applied-practice",
       "theme": "Strategy & Capstone",
