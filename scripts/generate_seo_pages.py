@@ -208,7 +208,7 @@ def page(
   <div class="animated-dot-field" aria-hidden="true"></div>
 {NAV}
 {crumbs_html}
-  <header class="cg-hero cg-hero-compact cg-reveal">
+  <header class="cg-hero cg-hero-compact">
     <div class="cg-hero-content" style="max-width:800px;">
       <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
       <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">{h1}</h1>

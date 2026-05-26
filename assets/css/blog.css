@@ -2551,9 +2551,48 @@ body[data-js] .cg-tab-panel.is-active { display: block; }
 }
 
 .cg-hero-compact {
-  padding: 72px 40px 48px;
+  padding: 28px 24px 20px;
   max-width: var(--cg-content-w);
   margin: 0 auto;
+}
+
+/* SEO / portal pages: no blog.js reveal — keep content visible */
+.portal-page .cg-reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.portal-page .cg-breadcrumbs {
+  padding-top: 12px;
+  padding-bottom: 4px;
+}
+
+.portal-page[data-page="case-studies"] .cg-hero-compact {
+  padding-top: 8px;
+  padding-bottom: 12px;
+}
+
+.portal-page[data-page="case-studies"] .cg-main.cg-article-content {
+  padding-top: 0;
+}
+
+.cg-case-study-list {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.cg-case-study-list > p {
+  margin: 0 0 20px;
+  color: var(--cg-text-muted);
+  font-size: 17px;
+  max-width: 62ch;
+}
+
+.cg-case-study-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* ============================================================

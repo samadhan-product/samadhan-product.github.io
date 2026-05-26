@@ -168,15 +168,16 @@ def build_landing_pages(shared_faqs, shared_geo) -> list[dict]:
         "AI Product Case Studies | Samadhan Mishra",
         "Case studies in healthcare AI, pre-auth automation, cognitive engines, network claims, EdTech AI, and AI product practice.",
         "AI Product Case Studies",
-        """<section class="cg-article-section"><h2>Selected work</h2>
+        """<section class="cg-article-section cg-case-study-list">
 <p>Production-oriented case studies across health insurance TPA, cognitive automation, agentic workflow mapping, and AI education platforms.</p>
-<div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;">
+<div class="cg-case-study-cards">
 <a class="cg-card glow is-link" href="/case-studies/ai-led-pre-auth-automation/"><h3>AI-Led Pre-Authorisation Automation</h3><p>Insurance pre-authorisation turnaround and governance.</p></a>
 <a class="cg-card glow is-link" href="/case-studies/ai-powered-cognitive-decision-engine/"><h3>AI-Powered Cognitive Decision Engine</h3><p>Document understanding and decision support.</p></a>
 <a class="cg-card glow is-link" href="/case-studies/network-claims-automation/"><h3>AI-Led Network Claims Automation</h3><p>Agentic mapping across claims and FinOps.</p></a>
 <a class="cg-card glow is-link" href="/case-studies/ai-learning-platform-for-schools/"><h3>AI Learning Platform for Schools</h3><p>Structured AI education for institutions.</p></a>
 <a class="cg-card glow is-link" href="/case-studies/ai-product-practice-operating-model/"><h3>AI Product Practice Operating Model</h3><p>Portfolio governance for AI initiatives.</p></a>
-</div></section>""",
+</div>
+</section>""",
         "case-studies",
         [("Home", "/"), ("Case Studies", "/case-studies/")],
         faqs=None,
