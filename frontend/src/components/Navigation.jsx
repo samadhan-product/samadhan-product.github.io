@@ -4,15 +4,17 @@ import { profile } from "../data/profile";
 import { useTheme } from "../hooks/useTheme";
 
 const SECTION_LINKS = [
-  { id: "work", label: "Work" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
   { id: "about", label: "About" },
-  { id: "contact", label: "Contact" }
+  { id: "services", label: "Services" },
+  { id: "case-studies", label: "Case Studies" },
+  { id: "experience", label: "Experience" },
+  { id: "work-with-me", label: "Contact" }
 ];
 
 const SITE_LINKS = [
-  { href: "/portfolio/", label: "Portfolio" },
+  { href: "/case-studies/", label: "Case Studies" },
+  { href: "/insights/", label: "Insights" },
+  { href: "/work-with-me/", label: "Work With Me" },
   { href: "/blog/", label: "Blog" }
 ];
 

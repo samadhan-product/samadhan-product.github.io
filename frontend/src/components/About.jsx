@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { Section, RevealText } from "./Reveal";
 import { profile } from "../data/profile";
+import { consulting } from "../data/consulting";
 
 export default function About() {
   return (
-    <Section id="about" label="02 / About">
+    <Section id="about" label="About Samadhan Mishra">
       <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-12">
         {/* Left — tag + portrait */}
         <div className="md:col-span-5">
@@ -49,23 +50,15 @@ export default function About() {
         {/* Right — bio */}
         <div className="md:col-span-7">
           <h2
-            className="font-display text-4xl font-light leading-[1.02] tracking-[-0.03em] text-white md:text-6xl"
+            className="font-display text-4xl font-light leading-[1.02] tracking-[-0.03em] text-white md:text-5xl"
             data-testid="about-heading"
           >
-            <RevealText text="Shipping intelligent" as="span" className="block" />
-            <RevealText
-              text="products — from"
-              as="span"
-              className="block"
-              delay={0.1}
-            />
-            <RevealText
-              text="claims to classrooms."
-              as="span"
-              className="block italic text-white/80"
-              delay={0.2}
-            />
+            <RevealText text="About Samadhan Mishra" as="span" className="block" />
           </h2>
+
+          <p className="mt-8 font-body text-base text-white/75 md:text-lg">
+            {consulting.entityBio}
+          </p>
 
           <div className="mt-12 space-y-7 font-body text-base text-white/70 md:text-lg">
             {profile.bio.map((p, i) => (

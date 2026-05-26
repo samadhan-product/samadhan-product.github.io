@@ -9,6 +9,15 @@ import Contact from "../components/Contact";
 import CustomCursor from "../components/CustomCursor";
 import SmoothScroll from "../components/SmoothScroll";
 import LoadingIntro from "../components/LoadingIntro";
+import {
+  WhatIBuild,
+  LeadershipExpertise,
+  FeaturedCaseStudies,
+  ConsultingServices,
+  ThoughtLeadership,
+  GeoFaqSection,
+  WorkWithMeSection
+} from "../components/ConsultingSections";
 
 export default function Landing() {
   return (
@@ -19,10 +28,17 @@ export default function Landing() {
       <Navigation />
       <Hero />
       <About />
+      <WhatIBuild />
+      <LeadershipExpertise />
+      <FeaturedCaseStudies />
+      <ConsultingServices />
       <Metrics />
       <Experience />
       <Projects />
+      <ThoughtLeadership />
       <Skills />
+      <GeoFaqSection />
+      <WorkWithMeSection />
       <Contact />
     </main>
   );

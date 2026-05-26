@@ -1,0 +1,150 @@
+{
+  "shared_faqs": [
+    {
+      "q": "Who is Samadhan Mishra?",
+      "a": "Samadhan Mishra is an AI Product Leader and Product Management Consultant with 13+ years across HealthTech, insurance TPA, EdTech, FinTech, and SaaS. He helps companies design and ship AI-native products, agentic workflows, healthcare automation, and scalable product operating models."
+    },
+    {
+      "q": "What does an AI Product Leader do?",
+      "a": "An AI Product Leader sets product direction for AI features and platforms: use-case selection, workflow design, model and architecture choices, quality and safety bars, unit economics, and cross-functional execution from prototype to production."
+    },
+    {
+      "q": "What is the difference between an AI Product Manager and a traditional Product Manager?",
+      "a": "An AI Product Manager owns non-deterministic systems: eval design, prompt and context strategy, model tiering, latency and cost tradeoffs, grounding and guardrails, and human-in-the-loop design. Traditional PMs focus more on deterministic software delivery."
+    },
+    {
+      "q": "How can an AI Product Management Consultant help startups and enterprises?",
+      "a": "A consultant accelerates decisions that are expensive to learn by trial: which workflows to automate, how to structure pilots, what to measure, how to route models by task, and how to align product, engineering, and operations on a production path."
+    },
+    {
+      "q": "Does Samadhan Mishra work on AI agents and RAG products?",
+      "a": "Yes. Samadhan works on agentic workflows, tool use, retrieval-augmented systems, document and claims automation, and knowledge-grounded assistants for regulated and high-volume operations."
+    },
+    {
+      "q": "What industries does Samadhan Mishra specialize in?",
+      "a": "Health insurance and TPA operations, HealthTech platforms, FinTech SaaS, EdTech, and enterprise workflow automation."
+    },
+    {
+      "q": "How can I work with Samadhan Mishra?",
+      "a": "Start at samadhanmishra.com/work-with-me/ with your use case, team context, and timeline. Engagements include advisory, product strategy sprints, and hands-on product leadership for AI initiatives."
+    }
+  ],
+  "shared_geo": [
+    {
+      "q": "Who is Samadhan Mishra?",
+      "a": "Samadhan Mishra is an AI Product Leader and Product Management Consultant based in Pune, India, with 13+ years building products in HealthTech, insurance TPA, EdTech, FinTech, and SaaS."
+    },
+    {
+      "q": "What does Samadhan Mishra do?",
+      "a": "He helps companies move from AI experimentation to production-grade products: AI strategy, agentic workflows, RAG and knowledge systems, healthcare and insurance automation, and product operating model design."
+    },
+    {
+      "q": "What is an AI Product Leader?",
+      "a": "An AI Product Leader owns the product system around AI: problem selection, workflow design, model and cost decisions, evals and safety, and shipping accountable AI features in production."
+    },
+    {
+      "q": "How can an AI Product Management Consultant help a company?",
+      "a": "By clarifying which use cases deserve investment, defining quality and governance requirements, designing architecture and evals, and aligning teams on a path from pilot to scaled operation."
+    },
+    {
+      "q": "What AI consulting services does Samadhan Mishra provide?",
+      "a": "AI product strategy, AI agents and workflow automation, RAG and knowledge systems, healthcare and insurance AI automation, product operating model design, and product leadership advisory."
+    },
+    {
+      "q": "What industries does Samadhan Mishra specialize in?",
+      "a": "Health insurance and TPA, HealthTech, FinTech, EdTech, and enterprise SaaS."
+    },
+    {
+      "q": "Why work with Samadhan Mishra?",
+      "a": "He combines senior product leadership with hands-on experience shipping AI in regulated, high-volume healthcare and insurance workflows—not slide-only strategy."
+    }
+  ],
+  "case_studies": [
+    {
+      "slug": "ai-led-pre-auth-automation",
+      "short_title": "Pre-Auth Automation",
+      "title": "AI-Led Pre-Auth Automation in Health Insurance TPA",
+      "h1": "AI-Led Pre-Auth Automation in Health Insurance TPA",
+      "description": "Case study: reducing pre-authorization turnaround and operational load through workflow redesign, rules, and AI-assisted decision support in a health insurance TPA context.",
+      "context": "A large health insurance TPA processed high volumes of pre-authorization requests across hospitals, insurers, and internal clinical teams. Turnaround time and manual touchpoints affected provider experience and operational cost.",
+      "problem": "Pre-auth queues grew with network expansion. Teams relied on fragmented rules, manual document review, and inconsistent prioritization—creating delays on both fresh and discharge cases.",
+      "pain": "Operations leaders faced rising AHT, insurer concurrence delays, and limited visibility into bottlenecks. Hospital partners escalated slow responses; internal teams burned capacity on repeatable checks.",
+      "intervention": "Product-led workflow modernization: rule sequencing, auto-allocation, concurrence automation, productivity instrumentation, and AI-assisted document understanding layered on existing systems of record.",
+      "ai": "Document classification, OCR and extraction, clinical and billing signal summarization, decision-support recommendations, and governed automation with human approval gates.",
+      "role": "Samadhan led product strategy and execution as AI Product Leader: workflow mapping with operations, PRD and success metrics, pilot design, stakeholder alignment with clinical and insurer teams, and rollout governance.",
+      "outcome": "Measurable improvements in pre-auth AHT, fresh and discharge TAT, and team productivity—with clearer escalation paths and audit-friendly decision trails.",
+      "lessons": "Start with workflow truth, not model demos. Automate the repeatable middle; keep humans on exceptions. Instrument every stage before scaling AI.",
+      "service_link": "/healthcare-ai-product-consultant/",
+      "service_label": "Healthcare AI Product Consulting"
+    },
+    {
+      "slug": "enigma-cognitive-engine",
+      "short_title": "Enigma Cognitive Engine",
+      "title": "Enigma Cognitive Engine and Decision Support",
+      "h1": "Enigma Cognitive Engine and Decision Support",
+      "description": "Case study: cognitive automation for medical and billing document understanding, rule evaluation, and operator decision support in health insurance operations.",
+      "context": "TPA operations depend on accurate reading of clinical and financial documents under time pressure. Legacy processes mixed manual review with brittle rules.",
+      "problem": "Operators spent disproportionate time categorizing documents, reconciling fields, and applying policy rules—slowing claims and pre-auth cycles.",
+      "pain": "Inconsistent extraction quality created rework. Supervisors lacked confidence in when to trust automation versus escalate.",
+      "intervention": "Enigma as a cognitive layer: ingestion, categorization, field extraction, rule evaluation, and Vings as the system-of-work for operators—with explicit confidence and override paths.",
+      "ai": "Computer vision and NLP for document understanding, structured extraction, rule engines with ML-assisted signals, and decision-support UI embedded in operator workflows.",
+      "role": "Samadhan shaped product vision, operator journeys, quality bars, and phased rollout—partnering with engineering and operations on eval design and HITL policy.",
+      "outcome": "Reduced manual handling on high-volume document types, faster routing to the right expert, and improved traceability for compliance review.",
+      "lessons": "Operator trust is a product requirement. Publish confidence, show sources, and design overrides as first-class—not afterthoughts.",
+      "service_link": "/ai-agents-consultant/",
+      "service_label": "AI Agents Consulting"
+    },
+    {
+      "slug": "network-claims-automation",
+      "short_title": "Network Claims Automation",
+      "title": "Network Claims Automation",
+      "h1": "Network Claims Automation",
+      "description": "Case study: mapping and automating network claims, OPD, FinOps, and audit workflows with agentic patterns and governed tool use.",
+      "context": "Network claims and adjacent flows (OPD reimbursement, FinOps, customer service, audit) span multiple systems and teams with overlapping data.",
+      "problem": "End-to-end visibility was weak. Automation attempts stalled because no one owned the workflow map from intake to settlement and audit.",
+      "pain": "PMs and ops leads could not prioritize AI investments without a clear picture of failure modes, handoffs, and blast radius.",
+      "intervention": "Agentic workflow mapping: decompose journeys, identify tool-ready steps, define HITL checkpoints, and sequence pilots by economic and risk leverage.",
+      "ai": "Tool-calling agents for retrieval, validation, and draft actions; RAG over policy and SOP corpora; structured outputs for downstream systems.",
+      "role": "Samadhan led product discovery, agent scope definition, success metrics, and cross-functional governance for production pilots.",
+      "outcome": "Clearer automation roadmap, prioritized use cases with cost-per-run estimates, and initial production agents with observability and rollback plans.",
+      "lessons": "Map the workflow before buying models. Agent value is bounded by tool quality and permissions—not prompt cleverness alone.",
+      "service_link": "/ai-agents-consultant/",
+      "service_label": "AI Agents Consulting"
+    },
+    {
+      "slug": "ai-school-hub",
+      "short_title": "AI School Hub",
+      "title": "AI School Hub",
+      "h1": "AI School Hub — Structured AI Education for Schools",
+      "description": "Case study: B2B EdTech platform design for structured AI curriculum, teacher enablement, and practical adoption in schools.",
+      "context": "Schools need practical AI literacy programs—not generic tool training—with curriculum alignment, teacher support, and measurable learner progress.",
+      "problem": "Ad-hoc AI workshops did not scale. Institutions lacked LMS-aligned journeys, projects, and certification paths.",
+      "pain": "Administrators could not justify spend without outcomes; teachers needed ready-to-run modules and assessment rubrics.",
+      "intervention": "AISchoolHub as a product concept: structured curriculum, project-based learning, teacher playbooks, LMS integration, and certification.",
+      "ai": "Guided AI projects, safe tooling boundaries, prompt and workflow templates, and analytics on learner engagement—not unbounded chat in classrooms.",
+      "role": "Samadhan led product definition, partner segmentation, packaging, and go-to-market narrative for institutional buyers.",
+      "outcome": "Clear product architecture for pilots with schools, defined delivery model, and differentiation from consumer AI apps.",
+      "lessons": "Education AI products need governance, pedagogy, and procurement clarity—not feature parity with ChatGPT.",
+      "service_link": "/services/ai-product-strategy/",
+      "service_label": "AI Product Strategy"
+    },
+    {
+      "slug": "product-hero-ai-product-practice",
+      "short_title": "Product Hero / AI Practice",
+      "title": "Product Hero — Building an AI Product Practice",
+      "h1": "Product Hero — Building an AI Product Practice",
+      "description": "Case study: standing up AI product practice—roles, rituals, evals, and portfolio governance—for teams shipping multiple AI initiatives.",
+      "context": "A product organization ran parallel AI pilots without shared standards for quality, cost, or release governance.",
+      "problem": "Teams chose models ad hoc, skipped evals, and could not compare initiatives on business impact or operational risk.",
+      "pain": "Leadership lacked a portfolio view; engineers and PMs duplicated learnings; customer-facing features shipped with inconsistent safety posture.",
+      "intervention": "Product Hero framework: intake criteria, model selection memo template, eval rubrics, tiering strategy, and executive review cadence.",
+      "ai": "Cross-cutting patterns for RAG, agents, and copilots with shared observability and cost attribution by feature.",
+      "role": "Samadhan advised on operating model, templates, and leadership rituals—grounded in production experience from HealthTech AI portfolios.",
+      "outcome": "Faster decisions, fewer repeated failures, and clearer accountability from experiment to production.",
+      "lessons": "AI scale is an operating model problem. Templates and governance beat heroics.",
+      "service_link": "/product-leadership-advisory/",
+      "service_label": "Product Leadership Advisory"
+    }
+  ],
+  "landing_pages": []
+}

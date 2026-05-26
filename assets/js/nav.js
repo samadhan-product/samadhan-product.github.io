@@ -6,11 +6,9 @@
 
   var MENU_LINKS = [
     { href: "/", label: "Home", nav: "home" },
-    { href: "/#work", label: "Work", nav: "work" },
-    { href: "/#experience", label: "Experience", nav: "experience" },
-    { href: "/#projects", label: "Projects", nav: "projects" },
-    { href: "/#about", label: "About", nav: "about" },
-    { href: "/#contact", label: "Contact", nav: "contact" },
+    { href: "/case-studies/", label: "Case Studies", nav: "case-studies" },
+    { href: "/insights/", label: "Insights", nav: "insights" },
+    { href: "/work-with-me/", label: "Work With Me", nav: "work-with-me" },
     { href: "/portfolio/", label: "Portfolio", nav: "portfolio" },
     { href: "/blog/", label: "Blog", nav: "blog" }
   ];
@@ -22,6 +20,12 @@
     if (path === "/" || path === "/index.html") return "home";
     if (path.indexOf("/portfolio") === 0) return "portfolio";
     if (path.indexOf("/blog") === 0) return "blog";
+    if (path.indexOf("/case-studies") === 0) return "case-studies";
+    if (path.indexOf("/insights") === 0) return "insights";
+    if (path.indexOf("/work-with-me") === 0) return "work-with-me";
+    if (path.indexOf("/services") === 0) return "services";
+    if (path.indexOf("/ai-product") === 0 || path.indexOf("/healthcare") === 0 || path.indexOf("/product-leadership") === 0 || path.indexOf("/ai-agents") === 0) return "consulting";
+    if (path.indexOf("/speaking") === 0) return "speaking-workshops";
     return "";
   }
 

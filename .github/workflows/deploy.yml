@@ -40,7 +40,10 @@ jobs:
           # portfolio: detailed static portfolio page
           # assets: shared CSS and static assets
           # ai-learning, posts: legacy URL redirects only
-          for path in blog portfolio assets ai-learning posts; do
+          for path in blog portfolio assets ai-learning posts \
+            case-studies ai-product-leader ai-product-management-consultant \
+            ai-agents-consultant healthcare-ai-product-consultant \
+            product-leadership-advisory speaking-workshops insights work-with-me services; do
             if [ -e "$path" ]; then
               cp -r "$path" frontend/build/
             fi

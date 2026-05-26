@@ -20,16 +20,16 @@ const socials = [
 
 export default function Contact() {
   return (
-    <Section id="contact" label="07 / Contact" className="pb-0">
+    <Section id="contact" label="Contact" className="pb-0">
       <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
         <div className="md:col-span-12">
           <h2
             className="font-display text-[clamp(3rem,10vw,10rem)] font-light leading-[0.9] tracking-[-0.04em] text-white"
             data-testid="contact-heading"
           >
-            <RevealText text="Have an idea?" as="span" className="block" />
+            <RevealText text="Let's talk." as="span" className="block" />
             <RevealText
-              text="Let's build it."
+              text="Production AI."
               as="span"
               className="block italic"
               delay={0.1}
@@ -39,20 +39,21 @@ export default function Contact() {
 
         <div className="md:col-span-7">
           <p className="font-body text-base text-white/70 md:text-lg">
-            I'm currently {profile.availability.toLowerCase()}. The fastest way
-            to reach me is LinkedIn — I reply to most serious conversations
-            within a working day.
+            {profile.availability}. For consulting and advisory, start at{" "}
+            <a href="/work-with-me/" className="text-white underline-offset-4 hover:underline">
+              Work With Me
+            </a>
+            —or connect on LinkedIn. I reply to most serious conversations within a business day.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <MagneticButton
-              href={profile.social.linkedin}
+              href="/work-with-me/"
               shape="pill"
               variant="primary"
-              data-testid="contact-hire-me-button"
-              data-cursor="hire me"
+              data-testid="contact-work-with-me-button"
             >
-              <span>Hire Me</span>
+              <span>Work With Me</span>
               <svg
                 width="14"
                 height="14"

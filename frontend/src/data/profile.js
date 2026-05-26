@@ -1,10 +1,10 @@
 export const profile = {
   name: "Samadhan Mishra",
-  role: "AI Product Leader",
+  role: "AI Product Leader & Product Management Consultant",
   location: "Pune, India",
-  availability: "Open to roles · Advisory · Speaking",
+  availability: "Open to advisory · Consulting · Speaking",
   tagline:
-    "Building AI-native products, HealthTech workflow automation, claims AI systems, agentic workflows, digital transformation platforms, and practical AI learning assets.",
+    "Helping companies build AI-native products, agentic workflows, healthcare automation platforms, and scalable product operating models.",
   years: "13+",
   bio: [
     "I'm an AI Product Leader and AI Product Manager with 13+ years across InsurTech/HealthTech, EdTech, FinTech, and enterprise SaaS — focused on AI-led digital transformation, enterprise AI implementation, and workflow automation.",
