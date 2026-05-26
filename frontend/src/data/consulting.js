@@ -1,6 +1,6 @@
 export const consulting = {
   entityBio:
-    "Samadhan Mishra is an AI Product Leader and Product Management Consultant with 13+ years of experience across HealthTech, Insurance TPA, EdTech, FinTech and SaaS. He specialises in AI-native product strategy, agentic workflows, healthcare automation, RAG-based systems, product operating models and AI transformation consulting.",
+    "Samadhan Mishra is an AI Product Leader and Product Management Consultant with 13+ years of experience across HealthTech, insurance TPA, EdTech, FinTech and SaaS. He specialises in AI-native product strategy, agentic workflows, healthcare automation, RAG-based systems, product operating models and AI transformation consulting.",
 
   heroSubcopy:
     "I help companies move from AI experimentation to production-grade AI products. My work sits at the intersection of product strategy, business workflows, AI agents, automation, healthcare platforms and execution governance.",
@@ -68,14 +68,14 @@ export const consulting = {
 
   caseStudies: [
     {
-      title: "AI-Led Pre-Auth Automation",
+      title: "AI-Led Pre-Authorisation Automation",
       href: "/case-studies/ai-led-pre-auth-automation/",
-      tag: "Health insurance TPA"
+      tag: "Insurance workflows"
     },
     {
-      title: "Enigma Cognitive Engine",
-      href: "/case-studies/enigma-cognitive-engine/",
-      tag: "Decision support"
+      title: "AI-Powered Cognitive Decision Engine",
+      href: "/case-studies/ai-powered-cognitive-decision-engine/",
+      tag: "Healthcare operations"
     },
     {
       title: "Network Claims Automation",
@@ -83,13 +83,13 @@ export const consulting = {
       tag: "Agentic workflows"
     },
     {
-      title: "AI School Hub",
-      href: "/case-studies/ai-school-hub/",
+      title: "AI Learning Platform for Schools",
+      href: "/case-studies/ai-learning-platform-for-schools/",
       tag: "EdTech · AI education"
     },
     {
-      title: "Product Hero — AI Practice",
-      href: "/case-studies/product-hero-ai-product-practice/",
+      title: "AI Product Practice Operating Model",
+      href: "/case-studies/ai-product-practice-operating-model/",
       tag: "Operating model"
     }
   ],

@@ -134,7 +134,7 @@ def build_landing_pages(shared_faqs, shared_geo) -> list[dict]:
 <p>Pre-authorization, claims adjudication, network operations, document understanding, and payment/settlement automation.</p>
 """ + links_block([
             ("Pre-auth case study", "/case-studies/ai-led-pre-auth-automation/"),
-            ("Enigma case study", "/case-studies/enigma-cognitive-engine/"),
+            ("Cognitive decision engine case study", "/case-studies/ai-powered-cognitive-decision-engine/"),
             ("Healthcare AI service", "/services/healthcare-insurance-ai/"),
         ]),
         "healthcare-ai-product-consultant",
@@ -153,7 +153,7 @@ def build_landing_pages(shared_faqs, shared_geo) -> list[dict]:
 <h2>Formats</h2>
 <p>Monthly advisory, strategy sprints, board-ready narratives, and interim product leadership for critical initiatives.</p>
 """ + links_block([
-            ("Product Hero case study", "/case-studies/product-hero-ai-product-practice/"),
+            ("AI product practice case study", "/case-studies/ai-product-practice-operating-model/"),
             ("Operating model service", "/services/product-operating-model/"),
             ("Speaking", "/speaking-workshops/"),
         ]),
@@ -171,11 +171,11 @@ def build_landing_pages(shared_faqs, shared_geo) -> list[dict]:
         """<section class="cg-article-section"><h2>Selected work</h2>
 <p>Production-oriented case studies across health insurance TPA, cognitive automation, agentic workflow mapping, and AI education platforms.</p>
 <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;">
-<a class="cg-card glow is-link" href="/case-studies/ai-led-pre-auth-automation/"><h3>AI-Led Pre-Auth Automation</h3><p>TPA pre-authorization turnaround and governance.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/enigma-cognitive-engine/"><h3>Enigma Cognitive Engine</h3><p>Document understanding and decision support.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/network-claims-automation/"><h3>Network Claims Automation</h3><p>Agentic mapping across claims and FinOps.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/ai-school-hub/"><h3>AI School Hub</h3><p>Structured AI education for institutions.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/product-hero-ai-product-practice/"><h3>Product Hero — AI Product Practice</h3><p>Operating model for AI portfolios.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/ai-led-pre-auth-automation/"><h3>AI-Led Pre-Authorisation Automation</h3><p>Insurance pre-authorisation turnaround and governance.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/ai-powered-cognitive-decision-engine/"><h3>AI-Powered Cognitive Decision Engine</h3><p>Document understanding and decision support.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/network-claims-automation/"><h3>AI-Led Network Claims Automation</h3><p>Agentic mapping across claims and FinOps.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/ai-learning-platform-for-schools/"><h3>AI Learning Platform for Schools</h3><p>Structured AI education for institutions.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/ai-product-practice-operating-model/"><h3>AI Product Practice Operating Model</h3><p>Portfolio governance for AI initiatives.</p></a>
 </div></section>""",
         "case-studies",
         [("Home", "/"), ("Case Studies", "/case-studies/")],

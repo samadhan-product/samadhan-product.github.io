@@ -149,46 +149,50 @@
 </head>
 <body class="cg-blog-theme portal-page" data-page="case-studies">
   <div class="animated-dot-field" aria-hidden="true"></div>
-  <header class="site-nav" data-testid="top-nav">
-    <div class="site-nav-inner">
-      <a class="site-brand" href="/">
-        <span class="site-logo-box">SM</span>
-        <span class="site-brand-text">/ Samadhan</span>
-      </a>
-      <nav class="site-menu" aria-label="Primary">
-        <a class="site-menu-link" href="/" data-nav="home">Home</a>
-        <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
-        <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
-        <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
-        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
-        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
-      </nav>
-      <div class="site-nav-meta">
-        <div class="site-time" aria-live="polite">
-          <span class="site-time-dot" aria-hidden="true"></span>
-          <span data-nav-clock></span>
-        </div>
-        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
-          <span class="theme-toggle-icon">◑</span>
-        </button>
-        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
-          <span class="site-nav-toggle-bar"></span>
-          <span class="site-nav-toggle-bar"></span>
-        </button>
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<header class="site-nav" data-testid="top-nav">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <span class="site-logo-box">SM</span>
+      <span class="site-brand-text">/ Samadhan</span>
+    </a>
+    <nav class="site-menu" aria-label="Primary">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="site-nav-meta">
+      <div class="site-time" aria-live="polite">
+        <span data-nav-clock></span>
       </div>
+      <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="theme-toggle-icon">◑</span>
+      </button>
+      <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+        <span class="site-nav-toggle-bar"></span>
+        <span class="site-nav-toggle-bar"></span>
+      </button>
     </div>
-    <div class="site-nav-mobile" data-nav-mobile hidden>
-      <nav aria-label="Mobile">
-        <a class="site-menu-link" href="/" data-nav="home">Home</a>
-        <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
-        <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
-        <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
-        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
-        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
-      </nav>
-    </div>
-  </header>
-
+  </div>
+  <div class="site-nav-mobile" data-nav-mobile hidden>
+    <nav aria-label="Mobile">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+  </div>
+</header>
 <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
 <a href="https://samadhanmishra.com/">Home</a>
 <span class="sep">→</span>
@@ -206,11 +210,11 @@
 <section class="cg-article-section"><h2>Selected work</h2>
 <p>Production-oriented case studies across health insurance TPA, cognitive automation, agentic workflow mapping, and AI education platforms.</p>
 <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;">
-<a class="cg-card glow is-link" href="/case-studies/ai-led-pre-auth-automation/"><h3>AI-Led Pre-Auth Automation</h3><p>TPA pre-authorization turnaround and governance.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/enigma-cognitive-engine/"><h3>Enigma Cognitive Engine</h3><p>Document understanding and decision support.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/network-claims-automation/"><h3>Network Claims Automation</h3><p>Agentic mapping across claims and FinOps.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/ai-school-hub/"><h3>AI School Hub</h3><p>Structured AI education for institutions.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/product-hero-ai-product-practice/"><h3>Product Hero — AI Product Practice</h3><p>Operating model for AI portfolios.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/ai-led-pre-auth-automation/"><h3>AI-Led Pre-Authorisation Automation</h3><p>Insurance pre-authorisation turnaround and governance.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/ai-powered-cognitive-decision-engine/"><h3>AI-Powered Cognitive Decision Engine</h3><p>Document understanding and decision support.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/network-claims-automation/"><h3>AI-Led Network Claims Automation</h3><p>Agentic mapping across claims and FinOps.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/ai-learning-platform-for-schools/"><h3>AI Learning Platform for Schools</h3><p>Structured AI education for institutions.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/ai-product-practice-operating-model/"><h3>AI Product Practice Operating Model</h3><p>Portfolio governance for AI initiatives.</p></a>
 </div></section>
 <section class="cg-section cg-reveal" id="geo-answers">
 <h2>Quick answers</h2>

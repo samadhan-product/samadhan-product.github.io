@@ -22,46 +22,7 @@ GTAG = """  <!-- Google tag (gtag.js) -->
   </script>
 """
 
-NAV = """  <header class="site-nav" data-testid="top-nav">
-    <div class="site-nav-inner">
-      <a class="site-brand" href="/">
-        <span class="site-logo-box">SM</span>
-        <span class="site-brand-text">/ Samadhan</span>
-      </a>
-      <nav class="site-menu" aria-label="Primary">
-        <a class="site-menu-link" href="/" data-nav="home">Home</a>
-        <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
-        <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
-        <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
-        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
-        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
-      </nav>
-      <div class="site-nav-meta">
-        <div class="site-time" aria-live="polite">
-          <span class="site-time-dot" aria-hidden="true"></span>
-          <span data-nav-clock></span>
-        </div>
-        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
-          <span class="theme-toggle-icon">◑</span>
-        </button>
-        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
-          <span class="site-nav-toggle-bar"></span>
-          <span class="site-nav-toggle-bar"></span>
-        </button>
-      </div>
-    </div>
-    <div class="site-nav-mobile" data-nav-mobile hidden>
-      <nav aria-label="Mobile">
-        <a class="site-menu-link" href="/" data-nav="home">Home</a>
-        <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
-        <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
-        <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
-        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
-        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
-      </nav>
-    </div>
-  </header>
-"""
+NAV = (ROOT / "assets/partials/site-nav.html").read_text(encoding="utf-8").strip()
 
 FOOTER = """  <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
   <script src="/assets/js/theme.js"></script>
@@ -311,6 +272,30 @@ def case_study_page(cs: dict) -> str:
     )
 
 
+CASE_STUDY_REDIRECTS = {
+    "enigma-cognitive-engine": "ai-powered-cognitive-decision-engine",
+    "ai-school-hub": "ai-learning-platform-for-schools",
+    "product-hero-ai-product-practice": "ai-product-practice-operating-model",
+}
+
+
+def redirect_page(old_slug: str, new_slug: str) -> str:
+    target = f"/case-studies/{new_slug}/"
+    canonical = SITE + target
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url={target}" />
+  <link rel="canonical" href="{canonical}" />
+  <title>Redirecting…</title>
+  <script>location.replace("{target}");</script>
+</head>
+<body><p><a href="{target}">Continue to case study</a></p></body>
+</html>
+"""
+
+
 def main() -> None:
     import sys
 
@@ -350,6 +335,12 @@ def main() -> None:
         out = ROOT / "case-studies" / cs["slug"] / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(case_study_page(cs), encoding="utf-8")
+        written.append(str(out.relative_to(ROOT)))
+
+    for old_slug, new_slug in CASE_STUDY_REDIRECTS.items():
+        out = ROOT / "case-studies" / old_slug / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(redirect_page(old_slug, new_slug), encoding="utf-8")
         written.append(str(out.relative_to(ROOT)))
 
     print(f"Wrote {len(written)} pages")

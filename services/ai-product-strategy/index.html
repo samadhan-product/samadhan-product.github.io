@@ -138,46 +138,50 @@
 </head>
 <body class="cg-blog-theme portal-page" data-page="services">
   <div class="animated-dot-field" aria-hidden="true"></div>
-  <header class="site-nav" data-testid="top-nav">
-    <div class="site-nav-inner">
-      <a class="site-brand" href="/">
-        <span class="site-logo-box">SM</span>
-        <span class="site-brand-text">/ Samadhan</span>
-      </a>
-      <nav class="site-menu" aria-label="Primary">
-        <a class="site-menu-link" href="/" data-nav="home">Home</a>
-        <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
-        <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
-        <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
-        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
-        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
-      </nav>
-      <div class="site-nav-meta">
-        <div class="site-time" aria-live="polite">
-          <span class="site-time-dot" aria-hidden="true"></span>
-          <span data-nav-clock></span>
-        </div>
-        <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
-          <span class="theme-toggle-icon">◑</span>
-        </button>
-        <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
-          <span class="site-nav-toggle-bar"></span>
-          <span class="site-nav-toggle-bar"></span>
-        </button>
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<header class="site-nav" data-testid="top-nav">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <span class="site-logo-box">SM</span>
+      <span class="site-brand-text">/ Samadhan</span>
+    </a>
+    <nav class="site-menu" aria-label="Primary">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="site-nav-meta">
+      <div class="site-time" aria-live="polite">
+        <span data-nav-clock></span>
       </div>
+      <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="theme-toggle-icon">◑</span>
+      </button>
+      <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+        <span class="site-nav-toggle-bar"></span>
+        <span class="site-nav-toggle-bar"></span>
+      </button>
     </div>
-    <div class="site-nav-mobile" data-nav-mobile hidden>
-      <nav aria-label="Mobile">
-        <a class="site-menu-link" href="/" data-nav="home">Home</a>
-        <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
-        <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
-        <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
-        <a class="site-menu-link" href="/portfolio/" data-nav="portfolio">Portfolio</a>
-        <a class="site-menu-link" href="/blog/" data-nav="blog">Blog</a>
-      </nav>
-    </div>
-  </header>
-
+  </div>
+  <div class="site-nav-mobile" data-nav-mobile hidden>
+    <nav aria-label="Mobile">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+  </div>
+</header>
 <nav class="cg-breadcrumbs" aria-label="Breadcrumb">
 <a href="https://samadhanmishra.com/">Home</a>
 <span class="sep">→</span>
