@@ -8,6 +8,7 @@ import html
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DATA = ROOT / "assets" / "data" / "seo-content.json"
+SERVICE_DATA = ROOT / "assets" / "data" / "service-pages.json"
 SITE = "https://samadhanmishra.com"
 OG_IMAGE = f"{SITE}/assets/og/samadhan-mishra-ai-product-leader.png"
 LINKEDIN = "https://www.linkedin.com/in/samadhan-mishra/"
@@ -226,6 +227,199 @@ def page(
 """
 
 
+def service_schema(name: str, desc: str, url: str) -> dict:
+    return {
+        "@type": "Service",
+        "name": name,
+        "description": desc,
+        "provider": {
+            "@type": "Person",
+            "name": "Samadhan Mishra",
+            "url": SITE + "/",
+            "jobTitle": "AI Product Leader and Product Management Consultant",
+            "description": "AI Product Leader for Healthcare, Insurance, Agentic Workflows and AI-Native Product Transformation",
+        },
+        "areaServed": "Worldwide",
+        "url": url,
+    }
+
+
+def render_svc_list(items: list[str]) -> str:
+    lis = "".join(f"<li>{esc(x)}</li>" for x in items)
+    return f'<ul class="svc-list">{lis}</ul>'
+
+
+def render_svc_links(links: list[dict]) -> str:
+    cards = "".join(
+        f'<a class="svc-link-card" href="{esc(l["href"])}">{esc(l["label"])}</a>'
+        for l in links
+    )
+    return f'<div class="svc-link-grid">{cards}</div>'
+
+
+def render_service_body(svc: dict) -> str:
+    process_steps = "".join(
+        f'<li class="svc-process-step"><span class="svc-process-num">{i}</span>'
+        f'<span class="svc-process-text">{esc(step)}</span></li>'
+        for i, step in enumerate(svc["process"], 1)
+    )
+    faq_html = render_faq_block(svc["faqs"]).replace('class="cg-section cg-reveal"', 'class="cg-section svc-section"')
+
+    return f"""
+<section class="svc-section svc-section--problem">
+  <h2>Why this matters</h2>
+  <p>{svc["why_matters"]}</p>
+</section>
+
+<section class="svc-section">
+  <h2>What I Help With</h2>
+  <div class="svc-card-grid svc-card-grid--2">
+    {render_svc_list(svc["help_with"])}
+  </div>
+</section>
+
+<section class="svc-section">
+  <h2>What You Get</h2>
+  <div class="svc-card svc-card--deliverables">
+    {render_svc_list(svc["deliverables"])}
+  </div>
+</section>
+
+<section class="svc-section">
+  <h2>Who This Is For</h2>
+  {render_svc_list(svc["audience"])}
+</section>
+
+<section class="svc-section">
+  <h2>Expected Outcomes</h2>
+  {render_svc_list(svc["outcomes"])}
+</section>
+
+<section class="svc-section svc-section--proof">
+  <h2>Relevant Experience</h2>
+  <p>{svc["experience"]}</p>
+</section>
+
+<section class="svc-section">
+  <h2>How I Work</h2>
+  <ol class="svc-process">{process_steps}</ol>
+</section>
+
+<section class="svc-section svc-geo-block" id="geo-answer">
+  <h2 class="svc-geo-label">Quick answer</h2>
+  <p class="svc-geo-text">{svc["geo_answer"]}</p>
+</section>
+
+{faq_html}
+
+<section class="svc-section svc-section--related">
+  <h2>Related links</h2>
+  <h3 class="svc-related-kicker">Case studies</h3>
+  {render_svc_links(svc["related_case_studies"])}
+  <h3 class="svc-related-kicker">Other services</h3>
+  {render_svc_links(svc["related_services"])}
+  <p class="svc-related-more">
+    <a href="/insights/">Insights</a>
+    <span class="sep">·</span>
+    <a href="/work-with-me/">Work With Me</a>
+    <span class="sep">·</span>
+    <a href="/case-studies/">All case studies</a>
+  </p>
+</section>
+"""
+
+
+def service_page(svc: dict) -> str:
+    slug = svc["slug"]
+    path = f"/services/{slug}/"
+    url = SITE + path
+    title = svc["meta_title"]
+    description = svc["meta_description"]
+    h1 = svc["h1"]
+    hero = svc["hero_paragraph"]
+    breadcrumb_label = svc["breadcrumb_label"]
+    schema_name = svc["service_schema_name"]
+
+    crumbs_html = '<nav class="cg-breadcrumbs" aria-label="Breadcrumb">\n'
+    crumbs = [
+        ("Home", SITE + "/"),
+        ("Services", SITE + "/ai-product-management-consultant/"),
+        (breadcrumb_label, url),
+    ]
+    for i, (name, href) in enumerate(crumbs):
+        if i:
+            crumbs_html += '<span class="sep">→</span>\n'
+        if i == len(crumbs) - 1:
+            crumbs_html += f'<span class="current">{esc(name)}</span>\n'
+        else:
+            crumbs_html += f'<a href="{esc(href)}">{esc(name)}</a>\n'
+    crumbs_html += "</nav>\n"
+
+    body_html = render_service_body(svc)
+    faqs = svc["faqs"]
+
+    schemas = breadcrumbs(crumbs)
+    graphs = [
+        person_schema(),
+        {
+            "@type": "WebPage",
+            "name": title,
+            "url": url,
+            "description": description,
+        },
+        service_schema(schema_name, description, url),
+    ]
+    schemas += f'\n<script type="application/ld+json">\n{ld_json(*graphs)}\n</script>\n'
+    schemas += faq_schema(faqs) + "\n"
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+{GTAG}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{esc(description)}" />
+  <title>{esc(title)}</title>
+  <link rel="canonical" href="{esc(url)}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{esc(title)}" />
+  <meta property="og:description" content="{esc(description)}" />
+  <meta property="og:url" content="{esc(url)}" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="{OG_IMAGE}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{esc(title)}" />
+  <meta name="twitter:description" content="{esc(description)}" />
+  <meta name="twitter:image" content="{OG_IMAGE}" />
+  <script>!function(){{var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+{schemas}
+</head>
+<body class="cg-blog-theme portal-page svc-page" data-page="service-{esc(slug)}">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+{NAV}
+{crumbs_html}
+  <header class="cg-hero cg-hero-compact svc-hero">
+    <div class="cg-hero-content svc-hero-inner">
+      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
+      <h1 class="cg-hero-title svc-hero-title">{h1}</h1>
+      <p class="cg-hero-subtitle svc-hero-lede">{esc(hero)}</p>
+      <div class="cg-hero-actions svc-hero-actions">
+        <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
+        <a class="cg-btn secondary" href="/case-studies/">View Case Studies</a>
+      </div>
+    </div>
+  </header>
+  <main class="cg-main svc-main">
+{body_html}
+{cta_block()}
+  </main>
+{FOOTER}
+</body>
+</html>
+"""
+
+
 def case_study_page(cs: dict) -> str:
     slug = cs["slug"]
     path = f"/case-studies/{slug}/"
@@ -341,6 +535,13 @@ def main() -> None:
         out = ROOT / "case-studies" / old_slug / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(redirect_page(old_slug, new_slug), encoding="utf-8")
+        written.append(str(out.relative_to(ROOT)))
+
+    service_data = json.loads(SERVICE_DATA.read_text(encoding="utf-8"))
+    for svc in service_data["services"]:
+        out = ROOT / "services" / svc["slug"] / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(service_page(svc), encoding="utf-8")
         written.append(str(out.relative_to(ROOT)))
 
     print(f"Wrote {len(written)} pages")

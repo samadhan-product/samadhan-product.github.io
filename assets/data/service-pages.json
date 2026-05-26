@@ -1,0 +1,563 @@
+{
+  "services": [
+    {
+      "slug": "ai-product-strategy",
+      "breadcrumb_label": "AI Product Strategy",
+      "meta_title": "AI Product Strategy Consultant | Samadhan Mishra",
+      "meta_description": "AI product strategy consulting for founders, CXOs and product teams looking to identify high-value AI use cases, build AI-native roadmaps and move from experimentation to execution.",
+      "service_schema_name": "AI Product Strategy Consulting",
+      "h1": "AI Product Strategy for AI-Native Business Transformation",
+      "hero_paragraph": "I help founders, CXOs and product teams identify where AI can create measurable business value, prioritise the right use cases, and convert ambiguous AI opportunities into clear product roadmaps, operating models and execution plans.",
+      "why_matters": "Most AI initiatives fail before engineering starts. Teams chase trends, build disconnected POCs, underestimate data readiness, and prioritise AI features without understanding workflow leverage, risk, adoption, or unit economics.",
+      "help_with": [
+        "AI opportunity discovery",
+        "AI use-case prioritisation",
+        "AI product roadmap design",
+        "Build vs buy decision support",
+        "Data and workflow readiness assessment",
+        "AI MVP scoping",
+        "AI governance and human-in-the-loop planning",
+        "Business case and ROI framing"
+      ],
+      "deliverables": [
+        "AI opportunity map",
+        "Prioritised AI use-case backlog",
+        "Product strategy document",
+        "AI-native roadmap",
+        "MVP scope",
+        "Workflow transformation blueprint",
+        "Data readiness assessment",
+        "Success metrics and governance framework",
+        "Executive narrative for leadership alignment"
+      ],
+      "audience": [
+        "Founders exploring AI-native products",
+        "CXOs planning AI transformation",
+        "Product heads building AI roadmaps",
+        "SaaS companies adding AI capabilities",
+        "Healthcare and insurance teams modernising workflows",
+        "Operations-heavy businesses looking to reduce manual effort"
+      ],
+      "outcomes": [
+        "Better AI investment decisions",
+        "Faster movement from idea to execution",
+        "Clearer product and engineering alignment",
+        "Reduced wasted engineering effort",
+        "Stronger roadmap discipline",
+        "Better prioritisation of AI opportunities",
+        "Practical governance before scale"
+      ],
+      "experience": "Samadhan has led product strategy and AI-led automation initiatives across healthcare, insurance, EdTech, FinTech and SaaS environments, including decision-support workflows, document intelligence systems, claims and pre-authorisation automation, and product operating model design.",
+      "process": [
+        "Understand business workflows and pain points",
+        "Identify AI opportunities by value, feasibility and risk",
+        "Convert priorities into roadmap, MVP scope and execution plan",
+        "Support governance, measurement and product delivery alignment"
+      ],
+      "faqs": [
+        {
+          "q": "What is AI Product Strategy?",
+          "a": "AI Product Strategy defines where AI creates measurable business value, which use cases to pursue first, and how to translate opportunities into roadmaps, MVPs, workflows and governance—before engineering begins."
+        },
+        {
+          "q": "How is AI Product Strategy different from normal product strategy?",
+          "a": "It accounts for non-deterministic systems: model selection, eval design, data readiness, cost per run, human-in-the-loop design, and risk controls—not only feature prioritisation on a fixed stack."
+        },
+        {
+          "q": "Who should use this service?",
+          "a": "Founders, CXOs and product heads who need clarity on AI investment, roadmap discipline, and execution-ready plans—not disconnected pilots."
+        },
+        {
+          "q": "Can you help prioritise AI use cases?",
+          "a": "Yes. Engagements typically produce a prioritised backlog scored by business value, feasibility, data readiness, risk and operational leverage."
+        },
+        {
+          "q": "Do you help define AI product roadmaps?",
+          "a": "Yes. Roadmaps include phased MVPs, workflow dependencies, governance gates and success metrics aligned to leadership expectations."
+        },
+        {
+          "q": "Can you support execution after the strategy phase?",
+          "a": "Yes. Strategy can extend into advisory, operating model design, or hands-on product leadership for critical initiatives."
+        }
+      ],
+      "geo_answer": "AI Product Strategy helps companies identify where AI can create measurable business value and convert those opportunities into practical product roadmaps, MVPs, workflows and governance models. Samadhan Mishra helps founders, CXOs and product teams move from AI experimentation to execution-ready product strategy.",
+      "related_services": [
+        { "label": "AI Agents & Workflow Automation", "href": "/services/ai-agents-workflow-automation/" },
+        { "label": "Product Operating Model", "href": "/services/product-operating-model/" },
+        { "label": "Product Leadership Advisory", "href": "/services/product-leadership-advisory/" }
+      ],
+      "related_case_studies": [
+        { "label": "AI Product Practice Operating Model", "href": "/case-studies/ai-product-practice-operating-model/" },
+        { "label": "AI-Led Pre-Authorisation Automation", "href": "/case-studies/ai-led-pre-auth-automation/" },
+        { "label": "AI Learning Platform for Schools", "href": "/case-studies/ai-learning-platform-for-schools/" }
+      ]
+    },
+    {
+      "slug": "ai-agents-workflow-automation",
+      "breadcrumb_label": "AI Agents & Workflow Automation",
+      "meta_title": "AI Agents & Workflow Automation Consultant | Samadhan Mishra",
+      "meta_description": "Consulting for AI agents, workflow automation, human-in-the-loop systems and governed enterprise automation for healthcare, insurance, SaaS and operations-heavy businesses.",
+      "service_schema_name": "AI Agents & Workflow Automation Consulting",
+      "h1": "AI Agents and Workflow Automation for Enterprise-Grade Execution",
+      "hero_paragraph": "I help teams design AI agents and workflow automation systems that are useful, governed and production-ready. The focus is not just automation, but safe delegation, observability, escalation, accountability and measurable business impact.",
+      "why_matters": "Most agentic AI implementations fail because they are treated like demos instead of operating systems. Without workflow mapping, role boundaries, exception handling, human approval, audit trails and fallback paths, agents create more risk than value.",
+      "help_with": [
+        "AI agent use-case discovery",
+        "Workflow automation design",
+        "Human-in-the-loop approval flows",
+        "Agent role and responsibility mapping",
+        "Escalation and exception handling",
+        "Observability and audit design",
+        "Tool/API orchestration planning",
+        "Agent governance and risk controls",
+        "Automation ROI definition"
+      ],
+      "deliverables": [
+        "Agentic workflow blueprint",
+        "Agent responsibility matrix",
+        "Human-in-the-loop decision model",
+        "Exception and escalation design",
+        "Tool/API integration map",
+        "Automation roadmap",
+        "Governance framework",
+        "MVP scope for agentic workflows",
+        "Metrics for adoption, accuracy and productivity"
+      ],
+      "audience": [
+        "Companies exploring AI agents for business operations",
+        "Product teams building agentic workflows",
+        "Founders creating AI-native SaaS products",
+        "CXOs trying to automate manual decision workflows",
+        "Healthcare and insurance teams managing document-heavy processes",
+        "Operations teams with repetitive review, routing or decision tasks"
+      ],
+      "outcomes": [
+        "Reduced manual effort",
+        "Faster workflow execution",
+        "Better operational visibility",
+        "Safer automation through human approval gates",
+        "Clearer accountability between AI and human users",
+        "Better exception handling",
+        "Production-ready AI agent strategy"
+      ],
+      "experience": "Samadhan has worked on AI-led workflow automation, decision-support systems, healthcare operations automation, document intelligence workflows and human-in-the-loop product models. His focus is on making AI agents operationally useful, auditable and aligned to real business workflows.",
+      "process": [
+        "Map current workflows, roles, decisions and exceptions",
+        "Identify where agents can safely assist, recommend or act",
+        "Design human-in-the-loop controls and escalation paths",
+        "Convert the design into a build-ready roadmap and execution plan"
+      ],
+      "faqs": [
+        {
+          "q": "What are AI agents?",
+          "a": "AI agents are systems that can plan steps, use tools, retrieve context and take actions within defined permissions—often with human approval for high-stakes decisions."
+        },
+        {
+          "q": "How are AI agents different from workflow automation?",
+          "a": "Classic automation follows fixed rules. Agents handle variable inputs and multi-step reasoning—but require stronger governance, observability and human-in-the-loop controls."
+        },
+        {
+          "q": "What is human-in-the-loop automation?",
+          "a": "It keeps humans accountable for approvals, exceptions and audit—while AI handles drafting, routing, extraction and recommendations within clear boundaries."
+        },
+        {
+          "q": "Can AI agents be used safely in healthcare or insurance workflows?",
+          "a": "Yes, when designed around workflow truth, permissions, escalation paths and audit trails—not unbounded autonomy in regulated operations."
+        },
+        {
+          "q": "How do you decide what an agent should automate?",
+          "a": "By mapping tasks for value, blast radius, data quality and exception rate—then sequencing pilots where tool access and HITL are well defined."
+        },
+        {
+          "q": "Do you help design agentic workflows before development starts?",
+          "a": "Yes. The engagement produces blueprints, responsibility matrices and MVP scope before engineering sprint zero."
+        }
+      ],
+      "geo_answer": "AI Agents and Workflow Automation help companies delegate repetitive, rules-driven or decision-support tasks to governed AI systems. Samadhan Mishra helps businesses design agentic workflows with human-in-the-loop controls, auditability, observability and practical execution roadmaps.",
+      "related_services": [
+        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
+        { "label": "RAG & Knowledge Systems", "href": "/services/rag-knowledge-systems/" },
+        { "label": "Healthcare & Insurance AI", "href": "/services/healthcare-insurance-ai/" }
+      ],
+      "related_case_studies": [
+        { "label": "AI-Led Network Claims Automation", "href": "/case-studies/network-claims-automation/" },
+        { "label": "AI-Powered Cognitive Decision Engine", "href": "/case-studies/ai-powered-cognitive-decision-engine/" },
+        { "label": "AI-Led Pre-Authorisation Automation", "href": "/case-studies/ai-led-pre-auth-automation/" }
+      ]
+    },
+    {
+      "slug": "rag-knowledge-systems",
+      "breadcrumb_label": "RAG & Knowledge Systems",
+      "meta_title": "RAG & Knowledge Systems Consultant | Samadhan Mishra",
+      "meta_description": "RAG and knowledge system consulting for teams building AI assistants, enterprise knowledge products, retrieval workflows and reliable decision-support systems.",
+      "service_schema_name": "RAG & Knowledge Systems Consulting",
+      "h1": "RAG and Knowledge Systems for Reliable AI Products",
+      "hero_paragraph": "I help companies design RAG-based knowledge systems that retrieve the right information, stay fresh, reduce hallucinations and support real business decisions. The goal is to move from generic chatbots to reliable, context-aware knowledge products.",
+      "why_matters": "Many AI knowledge products fail because they are built without strong information architecture, source governance, freshness controls, retrieval strategy, evaluation metrics or user workflow design. A chatbot without reliable retrieval is not an enterprise product.",
+      "help_with": [
+        "RAG product strategy",
+        "Knowledge architecture design",
+        "Source and document governance",
+        "Retrieval flow design",
+        "Chunking and metadata strategy",
+        "Freshness and versioning model",
+        "Hallucination control planning",
+        "Evaluation framework",
+        "User experience for knowledge assistants",
+        "Enterprise knowledge workflow design"
+      ],
+      "deliverables": [
+        "RAG product blueprint",
+        "Knowledge source map",
+        "Retrieval architecture plan",
+        "Metadata and content governance model",
+        "Evaluation framework",
+        "Hallucination risk control checklist",
+        "MVP scope",
+        "User journey and workflow map",
+        "Roadmap for knowledge system maturity"
+      ],
+      "audience": [
+        "Companies building AI assistants",
+        "Product teams designing enterprise knowledge products",
+        "CXOs looking to reduce dependency on scattered documents",
+        "Healthcare, insurance and operations teams with document-heavy workflows",
+        "SaaS companies adding knowledge intelligence to products",
+        "Teams struggling with unreliable AI chatbot outputs"
+      ],
+      "outcomes": [
+        "More reliable AI answers",
+        "Better document retrieval",
+        "Reduced hallucination risk",
+        "Improved knowledge accessibility",
+        "Stronger governance of enterprise knowledge",
+        "Better user trust in AI systems",
+        "Faster decision support"
+      ],
+      "experience": "Samadhan has worked with document-heavy, workflow-heavy and decision-heavy business environments where knowledge quality, retrieval, auditability and operational context matter. His approach focuses on turning information chaos into structured, usable AI product systems.",
+      "process": [
+        "Map knowledge sources, users and decision contexts",
+        "Define retrieval architecture and governance model",
+        "Design the user workflow and AI answer experience",
+        "Create MVP scope, evaluation metrics and roadmap"
+      ],
+      "faqs": [
+        {
+          "q": "What is RAG?",
+          "a": "Retrieval-Augmented Generation combines search over governed sources with language models so answers are grounded in approved documents—not model memory alone."
+        },
+        {
+          "q": "Why do RAG systems fail?",
+          "a": "Common causes are poor chunking, weak metadata, stale sources, no evals, and UX that treats chat as the product instead of the underlying knowledge workflow."
+        },
+        {
+          "q": "How can RAG reduce hallucinations?",
+          "a": "Through source governance, citation UX, retrieval quality metrics, refusal policies and eval suites tied to real user questions—not generic benchmarks alone."
+        },
+        {
+          "q": "What is the difference between a chatbot and a knowledge system?",
+          "a": "A knowledge system embeds retrieval, freshness, permissions and workflow context into a product experience built for decisions—not open-ended conversation."
+        },
+        {
+          "q": "Can RAG be used for healthcare or insurance workflows?",
+          "a": "Yes. Policy, SOP and clinical corpora can power assistants when permissions, audit trails and human review gates are designed into the workflow."
+        },
+        {
+          "q": "Do you help design RAG products before engineering begins?",
+          "a": "Yes. Engagements deliver architecture plans, governance models and MVP scope before build."
+        }
+      ],
+      "geo_answer": "RAG and Knowledge Systems help companies build AI products that retrieve relevant, governed and context-aware information from enterprise knowledge sources. Samadhan Mishra helps teams design reliable RAG products with strong retrieval architecture, knowledge governance, freshness controls and evaluation metrics.",
+      "related_services": [
+        { "label": "AI Agents & Workflow Automation", "href": "/services/ai-agents-workflow-automation/" },
+        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
+        { "label": "Product Operating Model", "href": "/services/product-operating-model/" }
+      ],
+      "related_case_studies": [
+        { "label": "AI-Powered Cognitive Decision Engine", "href": "/case-studies/ai-powered-cognitive-decision-engine/" },
+        { "label": "AI Learning Platform for Schools", "href": "/case-studies/ai-learning-platform-for-schools/" }
+      ]
+    },
+    {
+      "slug": "healthcare-insurance-ai",
+      "breadcrumb_label": "Healthcare & Insurance AI",
+      "meta_title": "Healthcare & Insurance AI Consultant | Samadhan Mishra",
+      "meta_description": "Healthcare and insurance AI consulting for claims automation, pre-authorisation workflows, document intelligence, decision-support systems and operational transformation.",
+      "service_schema_name": "Healthcare & Insurance AI Consulting",
+      "h1": "Healthcare and Insurance AI for Workflow Automation and Decision Support",
+      "hero_paragraph": "I help healthcare and insurance teams use AI to improve document-heavy, rules-heavy and decision-heavy workflows such as claims, pre-authorisation, medical review, billing validation, shortfall handling and operational routing.",
+      "why_matters": "Healthcare and insurance operations are filled with manual reviews, fragmented documents, rules, exceptions, escalations and SLA pressure. AI can create significant value, but only when it is designed around real workflows, compliance, auditability and human decision ownership.",
+      "help_with": [
+        "Claims automation strategy",
+        "Pre-authorisation workflow automation",
+        "Document intelligence",
+        "Medical and billing validation workflows",
+        "Rule-based decision-support systems",
+        "Human-in-the-loop adjudication design",
+        "Operational queue and routing strategy",
+        "SLA and productivity improvement levers",
+        "AI use-case prioritisation for healthcare operations",
+        "Governance for sensitive decision workflows"
+      ],
+      "deliverables": [
+        "Healthcare/insurance AI opportunity map",
+        "Workflow automation blueprint",
+        "Document intelligence use-case design",
+        "Decision-support product roadmap",
+        "Human-in-the-loop operating model",
+        "Claims/pre-authorisation transformation roadmap",
+        "Metrics framework for TAT, productivity, quality and cost",
+        "MVP scope and execution plan"
+      ],
+      "audience": [
+        "Healthcare technology companies",
+        "Insurance and TPA teams",
+        "Product leaders in claims or pre-authorisation workflows",
+        "Operations leaders handling manual case processing",
+        "Founders building healthcare AI products",
+        "SaaS companies serving healthcare or insurance clients"
+      ],
+      "outcomes": [
+        "Faster case processing",
+        "Reduced manual document review",
+        "Better decision consistency",
+        "Improved SLA performance",
+        "Better processor productivity",
+        "Stronger auditability",
+        "Lower operational friction",
+        "Clearer AI roadmap for healthcare workflows"
+      ],
+      "experience": "Samadhan has led product initiatives in healthcare and insurance environments involving workflow automation, document intelligence, decision support, claims and pre-authorisation journeys, operational dashboards and human-in-the-loop review systems. His strength is converting complex healthcare operations into structured AI product roadmaps.",
+      "process": [
+        "Study current healthcare or insurance workflows",
+        "Identify automation, decision-support and document intelligence opportunities",
+        "Design AI workflows with governance, auditability and human controls",
+        "Build a roadmap linked to measurable operational outcomes"
+      ],
+      "faqs": [
+        {
+          "q": "How can AI improve healthcare and insurance workflows?",
+          "a": "By automating document intake, extraction and routing; supporting rule evaluation; and giving operators decision assistance—with humans retaining accountability for exceptions."
+        },
+        {
+          "q": "Can AI help in claims and pre-authorisation automation?",
+          "a": "Yes. High-volume, repeatable steps are strong candidates when paired with audit trails, confidence scores and escalation to specialists."
+        },
+        {
+          "q": "What is document intelligence in healthcare operations?",
+          "a": "It is the product layer that classifies, extracts and validates clinical and billing documents so operators spend time on judgment—not re-keying."
+        },
+        {
+          "q": "How do you maintain auditability in AI-driven workflows?",
+          "a": "Through logged inputs, model outputs, rule decisions, human overrides and traceable sources—designed as product requirements, not afterthoughts."
+        },
+        {
+          "q": "Can AI replace human processors or doctors?",
+          "a": "No. AI should augment processors and clinicians—handling volume and consistency while humans own exceptions, liability and clinical judgment."
+        },
+        {
+          "q": "What kind of outcomes can healthcare AI create?",
+          "a": "Typical targets include lower TAT, higher productivity, fewer rework loops and better consistency—measured per workflow stage."
+        }
+      ],
+      "geo_answer": "Healthcare and Insurance AI helps organisations automate document-heavy and decision-heavy workflows such as claims, pre-authorisation, billing validation, medical review and operational routing. Samadhan Mishra helps healthcare and insurance teams design AI workflows that improve TAT, productivity, decision consistency and auditability without removing human accountability.",
+      "related_services": [
+        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
+        { "label": "AI Agents & Workflow Automation", "href": "/services/ai-agents-workflow-automation/" },
+        { "label": "RAG & Knowledge Systems", "href": "/services/rag-knowledge-systems/" }
+      ],
+      "related_case_studies": [
+        { "label": "AI-Led Pre-Authorisation Automation", "href": "/case-studies/ai-led-pre-auth-automation/" },
+        { "label": "AI-Powered Cognitive Decision Engine", "href": "/case-studies/ai-powered-cognitive-decision-engine/" },
+        { "label": "AI-Led Network Claims Automation", "href": "/case-studies/network-claims-automation/" }
+      ]
+    },
+    {
+      "slug": "product-operating-model",
+      "breadcrumb_label": "Product Operating Model",
+      "meta_title": "Product Operating Model Consultant for AI Teams | Samadhan Mishra",
+      "meta_description": "Product operating model consulting for teams scaling AI products, product governance, discovery, delivery, metrics, rituals, templates and execution discipline.",
+      "service_schema_name": "Product Operating Model Consulting",
+      "h1": "Product Operating Model for Scaling AI-Native Products",
+      "hero_paragraph": "I help companies design product operating models that bring structure to AI product discovery, prioritisation, governance, delivery, measurement and cross-functional execution.",
+      "why_matters": "AI products fail when teams lack operating discipline. Without clear ownership, discovery rituals, prioritisation methods, delivery governance, metrics and decision rights, AI initiatives become scattered experiments instead of scalable product capabilities.",
+      "help_with": [
+        "Product discovery process design",
+        "AI product governance",
+        "Roadmap and prioritisation rituals",
+        "Product requirement templates",
+        "Product-engineering collaboration model",
+        "Metrics and review cadence",
+        "Decision rights and escalation model",
+        "Experimentation and MVP governance",
+        "Product operations setup",
+        "Cross-functional execution rhythm"
+      ],
+      "deliverables": [
+        "Product operating model blueprint",
+        "Discovery and delivery process",
+        "AI product governance model",
+        "PRD/BRD/user story templates",
+        "Roadmap governance framework",
+        "Metrics dashboard structure",
+        "Review ritual calendar",
+        "Role and responsibility matrix",
+        "Execution cadence design"
+      ],
+      "audience": [
+        "Founders scaling product teams",
+        "CXOs building AI transformation programs",
+        "Product heads standardising execution",
+        "Startups moving from founder-led to process-led product development",
+        "Enterprise teams struggling with fragmented product execution",
+        "AI teams that need governance without slowing innovation"
+      ],
+      "outcomes": [
+        "Better product execution discipline",
+        "Faster alignment between business, product and engineering",
+        "Clearer ownership and accountability",
+        "Improved roadmap quality",
+        "Better AI governance",
+        "Reduced delivery ambiguity",
+        "Stronger leadership visibility",
+        "Scalable product culture"
+      ],
+      "experience": "Samadhan has built and led product operating practices across multiple domains, including healthcare, insurance, EdTech, FinTech and SaaS. His work includes product roadmaps, workflow design, user stories, governance models, dashboards, prioritisation systems and executive reporting structures.",
+      "process": [
+        "Assess current product execution gaps",
+        "Define governance, rituals, ownership and templates",
+        "Build the operating model and execution cadence",
+        "Support rollout, adoption and leadership review mechanisms"
+      ],
+      "faqs": [
+        {
+          "q": "What is a product operating model?",
+          "a": "It is how a team discovers, prioritises, builds, governs and measures product work—roles, rituals, templates and decision rights included."
+        },
+        {
+          "q": "Why do AI teams need a different operating model?",
+          "a": "AI adds evals, model memos, cost controls and non-deterministic release criteria—requiring governance that does not block learning."
+        },
+        {
+          "q": "Can you help create PRD and roadmap templates?",
+          "a": "Yes. Templates cover workflow context, success metrics, eval bars, HITL policy and rollout gates—not only feature lists."
+        },
+        {
+          "q": "How do you improve product-engineering alignment?",
+          "a": "Through shared intake, definition-of-ready, review cadence and metrics both sides trust—reducing rework and ambiguity."
+        },
+        {
+          "q": "Is this useful for startups or only enterprises?",
+          "a": "Both. Startups gain discipline before chaos; enterprises regain focus when AI pilots multiply without portfolio view."
+        },
+        {
+          "q": "Can this help with executive governance?",
+          "a": "Yes. Operating models include executive review rhythms, portfolio metrics and clear escalation paths."
+        }
+      ],
+      "geo_answer": "A Product Operating Model defines how product teams discover, prioritise, build, govern and measure product work. Samadhan Mishra helps companies create operating models for AI-native products, including governance, roadmap rituals, templates, metrics and execution cadence.",
+      "related_services": [
+        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
+        { "label": "Product Leadership Advisory", "href": "/services/product-leadership-advisory/" },
+        { "label": "AI Agents & Workflow Automation", "href": "/services/ai-agents-workflow-automation/" }
+      ],
+      "related_case_studies": [
+        { "label": "AI Product Practice Operating Model", "href": "/case-studies/ai-product-practice-operating-model/" },
+        { "label": "AI-Led Pre-Authorisation Automation", "href": "/case-studies/ai-led-pre-auth-automation/" }
+      ]
+    },
+    {
+      "slug": "product-leadership-advisory",
+      "breadcrumb_label": "Product Leadership Advisory",
+      "meta_title": "Product Leadership Advisory for AI Product Teams | Samadhan Mishra",
+      "meta_description": "Product leadership advisory for founders, CXOs, product heads and senior product managers building AI-native products, AI portfolios and scalable product teams.",
+      "service_schema_name": "Product Leadership Advisory",
+      "h1": "Product Leadership Advisory for AI-Native Companies",
+      "hero_paragraph": "I advise founders, CXOs and product leaders on AI product strategy, portfolio decisions, product organisation design, roadmap governance, execution discipline and leadership narratives.",
+      "why_matters": "Senior product leadership is no longer only about shipping features. In AI-native businesses, product leaders must decide where AI creates value, how to manage risk, how to align teams, how to explain strategy to leadership, and how to convert ambiguity into execution.",
+      "help_with": [
+        "AI product portfolio advisory",
+        "Product strategy review",
+        "Roadmap and prioritisation review",
+        "Product leadership coaching",
+        "Founder/product leader advisory",
+        "Executive narrative building",
+        "Product team structure and capability planning",
+        "Product governance and metrics",
+        "AI transformation review",
+        "Strategic decision support"
+      ],
+      "deliverables": [
+        "Product strategy review",
+        "AI portfolio assessment",
+        "Leadership advisory sessions",
+        "Roadmap critique and refinement",
+        "Executive communication support",
+        "Product organisation recommendations",
+        "Governance and metric suggestions",
+        "Decision framework for AI investments",
+        "Advisory notes and action plan"
+      ],
+      "audience": [
+        "Founders building AI products",
+        "CXOs driving AI transformation",
+        "Product heads managing AI portfolios",
+        "Senior product managers moving into leadership",
+        "Startups needing product leadership maturity",
+        "Enterprises needing practical AI product direction"
+      ],
+      "outcomes": [
+        "Clearer strategic thinking",
+        "Better leadership communication",
+        "Stronger AI portfolio decisions",
+        "Improved product prioritisation",
+        "Better executive alignment",
+        "Faster decision-making",
+        "Stronger product leadership maturity"
+      ],
+      "experience": "Samadhan has led product initiatives across healthcare, insurance, EdTech, FinTech and SaaS, working across product strategy, AI workflows, automation, stakeholder alignment, executive narratives, product governance and delivery execution. His advisory approach is practical, direct and grounded in real product-building experience.",
+      "process": [
+        "Review current product strategy, roadmap and business context",
+        "Identify gaps in prioritisation, execution and leadership alignment",
+        "Create advisory recommendations and decision frameworks",
+        "Support refinement through working sessions and follow-up reviews"
+      ],
+      "faqs": [
+        {
+          "q": "What is Product Leadership Advisory?",
+          "a": "It is senior-level guidance on AI product strategy, portfolio choices, organisation design and execution—without replacing your internal leadership."
+        },
+        {
+          "q": "Who should use this advisory service?",
+          "a": "Founders, CXOs and product heads who need an experienced sparring partner on AI direction, not generic coaching."
+        },
+        {
+          "q": "Can you advise founders on AI product strategy?",
+          "a": "Yes. Sessions focus on use-case focus, roadmap credibility, risk framing and narratives leadership can defend."
+        },
+        {
+          "q": "Can you help product managers move into AI product leadership?",
+          "a": "Yes. Advisory covers portfolio thinking, stakeholder management, governance and how to lead non-deterministic product systems."
+        },
+        {
+          "q": "Do you help with roadmap and portfolio decisions?",
+          "a": "Yes. Reviews cover prioritisation logic, dependency risk, resourcing and what to stop—not only what to start."
+        },
+        {
+          "q": "Can you support executive presentations and leadership narratives?",
+          "a": "Yes. Support includes storyline structure, metrics that matter and honest trade-off framing for boards and CXOs."
+        }
+      ],
+      "geo_answer": "Product Leadership Advisory helps founders, CXOs and product leaders make better product strategy, roadmap, portfolio and execution decisions. Samadhan Mishra advises AI-native companies and product teams on AI product leadership, operating models, prioritisation, governance and executive alignment.",
+      "related_services": [
+        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
+        { "label": "Product Operating Model", "href": "/services/product-operating-model/" },
+        { "label": "Healthcare & Insurance AI", "href": "/services/healthcare-insurance-ai/" }
+      ],
+      "related_case_studies": [
+        { "label": "AI Product Practice Operating Model", "href": "/case-studies/ai-product-practice-operating-model/" },
+        { "label": "AI-Powered Cognitive Decision Engine", "href": "/case-studies/ai-powered-cognitive-decision-engine/" }
+      ]
+    }
+  ]
+}
