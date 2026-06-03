@@ -24,7 +24,7 @@ export const profile = {
   ],
   experience: [
     {
-      company: "Healthcare & insurance technology · India",
+      company: "Bajaj Finserv Health Ltd.",
       role: "Senior Lead — Product Management",
       period: "Mar 2024 — Present",
       location: "Pune, India",
@@ -40,7 +40,7 @@ export const profile = {
       stack: ["Python/ML", "Microservices", "Event-driven", "AWS", "Mixpanel"]
     },
     {
-      company: "Healthcare & insurance technology · India",
+      company: "Bajaj Finserv Health Ltd.",
       role: "Product Lead",
       period: "Jun 2022 — Jun 2025",
       location: "Pune, India",
@@ -56,7 +56,7 @@ export const profile = {
       stack: ["LLMs", "Computer Vision", "ML Pipelines", "SQL", "Tableau"]
     },
     {
-      company: "Enterprise FinTech SaaS",
+      company: "Highradius Technologies Pvt. Ltd.",
       role: "Senior Product Manager",
       period: "Nov 2021 — Jun 2022",
       location: "Remote",
@@ -70,7 +70,7 @@ export const profile = {
       stack: ["SaaS", "B2B", "Enterprise FinTech", "AMP Email"]
     },
     {
-      company: "EdTech SaaS · India",
+      company: "Creanovation Technologies Pvt. Ltd.",
       role: "Senior Product Manager",
       period: "Jun 2019 — Oct 2021",
       location: "Gurugram, India",
@@ -85,7 +85,7 @@ export const profile = {
       stack: ["Microservices", "SMS/Email/WhatsApp", "Analytics", "Payments"]
     },
     {
-      company: "EdTech SaaS · India",
+      company: "Creanovation Labs Pvt. Ltd.",
       role: "Product Manager",
       period: "Apr 2017 — Jun 2019",
       location: "Bhubaneswar, India",
@@ -100,7 +100,7 @@ export const profile = {
       stack: ["OCR", "Analytics", "Payments", "White-label SaaS"]
     },
     {
-      company: "Freelance · e-Governance",
+      company: "Freelance",
       role: "Project Consultant",
       period: "Jul 2013 — Nov 2017",
       location: "Odisha, India",
@@ -114,7 +114,7 @@ export const profile = {
       stack: ["GovTech", "MIS", "Stakeholder Mgmt"]
     },
     {
-      company: "Software product company · India",
+      company: "Dzinepixel Technologies Pvt. Ltd.",
       role: "Associate Product Manager",
       period: "Jun 2013 — Apr 2017",
       location: "Bhubaneswar, India",
@@ -127,7 +127,7 @@ export const profile = {
       stack: ["CRM", "JIRA", "SCRUM"]
     },
     {
-      company: "Public sector technology · India",
+      company: "Electronics Corporation of India Ltd.",
       role: "Database Administrator",
       period: "Apr 2012 — May 2013",
       location: "India",
