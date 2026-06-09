@@ -119,6 +119,10 @@
         {
           "label": "Automating HealthPay Reconciliation So Payouts Could Move at Business Speed",
           "href": "/case-studies/bfhl-healthpay-recon-automation/"
+        },
+        {
+          "label": "Intelligent Collections Prioritization",
+          "href": "/case-studies/highradius-autonomous-collections/"
         }
       ]
     },
@@ -575,6 +579,10 @@
         {
           "label": "Redesigning OPD Claims Processing",
           "href": "/case-studies/bfhl-opd-reimbursement-claims/"
+        },
+        {
+          "label": "Intelligent Collections Prioritization",
+          "href": "/case-studies/highradius-autonomous-collections/"
         }
       ]
     },
