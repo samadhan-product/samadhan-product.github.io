@@ -107,6 +107,14 @@
         {
           "label": "AI Learning Platform for Schools",
           "href": "/case-studies/ai-learning-platform-for-schools/"
+        },
+        {
+          "label": "Moving HealthPay onto BajajPay Rails",
+          "href": "/case-studies/bfhl-healthpay-qr-transition/"
+        },
+        {
+          "label": "Turning a Provider Portal into a Partner Operating Center",
+          "href": "/case-studies/bfhl-partner-center-revamp/"
         }
       ]
     },
@@ -539,6 +547,10 @@
         {
           "label": "AI-Led Pre-Authorisation Automation",
           "href": "/case-studies/ai-led-pre-auth-automation/"
+        },
+        {
+          "label": "Turning a Provider Portal into a Partner Operating Center",
+          "href": "/case-studies/bfhl-partner-center-revamp/"
         }
       ]
     },

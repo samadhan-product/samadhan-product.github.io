@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XWSM8RBV2S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XWSM8RBV2S');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="How we migrated a live healthcare payment and provider ecosystem to BajajPay infrastructure with zero business disruption." />
+  <title>Moving HealthPay onto BajajPay Rails Without Breaking the Business | Case Study — Samadhan Mishra | Case Study — Samadhan Mishra</title>
+  <link rel="canonical" href="https://samadhanmishra.com/case-studies/bfhl-healthpay-qr-transition/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Moving HealthPay onto BajajPay Rails Without Breaking the Business | Case Study — Samadhan Mishra | Case Study — Samadhan Mishra" />
+  <meta property="og:description" content="How we migrated a live healthcare payment and provider ecosystem to BajajPay infrastructure with zero business disruption." />
+  <meta property="og:url" content="https://samadhanmishra.com/case-studies/bfhl-healthpay-qr-transition/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Moving HealthPay onto BajajPay Rails Without Breaking the Business | Case Study — Samadhan Mishra | Case Study — Samadhan Mishra" />
+  <meta name="twitter:description" content="How we migrated a live healthcare payment and provider ecosystem to BajajPay infrastructure with zero business disruption." />
+  <meta name="twitter:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://samadhanmishra.com/case-studies/" },
+    { "@type": "ListItem", "position": 3, "name": "HealthPay QR Transition", "item": "https://samadhanmishra.com/case-studies/bfhl-healthpay-qr-transition/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Samadhan Mishra",
+      "url": "https://samadhanmishra.com/",
+      "jobTitle": [
+        "AI Product Leader",
+        "AI Product Management Consultant",
+        "Product Head",
+        "Product Strategy Consultant"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pune",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/samadhan-mishra/"
+      ],
+      "knowsAbout": [
+        "AI Product Management",
+        "AI Agents",
+        "Generative AI",
+        "RAG",
+        "MCP",
+        "Healthcare Automation",
+        "Insurance TPA",
+        "Product Strategy",
+        "Product Leadership",
+        "Workflow Automation"
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Moving HealthPay onto BajajPay Rails Without Breaking the Business",
+      "description": "How we migrated a live healthcare payment and provider ecosystem to BajajPay infrastructure with zero business disruption.",
+      "author": {
+        "@type": "Person",
+        "name": "Samadhan Mishra"
+      },
+      "url": "https://samadhanmishra.com/case-studies/bfhl-healthpay-qr-transition/"
+    }
+  ]
+}
+</script>
+
+</head>
+<body class="cg-blog-theme portal-page" data-page="case-studies">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<header class="site-nav" data-testid="top-nav">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <span class="site-logo-box">SM</span>
+      <span class="site-brand-text">/ Samadhan</span>
+    </a>
+    <nav class="site-menu" aria-label="Primary">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="site-nav-meta">
+      <div class="site-time" aria-live="polite">
+        <span data-nav-clock></span>
+      </div>
+      <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="theme-toggle-icon">◑</span>
+      </button>
+      <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+        <span class="site-nav-toggle-bar"></span>
+        <span class="site-nav-toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+  <div class="site-nav-mobile" data-nav-mobile hidden>
+    <nav aria-label="Mobile">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+<a href="https://samadhanmishra.com/">Home</a>
+<span class="sep">→</span>
+<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
+<span class="sep">→</span>
+<span class="current">HealthPay QR Transition</span>
+</nav>
+
+  <header class="cg-hero cg-hero-compact">
+    <div class="cg-hero-content" style="max-width:800px;">
+      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
+      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Moving HealthPay onto BajajPay Rails Without Breaking the Business</h1>
+      <p class="cg-hero-subtitle">How we migrated a live healthcare payment and provider ecosystem to BajajPay infrastructure with zero business disruption.</p>
+    </div>
+  </header>
+  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
+
+<section class="cg-article-section">
+<p>Payment migrations look simple from the outside.</p>
+<p>Replace one QR with another.<br>
+Move merchants to a new payment rail.<br>
+Sync transaction and settlement feeds.<br>
+Roll out to the field.</p>
+<p>In reality, it is far more fragile.</p>
+<p>A QR code sitting at a doctor clinic, lab, or hospital is not just a payment artifact. It is tied to merchant onboarding, field sales, QR logistics, customer payment journeys, transaction feeds, settlement visibility, provider communication, refunds, support workflows, and reconciliation.</p>
+<p>The HealthPay–BajajPay transition was one of those projects where the product challenge was not just technical integration. The challenge was to move a live healthcare payment ecosystem onto BajajPay infrastructure while preserving business continuity, provider trust, customer experience, and operational control.</p>
+<p>I worked on this project in parallel to Partner Center. My contribution was concentrated around requirement definition, solutioning, merchant onboarding flows, QR migration planning, transaction and settlement feed requirements, logistics/service SOPs, support workflows, and UAT support. In the final stages, I was moved to another project, so the final rollout ownership transitioned to other stakeholders.</p>
+<p>That distinction matters. This was a strong product and integration strategy project, but I would not position it as a full final-rollout ownership story.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>The situation</h2>
+<p>HealthPay had built a healthcare payment ecosystem across doctors, labs, and hospitals. Providers used HealthPay QR codes and payment flows to collect money from customers. These payments were connected to BFHL systems, provider-facing platforms, settlement workflows, and internal reconciliation processes.</p>
+<p>The next strategic step was to transition HealthPay QR infrastructure to BajajPay.</p>
+<p>On paper, that sounds like a payment-rail migration.</p>
+<p>In practice, it touched almost every part of the HealthPay operating model:</p>
+<ul>
+  <li>provider onboarding,</li>
+  <li>doctor/lab/hospital merchant mapping,</li>
+  <li>QR generation,</li>
+  <li>QR template design,</li>
+  <li>QR logistics,</li>
+  <li>existing QR migration,</li>
+  <li>new merchant onboarding,</li>
+  <li>transaction feeds,</li>
+  <li>settlement feeds,</li>
+  <li>refund handling,</li>
+  <li>health-plan consumption,</li>
+  <li>provider communication,</li>
+  <li>customer communication,</li>
+  <li>support workflows,</li>
+  <li>Partner Center / Provider Portal visibility,</li>
+  <li>DRx and HRx journeys,</li>
+  <li>S1 onboarding,</li>
+  <li>field-force readiness,</li>
+  <li>CUG and GTM planning.</li>
+</ul>
+<p>The project was not only about getting payments to work. It was about ensuring that every actor in the ecosystem still knew what to do after the migration.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What was actually broken or risky</h2>
+<p>The existing HealthPay payment model worked, but it had to evolve into a group-level BajajPay-led infrastructure.</p>
+<p>That created several risks.</p>
+<h3 style="margin-top:16px;">Provider migration risk</h3>
+<p>Doctors, labs, and hospitals already had HealthPay QR codes in the market. Replacing or mapping those QR codes was not just a backend change.</p>
+<p>If the wrong QR was placed, mapped, activated, or communicated, transactions could fail or settlements could go to the wrong mapping layer.</p>
+<p>The product had to account for:</p>
+<ul>
+  <li>existing HealthPay UPI IDs,</li>
+  <li>new BajajPay UPI IDs,</li>
+  <li>old-to-new QR mapping,</li>
+  <li>QR activation,</li>
+  <li>QR status,</li>
+  <li>QR logistics,</li>
+  <li>provider-level reconciliation,</li>
+  <li>QR-level transaction visibility.</li>
+</ul>
+</section>
+
+<section class="cg-article-section">
+<h2>Business continuity risk</h2>
+<p>Healthcare payments cannot be disrupted casually.</p>
+<p>A customer standing at a clinic or lab expects payment to work.<br>
+A doctor expects settlement to happen.<br>
+A provider expects transaction visibility.<br>
+Support teams expect traceability when something fails.</p>
+<p>A failed migration could create:</p>
+<ul>
+  <li>payment failures,</li>
+  <li>duplicate payments,</li>
+  <li>refund queries,</li>
+  <li>provider escalations,</li>
+  <li>settlement confusion,</li>
+  <li>support TAT increase,</li>
+  <li>loss of provider trust.</li>
+</ul>
+</section>
+
+<section class="cg-article-section">
+<h2>Multi-system integration risk</h2>
+<p>This project sat between BFHL and BFL systems.</p>
+<p>That meant multiple systems had to stay aligned:</p>
+<ul>
+  <li>HRx app/web,</li>
+  <li>3-in-1 app,</li>
+  <li>DRx / doctor systems,</li>
+  <li>Provider Portal / Partner Center,</li>
+  <li>BajajPay systems,</li>
+  <li>HealthPay / PayRx systems,</li>
+  <li>SFDC,</li>
+  <li>payment dashboards,</li>
+  <li>SFTP feeds,</li>
+  <li>settlement APIs,</li>
+  <li>transaction webhooks.</li>
+</ul>
+<p>The challenge was not just &ldquo;build an API.&rdquo;</p>
+<p>The challenge was:</p>
+<blockquote>
+  <p>If a transaction starts in one system, who owns the journey, who communicates to the customer, who communicates to the merchant, who settles the money, who handles support, and where does the data become visible?</p>
+</blockquote>
+</section>
+
+<section class="cg-article-section">
+<h2>Support model risk</h2>
+<p>The customer or merchant did not care whether the issue belonged to BFHL or BFL.</p>
+<p>If a payment failed, refund was delayed, QR did not work, settlement was missing, or chargeback came in, the support model had to be clear.</p>
+<p>The product had to define:</p>
+<ul>
+  <li>customer support ownership,</li>
+  <li>merchant support ownership,</li>
+  <li>primary and secondary support teams,</li>
+  <li>SFDC case flow,</li>
+  <li>payment-origin-based routing,</li>
+  <li>analytics feed between systems,</li>
+  <li>resolution ownership.</li>
+</ul>
+<p>Without this, every issue would become a cross-company escalation.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>The product insight</h2>
+<p>The simple framing would have been:</p>
+<blockquote>
+  <p>&ldquo;Migrate HealthPay QR to BajajPay QR.&rdquo;</p>
+</blockquote>
+<p>That would have missed the real problem.</p>
+<p>The deeper product insight was:</p>
+<blockquote>
+  <p>A payment migration is not only a payment migration. It is an ecosystem migration.</p>
+</blockquote>
+<p>Every QR code represented a relationship between customer, provider, platform, payment rail, settlement engine, support process, and field team.</p>
+<p>So the product needed to solve for more than QR generation.</p>
+<p>It needed to solve for:</p>
+<ul>
+  <li>merchant onboarding,</li>
+  <li>QR lifecycle,</li>
+  <li>transaction traceability,</li>
+  <li>settlement traceability,</li>
+  <li>refund traceability,</li>
+  <li>provider communication,</li>
+  <li>customer communication,</li>
+  <li>support ownership,</li>
+  <li>field logistics,</li>
+  <li>migration sequencing,</li>
+  <li>compliance continuity,</li>
+  <li>failure recovery.</li>
+</ul>
+<p>The real question was:</p>
+<blockquote>
+  <p>How do we move HealthPay providers to BajajPay infrastructure without breaking payments, settlements, support, or provider trust?</p>
+</blockquote>
+</section>
+
+<section class="cg-article-section">
+<h2>What I shaped</h2>
+<p>My work focused on the early-to-mid product definition and solutioning layers of the merger.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Merchant onboarding design</h2>
+<p>The onboarding flow had to support multiple provider types:</p>
+<ul>
+  <li>doctors,</li>
+  <li>labs,</li>
+  <li>hospitals,</li>
+  <li>existing HealthPay providers,</li>
+  <li>new BFHL merchants,</li>
+  <li>bulk-upload merchant migration.</li>
+</ul>
+<p>Doctors had a more detailed onboarding flow because their listing and payment activation depended on document collection, profile validation, bank details, KYC, clinic details, QR placement, consent, QC, and activation.</p>
+<p>Labs and hospitals had their own onboarding complexity:</p>
+<ul>
+  <li>legal name,</li>
+  <li>display name,</li>
+  <li>provider type,</li>
+  <li>services,</li>
+  <li>sample collection model,</li>
+  <li>centres,</li>
+  <li>SPOC details,</li>
+  <li>pincode coverage,</li>
+  <li>banking details,</li>
+  <li>packages/tests,</li>
+  <li>online booking mechanism,</li>
+  <li>settlement mapping.</li>
+</ul>
+<p>The product direction was to keep BFHL as the front-end owner of provider data collection and operational coordination, while BajajPay powered QR generation and payment rails.</p>
+<p>This avoided forcing providers into a completely new onboarding behavior overnight.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Existing HealthPay provider migration</h2>
+<p>The migration problem was delicate because existing providers already had HealthPay QR codes.</p>
+<p>The core transition logic was:</p>
+<blockquote>
+  <p>Share existing provider and HealthPay UPI data with BajajPay &rarr; generate new BajajPay QR/UPI details &rarr; send new mapping back to BFHL &rarr; store BajajPay UPI ID against old HealthPay UPI ID &rarr; ensure HRx / 3-in-1 / provider-facing systems can identify the correct provider from the new QR.</p>
+</blockquote>
+<p>This mapping layer was critical.</p>
+<p>Without it, BFHL could generate payments but lose traceability.<br>
+And without traceability, settlements, provider communication, and support would break.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>QR lifecycle and logistics</h2>
+<p>The QR workflow was not just about creating a QR image.</p>
+<p>The product scope included:</p>
+<ul>
+  <li>QR generation,</li>
+  <li>QR activation,</li>
+  <li>QR template design,</li>
+  <li>co-branded QR collateral,</li>
+  <li>QR logistics,</li>
+  <li>QR scanning,</li>
+  <li>QR status,</li>
+  <li>QR ID mapping,</li>
+  <li>multi-QR support,</li>
+  <li>QR update/edit APIs,</li>
+  <li>QR image visibility on provider-facing platforms.</li>
+</ul>
+<p>The logistics layer was especially important.</p>
+<p>Existing HealthPay QR standees were already in the market. New BajajPay QR codes had to be printed, quality-checked, shipped, delivered, and placed across clinics, labs, and hospitals.</p>
+<p>The project therefore needed SOPs around:</p>
+<ul>
+  <li>who orders QRs,</li>
+  <li>who prints them,</li>
+  <li>who validates them,</li>
+  <li>who ships them,</li>
+  <li>who delivers them to partners,</li>
+  <li>how QR placement status is tracked,</li>
+  <li>what happens to old QR standees,</li>
+  <li>how migration is communicated to the field.</li>
+</ul>
+<p>This is where product thinking had to extend into field operations.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Transaction feed design</h2>
+<p>The transaction design had to support different customer origins.</p>
+<p>A customer could pay through:</p>
+<ul>
+  <li>HRx app or web,</li>
+  <li>3-in-1 app,</li>
+  <li>other UPI apps,</li>
+  <li>health-plan consumption journeys,</li>
+  <li>UPI / PPI / EMI / wallet / card modes.</li>
+</ul>
+<p>Each origin created a different ownership model.</p>
+<p>For example:</p>
+<ul>
+  <li>If the transaction originated from BFHL assets, BFHL owned the journey and communication.</li>
+  <li>If the transaction originated from 3-in-1, BFL owned the customer journey and communication.</li>
+  <li>Merchant communication largely remained with BFHL.</li>
+  <li>Other UPI app journeys required transaction feed visibility back to BFHL.</li>
+</ul>
+<p>The product challenge was to define how transaction data would move back into BFHL systems for provider visibility, support, and analytics.</p>
+<p>The expected design included:</p>
+<ul>
+  <li>real-time transaction feed,</li>
+  <li>transaction status API,</li>
+  <li>transaction webhook,</li>
+  <li>retry logic,</li>
+  <li>failure alerts,</li>
+  <li>transaction visibility in merchant-facing systems,</li>
+  <li>payment dashboard support.</li>
+</ul>
+<p>This ensured that BFHL did not lose operational visibility after moving payment rails to BajajPay.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Settlement feed design</h2>
+<p>Settlement was a critical part of provider trust.</p>
+<p>A provider does not only care whether the customer paid. The provider cares whether the money was settled and whether they can see it.</p>
+<p>The settlement design needed:</p>
+<ul>
+  <li>settlement API,</li>
+  <li>SFTP settlement feed,</li>
+  <li>QR-level settlement mapping,</li>
+  <li>provider-level settlement visibility,</li>
+  <li>settlement communication,</li>
+  <li>consistency between HealthPay and BajajPay settlement messaging,</li>
+  <li>alignment of settlement timelines,</li>
+  <li>visibility in Provider Portal / Partner Center.</li>
+</ul>
+<p>The key product requirement was:</p>
+<blockquote>
+  <p>Even if BajajPay becomes the payment rail, BFHL partners should continue getting transaction and settlement visibility through BFHL-owned merchant-facing channels.</p>
+</blockquote>
+<p>This mattered because Partner Center was becoming the partner operating layer. If settlements moved to BajajPay but visibility disappeared from BFHL systems, partner trust would suffer.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Refund and chargeback handling</h2>
+<p>Refunds and chargebacks are where payment systems reveal whether they were truly designed end-to-end.</p>
+<p>The project needed to define:</p>
+<ul>
+  <li>refund API,</li>
+  <li>refund webhook,</li>
+  <li>partial refund,</li>
+  <li>full refund,</li>
+  <li>refund statuses,</li>
+  <li>refund callback to BFHL,</li>
+  <li>support visibility,</li>
+  <li>chargeback alerts,</li>
+  <li>proof-of-delivery upload,</li>
+  <li>invoice support for chargeback handling.</li>
+</ul>
+<p>This prevented the migration from being limited to successful transactions only.</p>
+<p>A payment product cannot be designed only for success states. It must handle failure, reversal, refund, and dispute states as first-class workflows.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Customer and merchant support model</h2>
+<p>Support ownership had to be split based on journey origin.</p>
+<p>For customer support:</p>
+<ul>
+  <li>HRx-originated cases were to be handled by BFHL.</li>
+  <li>3-in-1-originated cases were to be handled by BFL.</li>
+  <li>BFHL needed feeds for analytics and visibility where required.</li>
+</ul>
+<p>For merchant support:</p>
+<ul>
+  <li>DRx PMS / Provider Portal cases would be created in BFHL SFDC.</li>
+  <li>BFHL would be first-level support for merchants.</li>
+  <li>BFL would become second-level support for cases related to BajajPay payment origin or payment-rail issues.</li>
+</ul>
+<p>This created a joint operating model.</p>
+<p>The important product decision was:</p>
+<blockquote>
+  <p>Merchants should not be forced to understand internal ownership between BFHL and BFL. They should raise issues through the familiar BFHL merchant support layer, while internal routing handles ownership.</p>
+</blockquote>
+</section>
+
+<section class="cg-article-section">
+<h2>Health-plan consumption on 3-in-1</h2>
+<p>One of the more complex parts of the merger was health-plan consumption.</p>
+<p>If a customer had BFHL health-plan benefits, those benefits needed to be visible and usable in the 3-in-1 app. That required coordination across benefit visibility, checkout experience, transaction breakup, communication templates, and post-payment visibility.</p>
+<p>The product considerations included:</p>
+<ul>
+  <li>show applicable health plans during checkout,</li>
+  <li>support multiple plan benefits,</li>
+  <li>show benefit breakup in transaction history,</li>
+  <li>ensure HealthPay/HRx gets visibility of transactions using benefits,</li>
+  <li>align customer communication across transaction types,</li>
+  <li>ensure merchant communication remains with BFHL.</li>
+</ul>
+<p>This was not just payments. It was the merger of payment and benefit consumption journeys.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>How the workflow changed</h2>
+<p>The earlier HealthPay model was more BFHL-owned and HealthPay QR-led.</p>
+<p>The future state moved toward:</p>
+<blockquote>
+  <p>BajajPay-powered QR infrastructure + BFHL-owned provider relationship + shared transaction/settlement feeds + coordinated support model + Partner Center visibility.</p>
+</blockquote>
+<p>Before transition, the operating model looked closer to:</p>
+<blockquote>
+  <p>HealthPay QR &rarr; BFHL payment/recon ecosystem &rarr; BFHL provider communication &rarr; BFHL support.</p>
+</blockquote>
+<p>The target model became: </p>
+<blockquote>
+  <p>BajajPay QR &rarr; BFL transaction/settlement infrastructure &rarr; feed to BFHL &rarr; BFHL merchant visibility/support &rarr; coordinated customer/merchant communication based on transaction origin.</p>
+</blockquote>
+<p>That is a much more complex model.</p>
+<p>The product challenge was to keep the provider experience simple even though the backend ownership had become more distributed.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What made this hard</h2>
+<p>This project was hard because it had too many moving parts.</p>
+<h3 style="margin-top:16px;">Cross-company dependency</h3>
+<p>BFHL and BFL systems, teams, processes, and support models had to align.</p>
+<p>Even small delays at one end could affect the entire logistics or transaction journey.</p>
+<h3 style="margin-top:16px;">Many failure points</h3>
+<p>The project had risk across onboarding, QR mapping, QR activation, payment capture, transaction feed, settlement feed, refund webhook, support routing, and provider communication.</p>
+<h3 style="margin-top:16px;">Field readiness</h3>
+<p>QR migration is not purely digital. Physical QR standees, FOS onboarding, QC, logistics, and field communication all mattered.</p>
+<h3 style="margin-top:16px;">Legacy continuity</h3>
+<p>Existing HealthPay records and QR histories could not simply disappear after migration.</p>
+<p>Old HealthPay QR records had to remain traceable while new BajajPay QR mappings became active.</p>
+<h3 style="margin-top:16px;">Communication complexity</h3>
+<p>Customer communication depended on payment origin. Merchant communication remained with BFHL. Support ownership depended on case type and transaction source.</p>
+<p>This required careful service design.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What was achieved before my transition</h2>
+<p>The integration reached an advanced stage before my movement to another project.</p>
+<p>The project documentation indicates:</p>
+<ul>
+  <li>integration between BajajPay and HealthPay was completed,</li>
+  <li>UAT testing was completed successfully,</li>
+  <li>code base was moved to production from both ends,</li>
+  <li>logistics SOP was approved,</li>
+  <li>service SOP was in progress,</li>
+  <li>GTM planning was prepared with the doctor listing team,</li>
+  <li>CUG was dependent on FOS onboarding readiness from the BFL side.</li>
+</ul>
+<p>My contribution sat across the product definition and transition-planning layers:</p>
+<ul>
+  <li>requirement definition,</li>
+  <li>merchant onboarding flows,</li>
+  <li>HealthPay-to-BajajPay QR migration logic,</li>
+  <li>QR generation and logistics process,</li>
+  <li>transaction and settlement feed requirements,</li>
+  <li>refund and webhook requirements,</li>
+  <li>provider-facing visibility requirements,</li>
+  <li>customer and merchant support flows,</li>
+  <li>health-plan consumption design,</li>
+  <li>SOP inputs,</li>
+  <li>business UAT support,</li>
+  <li>GTM/migration planning inputs.</li>
+</ul>
+<p>I was moved to another project during the final stages, so I would position final rollout as transitioned to other stakeholders.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What this delivered</h2>
+<p>The project created the foundation for moving HealthPay providers onto BajajPay QR infrastructure while preserving operational continuity.</p>
+<p>The intended business direction included:</p>
+<ul>
+  <li>migration of existing HealthPay doctor business to BajajPay QR codes,</li>
+  <li>fresh doctor onboarding onto BajajPay QR infrastructure,</li>
+  <li>later migration of labs and hospitals,</li>
+  <li>alignment of transaction and settlement feeds,</li>
+  <li>support for health-plan consumption through 3-in-1,</li>
+  <li>stronger compliance through BajajPay adoption,</li>
+  <li>unified provider visibility through BFHL systems.</li>
+</ul>
+<p>The project also defined the risk controls needed for a complex payment transition:</p>
+<ul>
+  <li>old-to-new QR mapping,</li>
+  <li>transaction webhooks,</li>
+  <li>settlement feeds,</li>
+  <li>refund APIs,</li>
+  <li>SFTP backup,</li>
+  <li>support ownership,</li>
+  <li>SOPs,</li>
+  <li>FOS onboarding,</li>
+  <li>QR logistics,</li>
+  <li>UAT and CUG planning.</li>
+</ul>
+</section>
+
+<section class="cg-article-section">
+<h2>What this says about my product approach</h2>
+<p>This project reflects a different side of product management: not feature-building, but ecosystem migration.</p>
+<p>The challenge was not to design a beautiful screen.<br>
+The challenge was to make a complex payment transition operationally safe.</p>
+<p>It required thinking across product, technology, payments, field sales, support, provider operations, compliance, logistics, and communication.</p>
+<p>The most important product principle here was:</p>
+<blockquote>
+  <p>When infrastructure changes, the user experience should not collapse.</p>
+</blockquote>
+<p>Doctors, labs, hospitals, customers, and support teams should not feel the complexity of internal systems changing. The product manager&rsquo;s job is to absorb that complexity into flows, mappings, APIs, SOPs, and support models.</p>
+<p>That was the essence of this project.</p>
+</section>
+<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/ai-product-strategy/">AI Product Strategy</a> · <a href="/insights/">Insights</a></p>
+
+<section class="cg-section cg-reveal" id="cta">
+      <div class="cg-card large glow">
+        <h2>Ready to move from AI pilots to production?</h2>
+        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
+        <div class="cg-hero-actions" style="margin-top:20px;">
+          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
+          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+
+</body>
+</html>
