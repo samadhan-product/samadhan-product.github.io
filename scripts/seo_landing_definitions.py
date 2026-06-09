@@ -180,6 +180,7 @@ def build_landing_pages(shared_faqs, shared_geo) -> list[dict]:
 <a class="cg-card glow is-link" href="/case-studies/bfhl-service-guarantee/"><h3>Turning Bookings into Fulfilment Assurance</h3><p>Converting fragmented booking follow-ups into a structured trackable communication-led operating model.</p></a>
 <a class="cg-card glow is-link" href="/case-studies/bfhl-opd-reimbursement-claims/"><h3>Redesigning OPD Claims Processing</h3><p>Transforming manual workflows and agent workarounds into a high-productivity claims cockpit (boosting output from 75 to 130 claims/day).</p></a>
 <a class="cg-card glow is-link" href="/case-studies/highradius-autonomous-collections/"><h3>Intelligent Collections Prioritization</h3><p>Turning manual aging-report collections into prioritized task management and automated dunning for enterprise receivables.</p></a>
+<a class="cg-card glow is-link" href="/case-studies/creanovation-edtech-saas/"><h3>B2B EdTech CRM &amp; SREM Platform</h3><p>Evolving a focused form builder into a comprehensive student lifecycle management system serving 500+ institutions.</p></a>
 <a class="cg-card glow is-link" href="/case-studies/ai-learning-platform-for-schools/"><h3>AI Learning Platform for Schools</h3><p>Structured AI education and LMS integration for institutional learning.</p></a>
 <a class="cg-card glow is-link" href="/case-studies/ai-product-practice-operating-model/"><h3>AI Product Practice Operating Model</h3><p>Intake templates, evals, and portfolio governance for multiple AI initiatives.</p></a>
 </div>
