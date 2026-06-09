@@ -152,57 +152,389 @@
   <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
 
 <section class="cg-article-section">
-  <p>Claims processing problems rarely announce themselves as product problems. On the surface, the issues look operational: claims taking time, agents switching screens, missing documents, duplicate requests, and mounting backlogs.</p>
-
-  <blockquote class="cg-editorial-quote">
-    I went to the call center and sat with the claim processing agents. This was not just a Salesforce workflow project. It was a redesign of how OPD reimbursement claims should be processed, prioritized, and moved toward assisted decisioning.
-  </blockquote>
+<p>Claims processing problems rarely announce themselves as product problems.</p>
+<p>On the surface, the issue looks operational:</p>
+<p>Claims are taking time.<br>
+Agents are switching screens.<br>
+Documents are missing.<br>
+Duplicate requests are piling up.<br>
+Customers are waiting.<br>
+Processors are under pressure.</p>
+<p>But when I worked on BFHL&rsquo;s OPD Reimbursement Claims Processing project, the real product problem became clear only after going close to the users.</p>
+<p>I went to the call center and sat with the claim processing agents.</p>
+<p>That changed the entire framing.</p>
+<p>This was not just a Salesforce workflow project. It was a redesign of how OPD reimbursement claims should be processed, prioritized, validated, documented, and moved toward assisted decisioning.</p>
 </section>
 
 <section class="cg-article-section">
-  <h2>Core Outcome</h2>
-  <div class="cg-stats-grid">
-    <div class="cg-stat-card">
-      <span class="cg-stat-val">+73%</span>
-      <span class="cg-stat-lbl">Processing Efficiency Gain</span>
-    </div>
-    <div class="cg-stat-card">
-      <span class="cg-stat-val">From 75</span>
-      <span class="cg-stat-lbl">Claims Per Processor/Day</span>
-    </div>
-    <div class="cg-stat-card">
-      <span class="cg-stat-val">To 130</span>
-      <span class="cg-stat-lbl">Claims Per Processor/Day</span>
-    </div>
+
+<div class="cg-stats-grid">
+  <div class="cg-stat-card">
+    <span class="cg-stat-val">+73%</span>
+    <span class="cg-stat-lbl">Processing Efficiency Gain</span>
   </div>
-</section>
-
-<section class="cg-article-section">
-  <h2>What was actually broken</h2>
-  
-  <div class="cg-comparison-grid">
-    <div class="cg-compare-card before">
-      <h4 class="cg-compare-title">Legacy Claims Processing</h4>
-      <ul class="cg-compare-list">
-        <li>Processors searching through multiple screens and tabs for customer details.</li>
-        <li>Manual calculation of deductibles, allowed limits, and Room Rent Caps.</li>
-        <li>Double-entries and spreadsheets used to cross-verify document authenticity.</li>
-      </ul>
-    </div>
-    <div class="cg-compare-card after">
-      <h4 class="cg-compare-title">Revamped claims workbench</h4>
-      <ul class="cg-compare-list">
-        <li>Unified Customer 360 view surfacing active benefits and past claims.</li>
-        <li>Embedded rule engine automatically computing allowed claim amounts.</li>
-        <li>Structured OCR extraction validating bills against invoice records.</li>
-      </ul>
-    </div>
+  <div class="cg-stat-card">
+    <span class="cg-stat-val">From 75</span>
+    <span class="cg-stat-lbl">Claims Per Processor/Day</span>
   </div>
+  <div class="cg-stat-card">
+    <span class="cg-stat-val">To 130</span>
+    <span class="cg-stat-lbl">Claims Per Processor/Day</span>
+  </div>
+</div>
+
+<h2>The situation</h2>
+<p>In 2022, BFHL&rsquo;s OPD reimbursement claims were being processed through Salesforce.</p>
+<p>Each claim came in as a Service Request, or SR. For practical purposes, every SR represented a claim that needed to be reviewed, validated, processed, and closed.</p>
+<p>The claims came through multiple channels:</p>
+<ul>
+  <li>email,</li>
+  <li>app,</li>
+  <li>portal.</li>
+</ul>
+<p>The processing team had to handle claim details, documents, duplicate SRs, customer information, eligibility rules, claim validation, and closure decisions.</p>
+<p>At the business level, the goal was clear:</p>
+<blockquote class="cg-editorial-quote">
+  <p>Improve claim processor productivity, reduce manual effort, and create a more scalable OPD reimbursement processing model.</p>
+</blockquote>
+<p>But the actual blockers were hidden inside the day-to-day agent workflow.</p>
 </section>
 
 <section class="cg-article-section">
-  <h2>What I shaped</h2>
-  <p>I led the functional redesign of the claims processor interface in Salesforce. By studying the manual steps of top performers, I mapped keyboard shortcuts, split-screen PDF viewers, and inline validation rule calculations into the system workflow, dramatically cutting down the clicks needed to verify a single document line item.</p>
+<h2>What was actually broken</h2>
+<p>The system existed. Claims existed. Agents were processing them.</p>
+<p>But the workflow was not designed around how processors actually worked.</p>
+<h3 style="margin-top:16px;">Agents were managing work outside the system</h3>
+<p>One of the clearest signs of workflow failure was that processors downloaded SR lists into Excel.</p>
+<p>They used Excel to manage their work and then manually searched SR numbers inside Salesforce.</p>
+<p>That meant the core claim-processing system was not functioning as a true work allocation engine.</p>
+<p>The processor&rsquo;s day started with:</p>
+<blockquote class="cg-editorial-quote">
+  <p>download list &rarr; find SR &rarr; search manually &rarr; open case &rarr; process.</p>
+</blockquote>
+<p>That created avoidable friction before the actual claim review even began.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Claim context was fragmented</h2>
+<p>Processors had to jump between multiple Salesforce screens to understand a single claim.</p>
+<p>They moved across:</p>
+<ul>
+  <li>SR details,</li>
+  <li>customer details,</li>
+  <li>search results,</li>
+  <li>document views,</li>
+  <li>older SRs,</li>
+  <li>rule checks,</li>
+  <li>decision screens.</li>
+</ul>
+<p>This created cognitive load.</p>
+<p>The processor was not only making a decision.<br>
+They were first assembling the information needed to make that decision.</p>
+<p>That is a bad operating model.</p>
+<p>The system should bring decision context to the processor.<br>
+The processor should not have to hunt for it.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Duplicate SRs were creating invisible waste</h2>
+<p>Customers could raise multiple SRs for the same claim through email, app, or portal.</p>
+<p>From the customer&rsquo;s perspective, this made sense. If they did not know what was happening, they tried again through another channel.</p>
+<p>But for operations, this created duplicate work.</p>
+<p>Duplicate SRs meant:</p>
+<ul>
+  <li>same claim appearing more than once,</li>
+  <li>documents scattered across requests,</li>
+  <li>processors spending time identifying duplicates,</li>
+  <li>risk of inconsistent handling,</li>
+  <li>poor customer tracking,</li>
+  <li>unnecessary queue load.</li>
+</ul>
+<p>The duplicate problem was not minor. It was a meaningful source of operational waste.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Document handling was too manual</h2>
+<p>OPD reimbursement claims are document-heavy.</p>
+<p>Processors had to review bills, prescriptions, supporting documents, and sometimes older claim documents to validate authenticity or continuity.</p>
+<p>But document handling was not smooth.</p>
+<p>Processors used external tools for basic operations.<br>
+JPEG preview issues forced conversion to PDF.<br>
+Documents received through email had to be uploaded manually.<br>
+Older SR documents had to be searched and compared manually.</p>
+<p>This was a major source of time leakage.</p>
+<p>A claims platform cannot scale if document work happens outside the claims workflow.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Rules were not embedded deeply enough</h2>
+<p>Eligibility checks, document completeness, benefit rules, policy rules, amount validation, and duplicate checks needed to be performed consistently.</p>
+<p>But a large part of claim validation depended on manual review and processor effort.</p>
+<p>That created risk:</p>
+<ul>
+  <li>inconsistent decisions,</li>
+  <li>longer processing time,</li>
+  <li>rework,</li>
+  <li>missed validations,</li>
+  <li>lower scalability.</li>
+</ul>
+<p>The long-term product direction had to move toward STP and rule-led assisted processing.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>The product insight</h2>
+<p>The obvious framing would have been:</p>
+<blockquote class="cg-editorial-quote">
+  <p>&ldquo;Agents need a better Salesforce screen.&rdquo;</p>
+</blockquote>
+<p>But the real insight was bigger.</p>
+<blockquote class="cg-editorial-quote">
+  <p>OPD processors did not just need screens. They needed a system-led claims cockpit.</p>
+</blockquote>
+<p>A claims cockpit would do four things:</p>
+<ol>
+  <li>bring work to the processor,</li>
+  <li>bring claim context together,</li>
+  <li>reduce duplicate and document friction,</li>
+  <li>support rule-led decisioning.</li>
+</ol>
+<p>The key product shift was:</p>
+<blockquote class="cg-editorial-quote">
+  <p>Move from processor-driven work assembly to system-driven claim processing.</p>
+</blockquote>
+<p>Instead of agents finding claims, finding context, finding documents, finding rules, and then making decisions, the system needed to organize the work, surface context, validate inputs, and guide the processor.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What I shaped</h2>
+<p>I led product discovery and solutioning for the OPD Reimbursement Claims Processing project.</p>
+<p>I was supported by one of my reportees.</p>
+<p>My work included:</p>
+<ul>
+  <li>floor-level discovery with claim processors,</li>
+  <li>stakeholder interviews,</li>
+  <li>form analysis,</li>
+  <li>product requirement specifications,</li>
+  <li>user journeys,</li>
+  <li>workflow design,</li>
+  <li>solutioning across queue management, Customer 360, document management, duplicate handling, and STP.</li>
+</ul>
+<p>The project was built on Salesforce, but the thinking went beyond Salesforce configuration.</p>
+<p>The goal was to redesign the operating model.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 1: Queue management</h2>
+<p>The first problem to solve was work allocation.</p>
+<p>Processors were using Excel because the system was not giving them a clean, actionable claim queue.</p>
+<p>The product direction was to move toward:</p>
+<ul>
+  <li>auto-allocation,</li>
+  <li>prioritized SR queues,</li>
+  <li>ready-to-process claim lists,</li>
+  <li>round-robin assignment,</li>
+  <li>SLA-driven prioritization,</li>
+  <li>agent-specific work views,</li>
+  <li>escalation visibility.</li>
+</ul>
+<p>This changed the workflow from:</p>
+<blockquote class="cg-editorial-quote">
+  <p>Agent downloads Excel and searches claims manually.</p>
+</blockquote>
+<p>to:</p>
+<blockquote class="cg-editorial-quote">
+  <p>System assigns and surfaces actionable claims.</p>
+</blockquote>
+<p>That is a fundamental productivity improvement.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 2: Customer 360 / One View</h2>
+<p>The strongest product intervention was Customer 360.</p>
+<p>Processors needed one place to see the claim context.</p>
+<p>The one-view model brought together:</p>
+<ul>
+  <li>customer details,</li>
+  <li>SR history,</li>
+  <li>current claim details,</li>
+  <li>uploaded documents,</li>
+  <li>older SR documents,</li>
+  <li>claim status,</li>
+  <li>decision funnel,</li>
+  <li>priority indicators,</li>
+  <li>audit trail,</li>
+  <li>relevant operational fields.</li>
+</ul>
+<p>This was designed to reduce screen switching and cognitive load.</p>
+<p>The processor&rsquo;s job should be to evaluate the claim, not assemble the workspace.</p>
+<p>Customer 360 changed the experience from:</p>
+<blockquote class="cg-editorial-quote">
+  <p>move across screens to understand the claim</p>
+</blockquote>
+<p>to:</p>
+<blockquote class="cg-editorial-quote">
+  <p>open one view and begin decisioning with context.</p>
+</blockquote>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 3: Duplicate SR handling</h2>
+<p>Duplicate SRs were a classic example of customer behaviour creating backend complexity.</p>
+<p>Customers raised the same claim through different channels because they lacked confidence or visibility.</p>
+<p>The product needed to identify and control duplicate requests.</p>
+<p>The solution direction included:</p>
+<ul>
+  <li>duplicate SR identification,</li>
+  <li>source-level duplicate prevention,</li>
+  <li>duplicate merge capability,</li>
+  <li>duplicate audit trail,</li>
+  <li>document comparison across SRs,</li>
+  <li>visibility into duplicate creation and merge history.</li>
+</ul>
+<p>This helped reduce duplicate effort and improved claim continuity.</p>
+<p>The key product principle was:</p>
+<blockquote class="cg-editorial-quote">
+  <p>The system should recognize claim continuity even when the customer interacts through multiple channels.</p>
+</blockquote>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 4: Document Management System</h2>
+<p>Document handling had to become part of the claims workflow.</p>
+<p>The DMS direction included:</p>
+<ul>
+  <li>central document storage,</li>
+  <li>SR-wise document mapping,</li>
+  <li>customer-wise document mapping,</li>
+  <li>document preview,</li>
+  <li>full-size view,</li>
+  <li>zoom,</li>
+  <li>rotate,</li>
+  <li>OCR for selected segments,</li>
+  <li>image preprocessing for blurred documents,</li>
+  <li>document comparison,</li>
+  <li>duplicate document suggestion.</li>
+</ul>
+<p>This reduced dependency on external tools and manual conversion.</p>
+<p>It also improved claim validation because processors could access document context more easily.</p>
+<p>A reimbursement claim is only as strong as the documents supporting it. So document management was not a support feature. It was a core claim-processing capability.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 5: STP and Rule Engine</h2>
+<p>The long-term product direction was to move toward Straight Through Processing.</p>
+<p>The STP scope included:</p>
+<ul>
+  <li>eligibility checks,</li>
+  <li>document completeness,</li>
+  <li>amount validation,</li>
+  <li>policy rules,</li>
+  <li>benefit rules,</li>
+  <li>duplicate checks,</li>
+  <li>related rule validations.</li>
+</ul>
+<p>The product vision was:</p>
+<blockquote class="cg-editorial-quote">
+  <p>zero data-entry approval, where the agent primarily checks and approves system-supported decisions.</p>
+</blockquote>
+<p>STP went live.</p>
+<p>The full zero-data-entry approval state was envisioned during the project and achieved later, after I had moved out of the project.</p>
+<p>That distinction is important.</p>
+<p>I would describe it as:</p>
+<blockquote class="cg-editorial-quote">
+  <p>I defined the zero-data-entry approval direction and helped build the rule-led foundation. The capability matured and was achieved after I had moved out of the project.</p>
+</blockquote>
+<p>That is accurate and still strong.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>How the workflow changed</h2>
+<p>Before the project, the claim processor&rsquo;s experience looked like this:</p>
+<blockquote class="cg-editorial-quote">
+  <p>download SR list &rarr; search claim manually &rarr; open SR &rarr; switch screens &rarr; check customer details &rarr; find documents &rarr; compare older SRs &rarr; validate rules manually &rarr; decide &rarr; close or move forward.</p>
+</blockquote>
+<p>After the product redesign, the workflow moved toward:</p>
+<blockquote class="cg-editorial-quote">
+  <p>system-assigned queue &rarr; open claim context in Customer 360 &rarr; review documents in structured DMS &rarr; identify duplicate history &rarr; validate rule outputs &rarr; process decision with better audit and control.</p>
+</blockquote>
+<p>The change was not just faster processing.</p>
+<p>It was a better way of working.</p>
+<p>The processor moved from being an information gatherer to being a decision maker.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What made this hard</h2>
+<p>This project was hard because the problem was hidden inside everyday workarounds.</p>
+<p>If I had only spoken to stakeholders, the answer might have been a generic Salesforce enhancement.</p>
+<p>The real product insights came from watching claim processors work.</p>
+<h3 style="margin-top:16px;">The system was not the only source of truth</h3>
+<p>Agents relied on Excel, documents, older SRs, and manual knowledge.</p>
+<h3 style="margin-top:16px;">The workflow crossed multiple channels</h3>
+<p>Claims came through email, app, and portal, creating duplicate and document-handling complexity.</p>
+<h3 style="margin-top:16px;">Productivity depended on small frictions</h3>
+<p>A few minutes lost in searching, switching screens, converting files, or checking duplicates became significant at scale.</p>
+<h3 style="margin-top:16px;">Automation had to be introduced carefully</h3>
+<p>Claims processing required rule confidence, auditability, and human validation.</p>
+<h3 style="margin-top:16px;">The future state had to be staged</h3>
+<p>The project could not jump directly to full automation. It needed queue management, one-view context, DMS, duplicate handling, and rule engine foundations first.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What was achieved</h2>
+<p>The project improved OPD claim-processing productivity.</p>
+<p>Before-state productivity was:</p>
+<blockquote class="cg-editorial-quote">
+  <p>75 claims per day per processor.</p>
+</blockquote>
+<p>After the project:</p>
+<blockquote class="cg-editorial-quote">
+  <p>130 claims per day per processor.</p>
+</blockquote>
+<p>The program projected and achieved a <strong>30% efficiency improvement</strong>.</p>
+<p>STP went live.</p>
+<p>The platform moved toward a zero-data-entry approval model, which was achieved later after I moved out of the project.</p>
+<p>The project also created a stronger processing foundation through: </p>
+<ul>
+  <li>system-led queues,</li>
+  <li>Customer 360,</li>
+  <li>document management,</li>
+  <li>duplicate handling,</li>
+  <li>rule-based validation,</li>
+  <li>STP direction,</li>
+  <li>better processor context,</li>
+  <li>improved operational control.</li>
+</ul>
+</section>
+
+<section class="cg-article-section">
+<h2>Why this mattered for BFHL</h2>
+<p>OPD reimbursement claims are high-volume, operationally sensitive, and customer-facing.</p>
+<p>Slow claim processing affects customer trust.<br>
+Manual workflows increase cost.<br>
+Fragmented context increases error risk.<br>
+Duplicate SRs create invisible workload.<br>
+Poor document handling slows decisions.<br>
+Weak rule validation reduces scalability.</p>
+<p>This project helped BFHL build a more scalable claim-processing operating model.</p>
+<p>It converted a manual, workaround-heavy process into a more structured, system-led workflow.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What this says about my product approach</h2>
+<p>This project is one of the clearest examples of how I use design thinking in operational products.</p>
+<p>I did not start with a feature request.</p>
+<p>I sat with the users.<br>
+I watched the work.<br>
+I identified the workarounds.<br>
+I mapped the friction.<br>
+I separated surface symptoms from root causes.<br>
+Then I translated those insights into product capabilities.</p>
+<p>The important product principle was:</p>
+<blockquote class="cg-editorial-quote">
+  <p>When users build workarounds outside the system, the workaround is the product requirement.</p>
+</blockquote>
+<p>Excel lists, manual searches, external document tools, duplicate checks, and screen switching were not random behaviours. They were evidence of where the product was failing.</p>
+<p>The product job was to absorb those workarounds into the system.</p>
 </section>
 <p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/healthcare-insurance-ai/">Healthcare &amp; Insurance AI</a> · <a href="/insights/">Insights</a></p>
 

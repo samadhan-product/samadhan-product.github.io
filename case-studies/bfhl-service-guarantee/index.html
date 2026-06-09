@@ -152,81 +152,431 @@
   <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
 
 <section class="cg-article-section">
-  <p>A booking confirmation does not always mean the service will happen. In healthcare, a customer books a lab test or a doctor appointment, but the actual fulfillment still depends on clinic availability, sample collection logistics, and report delivery.</p>
-
-  <blockquote class="cg-editorial-quote">
-    If any one of those steps fails, the customer does not see a backend issue. They see broken trust.
-  </blockquote>
-
-  <p>The Service Guarantee initiative aimed to make lab test bookings and doctor appointments reliable by converting fragmented follow-ups into a structured, trackable, communication-led operating model.</p>
+<p>A booking confirmation does not always mean the service will happen.</p>
+<p>That sounds obvious in hindsight, but it is one of the biggest gaps in healthcare service journeys. A customer books a lab test or a doctor appointment. The app shows that the request is placed. But behind that screen, the actual fulfilment still depends on provider confirmation, appointment availability, reminders, rescheduling, report generation, and manual follow-ups.</p>
+<p>If any one of those steps fails, the customer does not see it as a backend issue.</p>
+<p>They see it as broken trust.</p>
+<p>That was the core problem behind BFHL&rsquo;s Service Guarantee initiative.</p>
+<p>After working on OPD Reimbursement Claims Processing, I led the Service Guarantee project in 2022. The goal was to make lab test bookings and doctor appointments more reliable by converting fragmented fulfilment follow-ups into a structured, trackable, communication-led operating model.</p>
 </section>
 
 <section class="cg-article-section">
-  <h2>Project Pillars</h2>
-  <div class="cg-stats-grid">
-    <div class="cg-stat-card">
-      <span class="cg-stat-val">SFDC + HRx</span>
-      <span class="cg-stat-lbl">System Orchestration</span>
-    </div>
-    <div class="cg-stat-card">
-      <span class="cg-stat-val">Real-time</span>
-      <span class="cg-stat-lbl">Status Mapping</span>
-    </div>
-    <div class="cg-stat-card">
-      <span class="cg-stat-val">Fulfillment</span>
-      <span class="cg-stat-lbl">Assurance Model</span>
-    </div>
+
+<div class="cg-stats-grid">
+  <div class="cg-stat-card">
+    <span class="cg-stat-val">SFDC + HRx</span>
+    <span class="cg-stat-lbl">System Orchestration</span>
   </div>
+  <div class="cg-stat-card">
+    <span class="cg-stat-val">Real-time</span>
+    <span class="cg-stat-lbl">Status Mapping</span>
+  </div>
+  <div class="cg-stat-card">
+    <span class="cg-stat-val">Fulfillment</span>
+    <span class="cg-stat-lbl">Assurance Model</span>
+  </div>
+</div>
+
+<h2>The situation</h2>
+<p>BFHL customers could book lab tests and doctor appointments through digital journeys.</p>
+<p>But booking was only the first step.</p>
+<p>For the service to actually be fulfilled, several things had to happen after the customer placed the request:</p>
+<ul>
+  <li>the booking had to become visible to operations,</li>
+  <li>the provider had to confirm,</li>
+  <li>the customer had to be updated,</li>
+  <li>rejection or no-response scenarios had to be handled,</li>
+  <li>rescheduling had to be supported,</li>
+  <li>reminders had to be sent,</li>
+  <li>appointment completion had to be tracked,</li>
+  <li>reports or closure status had to be followed up,</li>
+  <li>escalations had to happen before the customer complained.</li>
+</ul>
+<p>The challenge was that this journey had multiple actors:</p>
+<ul>
+  <li>customer,</li>
+  <li>provider,</li>
+  <li>fulfilment agent,</li>
+  <li>operations team,</li>
+  <li>HRx,</li>
+  <li>SFDC,</li>
+  <li>app/web journey,</li>
+  <li>WhatsApp/SMS/voice communication layer.</li>
+</ul>
+<p>The product problem was not just creating a case in Salesforce.</p>
+<p>The product problem was ensuring that BFHL could stand behind the service promise.</p>
 </section>
 
 <section class="cg-article-section">
-  <h2>The Fulfillment Workflow</h2>
-  
-  <div class="cg-flow-track">
-    <div class="cg-flow-step">
-      <div class="cg-flow-num">1</div>
-      <div class="cg-flow-text">
-        <h4>Booking Orchestration</h4>
-        <p>Syncs clinic slot availability, doctor calendars, and partner locations to prevent duplicate booking slips.</p>
-      </div>
-    </div>
-    <div class="cg-flow-step">
-      <div class="cg-flow-num">2</div>
-      <div class="cg-flow-text">
-        <h4>Logistics & Phlebo Tracking</h4>
-        <p>Tracks sample collector assignments, home collection check-ins, and sample transit timestamps in real time.</p>
-      </div>
-    </div>
-    <div class="cg-flow-step">
-      <div class="cg-flow-num">3</div>
-      <div class="cg-flow-text">
-        <h4>Report Upload SLA Control</h4>
-        <p>Flags delayed reports, automatically triggering SMS/WhatsApp reminders to partner labs, and routing exceptions to operational recovery queues.</p>
-      </div>
-    </div>
-  </div>
+<h2>What was actually broken</h2>
+<p>The broken part was not appointment booking.</p>
+<p>The broken part was everything that happened after booking.</p>
+<h3 style="margin-top:16px;">Booking did not equal fulfilment</h3>
+<p>A booking request could be raised, but provider confirmation was still needed.</p>
+<p>Until the provider accepted the appointment, the customer journey was uncertain.</p>
+<p>The customer might think the appointment is progressing.<br>
+The provider might not have confirmed yet.<br>
+The agent might not know the case needs intervention.<br>
+The system might not have triggered the right communication.</p>
+<p>That gap created anxiety and complaints.</p>
 </section>
 
 <section class="cg-article-section">
-  <h2>Before and After the Revamp</h2>
-  <div class="cg-comparison-grid">
-    <div class="cg-compare-card before">
-      <h4 class="cg-compare-title">Fragmented Booking Journey</h4>
-      <ul class="cg-compare-list">
-        <li>Confirmation sent without verifying doctor availability.</li>
-        <li>No visibility on whether a phlebotomist actually visited.</li>
-        <li>Users calling customer support to ask for report status.</li>
-      </ul>
-    </div>
-    <div class="cg-compare-card after">
-      <h4 class="cg-compare-title">Structured Service Guarantee</h4>
-      <ul class="cg-compare-list">
-        <li>Real-time sync between booking system, provider portal, and partner PMS.</li>
-        <li>Automated collector mapping with physical check-in status.</li>
-        <li>Proactive alert engines signaling SLA breaches for quick intervention.</li>
-      </ul>
-    </div>
-  </div>
+<h2>Provider response was a critical dependency</h2>
+<p>Providers could respond in multiple ways:</p>
+<ul>
+  <li>accept the appointment,</li>
+  <li>reject the appointment,</li>
+  <li>suggest another slot,</li>
+  <li>not respond within the expected time.</li>
+</ul>
+<p>Each scenario needed a different system response.</p>
+<p>If the provider accepted, the customer needed confirmation.</p>
+<p>If the provider rejected, the customer needed recovery options.</p>
+<p>If the provider suggested a new slot, the customer needed rescheduling.</p>
+<p>If the provider did not respond, the case needed escalation.</p>
+<p>Without a structured workflow, provider response became a manual follow-up problem.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Customers lacked proactive visibility</h2>
+<p>Customers should not have to chase the system after booking.</p>
+<p>They needed timely updates:</p>
+<ul>
+  <li>request received,</li>
+  <li>provider confirmation pending,</li>
+  <li>appointment confirmed,</li>
+  <li>appointment rejected,</li>
+  <li>reschedule required,</li>
+  <li>appointment reminder,</li>
+  <li>post-appointment follow-up,</li>
+  <li>report/status update.</li>
+</ul>
+<p>Without this, customer care dependency increases.</p>
+<p>A customer who does not know what is happening will call, complain, or lose trust.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Agents needed actionable queues</h2>
+<p>Fulfilment agents needed more than a case list.</p>
+<p>They needed to know:</p>
+<ul>
+  <li>which cases were new,</li>
+  <li>which cases needed provider calling,</li>
+  <li>which providers had not responded,</li>
+  <li>which cases were rejected,</li>
+  <li>which customers needed rescheduling,</li>
+  <li>which appointments were confirmed,</li>
+  <li>which appointments were completed,</li>
+  <li>which cases could be closed.</li>
+</ul>
+<p>A raw case list does not drive fulfilment.</p>
+<p>An actionable queue does.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Operations needed TAT control</h2>
+<p>Service Guarantee was about accountability.</p>
+<p>If provider confirmation is delayed, someone must know.<br>
+If the customer has not been updated, someone must act.<br>
+If an appointment is at risk, it must move into an escalation path.</p>
+<p>Without TAT-based escalation, broken journeys remain invisible until the customer complains.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>The product insight</h2>
+<p>The easy way to define the project would have been:</p>
+<blockquote class="cg-editorial-quote">
+  <p>&ldquo;Build SFDC case management for lab and doctor appointments.&rdquo;</p>
+</blockquote>
+<p>But that would have missed the real point.</p>
+<p>The deeper product insight was:</p>
+<blockquote class="cg-editorial-quote">
+  <p>Customers do not buy a booking. They trust BFHL to make the service happen.</p>
+</blockquote>
+<p>That insight changed the product framing.</p>
+<p>The project became less about appointment management and more about fulfilment assurance.</p>
+<p>The design question became:</p>
+<blockquote class="cg-editorial-quote">
+  <p>How do we make sure every lab test or doctor appointment request is tracked, confirmed, communicated, escalated, recovered, and closed through a controlled service workflow?</p>
+</blockquote>
+<p>This is what made the project a Service Guarantee initiative, not just a case-management project.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What I shaped</h2>
+<p>I led the full Service Guarantee initiative as Lead Product Manager in 2022.</p>
+<p>The project covered:</p>
+<ul>
+  <li>lab test booking fulfilment,</li>
+  <li>doctor appointment fulfilment,</li>
+  <li>SFDC case management,</li>
+  <li>HRx-SFDC integration,</li>
+  <li>app-facing status visibility,</li>
+  <li>provider confirmation workflow,</li>
+  <li>customer communication automation,</li>
+  <li>WhatsApp/SMS/voice-blast triggers,</li>
+  <li>TAT-based escalation,</li>
+  <li>booking recovery flows.</li>
+</ul>
+<p>I worked with junior PMs to create the user stories, action plan, flows, integration requirements, communication triggers, and delivery requirements.</p>
+<p>The complete Service Guarantee flow went live.</p>
+<p>ProviderRx was evaluated as a separate provider-side track but was deprioritized. The core Service Guarantee flow did not depend on ProviderRx going live.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 1: Converting bookings into trackable cases</h2>
+<p>The first requirement was simple but foundational:</p>
+<blockquote class="cg-editorial-quote">
+  <p>Every relevant booking needed to become an operationally trackable case.</p>
+</blockquote>
+<p>If a lab test or doctor appointment existed only as a booking record but did not enter the fulfilment workflow, operations could not own it.</p>
+<p>The system had to create SFDC cases from booking events and carry enough information for agents to act.</p>
+<p>This included:</p>
+<ul>
+  <li>customer details,</li>
+  <li>appointment details,</li>
+  <li>provider details,</li>
+  <li>appointment date and time,</li>
+  <li>service type,</li>
+  <li>case status,</li>
+  <li>fulfilment stage,</li>
+  <li>action ownership.</li>
+</ul>
+<p>This created the operating layer for Service Guarantee.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 2: HRx-SFDC integration</h2>
+<p>HRx and SFDC had to stay aligned.</p>
+<p>HRx carried the booking journey.<br>
+SFDC carried the fulfilment case workflow.</p>
+<p>If the two systems showed different states, agents and customers would lose trust.</p>
+<p>The integration had to support:</p>
+<ul>
+  <li>booking data flowing into SFDC,</li>
+  <li>case status updates flowing back,</li>
+  <li>app-facing status visibility,</li>
+  <li>fulfilment-stage tracking,</li>
+  <li>case closure logic.</li>
+</ul>
+<p>This was important because the customer should not have to call support to know what is happening. The app itself needed to reflect the service state.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 3: Provider confirmation workflow</h2>
+<p>Provider confirmation was the most important operational moment in the journey.</p>
+<p>Until the provider confirmed, the service was not guaranteed.</p>
+<p>The workflow had to handle multiple provider outcomes.</p>
+<h3 style="margin-top:16px;">If provider accepted</h3>
+<p>The case moved toward appointment confirmation and the customer was updated.</p>
+<h3 style="margin-top:16px;">If provider rejected</h3>
+<p>The system triggered a recovery path, including customer communication and reschedule/callback options.</p>
+<h3 style="margin-top:16px;">If provider suggested a new slot</h3>
+<p>The customer needed to be contacted or routed into a reschedule flow.</p>
+<h3 style="margin-top:16px;">If provider did not respond</h3>
+<p>The case needed automated nudges, voice-blast escalation, and manual agent intervention.</p>
+<p>This turned provider response into a structured workflow instead of a manual follow-up activity.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 4: Agent queues and operational work buckets</h2>
+<p>Agents needed cases organized by action.</p>
+<p>The system needed to help them answer:</p>
+<blockquote class="cg-editorial-quote">
+  <p>What should I work on right now?</p>
+</blockquote>
+<p>The fulfilment queues included states such as:</p>
+<ul>
+  <li>new cases,</li>
+  <li>new cases requiring calling,</li>
+  <li>cases being processed by agent,</li>
+  <li>provider requires calling,</li>
+  <li>declined by provider,</li>
+  <li>waiting for customer rescheduling,</li>
+  <li>no response from provider,</li>
+  <li>confirmed by provider,</li>
+  <li>confirmed by both customer and provider,</li>
+  <li>appointment completed,</li>
+  <li>case closed.</li>
+</ul>
+<p>This transformed agent work from manual tracking to state-based fulfilment operations.</p>
+<p>The product goal was to make the next action obvious.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 5: Customer communication automation</h2>
+<p>Service Guarantee needed proactive communication.</p>
+<p>The customer should not be left guessing.</p>
+<p>Communication automation went live through:</p>
+<ul>
+  <li>WhatsApp,</li>
+  <li>SMS,</li>
+  <li>voice blast.</li>
+</ul>
+<p>The communication journey covered moments such as:</p>
+<ul>
+  <li>booking request received,</li>
+  <li>provider confirmation,</li>
+  <li>appointment rejection,</li>
+  <li>reschedule requirement,</li>
+  <li>reminders before appointment,</li>
+  <li>post-appointment follow-up,</li>
+  <li>report/status closure.</li>
+</ul>
+<p>This reduced customer uncertainty and helped prevent avoidable complaints.</p>
+<p>The communication layer was not just a notification feature. It was part of the service promise.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 6: App-facing status visibility</h2>
+<p>One of the most important customer-facing capabilities was status visibility.</p>
+<p>Customers needed to see where their request stood.</p>
+<p>The app-facing status experience helped communicate whether the appointment was initiated, pending confirmation, confirmed, completed, or closed.</p>
+<p>This mattered because transparency reduces anxiety.</p>
+<p>Even if a case is still pending, the customer experience is better when the system clearly shows the status instead of forcing the customer to call support.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 7: TAT-based escalation</h2>
+<p>A guarantee is meaningless without time control.</p>
+<p>The system needed defined TATs and escalation triggers.</p>
+<p>If provider response did not come within the expected window, the system had to move the case into an escalation path.</p>
+<p>This included:</p>
+<ul>
+  <li>automated reminders,</li>
+  <li>voice blast,</li>
+  <li>agent queue movement,</li>
+  <li>manual calling,</li>
+  <li>unresolved case tracking,</li>
+  <li>escalation visibility.</li>
+</ul>
+<p>The goal was to catch fulfilment failures before they became customer complaints.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 8: Recovery flows</h2>
+<p>Real-world service journeys are rarely perfect.</p>
+<p>Providers reject.<br>
+Customers miss calls.<br>
+Slots become unavailable.<br>
+Appointments need to be rescheduled.<br>
+Cases require manual intervention.</p>
+<p>So the product needed recovery flows, not only happy paths.</p>
+<p>Recovery scenarios included:</p>
+<ul>
+  <li>provider rejection,</li>
+  <li>provider no-response,</li>
+  <li>alternate slot suggestion,</li>
+  <li>customer rescheduling,</li>
+  <li>cancellation,</li>
+  <li>callback request,</li>
+  <li>manual fulfilment support.</li>
+</ul>
+<p>This was a key product principle:</p>
+<blockquote class="cg-editorial-quote">
+  <p>A service workflow is only as strong as its exception handling.</p>
+</blockquote>
+</section>
+
+<section class="cg-article-section">
+<h2>How the workflow changed</h2>
+<p>Before Service Guarantee, the journey looked closer to this:</p>
+<blockquote class="cg-editorial-quote">
+  <p>Customer books service &rarr; provider confirmation happens manually &rarr; agent follows up if needed &rarr; customer receives inconsistent updates &rarr; unresolved cases become complaints.</p>
+</blockquote>
+<p>After Service Guarantee, the workflow moved toward:</p>
+<blockquote class="cg-editorial-quote">
+  <p>Customer books service &rarr; SFDC case created &rarr; provider confirmation tracked &rarr; customer updated automatically &rarr; no-response cases escalated &rarr; agent works from action queues &rarr; appointment completion tracked &rarr; case closed with better visibility.</p>
+</blockquote>
+<p>The biggest change was ownership.</p>
+<p>The old model relied on people remembering to follow up.<br>
+The new model made the system responsible for surfacing what needed follow-up.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What made this hard</h2>
+<p>This project was hard because it sat between product, operations, provider behaviour, and customer trust.</p>
+<h3 style="margin-top:16px;">Multiple actors had to stay aligned</h3>
+<p>Customers, providers, agents, HRx, SFDC, app/web, and communication systems all had to reflect the correct journey.</p>
+<h3 style="margin-top:16px;">Provider behaviour was unpredictable</h3>
+<p>Providers could accept, reject, reschedule, delay, or not respond. The product had to handle all of these outcomes.</p>
+<h3 style="margin-top:16px;">Communication timing mattered</h3>
+<p>Too little communication created anxiety.<br>
+Too much communication created noise.<br>
+Wrong communication created confusion.</p>
+<h3 style="margin-top:16px;">Fulfilment could not be measured by case creation</h3>
+<p>A case being created did not mean the service happened.</p>
+<p>That is why Fulfilment Rate became the primary success metric.</p>
+<h3 style="margin-top:16px;">The workflow needed operational discipline</h3>
+<p>TATs, queues, escalation, and case closure had to be defined clearly. Otherwise, the system would simply digitize the old manual process.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What was achieved</h2>
+<p>The complete Service Guarantee flow went live.</p>
+<p>The delivered scope included:</p>
+<ul>
+  <li>lab test fulfilment flow,</li>
+  <li>doctor appointment fulfilment flow,</li>
+  <li>SFDC case-management workflow,</li>
+  <li>HRx-SFDC integration,</li>
+  <li>app-facing status visibility,</li>
+  <li>provider confirmation workflow,</li>
+  <li>WhatsApp communication,</li>
+  <li>SMS communication,</li>
+  <li>voice-blast automation,</li>
+  <li>TAT/SLA-based escalation,</li>
+  <li>booking recovery flows.</li>
+</ul>
+<p>The primary metric was <strong>Fulfilment Rate</strong>.</p>
+<p>Other secondary metrics included:</p>
+<ul>
+  <li>provider confirmation TAT,</li>
+  <li>appointment completion,</li>
+  <li>customer complaints,</li>
+  <li>provider response,</li>
+  <li>SLA adherence,</li>
+  <li>reschedule/rejection handling.</li>
+</ul>
+<p>Exact before/after numbers are not available, so the honest impact statement is:</p>
+<blockquote class="cg-editorial-quote">
+  <p>Customer complaints reduced significantly after rollout.</p>
+</blockquote>
+<p>The business objectives were:</p>
+<ul>
+  <li>improve customer trust,</li>
+  <li>improve provider accountability,</li>
+  <li>reduce broken fulfilment journeys,</li>
+  <li>create a more reliable service experience.</li>
+</ul>
+</section>
+
+<section class="cg-article-section">
+<h2>Why this mattered for BFHL</h2>
+<p>Service Guarantee strengthened BFHL&rsquo;s healthcare service promise.</p>
+<p>A health platform cannot build trust only by allowing customers to book services. It must also take responsibility for fulfilment.</p>
+<p>This project helped BFHL move from: </p>
+<blockquote class="cg-editorial-quote">
+  <p>booking-led healthcare access</p>
+</blockquote>
+<p>to:</p>
+<blockquote class="cg-editorial-quote">
+  <p>fulfilment-led healthcare assurance.</p>
+</blockquote>
+<p>That shift matters because customers remember whether the service happened smoothly, not whether the backend case was created successfully.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What this says about my product approach</h2>
+<p>This project reflects my belief that product management is not only about screens and features.</p>
+<p>Sometimes the real product is the operating model.</p>
+<p>In Service Guarantee, the most important work was not designing one page or one button. It was defining how a booking becomes a promise, how that promise is tracked, how providers are held accountable, how customers are kept informed, how agents know what to do, and how failures are recovered.</p>
+<p>The product principle was:</p>
+<blockquote class="cg-editorial-quote">
+  <p>Do not stop at request creation. Design until the customer outcome is actually fulfilled.</p>
+</blockquote>
+<p>That principle shaped the entire Service Guarantee project.</p>
 </section>
 <p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/product-operating-model/">Product Operating Model</a> · <a href="/insights/">Insights</a></p>
 
