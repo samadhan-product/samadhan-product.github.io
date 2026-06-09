@@ -113,7 +113,7 @@ def build_landing_pages(shared_faqs, shared_geo) -> list[dict]:
 <h2>Typical engagements</h2>
 <p>Agent PRDs, tool permission design, eval suites for multi-step runs, cost models per workflow, and production observability requirements.</p>
 """ + links_block([
-            ("Network claims case study", "/case-studies/network-claims-automation/"),
+            ("Pre-auth case study", "/case-studies/ai-led-pre-auth-automation/"),
             ("AI agents service page", "/services/ai-agents-workflow-automation/"),
             ("Insights", "/insights/"),
         ]),
@@ -173,17 +173,7 @@ def build_landing_pages(shared_faqs, shared_geo) -> list[dict]:
 <div class="cg-case-study-cards">
 <a class="cg-card glow is-link" href="/case-studies/ai-led-pre-auth-automation/"><h3>AI-Led Pre-Authorisation Automation</h3><p>Insurance pre-authorisation turnaround, queue strategy, and allowed amount sequencing.</p></a>
 <a class="cg-card glow is-link" href="/case-studies/ai-powered-cognitive-decision-engine/"><h3>AI-Powered Cognitive Decision Engine</h3><p>Document understanding, automated limit checks, and decision support UI (Enigma).</p></a>
-<a class="cg-card glow is-link" href="/case-studies/network-claims-automation/"><h3>AI-Led Network Claims Automation</h3><p>Automated allocation, tariff mapping validation, and audit controls.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/bfhl-opd-reimbursement-claims/"><h3>OPD Reimbursement Claims Processing</h3><p>Salesforce claims workflow discovery, Customer 360, and 30% efficiency gains.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/bfhl-service-guarantee/"><h3>BFHL Service Guarantee</h3><p>Booking fulfilment assurance, SFDC-HRx integration, and automated recovery.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/bfhl-healthpay-recon-automation/"><h3>HealthPay Recon & Settlement Automation</h3><p>API-led reconciliation, T+1 payouts via RazorpayX, and maker-checker controls.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/bfhl-partner-center-revamp/"><h3>Partner Center Revamp</h3><p>Revamping Provider Portal into unified self-serve operating platform for partners.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/bfhl-healthpay-qr-transition/"><h3>QR Transition & Payment Migration</h3><p>Controlled payment infrastructure migration to BajajPay QR and provider onboarding.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/bfhl-wellness-cohort/"><h3>Wellness Cohort Cost Optimization</h3><p>In-house dietician platform build, saving INR 95 lakhs, and gamified step trackers.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/highradius-autonomous-collections/"><h3>HighRadius Autonomous Receivables</h3><p>AI worklist prioritization, dunning outreach scale, AR inbox classification, and AP portal sync.</p></a>
-<a class="cg-card glow is-link" href="/case-studies/creanovation-edtech-saas/"><h3>Creanovation EdTech SaaS Platforms</h3><p>Digitizing admissions, student engagement, payments, and workflow automation for 800+ institutions.</p></a>
 <a class="cg-card glow is-link" href="/case-studies/ai-learning-platform-for-schools/"><h3>AI Learning Platform for Schools</h3><p>Structured AI education and LMS integration for institutional learning.</p></a>
-
 <a class="cg-card glow is-link" href="/case-studies/ai-product-practice-operating-model/"><h3>AI Product Practice Operating Model</h3><p>Intake templates, evals, and portfolio governance for multiple AI initiatives.</p></a>
 </div>
 </section>""",

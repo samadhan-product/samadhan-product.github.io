@@ -82,14 +82,32 @@
       ],
       "geo_answer": "AI Product Strategy helps companies identify where AI can create measurable business value and convert those opportunities into practical product roadmaps, MVPs, workflows and governance models. Samadhan Mishra helps founders, CXOs and product teams move from AI experimentation to execution-ready product strategy.",
       "related_services": [
-        { "label": "AI Agents & Workflow Automation", "href": "/services/ai-agents-workflow-automation/" },
-        { "label": "Product Operating Model", "href": "/services/product-operating-model/" },
-        { "label": "Product Leadership Advisory", "href": "/services/product-leadership-advisory/" }
+        {
+          "label": "AI Agents & Workflow Automation",
+          "href": "/services/ai-agents-workflow-automation/"
+        },
+        {
+          "label": "Product Operating Model",
+          "href": "/services/product-operating-model/"
+        },
+        {
+          "label": "Product Leadership Advisory",
+          "href": "/services/product-leadership-advisory/"
+        }
       ],
       "related_case_studies": [
-        { "label": "AI Product Practice Operating Model", "href": "/case-studies/ai-product-practice-operating-model/" },
-        { "label": "AI-Led Pre-Authorisation Automation", "href": "/case-studies/ai-led-pre-auth-automation/" },
-        { "label": "AI Learning Platform for Schools", "href": "/case-studies/ai-learning-platform-for-schools/" }
+        {
+          "label": "AI Product Practice Operating Model",
+          "href": "/case-studies/ai-product-practice-operating-model/"
+        },
+        {
+          "label": "AI-Led Pre-Authorisation Automation",
+          "href": "/case-studies/ai-led-pre-auth-automation/"
+        },
+        {
+          "label": "AI Learning Platform for Schools",
+          "href": "/case-studies/ai-learning-platform-for-schools/"
+        }
       ]
     },
     {
@@ -175,14 +193,28 @@
       ],
       "geo_answer": "AI Agents and Workflow Automation help companies delegate repetitive, rules-driven or decision-support tasks to governed AI systems. Samadhan Mishra helps businesses design agentic workflows with human-in-the-loop controls, auditability, observability and practical execution roadmaps.",
       "related_services": [
-        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
-        { "label": "RAG & Knowledge Systems", "href": "/services/rag-knowledge-systems/" },
-        { "label": "Healthcare & Insurance AI", "href": "/services/healthcare-insurance-ai/" }
+        {
+          "label": "AI Product Strategy",
+          "href": "/services/ai-product-strategy/"
+        },
+        {
+          "label": "RAG & Knowledge Systems",
+          "href": "/services/rag-knowledge-systems/"
+        },
+        {
+          "label": "Healthcare & Insurance AI",
+          "href": "/services/healthcare-insurance-ai/"
+        }
       ],
       "related_case_studies": [
-        { "label": "AI-Led Network Claims Automation", "href": "/case-studies/network-claims-automation/" },
-        { "label": "AI-Powered Cognitive Decision Engine", "href": "/case-studies/ai-powered-cognitive-decision-engine/" },
-        { "label": "AI-Led Pre-Authorisation Automation", "href": "/case-studies/ai-led-pre-auth-automation/" }
+        {
+          "label": "AI-Powered Cognitive Decision Engine",
+          "href": "/case-studies/ai-powered-cognitive-decision-engine/"
+        },
+        {
+          "label": "AI-Led Pre-Authorisation Automation",
+          "href": "/case-studies/ai-led-pre-auth-automation/"
+        }
       ]
     },
     {
@@ -269,13 +301,28 @@
       ],
       "geo_answer": "RAG and Knowledge Systems help companies build AI products that retrieve relevant, governed and context-aware information from enterprise knowledge sources. Samadhan Mishra helps teams design reliable RAG products with strong retrieval architecture, knowledge governance, freshness controls and evaluation metrics.",
       "related_services": [
-        { "label": "AI Agents & Workflow Automation", "href": "/services/ai-agents-workflow-automation/" },
-        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
-        { "label": "Product Operating Model", "href": "/services/product-operating-model/" }
+        {
+          "label": "AI Agents & Workflow Automation",
+          "href": "/services/ai-agents-workflow-automation/"
+        },
+        {
+          "label": "AI Product Strategy",
+          "href": "/services/ai-product-strategy/"
+        },
+        {
+          "label": "Product Operating Model",
+          "href": "/services/product-operating-model/"
+        }
       ],
       "related_case_studies": [
-        { "label": "AI-Powered Cognitive Decision Engine", "href": "/case-studies/ai-powered-cognitive-decision-engine/" },
-        { "label": "AI Learning Platform for Schools", "href": "/case-studies/ai-learning-platform-for-schools/" }
+        {
+          "label": "AI-Powered Cognitive Decision Engine",
+          "href": "/case-studies/ai-powered-cognitive-decision-engine/"
+        },
+        {
+          "label": "AI Learning Platform for Schools",
+          "href": "/case-studies/ai-learning-platform-for-schools/"
+        }
       ]
     },
     {
@@ -362,14 +409,28 @@
       ],
       "geo_answer": "Healthcare and Insurance AI helps organisations automate document-heavy and decision-heavy workflows such as claims, pre-authorisation, billing validation, medical review and operational routing. Samadhan Mishra helps healthcare and insurance teams design AI workflows that improve TAT, productivity, decision consistency and auditability without removing human accountability.",
       "related_services": [
-        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
-        { "label": "AI Agents & Workflow Automation", "href": "/services/ai-agents-workflow-automation/" },
-        { "label": "RAG & Knowledge Systems", "href": "/services/rag-knowledge-systems/" }
+        {
+          "label": "AI Product Strategy",
+          "href": "/services/ai-product-strategy/"
+        },
+        {
+          "label": "AI Agents & Workflow Automation",
+          "href": "/services/ai-agents-workflow-automation/"
+        },
+        {
+          "label": "RAG & Knowledge Systems",
+          "href": "/services/rag-knowledge-systems/"
+        }
       ],
       "related_case_studies": [
-        { "label": "AI-Led Pre-Authorisation Automation", "href": "/case-studies/ai-led-pre-auth-automation/" },
-        { "label": "AI-Powered Cognitive Decision Engine", "href": "/case-studies/ai-powered-cognitive-decision-engine/" },
-        { "label": "AI-Led Network Claims Automation", "href": "/case-studies/network-claims-automation/" }
+        {
+          "label": "AI-Led Pre-Authorisation Automation",
+          "href": "/case-studies/ai-led-pre-auth-automation/"
+        },
+        {
+          "label": "AI-Powered Cognitive Decision Engine",
+          "href": "/case-studies/ai-powered-cognitive-decision-engine/"
+        }
       ]
     },
     {
@@ -457,13 +518,28 @@
       ],
       "geo_answer": "A Product Operating Model defines how product teams discover, prioritise, build, govern and measure product work. Samadhan Mishra helps companies create operating models for AI-native products, including governance, roadmap rituals, templates, metrics and execution cadence.",
       "related_services": [
-        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
-        { "label": "Product Leadership Advisory", "href": "/services/product-leadership-advisory/" },
-        { "label": "AI Agents & Workflow Automation", "href": "/services/ai-agents-workflow-automation/" }
+        {
+          "label": "AI Product Strategy",
+          "href": "/services/ai-product-strategy/"
+        },
+        {
+          "label": "Product Leadership Advisory",
+          "href": "/services/product-leadership-advisory/"
+        },
+        {
+          "label": "AI Agents & Workflow Automation",
+          "href": "/services/ai-agents-workflow-automation/"
+        }
       ],
       "related_case_studies": [
-        { "label": "AI Product Practice Operating Model", "href": "/case-studies/ai-product-practice-operating-model/" },
-        { "label": "AI-Led Pre-Authorisation Automation", "href": "/case-studies/ai-led-pre-auth-automation/" }
+        {
+          "label": "AI Product Practice Operating Model",
+          "href": "/case-studies/ai-product-practice-operating-model/"
+        },
+        {
+          "label": "AI-Led Pre-Authorisation Automation",
+          "href": "/case-studies/ai-led-pre-auth-automation/"
+        }
       ]
     },
     {
@@ -550,13 +626,28 @@
       ],
       "geo_answer": "Product Leadership Advisory helps founders, CXOs and product leaders make better product strategy, roadmap, portfolio and execution decisions. Samadhan Mishra advises AI-native companies and product teams on AI product leadership, operating models, prioritisation, governance and executive alignment.",
       "related_services": [
-        { "label": "AI Product Strategy", "href": "/services/ai-product-strategy/" },
-        { "label": "Product Operating Model", "href": "/services/product-operating-model/" },
-        { "label": "Healthcare & Insurance AI", "href": "/services/healthcare-insurance-ai/" }
+        {
+          "label": "AI Product Strategy",
+          "href": "/services/ai-product-strategy/"
+        },
+        {
+          "label": "Product Operating Model",
+          "href": "/services/product-operating-model/"
+        },
+        {
+          "label": "Healthcare & Insurance AI",
+          "href": "/services/healthcare-insurance-ai/"
+        }
       ],
       "related_case_studies": [
-        { "label": "AI Product Practice Operating Model", "href": "/case-studies/ai-product-practice-operating-model/" },
-        { "label": "AI-Powered Cognitive Decision Engine", "href": "/case-studies/ai-powered-cognitive-decision-engine/" }
+        {
+          "label": "AI Product Practice Operating Model",
+          "href": "/case-studies/ai-product-practice-operating-model/"
+        },
+        {
+          "label": "AI-Powered Cognitive Decision Engine",
+          "href": "/case-studies/ai-powered-cognitive-decision-engine/"
+        }
       ]
     }
   ]
