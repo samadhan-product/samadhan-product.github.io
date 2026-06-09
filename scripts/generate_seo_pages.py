@@ -524,7 +524,8 @@ CASE_STUDY_METRICS = {
     "ai-learning-platform-for-schools": {
         "role": "Lead Product Manager",
         "domain": "EdTech AI",
-        "product": "AI Learning Platform for Schools",
+        "product": "Personalized Learning Suite",
+        "focus": "Adaptive Exercises & Curriculum",
         "outcomes": [
             {"val": "Adaptive", "lbl": "Personalized Exercises"},
             {"val": "Multi-Curricula", "lbl": "Automatic Content Maps"},
@@ -534,7 +535,8 @@ CASE_STUDY_METRICS = {
     "ai-product-practice-operating-model": {
         "role": "Consultant / Practice Lead",
         "domain": "Product Practice Operating Model",
-        "product": "AI Practice Center of Excellence",
+        "product": "Practice COE",
+        "focus": "PM Operating Playbooks & Evals",
         "outcomes": [
             {"val": "Standardized", "lbl": "PM Operating Playbooks"},
             {"val": "Eval Sprints", "lbl": "Systematic Evals"},
@@ -569,7 +571,14 @@ def case_study_page(cs: dict) -> str:
     # Global conversion: Translate all standard blockquotes to editorial quotes
     body = body.replace("<blockquote>", '<blockquote class="cg-editorial-quote">')
 
-    # Parse headings and wrap chapters
+    # Convert standard callouts to premium labels
+    body = body.replace('class="cg-callout insight"', 'class="cs-callout insight"')
+    body = body.replace('class="cg-callout product"', 'class="cs-callout judgment"')
+    body = body.replace('class="cg-callout warning"', 'class="cs-callout principle"')
+    
+    body = body.replace('class="cg-callout-title"', 'class="cs-callout-header"')
+
+    # Inject premium headers and custom tags for sections
     h2_pattern = re.compile(r'<h2>(.*?)</h2>')
     headers = h2_pattern.findall(body)
     
@@ -592,12 +601,12 @@ def case_study_page(cs: dict) -> str:
             clean_text = re.sub(r'<.*?>', '', h_text).strip()
             h_id = re.sub(r'[^a-z0-9]+', '-', clean_text.lower()).strip('-')
             
-            chapter_header = f'<span class="cs-chapter-num">Chapter {chapter_num:02d}</span>\n<h2 id="{h_id}">{h_text}</h2>'
-            s_modified = h2_pattern.sub(chapter_header, s, 1)
-            new_sections.append(f'<section class="cg-article-section cs-chapter">\n{s_modified.strip()}')
+            section_label = f'<span class="cs-section-label">{chapter_num:02d}. {clean_text}</span>\n<h2 id="{h_id}">{h_text}</h2>'
+            s_modified = h2_pattern.sub(section_label, s, 1)
+            new_sections.append(f'<section class="cg-article-section">\n{s_modified.strip()}')
             chapter_num += 1
         else:
-            new_sections.append(f'<section class="cg-article-section cs-chapter">\n{s.strip()}')
+            new_sections.append(f'<section class="cg-article-section">\n{s.strip()}')
             
     body_formatted = "".join(new_sections)
 
@@ -612,6 +621,7 @@ def case_study_page(cs: dict) -> str:
         "role": "AI Product Leader",
         "domain": "Product Strategy & Operations",
         "product": "Product Consulting Project",
+        "focus": "Product Advisory",
         "outcomes": [
             {"val": "Delivered", "lbl": "Strategy Framework"},
             {"val": "Audit-Ready", "lbl": "Process SOPs"},
@@ -622,13 +632,14 @@ def case_study_page(cs: dict) -> str:
     role = meta["role"]
     domain = meta["domain"]
     product = meta["product"]
+    focus = meta.get("focus", "AI Product Strategy")
     
     outcome_cards_html = ""
     for o in meta["outcomes"]:
         outcome_cards_html += f"""
-        <div class="cs-hero-outcome-card">
-          <span class="cs-hero-outcome-val">{esc(o["val"])}</span>
-          <span class="cs-hero-outcome-lbl">{esc(o["lbl"])}</span>
+        <div class="cs-snapshot-card">
+          <span class="cs-snapshot-val">{esc(o["val"])}</span>
+          <span class="cs-snapshot-lbl">{esc(o["lbl"])}</span>
         </div>
         """
 
@@ -689,33 +700,26 @@ def case_study_page(cs: dict) -> str:
 
   <header class="cs-hero">
     <div class="cs-hero-container">
-      <div class="cs-hero-chips">
-        <span class="cs-hero-chip">{esc(role)}</span>
-        <span class="cs-hero-chip">{esc(domain)}</span>
-        <span class="cs-hero-chip">{esc(product)}</span>
-      </div>
+      <span class="cs-hero-eyebrow">Product Case Study</span>
       <h1 class="cs-hero-title">{esc(h1)}</h1>
       <p class="cs-hero-desc">{esc(description)}</p>
-      <div class="cs-hero-outcomes">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">Role: {esc(role)}</span>
+        <span class="cs-hero-chip">Domain: {esc(domain)}</span>
+        <span class="cs-hero-chip">Product: {esc(product)}</span>
+        <span class="cs-hero-chip">Focus: {esc(focus)}</span>
+      </div>
+      <div class="cs-snapshot-row">
         {outcome_cards_html}
       </div>
     </div>
   </header>
 
   <main class="cs-layout">
-    <aside class="cs-toc-sidebar">
-      <nav aria-label="Table of Contents">
-        <div class="cs-toc-title">On this page</div>
-        <ul class="cs-toc-list">
-          {toc_items_html}
-        </ul>
-      </nav>
-    </aside>
-
     <div class="cs-content-area">
       <div class="cs-mobile-toc" id="mobile-toc">
         <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
-          <span>Table of Contents</span>
+          <span>Jump to section</span>
         </button>
         <div class="cs-mobile-toc-content">
           <ul class="cs-toc-list">
@@ -726,6 +730,15 @@ def case_study_page(cs: dict) -> str:
 
       {body_formatted}
     </div>
+
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          {toc_items_html}
+        </ul>
+      </nav>
+    </aside>
   </main>
 
 {FOOTER}
@@ -751,7 +764,7 @@ def case_study_page(cs: dict) -> str:
       }});
     }}, {{ rootMargin: '-100px 0px -70% 0px' }});
 
-    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {{
+    document.querySelectorAll('.cs-content-area h2[id]').forEach(h2 => {{
       observer.observe(h2);
     }});
   }});
