@@ -115,6 +115,10 @@
         {
           "label": "Turning a Provider Portal into a Partner Operating Center",
           "href": "/case-studies/bfhl-partner-center-revamp/"
+        },
+        {
+          "label": "Automating HealthPay Reconciliation So Payouts Could Move at Business Speed",
+          "href": "/case-studies/bfhl-healthpay-recon-automation/"
         }
       ]
     },
@@ -438,6 +442,14 @@
         {
           "label": "AI-Powered Cognitive Decision Engine",
           "href": "/case-studies/ai-powered-cognitive-decision-engine/"
+        },
+        {
+          "label": "Automating HealthPay Reconciliation So Payouts Could Move at Business Speed",
+          "href": "/case-studies/bfhl-healthpay-recon-automation/"
+        },
+        {
+          "label": "Turning Bookings into Fulfilment Assurance",
+          "href": "/case-studies/bfhl-service-guarantee/"
         }
       ]
     },
@@ -551,6 +563,10 @@
         {
           "label": "Turning a Provider Portal into a Partner Operating Center",
           "href": "/case-studies/bfhl-partner-center-revamp/"
+        },
+        {
+          "label": "Turning Bookings into Fulfilment Assurance",
+          "href": "/case-studies/bfhl-service-guarantee/"
         }
       ]
     },

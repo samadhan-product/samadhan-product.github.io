@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XWSM8RBV2S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XWSM8RBV2S');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="How we automated pay-in and payout reconciliation across multiple systems to enable reliable T+1 payouts for providers." />
+  <title>Automating HealthPay Reconciliation So Payouts Could Move at Business Speed | Case Study — Samadhan Mishra | Case Study — Samadhan Mishra</title>
+  <link rel="canonical" href="https://samadhanmishra.com/case-studies/bfhl-healthpay-recon-automation/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Automating HealthPay Reconciliation So Payouts Could Move at Business Speed | Case Study — Samadhan Mishra | Case Study — Samadhan Mishra" />
+  <meta property="og:description" content="How we automated pay-in and payout reconciliation across multiple systems to enable reliable T+1 payouts for providers." />
+  <meta property="og:url" content="https://samadhanmishra.com/case-studies/bfhl-healthpay-recon-automation/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Automating HealthPay Reconciliation So Payouts Could Move at Business Speed | Case Study — Samadhan Mishra | Case Study — Samadhan Mishra" />
+  <meta name="twitter:description" content="How we automated pay-in and payout reconciliation across multiple systems to enable reliable T+1 payouts for providers." />
+  <meta name="twitter:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://samadhanmishra.com/case-studies/" },
+    { "@type": "ListItem", "position": 3, "name": "HealthPay Recon Automation", "item": "https://samadhanmishra.com/case-studies/bfhl-healthpay-recon-automation/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Samadhan Mishra",
+      "url": "https://samadhanmishra.com/",
+      "jobTitle": [
+        "AI Product Leader",
+        "AI Product Management Consultant",
+        "Product Head",
+        "Product Strategy Consultant"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pune",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/samadhan-mishra/"
+      ],
+      "knowsAbout": [
+        "AI Product Management",
+        "AI Agents",
+        "Generative AI",
+        "RAG",
+        "MCP",
+        "Healthcare Automation",
+        "Insurance TPA",
+        "Product Strategy",
+        "Product Leadership",
+        "Workflow Automation"
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Automating HealthPay Reconciliation So Payouts Could Move at Business Speed",
+      "description": "How we automated pay-in and payout reconciliation across multiple systems to enable reliable T+1 payouts for providers.",
+      "author": {
+        "@type": "Person",
+        "name": "Samadhan Mishra"
+      },
+      "url": "https://samadhanmishra.com/case-studies/bfhl-healthpay-recon-automation/"
+    }
+  ]
+}
+</script>
+
+</head>
+<body class="cg-blog-theme portal-page" data-page="case-studies">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<header class="site-nav" data-testid="top-nav">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <span class="site-logo-box">SM</span>
+      <span class="site-brand-text">/ Samadhan</span>
+    </a>
+    <nav class="site-menu" aria-label="Primary">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="site-nav-meta">
+      <div class="site-time" aria-live="polite">
+        <span data-nav-clock></span>
+      </div>
+      <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="theme-toggle-icon">◑</span>
+      </button>
+      <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+        <span class="site-nav-toggle-bar"></span>
+        <span class="site-nav-toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+  <div class="site-nav-mobile" data-nav-mobile hidden>
+    <nav aria-label="Mobile">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+<a href="https://samadhanmishra.com/">Home</a>
+<span class="sep">→</span>
+<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
+<span class="sep">→</span>
+<span class="current">HealthPay Recon Automation</span>
+</nav>
+
+  <header class="cg-hero cg-hero-compact">
+    <div class="cg-hero-content" style="max-width:800px;">
+      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
+      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Automating HealthPay Reconciliation So Payouts Could Move at Business Speed</h1>
+      <p class="cg-hero-subtitle">How we automated pay-in and payout reconciliation across multiple systems to enable reliable T+1 payouts for providers.</p>
+    </div>
+  </header>
+  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
+
+<section class="cg-article-section">
+<p>Payment systems look simple when a transaction succeeds.</p>
+<p>A customer pays.<br>
+A provider receives money.<br>
+The business moves on.</p>
+<p>But behind that simple moment sits a complicated financial chain: payment gateways, internal payment systems, benefit consumption, voucher usage, health coins, claims, settlement reports, bank credits, payout rails, provider accounts, failures, retries, reversals, and audit trails.</p>
+<p>In HealthPay, that complexity had become an operating problem.</p>
+<p>The business needed faster and more accurate settlement. Providers needed timely payouts. Finance needed control. Operations needed visibility. Product needed to make the entire flow scalable.</p>
+<p>That was the core of the HealthPay Recon &amp; Settlement Automation project.</p>
+<p>I led this project as Lead PM in 2023, immediately after Service Guarantee. The goal was to automate pay-in and payout reconciliation across HealthPay, including doctor and lab payouts, with RazorpayX as the final payout rail.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>The situation</h2>
+<p>HealthPay was not a simple payment collection product.</p>
+<p>A single transaction could involve multiple components:</p>
+<ul>
+  <li>customer-paid amount,</li>
+  <li>voucher discount,</li>
+  <li>HealthCoin usage,</li>
+  <li>claim benefit,</li>
+  <li>payment gateway settlement,</li>
+  <li>PG charges,</li>
+  <li>taxes,</li>
+  <li>provider payout,</li>
+  <li>lab payout,</li>
+  <li>doctor payout,</li>
+  <li>UTR,</li>
+  <li>refund or failure state.</li>
+</ul>
+<p>These components were distributed across multiple systems.</p>
+<p>PayU and RazorPay handled payment gateway flows.<br>
+PayRx stored HealthPay transaction data.<br>
+HRx and DRx carried booking, benefit, and transaction context.<br>
+Labs systems contributed appointment and fulfilment data.<br>
+Voucherify, HealthCoin, and Claims represented benefit usage.<br>
+RazorpayX acted as the payout rail for doctors and providers.<br>
+Finance needed final settlement visibility.</p>
+<p>The operating challenge was clear:</p>
+<blockquote>
+  <p>If each system holds only part of the truth, reconciliation becomes the process of rebuilding the truth every day.</p>
+</blockquote>
+<p>Before automation, this meant manual reconciliation effort, open mismatches, delayed visibility, payout dependency, and controllership risk.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What was actually broken</h2>
+<p>The obvious problem was reconciliation effort.</p>
+<p>But the deeper issue was that HealthPay&rsquo;s payment ecosystem had too many partial ledgers.</p>
+<p>Each source knew something, but no single source had the full picture.</p>
+<h3 style="margin-top:16px;">Payment gateways knew the cash payment</h3>
+<p>PayU or RazorPay knew whether a payment was captured, failed, settled, or refunded.</p>
+<p>But the gateway did not know the complete business context of the transaction.</p>
+<h3 style="margin-top:16px;">PayRx knew the HealthPay order</h3>
+<p>PayRx had the internal HealthPay transaction record.</p>
+<p>But it still had to match with gateway data, benefit consumption, settlement values, and payout status.</p>
+<h3 style="margin-top:16px;">DRx / HRx knew the appointment and benefit context</h3>
+<p>These systems carried booking and benefit context, such as voucher, HealthCoin, claim benefit, and net payable amount.</p>
+<p>But they were not the final settlement source.</p>
+<h3 style="margin-top:16px;">Voucherify, HealthCoin, and Claims had benefit-level truth</h3>
+<p>Each benefit system knew its own utilization.</p>
+<p>But final settlement required benefit values to reconcile with the order, provider payout, and net customer payment.</p>
+<h3 style="margin-top:16px;">Finance needed the money trail</h3>
+<p>Finance needed the gateway settlement, bank credit, service fee, taxes, net received amount, and provider payout to agree.</p>
+<p>This created multiple failure modes:</p>
+<ul>
+  <li>count mismatch,</li>
+  <li>amount mismatch,</li>
+  <li>missing transaction,</li>
+  <li>duplicate transaction,</li>
+  <li>partial match,</li>
+  <li>proposed match,</li>
+  <li>open item,</li>
+  <li>payout failure,</li>
+  <li>invalid bank/UPI detail,</li>
+  <li>delayed UTR,</li>
+  <li>manual correction,</li>
+  <li>unclear audit trail.</li>
+</ul>
+<p>The problem was not just operational effort.</p>
+<p>It was financial trust.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>The product insight</h2>
+<p>The obvious product answer would have been:</p>
+<blockquote>
+  <p>&ldquo;Build a reconciliation dashboard.&rdquo;</p>
+</blockquote>
+<p>But a dashboard alone would not solve the problem.</p>
+<p>A dashboard can show mismatch.<br>
+It cannot automatically create trust.</p>
+<p>The deeper insight was:</p>
+<blockquote>
+  <p>HealthPay needed a reconciliation operating system, not just a reporting screen.</p>
+</blockquote>
+<p>That meant the product had to support the complete lifecycle:</p>
+<ol>
+  <li>ingest raw data,</li>
+  <li>validate data quality,</li>
+  <li>match transactions across systems,</li>
+  <li>identify exceptions,</li>
+  <li>route exceptions to manual review,</li>
+  <li>allow controlled correction,</li>
+  <li>audit every change,</li>
+  <li>trigger payouts,</li>
+  <li>track payout status,</li>
+  <li>give finance and operations real-time visibility.</li>
+</ol>
+<p>The product had to move reconciliation from a manual exercise to a controlled system workflow.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What I shaped</h2>
+<p>As Lead PM, I owned the full HealthPay Recon &amp; Settlement Automation project.</p>
+<p>My ownership covered:</p>
+<ul>
+  <li>PRD,</li>
+  <li>user stories,</li>
+  <li>dashboard design,</li>
+  <li>matching logic,</li>
+  <li>raw data ingestion requirements,</li>
+  <li>manual upload fallback,</li>
+  <li>exception handling,</li>
+  <li>manual review flow,</li>
+  <li>audit log requirements,</li>
+  <li>maker-checker controls,</li>
+  <li>payout triggering,</li>
+  <li>operations review until stabilization.</li>
+</ul>
+<p>The project covered both pay-in and pay-out automation.</p>
+<p>It included doctor payouts and lab payouts.</p>
+<p>API ingestion went live for all sources, while manual upload was retained as fallback.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 1: Pay-in reconciliation</h2>
+<p>The pay-in side had to reconcile money collected from customers.</p>
+<p>Different payment scenarios required different logic.</p>
+<h3 style="margin-top:16px;">Full PG payment</h3>
+<p>For a normal full payment, the system had to match:</p>
+<ul>
+  <li>transaction count,</li>
+  <li>transaction amount,</li>
+  <li>payment gateway order ID,</li>
+  <li>PayRx transaction ID,</li>
+  <li>captured/success status.</li>
+</ul>
+<p>This was the cleanest case.</p>
+<h3 style="margin-top:16px;">Partial PG payment</h3>
+<p>Some payments were not fully paid by the customer.</p>
+<p>A customer could use a combination of:</p>
+<ul>
+  <li>voucher,</li>
+  <li>HealthCoin,</li>
+  <li>claim benefit,</li>
+  <li>net customer payment.</li>
+</ul>
+<p>In such cases, the product had to validate:</p>
+<blockquote>
+  <p>PayRx order amount = RazorPay amount + Voucher + HealthCoin + Claim benefit</p>
+</blockquote>
+<p>This was more complex because the payment gateway saw only the net paid amount, while the business transaction included non-cash benefit components.</p>
+<h3 style="margin-top:16px;">Benefit-only transaction</h3>
+<p>Some transactions could be completed using benefits without a full cash payment.</p>
+<p>In those cases, reconciliation needed to validate benefit utilization across DRx, HRx, Voucherify, HealthCoin, Claims, and PayRx.</p>
+<p>The system had to understand that payment value was not always equal to cash collected.</p>
+<p>That was one of the central complexities of HealthPay recon.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 2: Benefit reconciliation</h2>
+<p>Benefit reconciliation was critical because HealthPay transactions could include more than money.</p>
+<p>The system needed to reconcile:</p>
+<ul>
+  <li>voucher usage,</li>
+  <li>HealthCoin usage,</li>
+  <li>claim benefit,</li>
+  <li>net payable amount,</li>
+  <li>gross order amount,</li>
+  <li>transaction source,</li>
+  <li>customer identity,</li>
+  <li>provider context.</li>
+</ul>
+<p>This made HealthPay different from a simple payment gateway integration.</p>
+<p>The product had to reconcile both financial and non-financial instruments.</p>
+<p>Without this, provider payouts would either be delayed, incorrect, or manually adjusted.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 3: Settlement reconciliation</h2>
+<p>Settlement was where finance trust was established.</p>
+<p>The product had to validate the relationship between:</p>
+<ul>
+  <li>payment gateway settlement report,</li>
+  <li>service fee,</li>
+  <li>service tax,</li>
+  <li>net settlement amount,</li>
+  <li>bank credit,</li>
+  <li>PayRx transaction value,</li>
+  <li>DRx / HRx transaction value.</li>
+</ul>
+<p>The key question was:</p>
+<blockquote>
+  <p>Did the money that should have arrived actually arrive, after gateway charges and taxes?</p>
+</blockquote>
+<p>This required matching transaction value, settlement value, and bank credit.</p>
+<p>A mismatch here could not be treated casually. It had finance, audit, and provider-trust implications.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 4: Doctor and lab payout automation</h2>
+<p>The payout side was equally important.</p>
+<p>Providers do not care how complex the reconciliation is behind the scenes. They care about when they get paid and whether the amount is correct.</p>
+<p>The project covered both doctor and lab payouts.</p>
+<p>RazorpayX was used as the final payout rail.</p>
+<p>The payout design had to account for:</p>
+<ul>
+  <li>appointment booking value,</li>
+  <li>net amount received,</li>
+  <li>benefits applied,</li>
+  <li>PG charges,</li>
+  <li>provider payable amount,</li>
+  <li>payout trigger,</li>
+  <li>payout status,</li>
+  <li>UTR,</li>
+  <li>payout failure,</li>
+  <li>retry or manual action.</li>
+</ul>
+<p>The target was to move payouts reliably to <strong>T+1</strong>.</p>
+<p>That became one of the most important operational outcomes.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 5: Raw data ingestion and visibility</h2>
+<p>Automation cannot work on bad data.</p>
+<p>So the product first needed strong raw data ingestion and visibility.</p>
+<p>The system supported:</p>
+<ul>
+  <li>API ingestion from all sources,</li>
+  <li>manual upload as fallback,</li>
+  <li>raw data visibility,</li>
+  <li>source-wise data tables,</li>
+  <li>import date and time,</li>
+  <li>import method,</li>
+  <li>API response visibility for authorized users,</li>
+  <li>issue highlighting.</li>
+</ul>
+<p>This was important because operations and finance teams needed to trust the data before trusting automation.</p>
+<p>If a transaction did not match, users needed to know whether the issue came from the transaction itself, the source file, the API response, a missing value, or a manual correction.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 6: Matching engine</h2>
+<p>The matching engine was the heart of the product.</p>
+<p>It had to compare records across systems using defined identifiers and validation rules.</p>
+<p>The matching logic included:</p>
+<h3 style="margin-top:16px;">Transaction count check</h3>
+<p>The first level was count validation.</p>
+<p>If one system had extra transactions, the system had to identify:</p>
+<ul>
+  <li>which transaction was extra,</li>
+  <li>which source it came from,</li>
+  <li>whether it should move to manual review.</li>
+</ul>
+<h3 style="margin-top:16px;">Transaction amount check</h3>
+<p>The second level was amount validation.</p>
+<p>If the amount did not match, the system had to apply exception logic and then decide whether the record was:</p>
+<ul>
+  <li>matched,</li>
+  <li>partially matched,</li>
+  <li>proposed match,</li>
+  <li>open item,</li>
+  <li>manual review required.</li>
+</ul>
+<p>This moved reconciliation from spreadsheet comparison to system-led matching.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 7: Manual review and exception management</h2>
+<p>No reconciliation system can assume that every case will match automatically.</p>
+<p>The product had to support exceptions properly.</p>
+<p>Manual review was designed for cases such as:</p>
+<ul>
+  <li>count mismatch,</li>
+  <li>amount mismatch,</li>
+  <li>failed payout,</li>
+  <li>invalid VPA,</li>
+  <li>invalid account,</li>
+  <li>invalid UPI,</li>
+  <li>beneficiary bank downtime,</li>
+  <li>processing payment stuck,</li>
+  <li>failed/reverted payment,</li>
+  <li>open items.</li>
+</ul>
+<p>The product supported:</p>
+<ul>
+  <li>manual review queue,</li>
+  <li>email notifications,</li>
+  <li>PayRx UI notifications,</li>
+  <li>exception details,</li>
+  <li>action options,</li>
+  <li>retry/reinitiation,</li>
+  <li>failure handling,</li>
+  <li>stakeholder notification.</li>
+</ul>
+<p>This was important because automation without exception handling simply shifts the problem elsewhere.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 8: Audit logs and controllership</h2>
+<p>Financial automation needs strict governance.</p>
+<p>The product included:</p>
+<ul>
+  <li>role-based edit permissions,</li>
+  <li>full audit logging,</li>
+  <li>maker-checker approval,</li>
+  <li>edit reason capture,</li>
+  <li>before and after values,</li>
+  <li>editor identity,</li>
+  <li>update timestamp,</li>
+  <li>transaction timeline,</li>
+  <li>manual payout approval controls.</li>
+</ul>
+<p>Every manual correction was audit-logged.</p>
+<p>Maker-checker approval existed for edited raw data and manual payout.</p>
+<p>This made the system suitable for finance operations, not just product reporting.</p>
+<p>The principle was:</p>
+<blockquote>
+  <p>Users can correct data, but the system must remember exactly who changed what, when, why, and what the value was before and after.</p>
+</blockquote>
+<p>That is what made the product controllership-ready.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 9: Recon and settlement dashboard</h2>
+<p>The dashboard was designed to give leadership, finance, and operations visibility into reconciliation health.</p>
+<p>It showed payments by:</p>
+<ul>
+  <li>matched,</li>
+  <li>partial match,</li>
+  <li>proposed match,</li>
+  <li>open,</li>
+  <li>total.</li>
+</ul>
+<p>It supported count and amount visibility across payment sources.</p>
+<p>It also supported open item tracking and trend views.</p>
+<p>The goal was to let teams answer: </p>
+<ul>
+  <li>How much is fully reconciled?</li>
+  <li>How much is partially matched?</li>
+  <li>What is still open?</li>
+  <li>Where are the exceptions?</li>
+  <li>Which source has issues?</li>
+  <li>What needs manual action?</li>
+  <li>Are open items increasing or decreasing?</li>
+</ul>
+<p>This turned reconciliation from a backend activity into an operationally visible process.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>How the workflow changed</h2>
+<p>Before automation, the workflow looked like this:</p>
+<blockquote>
+  <p>Download reports &rarr; compare transactions manually &rarr; identify mismatches &rarr; check benefit data &rarr; validate settlement reports &rarr; coordinate with finance/ops &rarr; trigger payout manually &rarr; track failures manually &rarr; maintain audit trail separately.</p>
+</blockquote>
+<p>After automation, the workflow became:</p>
+<blockquote>
+  <p>Ingest source data &rarr; validate raw data &rarr; run matching engine &rarr; classify matched/partial/open items &rarr; send exceptions to manual review &rarr; apply controlled correction if needed &rarr; approve through maker-checker &rarr; trigger payout &rarr; track status and UTR &rarr; view dashboard and audit trail.</p>
+</blockquote>
+<p>This was a fundamental shift.</p>
+<p>The old workflow made people reconcile data.<br>
+The new workflow made the system reconcile data and made people handle exceptions.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What made this hard</h2>
+<p>This project was hard because reconciliation problems are unforgiving.</p>
+<p>A small mismatch is not a UI bug. It can delay payout, create provider escalation, distort finance reporting, or create audit risk.</p>
+<p>Several challenges made this complex.</p>
+<h3 style="margin-top:16px;">Multiple systems carried partial truth</h3>
+<p>No single system had the full picture. The product had to stitch together the truth across payment, benefit, booking, settlement, and payout systems.</p>
+<h3 style="margin-top:16px;">Cash and non-cash components had to reconcile together</h3>
+<p>A transaction could include PG payment, voucher, HealthCoin, and claim benefit. That required business-specific matching logic.</p>
+<h3 style="margin-top:16px;">Finance required trust and traceability</h3>
+<p>Automation was not enough. Every exception, edit, payout, and manual correction needed governance.</p>
+<h3 style="margin-top:16px;">Payouts affected provider trust</h3>
+<p>Doctors and labs expected timely settlement. Delays could create escalations and damage trust.</p>
+<h3 style="margin-top:16px;">Fallbacks were still needed</h3>
+<p>API ingestion went live for all sources, but manual uploads were retained as fallback. That was the right product decision because financial operations cannot stop if one integration fails.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What was achieved</h2>
+<p>The HealthPay Recon &amp; Settlement Automation project went live with all major capabilities:</p>
+<ul>
+  <li>dashboard,</li>
+  <li>raw data ingestion,</li>
+  <li>API ingestion from all sources,</li>
+  <li>manual upload fallback,</li>
+  <li>matching engine,</li>
+  <li>manual review,</li>
+  <li>audit logs,</li>
+  <li>role-based edit permissions,</li>
+  <li>maker-checker approval,</li>
+  <li>payout triggering,</li>
+  <li>RazorpayX payout flow.</li>
+</ul>
+<p>The project completely automated the reconciliation process and eliminated manual reconciliation effort.</p>
+<p>Payouts moved to <strong>T+1</strong>.</p>
+<p>Payout delays and provider escalations reduced.</p>
+<p>The project improved:</p>
+<ul>
+  <li>payout TAT,</li>
+  <li>settlement accuracy,</li>
+  <li>auditability,</li>
+  <li>compliance,</li>
+  <li>financial controllership,</li>
+  <li>provider payout confidence,</li>
+  <li>operational visibility.</li>
+</ul>
+<p>The primary metrics were <strong>payout TAT</strong> and <strong>settlement accuracy</strong>.</p>
+<p>No before/after numeric metrics are available, so the strongest accurate statement is:</p>
+<blockquote>
+  <p>The reconciliation process became completely automated, manual reconciliation effort was eliminated, and payouts moved to T+1.</p>
+</blockquote>
+</section>
+
+<section class="cg-article-section">
+<h2>Why this mattered for HealthPay</h2>
+<p>This project strengthened HealthPay&rsquo;s financial operating foundation.</p>
+<p>A payment product cannot scale if reconciliation is manual.<br>
+A provider network cannot trust the product if payouts are delayed.<br>
+Finance cannot support growth without accurate settlement controls.<br>
+Operations cannot manage exceptions without visibility.</p>
+<p>By automating reconciliation and payout workflows, HealthPay gained the financial infrastructure needed to scale transaction volume, support provider trust, and reduce operational dependency.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What this says about my product approach</h2>
+<p>This project reflects my ability to work on deep operational and financial systems where product quality is measured by control, accuracy, and reliability.</p>
+<p>The product was not glamorous in a consumer-facing sense. But it solved a critical business problem.</p>
+<p>It required thinking across:</p>
+<ul>
+  <li>payment flows,</li>
+  <li>benefit utilization,</li>
+  <li>settlement logic,</li>
+  <li>payout rails,</li>
+  <li>exception handling,</li>
+  <li>finance controls,</li>
+  <li>auditability,</li>
+  <li>operational fallback,</li>
+  <li>dashboard visibility.</li>
+</ul>
+<p>The key product principle was:</p>
+<blockquote>
+  <p>Automate the predictable, isolate the exceptions, and make every manual action auditable.</p>
+</blockquote>
+<p>That principle made the system scalable and trustworthy.</p>
+</section>
+<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/healthcare-insurance-ai/">Healthcare &amp; Insurance AI</a> · <a href="/insights/">Insights</a></p>
+
+<section class="cg-section cg-reveal" id="cta">
+      <div class="cg-card large glow">
+        <h2>Ready to move from AI pilots to production?</h2>
+        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
+        <div class="cg-hero-actions" style="margin-top:20px;">
+          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
+          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+
+</body>
+</html>
