@@ -88,7 +88,7 @@
 </script>
 
 </head>
-<body class="cg-blog-theme portal-page" data-page="case-studies">
+<body class="cg-blog-theme portal-page case-study-premium" data-page="case-studies">
   <div class="animated-dot-field" aria-hidden="true"></div>
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
@@ -134,24 +134,98 @@
     </nav>
   </div>
 </header>
-<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
-<a href="https://samadhanmishra.com/">Home</a>
-<span class="sep">→</span>
-<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
-<span class="sep">→</span>
-<span class="current">Autonomous Collections</span>
-</nav>
 
-  <header class="cg-hero cg-hero-compact">
-    <div class="cg-hero-content" style="max-width:800px;">
-      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
-      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Helping Collectors Focus on the Right Customers Before Cash Gets Stuck</h1>
-      <p class="cg-hero-subtitle">How we turned collections from manual aging-report scanning to prioritised action and automated outreach in enterprise receivables.</p>
+  <header class="cs-hero">
+    <div class="cs-hero-container">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">Senior Product Manager</span>
+        <span class="cs-hero-chip">Enterprise FinTech SaaS</span>
+        <span class="cs-hero-chip">Autonomous Receivables Platform</span>
+      </div>
+      <h1 class="cs-hero-title">Helping Collectors Focus on the Right Customers Before Cash Gets Stuck</h1>
+      <p class="cs-hero-desc">How we turned collections from manual aging-report scanning to prioritised action and automated outreach in enterprise receivables.</p>
+      <div class="cs-hero-outcomes">
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Smart Priorities</span>
+          <span class="cs-hero-outcome-lbl">Delinquency Scoring Lists</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Auto AP Sync</span>
+          <span class="cs-hero-outcome-lbl">Direct Portal Posting</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Promise-to-Pay</span>
+          <span class="cs-hero-outcome-lbl">Commitment Auditing</span>
+        </div>
+        
+      </div>
     </div>
   </header>
-  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
 
-<section class="cg-article-section">
+  <main class="cs-layout">
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#high-value-accounts-consumed-attention">High-value accounts consumed attention</a></li>
+<li class="cs-toc-item"><a href="#manual-follow-ups-consumed-collector-capacity">Manual follow-ups consumed collector capacity</a></li>
+<li class="cs-toc-item"><a href="#customer-context-was-scattered">Customer context was scattered</a></li>
+<li class="cs-toc-item"><a href="#finance-leadership-lacked-clean-predictability">Finance leadership lacked clean predictability</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-ai-prioritized-collections-worklist">Track 1: AI-prioritized collections worklist</a></li>
+<li class="cs-toc-item"><a href="#track-2-automated-dunning-and-outreach">Track 2: Automated dunning and outreach</a></li>
+<li class="cs-toc-item"><a href="#track-3-ap-portal-invoice-upload-and-tracking">Track 3: AP portal invoice upload and tracking</a></li>
+<li class="cs-toc-item"><a href="#track-4-collector-workspace">Track 4: Collector workspace</a></li>
+<li class="cs-toc-item"><a href="#track-5-exception-and-dispute-aware-collections">Track 5: Exception and dispute-aware collections</a></li>
+<li class="cs-toc-item"><a href="#track-6-dashboards-and-leadership-visibility">Track 6: Dashboards and leadership visibility</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered">Why this mattered</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="cs-content-area">
+      <div class="cs-mobile-toc" id="mobile-toc">
+        <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
+          <span>Table of Contents</span>
+        </button>
+        <div class="cs-mobile-toc-content">
+          <ul class="cs-toc-list">
+            <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#high-value-accounts-consumed-attention">High-value accounts consumed attention</a></li>
+<li class="cs-toc-item"><a href="#manual-follow-ups-consumed-collector-capacity">Manual follow-ups consumed collector capacity</a></li>
+<li class="cs-toc-item"><a href="#customer-context-was-scattered">Customer context was scattered</a></li>
+<li class="cs-toc-item"><a href="#finance-leadership-lacked-clean-predictability">Finance leadership lacked clean predictability</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-ai-prioritized-collections-worklist">Track 1: AI-prioritized collections worklist</a></li>
+<li class="cs-toc-item"><a href="#track-2-automated-dunning-and-outreach">Track 2: Automated dunning and outreach</a></li>
+<li class="cs-toc-item"><a href="#track-3-ap-portal-invoice-upload-and-tracking">Track 3: AP portal invoice upload and tracking</a></li>
+<li class="cs-toc-item"><a href="#track-4-collector-workspace">Track 4: Collector workspace</a></li>
+<li class="cs-toc-item"><a href="#track-5-exception-and-dispute-aware-collections">Track 5: Exception and dispute-aware collections</a></li>
+<li class="cs-toc-item"><a href="#track-6-dashboards-and-leadership-visibility">Track 6: Dashboards and leadership visibility</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered">Why this mattered</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <section class="cg-article-section cs-chapter">
 <p>Collections is one of those enterprise problems that looks simple only if you have never seen it from inside a finance team.</p>
 <p>An invoice is due.<br>
 The customer has not paid.<br>
@@ -164,10 +238,7 @@ Someone needs to follow up.</p>
 <p>At HighRadius, I worked as a Senior Product Manager on the Autonomous Collections product. The product sat inside the broader Order-to-Cash / Autonomous Receivables ecosystem, where the goal was to help finance teams reduce past dues, improve cash flow, increase collector productivity, and make collections more intelligent.</p>
 <p>The challenge was not only to digitize collections.</p>
 <p>The real challenge was to help collectors know where to spend their time.</p>
-</section>
-
-<section class="cg-article-section">
-
+</section><section class="cg-article-section cs-chapter">
 <div class="cg-stats-grid">
   <div class="cg-stat-card">
     <span class="cg-stat-val">Autonomous</span>
@@ -183,7 +254,8 @@ Someone needs to follow up.</p>
   </div>
 </div>
 
-<h2>The situation</h2>
+<span class="cs-chapter-num">Chapter 01</span>
+<h2 id="the-situation">The situation</h2>
 <p>Traditional collections teams often work from aging reports.</p>
 <p>Aging reports tell collectors which invoices are overdue. But they do not always tell them what to do next.</p>
 <p>A customer with a large overdue balance may not be the highest priority if they are already scheduled to pay tomorrow.<br>
@@ -202,10 +274,9 @@ Another may require escalation.</p>
   <p>Which account needs action today, why does it need action, what action should be taken, and how can the system reduce avoidable collector effort?</p>
 </blockquote>
 <p>That was the product space.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What was actually broken</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 02</span>
+<h2 id="what-was-actually-broken">What was actually broken</h2>
 <p>Collections teams were not failing because they lacked effort.</p>
 <p>They were failing because too much of their effort was trapped in low-value manual work.</p>
 <h3 style="margin-top:16px;">Collectors were working from static views</h3>
@@ -223,18 +294,16 @@ Another may require escalation.</p>
   <li>strategic account importance.</li>
 </ul>
 <p>A static aging report cannot intelligently decide what deserves attention now.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>High-value accounts consumed attention</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 03</span>
+<h2 id="high-value-accounts-consumed-attention">High-value accounts consumed attention</h2>
 <p>Collectors naturally focus on large balances and high-visibility customers.</p>
 <p>That makes sense, but it creates a long-tail problem.</p>
 <p>Thousands of smaller accounts may go untouched because collectors do not have enough bandwidth. Individually they may be small. Together they can create meaningful past-due exposure.</p>
 <p>The product needed to help teams cover more accounts without increasing headcount proportionally.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Manual follow-ups consumed collector capacity</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 04</span>
+<h2 id="manual-follow-ups-consumed-collector-capacity">Manual follow-ups consumed collector capacity</h2>
 <p>Collectors spent time on repetitive actions:</p>
 <ul>
   <li>sending reminder emails,</li>
@@ -249,10 +318,9 @@ Another may require escalation.</p>
 <p>These tasks are necessary, but many of them are not the best use of human judgment.</p>
 <p>The collector should spend time on accounts where negotiation, relationship handling, dispute resolution, or escalation is needed.</p>
 <p>The system should handle repeatable work.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Customer context was scattered</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 05</span>
+<h2 id="customer-context-was-scattered">Customer context was scattered</h2>
 <p>Collections decisions need context.</p>
 <p>A collector needs to know:</p>
 <ul>
@@ -266,10 +334,9 @@ Another may require escalation.</p>
   <li>whether the customer has unresolved deductions.</li>
 </ul>
 <p>When this context is scattered, collectors spend too much time preparing to act.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Finance leadership lacked clean predictability</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 06</span>
+<h2 id="finance-leadership-lacked-clean-predictability">Finance leadership lacked clean predictability</h2>
 <p>Collections is not only a collector workflow. It directly affects cash forecasting and working capital.</p>
 <p>Leadership needs visibility into:</p>
 <ul>
@@ -284,10 +351,9 @@ Another may require escalation.</p>
   <li>DSO movement.</li>
 </ul>
 <p>Without structured intelligence, collections remains reactive.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>The product insight</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 07</span>
+<h2 id="the-product-insight">The product insight</h2>
 <p>The obvious product idea would be:</p>
 <blockquote class="cg-editorial-quote">
   <p>&ldquo;Build a better collections worklist.&rdquo;</p>
@@ -310,10 +376,9 @@ Another may require escalation.</p>
   This is what the system has already done.<br>
   This is what still needs your judgment.</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>What I shaped</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 08</span>
+<h2 id="what-i-shaped">What I shaped</h2>
 <p>As Senior Product Manager, I worked on the Autonomous Collections product in the enterprise AR / Order-to-Cash space.</p>
 <p>The product direction centered on turning collections from a manual, aging-report-led process into an intelligent collections operating system.</p>
 <p>The key areas were:</p>
@@ -332,10 +397,9 @@ Another may require escalation.</p>
 <p>The product had to support both scale and judgment.</p>
 <p>Automation could help with repetitive outreach and data gathering.<br>
 Collectors still needed to manage complex accounts, disputes, escalations, and strategic relationships.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 1: AI-prioritized collections worklist</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 09</span>
+<h2 id="track-1-ai-prioritized-collections-worklist">Track 1: AI-prioritized collections worklist</h2>
 <p>The worklist was the entry point into the collector&rsquo;s day.</p>
 <p>The product needed to help collectors avoid the trap of manually scanning aging reports and choosing accounts based only on balance or age.</p>
 <p>A smarter worklist could prioritize accounts using signals such as:</p>
@@ -358,10 +422,9 @@ Collectors still needed to manage complex accounts, disputes, escalations, and s
   <p>Where do I start?</p>
 </blockquote>
 <p>The system should answer that.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 2: Automated dunning and outreach</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 10</span>
+<h2 id="track-2-automated-dunning-and-outreach">Track 2: Automated dunning and outreach</h2>
 <p>A large part of collections involves repetitive communication.</p>
 <p>Reminder emails, payment follow-ups, and scheduled dunning can be automated for accounts where human intervention is not immediately required.</p>
 <p>Automated dunning helped cover the long tail of customers that collectors may not have time to reach manually.</p>
@@ -374,10 +437,9 @@ Collectors still needed to manage complex accounts, disputes, escalations, and s
 <blockquote class="cg-editorial-quote">
   <p>Automation should not only reduce effort. It should redirect human attention to higher-value work.</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 3: AP portal invoice upload and tracking</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 11</span>
+<h2 id="track-3-ap-portal-invoice-upload-and-tracking">Track 3: AP portal invoice upload and tracking</h2>
 <p>A surprisingly common reason for delayed payment is not customer refusal.</p>
 <p>It is process failure.</p>
 <p>The customer may require invoices to be uploaded to their AP portal. If that upload does not happen, the invoice may not enter their payment workflow.</p>
@@ -392,10 +454,9 @@ Collectors still needed to manage complex accounts, disputes, escalations, and s
   <li>customer-side workflow issue.</li>
 </ul>
 <p>This turned collections from &ldquo;send reminders&rdquo; to &ldquo;remove payment blockers.&rdquo;</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 4: Collector workspace</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 12</span>
+<h2 id="track-4-collector-workspace">Track 4: Collector workspace</h2>
 <p>The collector workspace had to bring relevant context into one place.</p>
 <p>A collector needed to see:</p>
 <ul>
@@ -415,10 +476,9 @@ Collectors still needed to manage complex accounts, disputes, escalations, and s
 <blockquote class="cg-editorial-quote">
   <p>The system should assemble the decision context so the user can act faster.</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 5: Exception and dispute-aware collections</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 13</span>
+<h2 id="track-5-exception-and-dispute-aware-collections">Track 5: Exception and dispute-aware collections</h2>
 <p>Not all overdue invoices should be treated the same.</p>
 <p>Some customers are late because they have not been contacted.<br>
 Some are late because they are waiting for a document.<br>
@@ -429,10 +489,9 @@ Some require escalation.</p>
 <p>Collections workflows needed to distinguish these cases.</p>
 <p>A generic reminder email does not solve a disputed invoice.</p>
 <p>The product had to make room for dispute-aware and exception-aware handling so that collectors did not waste effort on the wrong action.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 6: Dashboards and leadership visibility</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 14</span>
+<h2 id="track-6-dashboards-and-leadership-visibility">Track 6: Dashboards and leadership visibility</h2>
 <p>Collections is closely tied to working capital.</p>
 <p>Finance leaders needed visibility into:</p>
 <ul>
@@ -449,10 +508,9 @@ Some require escalation.</p>
 <p>Dashboards were important because collections work needs operational transparency.</p>
 <p>If leadership cannot see why cash is stuck, the team remains reactive.</p>
 <p>The dashboard layer helped convert collections from activity tracking into cash-flow management.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>How the workflow changed</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 15</span>
+<h2 id="how-the-workflow-changed">How the workflow changed</h2>
 <p>Before intelligent collections, the workflow looked closer to this:</p>
 <blockquote class="cg-editorial-quote">
   <p>Open aging report &rarr; scan overdue accounts &rarr; manually decide whom to contact &rarr; check account context &rarr; send email/call &rarr; update notes &rarr; repeat &rarr; hope cash comes in.</p>
@@ -464,10 +522,9 @@ Some require escalation.</p>
 <p>The shift was subtle but powerful.</p>
 <p>The old workflow made collectors search for work.<br>
 The new workflow made the system guide the collector toward the highest-impact action.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What made this hard</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 16</span>
+<h2 id="what-made-this-hard">What made this hard</h2>
 <p>Collections automation is difficult because it sits at the intersection of finance, customer behavior, enterprise data, and human relationships.</p>
 <h3 style="margin-top:16px;">Prioritization is not obvious</h3>
 <p>The largest overdue account is not always the highest-priority account. Prioritization requires understanding risk, behavior, promise history, dispute state, and collector capacity.</p>
@@ -480,10 +537,9 @@ The new workflow made the system guide the collector toward the highest-impact a
 <h3 style="margin-top:16px;">Human judgment still matters</h3>
 <p>Collectors still need to manage negotiation, disputes, escalations, and sensitive accounts. The product should not pretend everything can be fully automated.</p>
 <p>The real design challenge was to decide what should be automated, what should be prioritized, and what should remain human-led.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What was achieved</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 17</span>
+<h2 id="what-was-achieved">What was achieved</h2>
 <p>The product direction supported the core collections goals:</p>
 <ul>
   <li>reduce past dues,</li>
@@ -501,10 +557,9 @@ The new workflow made the system guide the collector toward the highest-impact a
 <blockquote class="cg-editorial-quote">
   <p>I worked as Senior Product Manager on HighRadius Autonomous Collections, contributing to product capabilities that helped enterprise AR teams prioritize the right accounts, automate repetitive collections outreach, improve collector productivity, and strengthen receivables visibility.</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>Why this mattered</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 18</span>
+<h2 id="why-this-mattered">Why this mattered</h2>
 <p>Collections is one of the most important functions inside Order-to-Cash.</p>
 <p>If collections is weak, cash gets stuck.<br>
 If cash gets stuck, working capital suffers.<br>
@@ -521,10 +576,9 @@ If payment blockers are invisible, follow-ups become noise.</p>
   <li>Where is cash stuck?</li>
 </ul>
 <p>That is the difference between a collections tool and a collections operating system.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What this says about my product approach</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 19</span>
+<h2 id="what-this-says-about-my-product-approach">What this says about my product approach</h2>
 <p>HighRadius gave me deep exposure to enterprise SaaS, finance workflows, and AI-led prioritization before AI became mainstream in every product conversation.</p>
 <p>The product was not about flashy automation. It was about making finance teams more effective in a measurable way.</p>
 <p>The key product principle was:</p>
@@ -537,23 +591,40 @@ If payment blockers are invisible, follow-ups become noise.</p>
 <blockquote class="cg-editorial-quote">
   <p>understand the workflow, identify the decision point, reduce manual effort, and make the system guide the next best action.</p>
 </blockquote>
-</section>
-<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/ai-product-strategy/">AI Product Strategy</a> · <a href="/insights/">Insights</a></p>
-
-<section class="cg-section cg-reveal" id="cta">
-      <div class="cg-card large glow">
-        <h2>Ready to move from AI pilots to production?</h2>
-        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
-        <div class="cg-hero-actions" style="margin-top:20px;">
-          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
-          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
-        </div>
-      </div>
-    </section>
+</section><p style="margin-top:32px; border-top: 1px solid var(--soft); padding-top:24px;"><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/ai-product-strategy/">AI Product Strategy</a> · <a href="/insights/">Insights</a></p>
+    </div>
   </main>
+
   <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
   <script src="/assets/js/theme.js"></script>
   <script src="/assets/js/nav.js"></script>
 
+
+<script>
+  function toggleMobileTOC() {
+    const el = document.getElementById('mobile-toc');
+    el.classList.toggle('open');
+  }
+
+  // Active section scroll tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const links = document.querySelectorAll(`.cs-toc-list a[href="#${id}"]`);
+        if (links.length === 0) return;
+        if (entry.intersectionRatio > 0) {
+          document.querySelectorAll('.cs-toc-item').forEach(item => item.classList.remove('active'));
+          links.forEach(link => link.parentElement.classList.add('active'));
+        }
+      });
+    }, { rootMargin: '-100px 0px -70% 0px' });
+
+    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {
+      observer.observe(h2);
+    });
+  });
+</script>
 </body>
 </html>

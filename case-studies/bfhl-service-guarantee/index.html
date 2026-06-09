@@ -88,7 +88,7 @@
 </script>
 
 </head>
-<body class="cg-blog-theme portal-page" data-page="case-studies">
+<body class="cg-blog-theme portal-page case-study-premium" data-page="case-studies">
   <div class="animated-dot-field" aria-hidden="true"></div>
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
@@ -134,34 +134,109 @@
     </nav>
   </div>
 </header>
-<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
-<a href="https://samadhanmishra.com/">Home</a>
-<span class="sep">→</span>
-<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
-<span class="sep">→</span>
-<span class="current">Service Guarantee</span>
-</nav>
 
-  <header class="cg-hero cg-hero-compact">
-    <div class="cg-hero-content" style="max-width:800px;">
-      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
-      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Turning Bookings into Fulfilment Assurance</h1>
-      <p class="cg-hero-subtitle">How we built a trackable, communication-led operating model to convert fragmented booking follow-ups into guaranteed healthcare fulfilment.</p>
+  <header class="cs-hero">
+    <div class="cs-hero-container">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">Lead Product Manager</span>
+        <span class="cs-hero-chip">Healthcare Service Operations</span>
+        <span class="cs-hero-chip">Fulfillment Assurance Platform</span>
+      </div>
+      <h1 class="cs-hero-title">Turning Bookings into Fulfilment Assurance</h1>
+      <p class="cs-hero-desc">How we built a trackable, communication-led operating model to convert fragmented booking follow-ups into guaranteed healthcare fulfilment.</p>
+      <div class="cs-hero-outcomes">
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">SFDC + HRx</span>
+          <span class="cs-hero-outcome-lbl">System Sync Integration</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Real-Time</span>
+          <span class="cs-hero-outcome-lbl">Phlebo Check-in Track</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Proactive</span>
+          <span class="cs-hero-outcome-lbl">SLA-Breach Alerts</span>
+        </div>
+        
+      </div>
     </div>
   </header>
-  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
 
-<section class="cg-article-section">
+  <main class="cs-layout">
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#provider-response-was-a-critical-dependency">Provider response was a critical dependency</a></li>
+<li class="cs-toc-item"><a href="#customers-lacked-proactive-visibility">Customers lacked proactive visibility</a></li>
+<li class="cs-toc-item"><a href="#agents-needed-actionable-queues">Agents needed actionable queues</a></li>
+<li class="cs-toc-item"><a href="#operations-needed-tat-control">Operations needed TAT control</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-converting-bookings-into-trackable-cases">Track 1: Converting bookings into trackable cases</a></li>
+<li class="cs-toc-item"><a href="#track-2-hrx-sfdc-integration">Track 2: HRx-SFDC integration</a></li>
+<li class="cs-toc-item"><a href="#track-3-provider-confirmation-workflow">Track 3: Provider confirmation workflow</a></li>
+<li class="cs-toc-item"><a href="#track-4-agent-queues-and-operational-work-buckets">Track 4: Agent queues and operational work buckets</a></li>
+<li class="cs-toc-item"><a href="#track-5-customer-communication-automation">Track 5: Customer communication automation</a></li>
+<li class="cs-toc-item"><a href="#track-6-app-facing-status-visibility">Track 6: App-facing status visibility</a></li>
+<li class="cs-toc-item"><a href="#track-7-tat-based-escalation">Track 7: TAT-based escalation</a></li>
+<li class="cs-toc-item"><a href="#track-8-recovery-flows">Track 8: Recovery flows</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered-for-bfhl">Why this mattered for BFHL</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="cs-content-area">
+      <div class="cs-mobile-toc" id="mobile-toc">
+        <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
+          <span>Table of Contents</span>
+        </button>
+        <div class="cs-mobile-toc-content">
+          <ul class="cs-toc-list">
+            <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#provider-response-was-a-critical-dependency">Provider response was a critical dependency</a></li>
+<li class="cs-toc-item"><a href="#customers-lacked-proactive-visibility">Customers lacked proactive visibility</a></li>
+<li class="cs-toc-item"><a href="#agents-needed-actionable-queues">Agents needed actionable queues</a></li>
+<li class="cs-toc-item"><a href="#operations-needed-tat-control">Operations needed TAT control</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-converting-bookings-into-trackable-cases">Track 1: Converting bookings into trackable cases</a></li>
+<li class="cs-toc-item"><a href="#track-2-hrx-sfdc-integration">Track 2: HRx-SFDC integration</a></li>
+<li class="cs-toc-item"><a href="#track-3-provider-confirmation-workflow">Track 3: Provider confirmation workflow</a></li>
+<li class="cs-toc-item"><a href="#track-4-agent-queues-and-operational-work-buckets">Track 4: Agent queues and operational work buckets</a></li>
+<li class="cs-toc-item"><a href="#track-5-customer-communication-automation">Track 5: Customer communication automation</a></li>
+<li class="cs-toc-item"><a href="#track-6-app-facing-status-visibility">Track 6: App-facing status visibility</a></li>
+<li class="cs-toc-item"><a href="#track-7-tat-based-escalation">Track 7: TAT-based escalation</a></li>
+<li class="cs-toc-item"><a href="#track-8-recovery-flows">Track 8: Recovery flows</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered-for-bfhl">Why this mattered for BFHL</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <section class="cg-article-section cs-chapter">
 <p>A booking confirmation does not always mean the service will happen.</p>
 <p>That sounds obvious in hindsight, but it is one of the biggest gaps in healthcare service journeys. A customer books a lab test or a doctor appointment. The app shows that the request is placed. But behind that screen, the actual fulfilment still depends on provider confirmation, appointment availability, reminders, rescheduling, report generation, and manual follow-ups.</p>
 <p>If any one of those steps fails, the customer does not see it as a backend issue.</p>
 <p>They see it as broken trust.</p>
 <p>That was the core problem behind BFHL&rsquo;s Service Guarantee initiative.</p>
 <p>After working on OPD Reimbursement Claims Processing, I led the Service Guarantee project in 2022. The goal was to make lab test bookings and doctor appointments more reliable by converting fragmented fulfilment follow-ups into a structured, trackable, communication-led operating model.</p>
-</section>
-
-<section class="cg-article-section">
-
+</section><section class="cg-article-section cs-chapter">
 <div class="cg-stats-grid">
   <div class="cg-stat-card">
     <span class="cg-stat-val">SFDC + HRx</span>
@@ -177,7 +252,8 @@
   </div>
 </div>
 
-<h2>The situation</h2>
+<span class="cs-chapter-num">Chapter 01</span>
+<h2 id="the-situation">The situation</h2>
 <p>BFHL customers could book lab tests and doctor appointments through digital journeys.</p>
 <p>But booking was only the first step.</p>
 <p>For the service to actually be fulfilled, several things had to happen after the customer placed the request:</p>
@@ -205,10 +281,9 @@
 </ul>
 <p>The product problem was not just creating a case in Salesforce.</p>
 <p>The product problem was ensuring that BFHL could stand behind the service promise.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What was actually broken</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 02</span>
+<h2 id="what-was-actually-broken">What was actually broken</h2>
 <p>The broken part was not appointment booking.</p>
 <p>The broken part was everything that happened after booking.</p>
 <h3 style="margin-top:16px;">Booking did not equal fulfilment</h3>
@@ -219,10 +294,9 @@ The provider might not have confirmed yet.<br>
 The agent might not know the case needs intervention.<br>
 The system might not have triggered the right communication.</p>
 <p>That gap created anxiety and complaints.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Provider response was a critical dependency</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 03</span>
+<h2 id="provider-response-was-a-critical-dependency">Provider response was a critical dependency</h2>
 <p>Providers could respond in multiple ways:</p>
 <ul>
   <li>accept the appointment,</li>
@@ -236,10 +310,9 @@ The system might not have triggered the right communication.</p>
 <p>If the provider suggested a new slot, the customer needed rescheduling.</p>
 <p>If the provider did not respond, the case needed escalation.</p>
 <p>Without a structured workflow, provider response became a manual follow-up problem.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Customers lacked proactive visibility</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 04</span>
+<h2 id="customers-lacked-proactive-visibility">Customers lacked proactive visibility</h2>
 <p>Customers should not have to chase the system after booking.</p>
 <p>They needed timely updates:</p>
 <ul>
@@ -254,10 +327,9 @@ The system might not have triggered the right communication.</p>
 </ul>
 <p>Without this, customer care dependency increases.</p>
 <p>A customer who does not know what is happening will call, complain, or lose trust.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Agents needed actionable queues</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 05</span>
+<h2 id="agents-needed-actionable-queues">Agents needed actionable queues</h2>
 <p>Fulfilment agents needed more than a case list.</p>
 <p>They needed to know:</p>
 <ul>
@@ -272,19 +344,17 @@ The system might not have triggered the right communication.</p>
 </ul>
 <p>A raw case list does not drive fulfilment.</p>
 <p>An actionable queue does.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Operations needed TAT control</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 06</span>
+<h2 id="operations-needed-tat-control">Operations needed TAT control</h2>
 <p>Service Guarantee was about accountability.</p>
 <p>If provider confirmation is delayed, someone must know.<br>
 If the customer has not been updated, someone must act.<br>
 If an appointment is at risk, it must move into an escalation path.</p>
 <p>Without TAT-based escalation, broken journeys remain invisible until the customer complains.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>The product insight</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 07</span>
+<h2 id="the-product-insight">The product insight</h2>
 <p>The easy way to define the project would have been:</p>
 <blockquote class="cg-editorial-quote">
   <p>&ldquo;Build SFDC case management for lab and doctor appointments.&rdquo;</p>
@@ -301,10 +371,9 @@ If an appointment is at risk, it must move into an escalation path.</p>
   <p>How do we make sure every lab test or doctor appointment request is tracked, confirmed, communicated, escalated, recovered, and closed through a controlled service workflow?</p>
 </blockquote>
 <p>This is what made the project a Service Guarantee initiative, not just a case-management project.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What I shaped</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 08</span>
+<h2 id="what-i-shaped">What I shaped</h2>
 <p>I led the full Service Guarantee initiative as Lead Product Manager in 2022.</p>
 <p>The project covered:</p>
 <ul>
@@ -322,10 +391,9 @@ If an appointment is at risk, it must move into an escalation path.</p>
 <p>I worked with junior PMs to create the user stories, action plan, flows, integration requirements, communication triggers, and delivery requirements.</p>
 <p>The complete Service Guarantee flow went live.</p>
 <p>ProviderRx was evaluated as a separate provider-side track but was deprioritized. The core Service Guarantee flow did not depend on ProviderRx going live.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 1: Converting bookings into trackable cases</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 09</span>
+<h2 id="track-1-converting-bookings-into-trackable-cases">Track 1: Converting bookings into trackable cases</h2>
 <p>The first requirement was simple but foundational:</p>
 <blockquote class="cg-editorial-quote">
   <p>Every relevant booking needed to become an operationally trackable case.</p>
@@ -344,10 +412,9 @@ If an appointment is at risk, it must move into an escalation path.</p>
   <li>action ownership.</li>
 </ul>
 <p>This created the operating layer for Service Guarantee.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 2: HRx-SFDC integration</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 10</span>
+<h2 id="track-2-hrx-sfdc-integration">Track 2: HRx-SFDC integration</h2>
 <p>HRx and SFDC had to stay aligned.</p>
 <p>HRx carried the booking journey.<br>
 SFDC carried the fulfilment case workflow.</p>
@@ -361,10 +428,9 @@ SFDC carried the fulfilment case workflow.</p>
   <li>case closure logic.</li>
 </ul>
 <p>This was important because the customer should not have to call support to know what is happening. The app itself needed to reflect the service state.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 3: Provider confirmation workflow</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 11</span>
+<h2 id="track-3-provider-confirmation-workflow">Track 3: Provider confirmation workflow</h2>
 <p>Provider confirmation was the most important operational moment in the journey.</p>
 <p>Until the provider confirmed, the service was not guaranteed.</p>
 <p>The workflow had to handle multiple provider outcomes.</p>
@@ -377,10 +443,9 @@ SFDC carried the fulfilment case workflow.</p>
 <h3 style="margin-top:16px;">If provider did not respond</h3>
 <p>The case needed automated nudges, voice-blast escalation, and manual agent intervention.</p>
 <p>This turned provider response into a structured workflow instead of a manual follow-up activity.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 4: Agent queues and operational work buckets</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 12</span>
+<h2 id="track-4-agent-queues-and-operational-work-buckets">Track 4: Agent queues and operational work buckets</h2>
 <p>Agents needed cases organized by action.</p>
 <p>The system needed to help them answer:</p>
 <blockquote class="cg-editorial-quote">
@@ -402,10 +467,9 @@ SFDC carried the fulfilment case workflow.</p>
 </ul>
 <p>This transformed agent work from manual tracking to state-based fulfilment operations.</p>
 <p>The product goal was to make the next action obvious.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 5: Customer communication automation</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 13</span>
+<h2 id="track-5-customer-communication-automation">Track 5: Customer communication automation</h2>
 <p>Service Guarantee needed proactive communication.</p>
 <p>The customer should not be left guessing.</p>
 <p>Communication automation went live through:</p>
@@ -426,19 +490,17 @@ SFDC carried the fulfilment case workflow.</p>
 </ul>
 <p>This reduced customer uncertainty and helped prevent avoidable complaints.</p>
 <p>The communication layer was not just a notification feature. It was part of the service promise.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 6: App-facing status visibility</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 14</span>
+<h2 id="track-6-app-facing-status-visibility">Track 6: App-facing status visibility</h2>
 <p>One of the most important customer-facing capabilities was status visibility.</p>
 <p>Customers needed to see where their request stood.</p>
 <p>The app-facing status experience helped communicate whether the appointment was initiated, pending confirmation, confirmed, completed, or closed.</p>
 <p>This mattered because transparency reduces anxiety.</p>
 <p>Even if a case is still pending, the customer experience is better when the system clearly shows the status instead of forcing the customer to call support.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 7: TAT-based escalation</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 15</span>
+<h2 id="track-7-tat-based-escalation">Track 7: TAT-based escalation</h2>
 <p>A guarantee is meaningless without time control.</p>
 <p>The system needed defined TATs and escalation triggers.</p>
 <p>If provider response did not come within the expected window, the system had to move the case into an escalation path.</p>
@@ -452,10 +514,9 @@ SFDC carried the fulfilment case workflow.</p>
   <li>escalation visibility.</li>
 </ul>
 <p>The goal was to catch fulfilment failures before they became customer complaints.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 8: Recovery flows</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 16</span>
+<h2 id="track-8-recovery-flows">Track 8: Recovery flows</h2>
 <p>Real-world service journeys are rarely perfect.</p>
 <p>Providers reject.<br>
 Customers miss calls.<br>
@@ -477,10 +538,9 @@ Cases require manual intervention.</p>
 <blockquote class="cg-editorial-quote">
   <p>A service workflow is only as strong as its exception handling.</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>How the workflow changed</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 17</span>
+<h2 id="how-the-workflow-changed">How the workflow changed</h2>
 <p>Before Service Guarantee, the journey looked closer to this:</p>
 <blockquote class="cg-editorial-quote">
   <p>Customer books service &rarr; provider confirmation happens manually &rarr; agent follows up if needed &rarr; customer receives inconsistent updates &rarr; unresolved cases become complaints.</p>
@@ -492,10 +552,9 @@ Cases require manual intervention.</p>
 <p>The biggest change was ownership.</p>
 <p>The old model relied on people remembering to follow up.<br>
 The new model made the system responsible for surfacing what needed follow-up.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What made this hard</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 18</span>
+<h2 id="what-made-this-hard">What made this hard</h2>
 <p>This project was hard because it sat between product, operations, provider behaviour, and customer trust.</p>
 <h3 style="margin-top:16px;">Multiple actors had to stay aligned</h3>
 <p>Customers, providers, agents, HRx, SFDC, app/web, and communication systems all had to reflect the correct journey.</p>
@@ -510,10 +569,9 @@ Wrong communication created confusion.</p>
 <p>That is why Fulfilment Rate became the primary success metric.</p>
 <h3 style="margin-top:16px;">The workflow needed operational discipline</h3>
 <p>TATs, queues, escalation, and case closure had to be defined clearly. Otherwise, the system would simply digitize the old manual process.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What was achieved</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 19</span>
+<h2 id="what-was-achieved">What was achieved</h2>
 <p>The complete Service Guarantee flow went live.</p>
 <p>The delivered scope included:</p>
 <ul>
@@ -550,10 +608,9 @@ Wrong communication created confusion.</p>
   <li>reduce broken fulfilment journeys,</li>
   <li>create a more reliable service experience.</li>
 </ul>
-</section>
-
-<section class="cg-article-section">
-<h2>Why this mattered for BFHL</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 20</span>
+<h2 id="why-this-mattered-for-bfhl">Why this mattered for BFHL</h2>
 <p>Service Guarantee strengthened BFHL&rsquo;s healthcare service promise.</p>
 <p>A health platform cannot build trust only by allowing customers to book services. It must also take responsibility for fulfilment.</p>
 <p>This project helped BFHL move from: </p>
@@ -565,10 +622,9 @@ Wrong communication created confusion.</p>
   <p>fulfilment-led healthcare assurance.</p>
 </blockquote>
 <p>That shift matters because customers remember whether the service happened smoothly, not whether the backend case was created successfully.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What this says about my product approach</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 21</span>
+<h2 id="what-this-says-about-my-product-approach">What this says about my product approach</h2>
 <p>This project reflects my belief that product management is not only about screens and features.</p>
 <p>Sometimes the real product is the operating model.</p>
 <p>In Service Guarantee, the most important work was not designing one page or one button. It was defining how a booking becomes a promise, how that promise is tracked, how providers are held accountable, how customers are kept informed, how agents know what to do, and how failures are recovered.</p>
@@ -577,23 +633,40 @@ Wrong communication created confusion.</p>
   <p>Do not stop at request creation. Design until the customer outcome is actually fulfilled.</p>
 </blockquote>
 <p>That principle shaped the entire Service Guarantee project.</p>
-</section>
-<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/product-operating-model/">Product Operating Model</a> · <a href="/insights/">Insights</a></p>
-
-<section class="cg-section cg-reveal" id="cta">
-      <div class="cg-card large glow">
-        <h2>Ready to move from AI pilots to production?</h2>
-        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
-        <div class="cg-hero-actions" style="margin-top:20px;">
-          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
-          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
-        </div>
-      </div>
-    </section>
+</section><p style="margin-top:32px; border-top: 1px solid var(--soft); padding-top:24px;"><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/product-operating-model/">Product Operating Model</a> · <a href="/insights/">Insights</a></p>
+    </div>
   </main>
+
   <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
   <script src="/assets/js/theme.js"></script>
   <script src="/assets/js/nav.js"></script>
 
+
+<script>
+  function toggleMobileTOC() {
+    const el = document.getElementById('mobile-toc');
+    el.classList.toggle('open');
+  }
+
+  // Active section scroll tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const links = document.querySelectorAll(`.cs-toc-list a[href="#${id}"]`);
+        if (links.length === 0) return;
+        if (entry.intersectionRatio > 0) {
+          document.querySelectorAll('.cs-toc-item').forEach(item => item.classList.remove('active'));
+          links.forEach(link => link.parentElement.classList.add('active'));
+        }
+      });
+    }, { rootMargin: '-100px 0px -70% 0px' });
+
+    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {
+      observer.observe(h2);
+    });
+  });
+</script>
 </body>
 </html>

@@ -88,7 +88,7 @@
 </script>
 
 </head>
-<body class="cg-blog-theme portal-page" data-page="case-studies">
+<body class="cg-blog-theme portal-page case-study-premium" data-page="case-studies">
   <div class="animated-dot-field" aria-hidden="true"></div>
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
@@ -134,72 +134,151 @@
     </nav>
   </div>
 </header>
-<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
-<a href="https://samadhanmishra.com/">Home</a>
-<span class="sep">→</span>
-<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
-<span class="sep">→</span>
-<span class="current">AI Product Practice</span>
-</nav>
 
-  <header class="cg-hero cg-hero-compact">
-    <div class="cg-hero-content" style="max-width:800px;">
-      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
-      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Building an AI Product Practice Operating Model</h1>
-      <p class="cg-hero-subtitle">Case study: standing up AI product practice—roles, rituals, evals, and portfolio governance—for teams shipping multiple AI initiatives.</p>
+  <header class="cs-hero">
+    <div class="cs-hero-container">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">Consultant / Practice Lead</span>
+        <span class="cs-hero-chip">Product Practice Operating Model</span>
+        <span class="cs-hero-chip">AI Practice Center of Excellence</span>
+      </div>
+      <h1 class="cs-hero-title">Building an AI Product Practice Operating Model</h1>
+      <p class="cs-hero-desc">Case study: standing up AI product practice—roles, rituals, evals, and portfolio governance—for teams shipping multiple AI initiatives.</p>
+      <div class="cs-hero-outcomes">
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Standardized</span>
+          <span class="cs-hero-outcome-lbl">PM Operating Playbooks</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Eval Sprints</span>
+          <span class="cs-hero-outcome-lbl">Systematic Evals</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Structured Governance</span>
+          <span class="cs-hero-outcome-lbl">Model Choice Frameworks</span>
+        </div>
+        
+      </div>
     </div>
   </header>
-  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
-<section class="cg-article-section"><h2>Context</h2><div>
+
+  <main class="cs-layout">
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          <li class="cs-toc-item"><a href="#context">Context</a></li>
+<li class="cs-toc-item"><a href="#business-problem">Business problem</a></li>
+<li class="cs-toc-item"><a href="#user-or-operational-pain">User or operational pain</a></li>
+<li class="cs-toc-item"><a href="#product-intervention">Product intervention</a></li>
+<li class="cs-toc-item"><a href="#ai-capability-used">AI capability used</a></li>
+<li class="cs-toc-item"><a href="#samadhan-x27-s-role">Samadhan&amp;#x27;s role</a></li>
+<li class="cs-toc-item"><a href="#business-outcome">Business outcome</a></li>
+<li class="cs-toc-item"><a href="#lessons-for-other-companies">Lessons for other companies</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="cs-content-area">
+      <div class="cs-mobile-toc" id="mobile-toc">
+        <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
+          <span>Table of Contents</span>
+        </button>
+        <div class="cs-mobile-toc-content">
+          <ul class="cs-toc-list">
+            <li class="cs-toc-item"><a href="#context">Context</a></li>
+<li class="cs-toc-item"><a href="#business-problem">Business problem</a></li>
+<li class="cs-toc-item"><a href="#user-or-operational-pain">User or operational pain</a></li>
+<li class="cs-toc-item"><a href="#product-intervention">Product intervention</a></li>
+<li class="cs-toc-item"><a href="#ai-capability-used">AI capability used</a></li>
+<li class="cs-toc-item"><a href="#samadhan-x27-s-role">Samadhan&amp;#x27;s role</a></li>
+<li class="cs-toc-item"><a href="#business-outcome">Business outcome</a></li>
+<li class="cs-toc-item"><a href="#lessons-for-other-companies">Lessons for other companies</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 01</span>
+<h2 id="context">Context</h2><div>
 <p>This case study covers the design and deployment of an AI Product Practice Operating Model. Developed for product organizations running parallel AI pilots, this model establishes governance, evaluation, and model-tiering standards to scale AI initiatives efficiently.</p>
-</div></section>
-<section class="cg-article-section"><h2>Business problem</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 02</span>
+<h2 id="business-problem">Business problem</h2><div>
 <p>Product squads launched AI pilots ad-hoc. There was no shared standard for model selection, eval metrics, prompt grounding, or cost attribution. This led to high API token costs, security vulnerabilities, and duplicate learning loops across squads.</p>
 <p><strong>First Principles Analysis:</strong> AI scale is not just an engineering problem; it is an operating model problem. Unlike traditional software, AI is non-deterministic. The product organization needed a structured process for model evaluation (evals), task-routing, and security tiering, ensuring that teams do not start coding until they document their model selections and safety boundaries.</p>
-</div></section>
-<section class="cg-article-section"><h2>User or operational pain</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 03</span>
+<h2 id="user-or-operational-pain">User or operational pain</h2><div>
 <p>Executive leadership lacked visibility into AI return on investment. Product teams wasted cycles repeating the same LLM mistakes, and security and compliance teams flagged safety issues late in production cycles, causing release blocks.</p>
-</div></section>
-<section class="cg-article-section"><h2>Product intervention</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 04</span>
+<h2 id="product-intervention">Product intervention</h2><div>
 <p>We designed and rolled out the AI Product Practice Operating Model:</p>
 <ul>
   <li><strong>Model Selection Framework:</strong> Created standardized templates for documenting model choices, cost trade-offs, and prompts.</li>
   <li><strong>Eval Suite Standards:</strong> Standardized evaluation rubrics (measuring grounding, faithfulness, and latency) before production deployment.</li>
   <li><strong>Release Governance:</strong> Set up a cross-functional review board to audit safety, security, and cost per run parameters.</li>
 </ul>
-</div></section>
-<section class="cg-article-section"><h2>AI capability used</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 05</span>
+<h2 id="ai-capability-used">AI capability used</h2><div>
 <p>Established shared libraries for RAG evaluations, model-routing rules, and prompt safety guardrails.</p>
-</div></section>
-<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 06</span>
+<h2 id="samadhan-x27-s-role">Samadhan&#x27;s role</h2><div>
 <p>Samadhan advised on the operating model, template designs, and leadership rituals, leveraging his experience leading HealthTech AI portfolios to build scalable governance structures.</p>
-</div></section>
-<section class="cg-article-section"><h2>Business outcome</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 07</span>
+<h2 id="business-outcome">Business outcome</h2><div>
 <p>Delivered an operating model that aligned product, engineering, and compliance. Enabled faster launch decisions, reduced token cost wastage, and established consistent safety guardrails across all AI features.</p>
-</div></section>
-<section class="cg-article-section"><h2>Lessons for other companies</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 08</span>
+<h2 id="lessons-for-other-companies">Lessons for other companies</h2><div>
 <p><strong>Key Product Leadership Takeaways:</strong></p>
 <ol>
   <li><strong>Templates beat heroics:</strong> Scaling AI requires structured checklists and templates. Documenting model choices and evals before writing code ensures process consistency.</li>
   <li><strong>Evaluate early and often:</strong> Set up eval runs early in the design cycle. Waiting until production to measure latency and grounding leads to major rework.</li>
 </ol>
-</div></section>
-<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/product-leadership-advisory/">Product Leadership Advisory</a> · <a href="/insights/">Insights</a></p>
-
-<section class="cg-section cg-reveal" id="cta">
-      <div class="cg-card large glow">
-        <h2>Ready to move from AI pilots to production?</h2>
-        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
-        <div class="cg-hero-actions" style="margin-top:20px;">
-          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
-          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
-        </div>
-      </div>
-    </section>
+</div></section><p style="margin-top:32px; border-top: 1px solid var(--soft); padding-top:24px;"><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/product-leadership-advisory/">Product Leadership Advisory</a> · <a href="/insights/">Insights</a></p>
+    </div>
   </main>
+
   <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
   <script src="/assets/js/theme.js"></script>
   <script src="/assets/js/nav.js"></script>
 
+
+<script>
+  function toggleMobileTOC() {
+    const el = document.getElementById('mobile-toc');
+    el.classList.toggle('open');
+  }
+
+  // Active section scroll tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const links = document.querySelectorAll(`.cs-toc-list a[href="#${id}"]`);
+        if (links.length === 0) return;
+        if (entry.intersectionRatio > 0) {
+          document.querySelectorAll('.cs-toc-item').forEach(item => item.classList.remove('active'));
+          links.forEach(link => link.parentElement.classList.add('active'));
+        }
+      });
+    }, { rootMargin: '-100px 0px -70% 0px' });
+
+    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {
+      observer.observe(h2);
+    });
+  });
+</script>
 </body>
 </html>

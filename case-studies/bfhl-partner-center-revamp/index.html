@@ -88,7 +88,7 @@
 </script>
 
 </head>
-<body class="cg-blog-theme portal-page" data-page="case-studies">
+<body class="cg-blog-theme portal-page case-study-premium" data-page="case-studies">
   <div class="animated-dot-field" aria-hidden="true"></div>
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
@@ -134,34 +134,107 @@
     </nav>
   </div>
 </header>
-<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
-<a href="https://samadhanmishra.com/">Home</a>
-<span class="sep">→</span>
-<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
-<span class="sep">→</span>
-<span class="current">Partner Center Revamp</span>
-</nav>
 
-  <header class="cg-hero cg-hero-compact">
-    <div class="cg-hero-content" style="max-width:800px;">
-      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
-      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Turning a Provider Portal into a Partner Operating Center</h1>
-      <p class="cg-hero-subtitle">How we reimagined a fragmented provider portal into a unified self-serve operating platform for healthcare partners.</p>
+  <header class="cs-hero">
+    <div class="cs-hero-container">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">Lead Product Manager</span>
+        <span class="cs-hero-chip">B2B SaaS / Partner Portals</span>
+        <span class="cs-hero-chip">Partner Operating Center</span>
+      </div>
+      <h1 class="cs-hero-title">Turning a Provider Portal into a Partner Operating Center</h1>
+      <p class="cs-hero-desc">How we reimagined a fragmented provider portal into a unified self-serve operating platform for healthcare partners.</p>
+      <div class="cs-hero-outcomes">
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Self-Serve</span>
+          <span class="cs-hero-outcome-lbl">Settlements &amp; Reports</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Superuser</span>
+          <span class="cs-hero-outcome-lbl">Hierarchical RBAC</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Reduced Load</span>
+          <span class="cs-hero-outcome-lbl">RM &amp; Support Dependency</span>
+        </div>
+        
+      </div>
     </div>
   </header>
-  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
 
-<section class="cg-article-section">
+  <main class="cs-layout">
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#rm-and-support-dependency-was-too-high">RM and support dependency was too high</a></li>
+<li class="cs-toc-item"><a href="#different-partner-types-had-different-workflows">Different partner types had different workflows</a></li>
+<li class="cs-toc-item"><a href="#access-control-needed-to-reflect-real-partner-hierarchies">Access control needed to reflect real partner hierarchies</a></li>
+<li class="cs-toc-item"><a href="#field-payment-workflows-were-different-from-ideal-product-journeys">Field payment workflows were different from ideal product journeys</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-healthpay-orders-and-settlements">Track 1: HealthPay Orders and Settlements</a></li>
+<li class="cs-toc-item"><a href="#track-2-lab-appointment-management">Track 2: Lab Appointment Management</a></li>
+<li class="cs-toc-item"><a href="#track-3-partner-report-upload">Track 3: Partner Report Upload</a></li>
+<li class="cs-toc-item"><a href="#track-4-help-support-sr-creation">Track 4: Help &amp; Support SR Creation</a></li>
+<li class="cs-toc-item"><a href="#track-5-hospital-lead-management-and-claim-assistance">Track 5: Hospital Lead Management and Claim Assistance</a></li>
+<li class="cs-toc-item"><a href="#track-6-access-control-and-partner-hierarchy">Track 6: Access Control and Partner Hierarchy</a></li>
+<li class="cs-toc-item"><a href="#track-7-analytics-dashboarding-and-adoption">Track 7: Analytics, Dashboarding, and Adoption</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered-for-bfhl">Why this mattered for BFHL</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="cs-content-area">
+      <div class="cs-mobile-toc" id="mobile-toc">
+        <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
+          <span>Table of Contents</span>
+        </button>
+        <div class="cs-mobile-toc-content">
+          <ul class="cs-toc-list">
+            <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#rm-and-support-dependency-was-too-high">RM and support dependency was too high</a></li>
+<li class="cs-toc-item"><a href="#different-partner-types-had-different-workflows">Different partner types had different workflows</a></li>
+<li class="cs-toc-item"><a href="#access-control-needed-to-reflect-real-partner-hierarchies">Access control needed to reflect real partner hierarchies</a></li>
+<li class="cs-toc-item"><a href="#field-payment-workflows-were-different-from-ideal-product-journeys">Field payment workflows were different from ideal product journeys</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-healthpay-orders-and-settlements">Track 1: HealthPay Orders and Settlements</a></li>
+<li class="cs-toc-item"><a href="#track-2-lab-appointment-management">Track 2: Lab Appointment Management</a></li>
+<li class="cs-toc-item"><a href="#track-3-partner-report-upload">Track 3: Partner Report Upload</a></li>
+<li class="cs-toc-item"><a href="#track-4-help-support-sr-creation">Track 4: Help &amp; Support SR Creation</a></li>
+<li class="cs-toc-item"><a href="#track-5-hospital-lead-management-and-claim-assistance">Track 5: Hospital Lead Management and Claim Assistance</a></li>
+<li class="cs-toc-item"><a href="#track-6-access-control-and-partner-hierarchy">Track 6: Access Control and Partner Hierarchy</a></li>
+<li class="cs-toc-item"><a href="#track-7-analytics-dashboarding-and-adoption">Track 7: Analytics, Dashboarding, and Adoption</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered-for-bfhl">Why this mattered for BFHL</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <section class="cg-article-section cs-chapter">
 <p>Provider portals often become dumping grounds.</p>
 <p>A place where partners can log in, download a report, raise a ticket, and maybe check a few transactions. They exist, but they do not change behaviour. Partners still call the RM. They still message on WhatsApp. They still ask support teams for transaction details, settlement status, appointment updates, report uploads, and issue resolution.</p>
 <p>That was the real product problem behind Partner Center.</p>
 <p>The earlier Provider Portal was not enough for the scale and direction of HealthPay. BFHL needed something broader: a partner-facing operating platform where labs, hospitals, diagnostic partners, and HealthPay merchants could manage their day-to-day work without depending on internal teams for every basic action.</p>
 <p>The product was completely revamped and renamed <strong>Partner Center</strong>.</p>
 <p>The rename was not because the scope moved beyond providers. It was because the product itself was being reimagined — from a portal into a working system for partners.</p>
-</section>
-
-<section class="cg-article-section">
-
+</section><section class="cg-article-section cs-chapter">
 <div class="cg-stats-grid">
   <div class="cg-stat-card">
     <span class="cg-stat-val">Unified</span>
@@ -177,7 +250,8 @@
   </div>
 </div>
 
-<h2>The situation</h2>
+<span class="cs-chapter-num">Chapter 01</span>
+<h2 id="the-situation">The situation</h2>
 <p>By the time I moved into Partner Center, HealthPay had already started building strong transaction, settlement, and partner workflows.</p>
 <p>But partners were still dependent on BFHL teams for many routine needs.</p>
 <p>A lab partner needed to know:</p>
@@ -213,10 +287,9 @@
 <blockquote class="cg-editorial-quote">
   <p>Build one partner-facing platform that reduces dependency, improves visibility, and gives partners enough control to manage their own operational workflows.</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>What was actually broken</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 02</span>
+<h2 id="what-was-actually-broken">What was actually broken</h2>
 <p>The problem was not that partners lacked a login.</p>
 <p>The problem was that the partner experience was fragmented.</p>
 
@@ -252,38 +325,34 @@
   <li>What happened to my support query?</li>
 </ul>
 <p>When partners cannot answer these questions themselves, the platform becomes invisible and the RM becomes the product.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>RM and support dependency was too high</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 03</span>
+<h2 id="rm-and-support-dependency-was-too-high">RM and support dependency was too high</h2>
 <p>If every operational question required a call, message, or escalation, the system was not scaling.</p>
 <p>RMs were pulled into routine support.<br>
 Support teams handled repetitive requests.<br>
 Partners developed habits around WhatsApp and direct calls instead of using product workflows.</p>
 <p>That meant Partner Center had to change not only functionality, but behaviour.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Different partner types had different workflows</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 04</span>
+<h2 id="different-partner-types-had-different-workflows">Different partner types had different workflows</h2>
 <p>A lab, a hospital, and a HealthPay merchant do not work the same way.</p>
 <p>A lab cares about appointments, sample collection, report upload, and lab settlements.<br>
 A hospital cares about leads, claim assistance, and future appointment/payout flows.<br>
 A HealthPay merchant cares about QR transactions, orders, settlements, downloads, and payment visibility.</p>
 <p>A generic provider portal would not solve all of this.</p>
 <p>The product had to be modular but unified.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Access control needed to reflect real partner hierarchies</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 05</span>
+<h2 id="access-control-needed-to-reflect-real-partner-hierarchies">Access control needed to reflect real partner hierarchies</h2>
 <p>Partners were not single users.</p>
 <p>A large diagnostic chain could have head-office users, center-level users, finance users, operations users, and staff members across locations.</p>
 <p>In real usage, shared logins appeared because the platform did not yet fully match partner hierarchy and access needs.</p>
 <p>This was a product signal.</p>
 <p>The system needed stronger access control, user hierarchy, superuser roles, center-level visibility, and adoption tracking.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Field payment workflows were different from ideal product journeys</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 06</span>
+<h2 id="field-payment-workflows-were-different-from-ideal-product-journeys">Field payment workflows were different from ideal product journeys</h2>
 <p>In the phlebo and lab context, actual field behaviour was practical and messy.</p>
 <p>Payments were happening through QR codes and payment links.<br>
 Payment confirmation and reconciliation were often coordinated centrally.<br>
@@ -291,10 +360,9 @@ POS machines were not the dominant field mechanism.<br>
 Cash and UPI were still part of the operating reality.</p>
 <p>So the product could not be designed for a clean digital-only assumption.</p>
 <p>It needed to support QR-level visibility, payment links, center-wise QR usage, and reporting that matched how partners actually operated.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>The product insight</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 07</span>
+<h2 id="the-product-insight">The product insight</h2>
 <p>The obvious product answer would have been:</p>
 <blockquote class="cg-editorial-quote">
   <p>&ldquo;Improve the provider portal.&rdquo;</p>
@@ -323,18 +391,16 @@ An operating center is where users go to run their work.</p>
   <li>eventually access unified ledger and reconciliation views.</li>
 </ul>
 <p>This moved the product from passive visibility to active partner operations.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What I shaped</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 08</span>
+<h2 id="what-i-shaped">What I shaped</h2>
 <p>I led the Partner Center revamp in 2023 under HealthPay.</p>
 <p>I owned the full Partner Center scope across HealthPay, Labs/Lab Connect, Hospitals, Help & Support, Analytics, Access Control, roadmap, user stories, stakeholder alignment, GTM/adoption, dashboarding, and delivery.</p>
 <p>Maaz Modak and Abhishek Behera supported me as PMs.</p>
 <p>The work was structured into multiple product tracks.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 1: HealthPay Orders and Settlements</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 09</span>
+<h2 id="track-1-healthpay-orders-and-settlements">Track 1: HealthPay Orders and Settlements</h2>
 <p>The HealthPay track gave partners visibility into their financial transactions.</p>
 <p>This was foundational because payment trust depends on transparency.</p>
 <p>Partners needed to answer basic questions without calling BFHL:</p>
@@ -364,10 +430,9 @@ An operating center is where users go to run their work.</p>
   <li>data download/export.</li>
 </ul>
 <p>This changed the partner experience from asking BFHL for payment data to accessing transaction and settlement visibility directly.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 2: Lab Appointment Management</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 10</span>
+<h2 id="track-2-lab-appointment-management">Track 2: Lab Appointment Management</h2>
 <p>Labs needed Partner Center for operational fulfilment, not only financial reporting.</p>
 <p>Lab Appointment Management went live with capabilities that allowed lab partners to act on appointment workflows.</p>
 <p>The platform supported:</p>
@@ -382,20 +447,18 @@ An operating center is where users go to run their work.</p>
 <p>This mattered because lab operations are time-sensitive.</p>
 <p>A lab appointment is not just a record. It requires action: accept it, prepare for it, complete the service, upload the report, and close the loop.</p>
 <p>Partner Center helped move those actions closer to the partner.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 3: Partner Report Upload</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 11</span>
+<h2 id="track-3-partner-report-upload">Track 3: Partner Report Upload</h2>
 <p>Report upload was a critical capability for lab workflows.</p>
 <p>Without partner-side report upload, BFHL remained dependent on manual coordination. Reports could be delayed, missed, or chased through operational channels.</p>
 <p>By enabling report upload inside Partner Center, the platform gave partners a clearer path to complete the service journey.</p>
 <p>This was important for customer experience as well.</p>
 <p>For a customer, the lab journey does not end when the sample is collected. It ends when the report is available.</p>
 <p>Partner Center helped bring that final step into the product workflow.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 4: Help & Support SR Creation</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 12</span>
+<h2 id="track-4-help-support-sr-creation">Track 4: Help & Support SR Creation</h2>
 <p>Support was one of the most important horizontal tracks.</p>
 <p>Partners needed a structured way to raise queries instead of depending on WhatsApp, calls, or RM escalation.</p>
 <p>Help & Support SR creation went live.</p>
@@ -411,10 +474,9 @@ An operating center is where users go to run their work.</p>
 <p>This was a key move from informal support to productized support.</p>
 <p>The goal was not only faster resolution.<br>
 The goal was better ownership and visibility.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 5: Hospital Lead Management and Claim Assistance</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 13</span>
+<h2 id="track-5-hospital-lead-management-and-claim-assistance">Track 5: Hospital Lead Management and Claim Assistance</h2>
 <p>Hospitals had a different partner journey.</p>
 <p>They needed visibility into leads and support for claim-related assistance workflows.</p>
 <p>Partner Center enabled:</p>
@@ -426,10 +488,9 @@ The goal was better ownership and visibility.</p>
 </ul>
 <p>This extended the platform beyond payment and lab workflows into hospital-facing business operations.</p>
 <p>It also reinforced the idea that Partner Center was not a single-feature portal. It was a multi-cohort partner platform.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 6: Access Control and Partner Hierarchy</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 14</span>
+<h2 id="track-6-access-control-and-partner-hierarchy">Track 6: Access Control and Partner Hierarchy</h2>
 <p>One of the more important product realities was that partners had different internal users.</p>
 <p>A diagnostic chain could not be treated the same way as a single-center provider.</p>
 <p>The platform needed:</p>
@@ -446,10 +507,9 @@ The goal was better ownership and visibility.</p>
 <p>It was a scale feature.</p>
 <p>If access control is weak, partners share logins. If partners share logins, adoption data becomes unreliable. If adoption data is unreliable, GTM and usage strategy become guesswork.</p>
 <p>Access control made the platform more enterprise-ready.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 7: Analytics, Dashboarding, and Adoption</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 15</span>
+<h2 id="track-7-analytics-dashboarding-and-adoption">Track 7: Analytics, Dashboarding, and Adoption</h2>
 <p>Partner Adoption was the primary success metric.</p>
 <p>That meant the product had to be measured not only by features delivered, but by whether partners actually used them.</p>
 <p>The platform needed visibility into:</p>
@@ -469,10 +529,9 @@ The goal was better ownership and visibility.</p>
 <p>That difference is critical.</p>
 <p>A product is not successful because it is live.<br>
 It is successful when it changes behaviour.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>How the workflow changed</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 16</span>
+<h2 id="how-the-workflow-changed">How the workflow changed</h2>
 <p>Before Partner Center, many workflows looked like this:</p>
 <blockquote class="cg-editorial-quote">
   <p>Partner needs information &rarr; calls RM or support &rarr; internal team checks system &rarr; data shared manually &rarr; follow-up continues on WhatsApp/email/calls.</p>
@@ -484,10 +543,9 @@ It is successful when it changes behaviour.</p>
 <p>This shifted the center of gravity.</p>
 <p>The old model made BFHL teams the interface.<br>
 The new model made the platform the interface.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What made this hard</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 17</span>
+<h2 id="what-made-this-hard">What made this hard</h2>
 <p>Partner Center was complex because it was not one product for one user type.</p>
 <p>It had multiple partner segments, each with different jobs to be done.</p>
 <h3 style="margin-top:16px;">HealthPay partners needed financial visibility</h3>
@@ -512,10 +570,9 @@ The new model made the platform the interface.</p>
 </ul>
 <p>This required careful prioritization.</p>
 <p>The challenge was to build enough value for adoption now while keeping the architecture and roadmap open for a broader partner operating platform.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What was achieved</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 18</span>
+<h2 id="what-was-achieved">What was achieved</h2>
 <p>Partner Center delivered multiple live capabilities under my ownership:</p>
 <ul>
   <li>HealthPay Orders and Settlements,</li>
@@ -535,10 +592,9 @@ The new model made the platform the interface.</p>
 <blockquote class="cg-editorial-quote">
   <p>Partner Center created a unified self-serve platform for BFHL partners, reducing operational dependency on RMs/support teams and improving partner trust, visibility, and adoption across HealthPay, Labs, Hospitals, and support workflows.</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>Why this mattered for BFHL</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 19</span>
+<h2 id="why-this-mattered-for-bfhl">Why this mattered for BFHL</h2>
 <p>Partner Center mattered because partner experience directly affects business scalability.</p>
 <p>If partners depend on RMs for every transaction, settlement, appointment, or support query, the business cannot scale efficiently.</p>
 <p>If partners have self-serve access, the operating model changes.</p>
@@ -554,10 +610,9 @@ The new model made the platform the interface.</p>
 </ul>
 <p>It also connected with the broader HealthPay vision.</p>
 <p>HealthPay was not only a payment product. It needed partner trust, partner adoption, transaction confidence, and settlement visibility. Partner Center became the interface for that trust.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What this says about my product approach</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 20</span>
+<h2 id="what-this-says-about-my-product-approach">What this says about my product approach</h2>
 <p>Partner Center reflects one of my strongest product patterns:</p>
 <blockquote class="cg-editorial-quote">
   <p>I look for where operational dependency is hiding, then build product systems that convert dependency into self-service.</p>
@@ -569,23 +624,40 @@ The better answer was to redesign partner operations.</p>
 <p>A portal displays information.<br>
 A platform changes the operating model.</p>
 <p>Partner Center was built to change the operating model.</p>
-</section>
-<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/product-operating-model/">Product Operating Model</a> · <a href="/insights/">Insights</a></p>
-
-<section class="cg-section cg-reveal" id="cta">
-      <div class="cg-card large glow">
-        <h2>Ready to move from AI pilots to production?</h2>
-        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
-        <div class="cg-hero-actions" style="margin-top:20px;">
-          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
-          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
-        </div>
-      </div>
-    </section>
+</section><p style="margin-top:32px; border-top: 1px solid var(--soft); padding-top:24px;"><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/product-operating-model/">Product Operating Model</a> · <a href="/insights/">Insights</a></p>
+    </div>
   </main>
+
   <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
   <script src="/assets/js/theme.js"></script>
   <script src="/assets/js/nav.js"></script>
 
+
+<script>
+  function toggleMobileTOC() {
+    const el = document.getElementById('mobile-toc');
+    el.classList.toggle('open');
+  }
+
+  // Active section scroll tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const links = document.querySelectorAll(`.cs-toc-list a[href="#${id}"]`);
+        if (links.length === 0) return;
+        if (entry.intersectionRatio > 0) {
+          document.querySelectorAll('.cs-toc-item').forEach(item => item.classList.remove('active'));
+          links.forEach(link => link.parentElement.classList.add('active'));
+        }
+      });
+    }, { rootMargin: '-100px 0px -70% 0px' });
+
+    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {
+      observer.observe(h2);
+    });
+  });
+</script>
 </body>
 </html>

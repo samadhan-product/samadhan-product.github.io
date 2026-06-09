@@ -420,9 +420,135 @@ def service_page(svc: dict) -> str:
 """
 
 
+CASE_STUDY_METRICS = {
+    "ai-led-pre-auth-automation": {
+        "role": "Lead Product Manager",
+        "domain": "Healthcare TPA Operations",
+        "product": "IPD Cashless Pre-Auth Workbench",
+        "outcomes": [
+            {"val": "Assistive AI", "lbl": "Clinical Summarization"},
+            {"val": "Strict Sequence", "lbl": "Deductions Guardrails"},
+            {"val": "Discharge Lane", "lbl": "Expedited Queue Routing"}
+        ]
+    },
+    "ai-powered-cognitive-decision-engine": {
+        "role": "Lead Product Manager",
+        "domain": "Healthcare Operations AI",
+        "product": "Enigma Cognitive DMS Engine",
+        "outcomes": [
+            {"val": "Multi-Modal", "lbl": "CV & NLP Models"},
+            {"val": "Explainable", "lbl": "Visual Proofing Grid"},
+            {"val": "Audit Logs", "lbl": "Override Verification"}
+        ]
+    },
+    "bfhl-wellness-cohort": {
+        "role": "Lead Product Manager",
+        "domain": "Digital Health & Corporate Wellness",
+        "product": "Wellness Engagement System",
+        "outcomes": [
+            {"val": "₹95 Lakhs", "lbl": "Annual Vendor Cost Saved"},
+            {"val": "In-House", "lbl": "Dietician-led Care model"},
+            {"val": "Gamified", "lbl": "Everest/Kilimanjaro Steps"}
+        ]
+    },
+    "bfhl-healthpay-qr-transition": {
+        "role": "Lead Product Manager (Integration)",
+        "domain": "FinTech & Payment Rails",
+        "product": "HealthPay-BajajPay QR Transition",
+        "outcomes": [
+            {"val": "Zero Downtime", "lbl": "Ecosystem Migration"},
+            {"val": "Automated", "lbl": "Merchant Mapping Feed"},
+            {"val": "Shared Support", "lbl": "Cross-Company SOP"}
+        ]
+    },
+    "bfhl-partner-center-revamp": {
+        "role": "Lead Product Manager",
+        "domain": "B2B SaaS / Partner Portals",
+        "product": "Partner Operating Center",
+        "outcomes": [
+            {"val": "Self-Serve", "lbl": "Settlements & Reports"},
+            {"val": "Superuser", "lbl": "Hierarchical RBAC"},
+            {"val": "Reduced Load", "lbl": "RM & Support Dependency"}
+        ]
+    },
+    "bfhl-healthpay-recon-automation": {
+        "role": "Lead Product Manager",
+        "domain": "FinTech / Financial Operations",
+        "product": "HealthPay Payout & Recon Engine",
+        "outcomes": [
+            {"val": "RazorpayX", "lbl": "API Payout Integration"},
+            {"val": "Automated", "lbl": "Daily PG Reconciliation"},
+            {"val": "Audit-Ready", "lbl": "Internal Payout Controls"}
+        ]
+    },
+    "bfhl-service-guarantee": {
+        "role": "Lead Product Manager",
+        "domain": "Healthcare Service Operations",
+        "product": "Fulfillment Assurance Platform",
+        "outcomes": [
+            {"val": "SFDC + HRx", "lbl": "System Sync Integration"},
+            {"val": "Real-Time", "lbl": "Phlebo Check-in Track"},
+            {"val": "Proactive", "lbl": "SLA-Breach Alerts"}
+        ]
+    },
+    "bfhl-opd-reimbursement-claims": {
+        "role": "Lead Product Manager",
+        "domain": "Health Insurance Claims",
+        "product": "OPD Claims Salesforce Workbench",
+        "outcomes": [
+            {"val": "+73%", "lbl": "Claims Processing Speed"},
+            {"val": "From 75", "lbl": "Original Daily Claims/Agent"},
+            {"val": "To 130", "lbl": "Revamped Daily Claims/Agent"}
+        ]
+    },
+    "highradius-autonomous-collections": {
+        "role": "Senior Product Manager",
+        "domain": "Enterprise FinTech SaaS",
+        "product": "Autonomous Receivables Platform",
+        "outcomes": [
+            {"val": "Smart Priorities", "lbl": "Delinquency Scoring Lists"},
+            {"val": "Auto AP Sync", "lbl": "Direct Portal Posting"},
+            {"val": "Promise-to-Pay", "lbl": "Commitment Auditing"}
+        ]
+    },
+    "creanovation-edtech-saas": {
+        "role": "Lead Product Manager",
+        "domain": "EdTech CRM / SaaS",
+        "product": "Forms Dot Star Admissions Suite",
+        "outcomes": [
+            {"val": "Unified Funnel", "lbl": "Student Lifecycle"},
+            {"val": "Self-Serve", "lbl": "Document Upload Hub"},
+            {"val": "Automated", "lbl": "Fee Reconciliation"}
+        ]
+    },
+    "ai-learning-platform-for-schools": {
+        "role": "Lead Product Manager",
+        "domain": "EdTech AI",
+        "product": "AI Learning Platform for Schools",
+        "outcomes": [
+            {"val": "Adaptive", "lbl": "Personalized Exercises"},
+            {"val": "Multi-Curricula", "lbl": "Automatic Content Maps"},
+            {"val": "Insights", "lbl": "Teacher Feedback Portal"}
+        ]
+    },
+    "ai-product-practice-operating-model": {
+        "role": "Consultant / Practice Lead",
+        "domain": "Product Practice Operating Model",
+        "product": "AI Practice Center of Excellence",
+        "outcomes": [
+            {"val": "Standardized", "lbl": "PM Operating Playbooks"},
+            {"val": "Eval Sprints", "lbl": "Systematic Evals"},
+            {"val": "Structured Governance", "lbl": "Model Choice Frameworks"}
+        ]
+    }
+}
+
+
 def case_study_page(cs: dict) -> str:
+    import re
     slug = cs["slug"]
     path = f"/case-studies/{slug}/"
+    
     if "custom_body" in cs:
         body = cs["custom_body"]
     else:
@@ -439,36 +565,200 @@ def case_study_page(cs: dict) -> str:
         body = ""
         for h, p in sections:
             body += f'<section class="cg-article-section"><h2>{esc(h)}</h2><div>{p}</div></section>\n'
-    body += f'<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p>'
 
+    # Global conversion: Translate all standard blockquotes to editorial quotes
+    body = body.replace("<blockquote>", '<blockquote class="cg-editorial-quote">')
 
+    # Parse headings and wrap chapters
+    h2_pattern = re.compile(r'<h2>(.*?)</h2>')
+    headers = h2_pattern.findall(body)
+    
+    toc = []
+    for h in headers:
+        clean_text = re.sub(r'<.*?>', '', h).strip()
+        h_id = re.sub(r'[^a-z0-9]+', '-', clean_text.lower()).strip('-')
+        toc.append((clean_text, h_id))
+
+    sections_split = body.split('<section class="cg-article-section">')
+    new_sections = []
+    if sections_split[0].strip():
+        new_sections.append(sections_split[0])
+        
+    chapter_num = 1
+    for s in sections_split[1:]:
+        h2_match = h2_pattern.search(s)
+        if h2_match:
+            h_text = h2_match.group(1)
+            clean_text = re.sub(r'<.*?>', '', h_text).strip()
+            h_id = re.sub(r'[^a-z0-9]+', '-', clean_text.lower()).strip('-')
+            
+            chapter_header = f'<span class="cs-chapter-num">Chapter {chapter_num:02d}</span>\n<h2 id="{h_id}">{h_text}</h2>'
+            s_modified = h2_pattern.sub(chapter_header, s, 1)
+            new_sections.append(f'<section class="cg-article-section cs-chapter">\n{s_modified.strip()}')
+            chapter_num += 1
+        else:
+            new_sections.append(f'<section class="cg-article-section cs-chapter">\n{s.strip()}')
+            
+    body_formatted = "".join(new_sections)
+
+    # Add related links footer
+    footer_links = f'<p style="margin-top:32px; border-top: 1px solid var(--soft); padding-top:24px;"><a class="cg-read-link" href="/case-studies/">← All case studies</a></p>'
     service = cs.get("service_link", "/ai-product-management-consultant/")
-    body += f'<p style="margin-top:16px;">Related service: <a href="{esc(service)}">{esc(cs.get("service_label", "AI Product Consulting"))}</a> · <a href="/insights/">Insights</a></p>'
+    footer_links += f'<p style="margin-top:16px;">Related service: <a href="{esc(service)}">{esc(cs.get("service_label", "AI Product Consulting"))}</a> · <a href="/insights/">Insights</a></p>'
+    body_formatted += footer_links
 
+    # Fetch metadata
+    meta = CASE_STUDY_METRICS.get(slug, {
+        "role": "AI Product Leader",
+        "domain": "Product Strategy & Operations",
+        "product": "Product Consulting Project",
+        "outcomes": [
+            {"val": "Delivered", "lbl": "Strategy Framework"},
+            {"val": "Audit-Ready", "lbl": "Process SOPs"},
+            {"val": "Operational", "lbl": "Production Evals"}
+        ]
+    })
 
-    return page(
-        path=path,
-        title=cs["title"] + " | Case Study — Samadhan Mishra",
-        description=cs["description"],
-        h1=cs["h1"],
-        body_html=body,
-        data_page="case-studies",
-        breadcrumbs_items=[
-            ("Home", SITE + "/"),
-            ("Case Studies", SITE + "/case-studies/"),
-            (cs["short_title"], SITE + path),
-        ],
-        schema_graphs=[
-            person_schema(),
-            {
-                "@type": "Article",
-                "headline": cs["h1"],
-                "description": cs["description"],
-                "author": {"@type": "Person", "name": "Samadhan Mishra"},
-                "url": SITE + path,
-            },
-        ],
-    )
+    role = meta["role"]
+    domain = meta["domain"]
+    product = meta["product"]
+    
+    outcome_cards_html = ""
+    for o in meta["outcomes"]:
+        outcome_cards_html += f"""
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">{esc(o["val"])}</span>
+          <span class="cs-hero-outcome-lbl">{esc(o["lbl"])}</span>
+        </div>
+        """
+
+    # Build TOC navigation HTML
+    toc_items_html = ""
+    for clean_text, h_id in toc:
+        toc_items_html += f'<li class="cs-toc-item"><a href="#{h_id}">{esc(clean_text)}</a></li>\n'
+
+    title = cs["title"] + " | Case Study — Samadhan Mishra"
+    description = cs["description"]
+    h1 = cs["h1"]
+    url = SITE + path
+
+    schemas = breadcrumbs([
+        ("Home", SITE + "/"),
+        ("Case Studies", SITE + "/case-studies/"),
+        (cs["short_title"], SITE + path),
+    ])
+    
+    graphs = [
+        person_schema(),
+        {
+            "@type": "Article",
+            "headline": cs["h1"],
+            "description": cs["description"],
+            "author": {"@type": "Person", "name": "Samadhan Mishra"},
+            "url": SITE + path,
+        },
+    ]
+    schemas += f'\n<script type="application/ld+json">\n{ld_json(*graphs)}\n</script>\n'
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+{GTAG}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{esc(description)}" />
+  <title>{esc(title)}</title>
+  <link rel="canonical" href="{esc(url)}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{esc(title)}" />
+  <meta property="og:description" content="{esc(description)}" />
+  <meta property="og:url" content="{esc(url)}" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="{OG_IMAGE}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{esc(title)}" />
+  <meta name="twitter:description" content="{esc(description)}" />
+  <meta name="twitter:image" content="{OG_IMAGE}" />
+  <script>!function(){{var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+{schemas}
+</head>
+<body class="cg-blog-theme portal-page case-study-premium" data-page="case-studies">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+{NAV}
+
+  <header class="cs-hero">
+    <div class="cs-hero-container">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">{esc(role)}</span>
+        <span class="cs-hero-chip">{esc(domain)}</span>
+        <span class="cs-hero-chip">{esc(product)}</span>
+      </div>
+      <h1 class="cs-hero-title">{esc(h1)}</h1>
+      <p class="cs-hero-desc">{esc(description)}</p>
+      <div class="cs-hero-outcomes">
+        {outcome_cards_html}
+      </div>
+    </div>
+  </header>
+
+  <main class="cs-layout">
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          {toc_items_html}
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="cs-content-area">
+      <div class="cs-mobile-toc" id="mobile-toc">
+        <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
+          <span>Table of Contents</span>
+        </button>
+        <div class="cs-mobile-toc-content">
+          <ul class="cs-toc-list">
+            {toc_items_html}
+          </ul>
+        </div>
+      </div>
+
+      {body_formatted}
+    </div>
+  </main>
+
+{FOOTER}
+
+<script>
+  function toggleMobileTOC() {{
+    const el = document.getElementById('mobile-toc');
+    el.classList.toggle('open');
+  }}
+
+  // Active section scroll tracking
+  document.addEventListener('DOMContentLoaded', () => {{
+    const observer = new IntersectionObserver(entries => {{
+      entries.forEach(entry => {{
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const links = document.querySelectorAll(`.cs-toc-list a[href="#${{id}}"]`);
+        if (links.length === 0) return;
+        if (entry.intersectionRatio > 0) {{
+          document.querySelectorAll('.cs-toc-item').forEach(item => item.classList.remove('active'));
+          links.forEach(link => link.parentElement.classList.add('active'));
+        }}
+      }});
+    }}, {{ rootMargin: '-100px 0px -70% 0px' }});
+
+    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {{
+      observer.observe(h2);
+    }});
+  }});
+</script>
+</body>
+</html>
+"""
 
 
 CASE_STUDY_REDIRECTS = {

@@ -88,7 +88,7 @@
 </script>
 
 </head>
-<body class="cg-blog-theme portal-page" data-page="case-studies">
+<body class="cg-blog-theme portal-page case-study-premium" data-page="case-studies">
   <div class="animated-dot-field" aria-hidden="true"></div>
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
@@ -134,24 +134,108 @@
     </nav>
   </div>
 </header>
-<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
-<a href="https://samadhanmishra.com/">Home</a>
-<span class="sep">→</span>
-<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
-<span class="sep">→</span>
-<span class="current">EdTech SaaS Platform</span>
-</nav>
 
-  <header class="cg-hero cg-hero-compact">
-    <div class="cg-hero-content" style="max-width:800px;">
-      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
-      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Building an EdTech SaaS Platform from Online Forms to Student Relationship Management</h1>
-      <p class="cg-hero-subtitle">How we evolved a focused application form builder into SREM, a comprehensive student relationship management platform serving 500+ colleges and processing 5M+ applications.</p>
+  <header class="cs-hero">
+    <div class="cs-hero-container">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">Lead Product Manager</span>
+        <span class="cs-hero-chip">EdTech CRM / SaaS</span>
+        <span class="cs-hero-chip">Forms Dot Star Admissions Suite</span>
+      </div>
+      <h1 class="cs-hero-title">Building an EdTech SaaS Platform from Online Forms to Student Relationship Management</h1>
+      <p class="cs-hero-desc">How we evolved a focused application form builder into SREM, a comprehensive student relationship management platform serving 500+ colleges and processing 5M+ applications.</p>
+      <div class="cs-hero-outcomes">
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Unified Funnel</span>
+          <span class="cs-hero-outcome-lbl">Student Lifecycle</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Self-Serve</span>
+          <span class="cs-hero-outcome-lbl">Document Upload Hub</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Automated</span>
+          <span class="cs-hero-outcome-lbl">Fee Reconciliation</span>
+        </div>
+        
+      </div>
     </div>
   </header>
-  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
 
-<section class="cg-article-section">
+  <main class="cs-layout">
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#admissions-teams-lacked-follow-up-discipline">Admissions teams lacked follow-up discipline</a></li>
+<li class="cs-toc-item"><a href="#application-processing-was-slow">Application processing was slow</a></li>
+<li class="cs-toc-item"><a href="#communication-was-disconnected">Communication was disconnected</a></li>
+<li class="cs-toc-item"><a href="#management-lacked-real-time-visibility">Management lacked real-time visibility</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#how-forms-dot-star-evolved-into-srem">How Forms Dot Star evolved into SREM</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-digital-application-and-enrollment-workflow">Track 1: Digital application and enrollment workflow</a></li>
+<li class="cs-toc-item"><a href="#track-2-automated-document-processing">Track 2: Automated document processing</a></li>
+<li class="cs-toc-item"><a href="#track-3-admissions-crm-and-student-lifecycle-management">Track 3: Admissions CRM and student lifecycle management</a></li>
+<li class="cs-toc-item"><a href="#track-4-intelligent-lead-scoring">Track 4: Intelligent lead scoring</a></li>
+<li class="cs-toc-item"><a href="#track-5-automated-admission-workflow">Track 5: Automated admission workflow</a></li>
+<li class="cs-toc-item"><a href="#track-6-multi-channel-communication-platform">Track 6: Multi-channel communication platform</a></li>
+<li class="cs-toc-item"><a href="#track-7-analytics-and-funnel-visibility">Track 7: Analytics and funnel visibility</a></li>
+<li class="cs-toc-item"><a href="#track-8-payment-gateway-integration">Track 8: Payment gateway integration</a></li>
+<li class="cs-toc-item"><a href="#track-9-role-based-access-and-institutional-hierarchy">Track 9: Role-based access and institutional hierarchy</a></li>
+<li class="cs-toc-item"><a href="#track-10-mobile-first-accessibility">Track 10: Mobile-first accessibility</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered">Why this mattered</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="cs-content-area">
+      <div class="cs-mobile-toc" id="mobile-toc">
+        <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
+          <span>Table of Contents</span>
+        </button>
+        <div class="cs-mobile-toc-content">
+          <ul class="cs-toc-list">
+            <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#admissions-teams-lacked-follow-up-discipline">Admissions teams lacked follow-up discipline</a></li>
+<li class="cs-toc-item"><a href="#application-processing-was-slow">Application processing was slow</a></li>
+<li class="cs-toc-item"><a href="#communication-was-disconnected">Communication was disconnected</a></li>
+<li class="cs-toc-item"><a href="#management-lacked-real-time-visibility">Management lacked real-time visibility</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#how-forms-dot-star-evolved-into-srem">How Forms Dot Star evolved into SREM</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-digital-application-and-enrollment-workflow">Track 1: Digital application and enrollment workflow</a></li>
+<li class="cs-toc-item"><a href="#track-2-automated-document-processing">Track 2: Automated document processing</a></li>
+<li class="cs-toc-item"><a href="#track-3-admissions-crm-and-student-lifecycle-management">Track 3: Admissions CRM and student lifecycle management</a></li>
+<li class="cs-toc-item"><a href="#track-4-intelligent-lead-scoring">Track 4: Intelligent lead scoring</a></li>
+<li class="cs-toc-item"><a href="#track-5-automated-admission-workflow">Track 5: Automated admission workflow</a></li>
+<li class="cs-toc-item"><a href="#track-6-multi-channel-communication-platform">Track 6: Multi-channel communication platform</a></li>
+<li class="cs-toc-item"><a href="#track-7-analytics-and-funnel-visibility">Track 7: Analytics and funnel visibility</a></li>
+<li class="cs-toc-item"><a href="#track-8-payment-gateway-integration">Track 8: Payment gateway integration</a></li>
+<li class="cs-toc-item"><a href="#track-9-role-based-access-and-institutional-hierarchy">Track 9: Role-based access and institutional hierarchy</a></li>
+<li class="cs-toc-item"><a href="#track-10-mobile-first-accessibility">Track 10: Mobile-first accessibility</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered">Why this mattered</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <section class="cg-article-section cs-chapter">
 <p>Most education institutions do not lose students only because of academics, pricing, or competition.</p>
 <p>They lose them in the gaps.</p>
 <p>A student fills a form, but no one follows up quickly.<br>
@@ -168,10 +252,7 @@ Marketing generates leads, but admissions teams do not know which ones are likel
 <p>The evolution was not just a rename. It was a product-market fit shift.</p>
 <p>Forms Dot Star solved application digitization.<br>
 SREM solved student engagement, admissions CRM, communication, application processing, analytics, and lifecycle management as one platform.</p>
-</section>
-
-<section class="cg-article-section">
-
+</section><section class="cg-article-section cs-chapter">
 <div class="cg-stats-grid">
   <div class="cg-stat-card">
     <span class="cg-stat-val">CRM SaaS</span>
@@ -187,7 +268,8 @@ SREM solved student engagement, admissions CRM, communication, application proce
   </div>
 </div>
 
-<h2>The situation</h2>
+<span class="cs-chapter-num">Chapter 01</span>
+<h2 id="the-situation">The situation</h2>
 <p>Indian educational institutions were going through a digital transformation, but the admissions operating model was still highly fragmented.</p>
 <p>Many institutions were dealing with:</p>
 <ul>
@@ -206,10 +288,9 @@ SREM solved student engagement, admissions CRM, communication, application proce
 <p>At larger institutions, the problem was scale, conversion, funnel visibility, and process control.</p>
 <p>The product had to serve both.</p>
 <p>It had to be simple enough for institutions moving away from paper and powerful enough for institutions managing thousands of students, counselors, campaigns, and admission stages.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What was actually broken</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 02</span>
+<h2 id="what-was-actually-broken">What was actually broken</h2>
 <p>At first glance, the problem looked like:</p>
 <blockquote class="cg-editorial-quote">
   <p>&ldquo;Institutions need online application forms.&rdquo;</p>
@@ -230,10 +311,9 @@ SREM solved student engagement, admissions CRM, communication, application proce
 </ul>
 <p>But institutions did not have a unified way to capture and manage all these interactions.</p>
 <p>A form submission was often treated as an isolated record instead of the beginning of a student relationship.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Admissions teams lacked follow-up discipline</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 03</span>
+<h2 id="admissions-teams-lacked-follow-up-discipline">Admissions teams lacked follow-up discipline</h2>
 <p>A student enquiry loses value quickly if no one follows up.</p>
 <p>Counselors needed to know:</p>
 <ul>
@@ -251,10 +331,9 @@ SREM solved student engagement, admissions CRM, communication, application proce
 Some were ignored.<br>
 Some were contacted too late.<br>
 Some were contacted without context.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Application processing was slow</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 04</span>
+<h2 id="application-processing-was-slow">Application processing was slow</h2>
 <p>For many institutions, application processing involved manual checks:</p>
 <ul>
   <li>form completeness,</li>
@@ -267,20 +346,18 @@ Some were contacted without context.</p>
 <p>Processing time affected both student experience and institutional efficiency.</p>
 <p>If an institution took too long to respond, the student could move to another college.</p>
 <p>Speed was not just an operational metric. It affected conversion.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Communication was disconnected</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 05</span>
+<h2 id="communication-was-disconnected">Communication was disconnected</h2>
 <p>Institutions used SMS, email, WhatsApp, calls, and sometimes physical notices.</p>
 <p>But communication was often not connected to the student&rsquo;s actual funnel stage.</p>
 <p>A student who submitted documents needed a different message from a student who abandoned the form.<br>
 A student who paid application fees needed a different message from someone who only enquired.<br>
 A student who was admitted needed a different journey from someone still undecided.</p>
 <p>The product needed to support communication as part of the lifecycle, not as a separate broadcast tool.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Management lacked real-time visibility</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 06</span>
+<h2 id="management-lacked-real-time-visibility">Management lacked real-time visibility</h2>
 <p>Leadership needed to know:</p>
 <ul>
   <li>how many enquiries were generated,</li>
@@ -295,10 +372,9 @@ A student who was admitted needed a different journey from someone still undecid
 </ul>
 <p>Without dashboards, decisions were reactive.</p>
 <p>Institutions needed analytics that converted scattered admission activity into management insight.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>The product insight</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 07</span>
+<h2 id="the-product-insight">The product insight</h2>
 <p>The initial product solved a real need: digital application forms.</p>
 <p>But over time, the bigger insight became clear:</p>
 <blockquote class="cg-editorial-quote">
@@ -326,10 +402,9 @@ A student who was admitted needed a different journey from someone still undecid
   <li>lifecycle engagement.</li>
 </ul>
 <p>This was a better market fit because institutions did not want to stitch together multiple tools. They needed one platform to solve the full admissions and student engagement journey.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>How Forms Dot Star evolved into SREM</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 08</span>
+<h2 id="how-forms-dot-star-evolved-into-srem">How Forms Dot Star evolved into SREM</h2>
 <p>Forms Dot Star started as a focused application and enrollment platform.</p>
 <p>It helped institutions digitize:</p>
 <ul>
@@ -363,10 +438,9 @@ A student who was admitted needed a different journey from someone still undecid
   <p>student engagement and admissions relationship management.</p>
 </blockquote>
 <p>This was the key product evolution.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What I shaped</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 09</span>
+<h2 id="what-i-shaped">What I shaped</h2>
 <p>I led end-to-end product strategy for SREM and owned the product evolution from Forms Dot Star into a broader EdTech SaaS platform.</p>
 <p>The work covered:</p>
 <ul>
@@ -388,10 +462,9 @@ A student who was admitted needed a different journey from someone still undecid
 </ul>
 <p>I also built and mentored a cross-functional team of 8+ members across engineering, design, and operations.</p>
 <p>The product grew from serving a narrower enrollment need to becoming a comprehensive student engagement and relationship management platform.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 1: Digital application and enrollment workflow</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 10</span>
+<h2 id="track-1-digital-application-and-enrollment-workflow">Track 1: Digital application and enrollment workflow</h2>
 <p>The first product foundation was digitizing the application journey.</p>
 <p>The platform allowed institutions to move away from paper-based forms and manual application handling.</p>
 <p>The application workflow supported:</p>
@@ -407,10 +480,9 @@ A student who was admitted needed a different journey from someone still undecid
 </ul>
 <p>This was especially important for institutions that needed digital transformation but did not have the internal capacity to build their own admissions technology.</p>
 <p>The product helped make admission processes faster, cleaner, and easier to manage.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 2: Automated document processing</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 11</span>
+<h2 id="track-2-automated-document-processing">Track 2: Automated document processing</h2>
 <p>Document verification was one of the most painful operational steps.</p>
 <p>Students submitted documents.<br>
 Institutions had to check them.<br>
@@ -420,10 +492,9 @@ Manual verification consumed staff time.</p>
 <p>This reduced processing time and manual data-entry effort.</p>
 <p>For Forms Dot Star, automated document verification reduced processing time by <strong>70%</strong>.</p>
 <p>This was one of the strongest operational improvements because it directly attacked the admission processing bottleneck.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 3: Admissions CRM and student lifecycle management</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 12</span>
+<h2 id="track-3-admissions-crm-and-student-lifecycle-management">Track 3: Admissions CRM and student lifecycle management</h2>
 <p>As the product evolved into SREM, the admissions CRM became central.</p>
 <p>The platform helped institutions manage students across the funnel:</p>
 <ul>
@@ -441,10 +512,9 @@ Manual verification consumed staff time.</p>
 Managers could track funnel movement.<br>
 Institutions could identify where students were dropping off.</p>
 <p>The product shifted from record keeping to active admission management.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 4: Intelligent lead scoring</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 13</span>
+<h2 id="track-4-intelligent-lead-scoring">Track 4: Intelligent lead scoring</h2>
 <p>One of the most important SREM capabilities was intelligent lead scoring.</p>
 <p>Admissions teams cannot treat every enquiry the same.</p>
 <p>Some students are high intent.<br>
@@ -457,10 +527,9 @@ Some are unlikely to convert.</p>
 <p>The value was not only in the score itself. The value was in changing counselor behavior.</p>
 <p>Instead of calling students randomly or chronologically, counselors could focus on the students most likely to move forward.</p>
 <p>This is where the product became more than CRM. It became a decision-support system.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 5: Automated admission workflow</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 14</span>
+<h2 id="track-5-automated-admission-workflow">Track 5: Automated admission workflow</h2>
 <p>Admissions processing was reduced from <strong>7 days to 2 days</strong>.</p>
 <p>That improvement came from automating the admission workflow and reducing manual handoffs.</p>
 <p>The workflow improvements included:</p>
@@ -478,10 +547,9 @@ Some are unlikely to convert.</p>
 <p>Faster processing means students get clarity sooner.<br>
 Institutions reduce administrative load.<br>
 Counselors focus on conversion instead of chasing paperwork.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 6: Multi-channel communication platform</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 15</span>
+<h2 id="track-6-multi-channel-communication-platform">Track 6: Multi-channel communication platform</h2>
 <p>Student engagement depends heavily on communication.</p>
 <p>The product supported communication across:</p>
 <ul>
@@ -495,10 +563,9 @@ Counselors focus on conversion instead of chasing paperwork.</p>
 A missed reminder can mean an incomplete application.<br>
 A late follow-up can mean a lost student.</p>
 <p>The communication system helped institutions send the right message at the right stage of the student journey.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 7: Analytics and funnel visibility</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 16</span>
+<h2 id="track-7-analytics-and-funnel-visibility">Track 7: Analytics and funnel visibility</h2>
 <p>The analytics dashboard gave institutions real-time insight into student engagement and admission funnel performance.</p>
 <p>The dashboard helped answer:</p>
 <ul>
@@ -514,28 +581,25 @@ A late follow-up can mean a lost student.</p>
 </ul>
 <p>This changed the management layer.</p>
 <p>Instead of waiting for manual reports, leaders could see admission performance in real time.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 8: Payment gateway integration</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 17</span>
+<h2 id="track-8-payment-gateway-integration">Track 8: Payment gateway integration</h2>
 <p>Application and admission workflows often require fee collection.</p>
 <p>The product integrated payment gateways to support digital fee collection.</p>
 <p>This helped institutions reduce cash/manual collection dependency and improved transaction traceability.</p>
 <p>It also improved the student experience because students could complete application/payment steps digitally.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 9: Role-based access and institutional hierarchy</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 18</span>
+<h2 id="track-9-role-based-access-and-institutional-hierarchy">Track 9: Role-based access and institutional hierarchy</h2>
 <p>Educational institutions are hierarchical.</p>
 <p>There are admins, counselors, department users, finance users, reviewers, and management users.</p>
 <p>The platform implemented role-based access control to support institutional hierarchies.</p>
 <p>This allowed institutions to configure visibility and actions based on user role.</p>
 <p>For enterprise SaaS adoption, this was essential.</p>
 <p>A platform serving hundreds of institutions cannot rely on a flat user model.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 10: Mobile-first accessibility</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 19</span>
+<h2 id="track-10-mobile-first-accessibility">Track 10: Mobile-first accessibility</h2>
 <p>The product was built with a mobile-first responsive interface.</p>
 <p>This mattered deeply in the Indian education market.</p>
 <p>Many students applied through mobile phones.<br>
@@ -543,10 +607,9 @@ Many rural or smaller institutions did not have desktop-first workflows.<br>
 Counselors and staff needed access beyond office systems.</p>
 <p>The mobile-responsive application portal increased mobile submissions by <strong>200%</strong>.</p>
 <p>This showed that accessibility was not a cosmetic design choice. It affected adoption and conversion.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>How the workflow changed</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 20</span>
+<h2 id="how-the-workflow-changed">How the workflow changed</h2>
 <p>Before the product, an institution&rsquo;s admission journey often looked like this:</p>
 <blockquote class="cg-editorial-quote">
   <p>collect enquiry &rarr; record manually &rarr; share form &rarr; collect paper documents &rarr; verify manually &rarr; chase payment &rarr; update spreadsheet &rarr; call student &rarr; prepare reports manually.</p>
@@ -558,10 +621,9 @@ Counselors and staff needed access beyond office systems.</p>
 <p>The biggest shift was from fragmented administration to lifecycle management.</p>
 <p>The old process managed applications.<br>
 The new platform managed student relationships.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What made this hard</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 21</span>
+<h2 id="what-made-this-hard">What made this hard</h2>
 <p>This product was hard because education institutions are not uniform.</p>
 <p>A platform had to support different institution sizes, processes, levels of digital maturity, geographies, languages, and operating habits.</p>
 <h3 style="margin-top:16px;">Some institutions needed digitization</h3>
@@ -578,10 +640,9 @@ The new platform managed student relationships.</p>
 <blockquote class="cg-editorial-quote">
   <p>configurable for clients, but not custom-built for every client.</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>What was achieved</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 22</span>
+<h2 id="what-was-achieved">What was achieved</h2>
 <p>The product achieved strong growth and business impact.</p>
 <p>SREM scaled from <strong>150 to 500+ institutional clients</strong>, achieving <strong>233% growth in 2.5 years</strong>.</p>
 <p>It served:</p>
@@ -605,10 +666,9 @@ The new platform managed student relationships.</p>
 </ul>
 <p>Forms Dot Star, as the earlier product stage, served <strong>300+ educational institutions across 15+ states</strong>, processed <strong>1.5M+ student applications</strong>, and generated <strong>₹8Cr+ ARR</strong> through platform subscriptions and transaction fees.</p>
 <p>The evolution into SREM expanded the addressable problem and created a stronger platform-market fit.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Why this mattered</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 23</span>
+<h2 id="why-this-mattered">Why this mattered</h2>
 <p>The education sector was moving from offline admissions to digital student lifecycle management.</p>
 <p>Institutions that could respond faster, communicate better, process applications digitally, and understand funnel performance had a competitive advantage.</p>
 <p>SREM helped institutions modernize their admission operations.</p>
@@ -618,10 +678,9 @@ It helped institutions manage relationships.</p>
 <p>A form is a transaction.<br>
 A relationship is a journey.</p>
 <p>SREM turned student acquisition into a managed journey.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What this says about my product approach</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 24</span>
+<h2 id="what-this-says-about-my-product-approach">What this says about my product approach</h2>
 <p>This product reflects my ability to identify when a product&rsquo;s initial category is too narrow.</p>
 <p>Forms Dot Star was useful as an application platform, but the market needed more.</p>
 <p>The stronger opportunity was SREM.</p>
@@ -642,23 +701,40 @@ A relationship is a journey.</p>
   <p>I need to attract, engage, process, convert, and manage students efficiently.</p>
 </blockquote>
 <p>SREM solved that broader problem.</p>
-</section>
-<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/ai-product-strategy/">AI Product Strategy</a> · <a href="/insights/">Insights</a></p>
-
-<section class="cg-section cg-reveal" id="cta">
-      <div class="cg-card large glow">
-        <h2>Ready to move from AI pilots to production?</h2>
-        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
-        <div class="cg-hero-actions" style="margin-top:20px;">
-          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
-          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
-        </div>
-      </div>
-    </section>
+</section><p style="margin-top:32px; border-top: 1px solid var(--soft); padding-top:24px;"><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/ai-product-strategy/">AI Product Strategy</a> · <a href="/insights/">Insights</a></p>
+    </div>
   </main>
+
   <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
   <script src="/assets/js/theme.js"></script>
   <script src="/assets/js/nav.js"></script>
 
+
+<script>
+  function toggleMobileTOC() {
+    const el = document.getElementById('mobile-toc');
+    el.classList.toggle('open');
+  }
+
+  // Active section scroll tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const links = document.querySelectorAll(`.cs-toc-list a[href="#${id}"]`);
+        if (links.length === 0) return;
+        if (entry.intersectionRatio > 0) {
+          document.querySelectorAll('.cs-toc-item').forEach(item => item.classList.remove('active'));
+          links.forEach(link => link.parentElement.classList.add('active'));
+        }
+      });
+    }, { rootMargin: '-100px 0px -70% 0px' });
+
+    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {
+      observer.observe(h2);
+    });
+  });
+</script>
 </body>
 </html>

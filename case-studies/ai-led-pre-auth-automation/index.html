@@ -88,7 +88,7 @@
 </script>
 
 </head>
-<body class="cg-blog-theme portal-page" data-page="case-studies">
+<body class="cg-blog-theme portal-page case-study-premium" data-page="case-studies">
   <div class="animated-dot-field" aria-hidden="true"></div>
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
@@ -134,30 +134,81 @@
     </nav>
   </div>
 </header>
-<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
-<a href="https://samadhanmishra.com/">Home</a>
-<span class="sep">→</span>
-<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
-<span class="sep">→</span>
-<span class="current">Pre-Authorisation Automation</span>
-</nav>
 
-  <header class="cg-hero cg-hero-compact">
-    <div class="cg-hero-content" style="max-width:800px;">
-      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
-      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Reimagining Cashless Claim Decisions for Speed, Accuracy, and Trust</h1>
-      <p class="cg-hero-subtitle">How we modernized the IPD cashless journey across Pre-Auth and Network Claims for speed, accuracy, and trust at Vidal Health.</p>
+  <header class="cs-hero">
+    <div class="cs-hero-container">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">Lead Product Manager</span>
+        <span class="cs-hero-chip">Healthcare TPA Operations</span>
+        <span class="cs-hero-chip">IPD Cashless Pre-Auth Workbench</span>
+      </div>
+      <h1 class="cs-hero-title">Reimagining Cashless Claim Decisions for Speed, Accuracy, and Trust</h1>
+      <p class="cs-hero-desc">How we modernized the IPD cashless journey across Pre-Auth and Network Claims for speed, accuracy, and trust at Vidal Health.</p>
+      <div class="cs-hero-outcomes">
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Assistive AI</span>
+          <span class="cs-hero-outcome-lbl">Clinical Summarization</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Strict Sequence</span>
+          <span class="cs-hero-outcome-lbl">Deductions Guardrails</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Discharge Lane</span>
+          <span class="cs-hero-outcome-lbl">Expedited Queue Routing</span>
+        </div>
+        
+      </div>
     </div>
   </header>
-  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
 
-<section class="cg-article-section">
+  <main class="cs-layout">
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-this-delivered">What this delivered</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="cs-content-area">
+      <div class="cs-mobile-toc" id="mobile-toc">
+        <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
+          <span>Table of Contents</span>
+        </button>
+        <div class="cs-mobile-toc-content">
+          <ul class="cs-toc-list">
+            <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-this-delivered">What this delivered</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <section class="cg-article-section cs-chapter">
 <p>Hospital cashless claims are not just backend insurance workflows. They sit at a tense moment where patients are waiting, hospitals want clarity, insurers need control, and processors are expected to make accurate decisions under pressure.</p>
 <p>At Vidal Health, I worked on modernizing the IPD cashless journey across <strong>Pre-Auth</strong> and <strong>Network Claims</strong>. The work was not about adding screens or building isolated automation. It was about redesigning how complex claim decisions could be made faster, with better evidence, stronger controls, and less operational leakage.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>The situation</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 01</span>
+<h2 id="the-situation">The situation</h2>
 <p>A cashless claim journey has multiple moving parts.</p>
 <p>A hospital raises a request. Documents come in. Medical details need to be interpreted. Bills and tariffs must be checked. Policy rules have to be applied. Deductions must happen in the correct sequence. Insurer concurrence may be needed. Discharge cases need faster handling. Every decision needs to be explainable later during audit.</p>
 <p>This creates a difficult product problem.</p>
@@ -168,10 +219,9 @@
   <li>If workflows are fragmented, processors spend more time finding information than making decisions.</li>
 </ul>
 <p>The challenge was to modernize the workflow without compromising medical, financial, and audit discipline.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What was actually broken</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 02</span>
+<h2 id="what-was-actually-broken">What was actually broken</h2>
 <p>The problem was not simply that claim processing was slow.</p>
 <p>The deeper issue was that processors were working inside a fragmented decision environment.</p>
 <p>They had to move across documents, policy rules, billing inputs, tariff logic, medical notes, insurer guidelines, previous approvals, and internal systems. A single decision could require multiple checks:</p>
@@ -202,10 +252,9 @@
 <p>Deduction sequencing, overrides, insurer concurrence, and audit trails needed stronger governance.</p>
 <h3 style="margin-top:16px;">5. Experience leakage</h3>
 <p>Any delay in pre-auth or discharge affected hospitals and customers directly.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>The product insight</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 03</span>
+<h2 id="the-product-insight">The product insight</h2>
 <p>The obvious solution would have been to say:</p>
 <blockquote class="cg-editorial-quote">
   <p>&ldquo;Let us automate claims.&rdquo;</p>
@@ -222,10 +271,9 @@
 <blockquote class="cg-editorial-quote">
   <p>How do we give processors, doctors, billing teams, auditors, and operations leaders the right context, evidence, workflow controls, and prioritization so that cashless decisions become faster, more accurate, and more auditable?</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>What I shaped</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 04</span>
+<h2 id="what-i-shaped">What I shaped</h2>
 <p>The solutioning evolved across multiple layers of the cashless journey.</p>
 <h3 style="margin-top:20px;">A smarter intake and queue model</h3>
 <p>Not every case should be treated the same way.</p>
@@ -324,10 +372,9 @@ An exception case is different from a clean case.</p>
   <li>audit trail.</li>
 </ul>
 <p>The goal was to prevent insurer dependency from becoming an invisible TAT risk.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>How the workflow changed</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 05</span>
+<h2 id="how-the-workflow-changed">How the workflow changed</h2>
 <p>Before the transformation, the processor&rsquo;s work looked like this:</p>
 <blockquote class="cg-editorial-quote">
   <p>Open case &rarr; search for documents &rarr; interpret manually &rarr; check policy/rules &rarr; validate billing &rarr; identify deductions &rarr; look for missing information &rarr; decide &rarr; justify later if questioned.</p>
@@ -339,10 +386,9 @@ An exception case is different from a clean case.</p>
 <p>This is the key difference.</p>
 <p>The old workflow made the user assemble the decision.<br>
 The new direction made the system assemble the decision context.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What made this hard</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 06</span>
+<h2 id="what-made-this-hard">What made this hard</h2>
 <p>This was not a simple workflow automation problem.</p>
 <p>It was hard because the product had to balance competing needs.</p>
 <h3 style="margin-top:16px;">Speed vs accuracy</h3>
@@ -356,10 +402,9 @@ The new direction made the system assemble the decision context.</p>
 <h3 style="margin-top:16px;">System modernization vs legacy realities</h3>
 <p>The product had to work within existing systems, operational habits, rule structures, and process constraints.</p>
 <p>This is where product judgment mattered. The answer was not to blindly automate everything. The answer was to decide what should be automated, what should be assisted, what should be escalated, and what should remain human-reviewed.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What this delivered</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 07</span>
+<h2 id="what-this-delivered">What this delivered</h2>
 <p>The work created a product direction for a more intelligent IPD cashless operating model across Pre-Auth and Network Claims.</p>
 <p>The focus areas included:</p>
 <ul>
@@ -383,10 +428,9 @@ The new direction made the system assemble the decision context.</p>
   <li>reduce cost per claim,</li>
   <li>increase trust in system-supported decisions.</li>
 </ul>
-</section>
-
-<section class="cg-article-section">
-<h2>What this says about my product approach</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 08</span>
+<h2 id="what-this-says-about-my-product-approach">What this says about my product approach</h2>
 <p>This project reflects the kind of product problems I enjoy most: messy, high-stakes, workflow-heavy systems where the answer is not obvious from the surface.</p>
 <p>I did not approach IPD cashless as a feature backlog. I approached it as a decision system.</p>
 <p>The real product work was in understanding how users think, where decisions break, what evidence they need, where rules should control the process, where AI can help, and where human judgment must remain.</p>
@@ -399,23 +443,40 @@ The new direction made the system assemble the decision context.</p>
 </blockquote>
 <p>In IPD cashless, the goal was not just to process claims faster.<br>
 The goal was to make every claim decision faster, clearer, more consistent, and more defensible.</p>
-</section>
-<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/healthcare-ai-product-consultant/">Healthcare AI Product Consulting</a> · <a href="/insights/">Insights</a></p>
-
-<section class="cg-section cg-reveal" id="cta">
-      <div class="cg-card large glow">
-        <h2>Ready to move from AI pilots to production?</h2>
-        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
-        <div class="cg-hero-actions" style="margin-top:20px;">
-          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
-          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
-        </div>
-      </div>
-    </section>
+</section><p style="margin-top:32px; border-top: 1px solid var(--soft); padding-top:24px;"><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/healthcare-ai-product-consultant/">Healthcare AI Product Consulting</a> · <a href="/insights/">Insights</a></p>
+    </div>
   </main>
+
   <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
   <script src="/assets/js/theme.js"></script>
   <script src="/assets/js/nav.js"></script>
 
+
+<script>
+  function toggleMobileTOC() {
+    const el = document.getElementById('mobile-toc');
+    el.classList.toggle('open');
+  }
+
+  // Active section scroll tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const links = document.querySelectorAll(`.cs-toc-list a[href="#${id}"]`);
+        if (links.length === 0) return;
+        if (entry.intersectionRatio > 0) {
+          document.querySelectorAll('.cs-toc-item').forEach(item => item.classList.remove('active'));
+          links.forEach(link => link.parentElement.classList.add('active'));
+        }
+      });
+    }, { rootMargin: '-100px 0px -70% 0px' });
+
+    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {
+      observer.observe(h2);
+    });
+  });
+</script>
 </body>
 </html>

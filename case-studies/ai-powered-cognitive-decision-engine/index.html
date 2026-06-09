@@ -88,7 +88,7 @@
 </script>
 
 </head>
-<body class="cg-blog-theme portal-page" data-page="case-studies">
+<body class="cg-blog-theme portal-page case-study-premium" data-page="case-studies">
   <div class="animated-dot-field" aria-hidden="true"></div>
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
@@ -134,77 +134,156 @@
     </nav>
   </div>
 </header>
-<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
-<a href="https://samadhanmishra.com/">Home</a>
-<span class="sep">→</span>
-<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
-<span class="sep">→</span>
-<span class="current">Cognitive Decision Engine</span>
-</nav>
 
-  <header class="cg-hero cg-hero-compact">
-    <div class="cg-hero-content" style="max-width:800px;">
-      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
-      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">AI-Powered Cognitive Decision Engine for Healthcare Operations</h1>
-      <p class="cg-hero-subtitle">Case study: an AI-led decision intelligence platform for medical and billing document understanding, rule evaluation, and human-in-the-loop operator support.</p>
+  <header class="cs-hero">
+    <div class="cs-hero-container">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">Lead Product Manager</span>
+        <span class="cs-hero-chip">Healthcare Operations AI</span>
+        <span class="cs-hero-chip">Enigma Cognitive DMS Engine</span>
+      </div>
+      <h1 class="cs-hero-title">AI-Powered Cognitive Decision Engine for Healthcare Operations</h1>
+      <p class="cs-hero-desc">Case study: an AI-led decision intelligence platform for medical and billing document understanding, rule evaluation, and human-in-the-loop operator support.</p>
+      <div class="cs-hero-outcomes">
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Multi-Modal</span>
+          <span class="cs-hero-outcome-lbl">CV &amp; NLP Models</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Explainable</span>
+          <span class="cs-hero-outcome-lbl">Visual Proofing Grid</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Audit Logs</span>
+          <span class="cs-hero-outcome-lbl">Override Verification</span>
+        </div>
+        
+      </div>
     </div>
   </header>
-  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
-<section class="cg-article-section"><h2>Context</h2><div>
+
+  <main class="cs-layout">
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          <li class="cs-toc-item"><a href="#context">Context</a></li>
+<li class="cs-toc-item"><a href="#business-problem">Business problem</a></li>
+<li class="cs-toc-item"><a href="#user-or-operational-pain">User or operational pain</a></li>
+<li class="cs-toc-item"><a href="#product-intervention">Product intervention</a></li>
+<li class="cs-toc-item"><a href="#ai-capability-used">AI capability used</a></li>
+<li class="cs-toc-item"><a href="#samadhan-x27-s-role">Samadhan&amp;#x27;s role</a></li>
+<li class="cs-toc-item"><a href="#business-outcome">Business outcome</a></li>
+<li class="cs-toc-item"><a href="#lessons-for-other-companies">Lessons for other companies</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="cs-content-area">
+      <div class="cs-mobile-toc" id="mobile-toc">
+        <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
+          <span>Table of Contents</span>
+        </button>
+        <div class="cs-mobile-toc-content">
+          <ul class="cs-toc-list">
+            <li class="cs-toc-item"><a href="#context">Context</a></li>
+<li class="cs-toc-item"><a href="#business-problem">Business problem</a></li>
+<li class="cs-toc-item"><a href="#user-or-operational-pain">User or operational pain</a></li>
+<li class="cs-toc-item"><a href="#product-intervention">Product intervention</a></li>
+<li class="cs-toc-item"><a href="#ai-capability-used">AI capability used</a></li>
+<li class="cs-toc-item"><a href="#samadhan-x27-s-role">Samadhan&amp;#x27;s role</a></li>
+<li class="cs-toc-item"><a href="#business-outcome">Business outcome</a></li>
+<li class="cs-toc-item"><a href="#lessons-for-other-companies">Lessons for other companies</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 01</span>
+<h2 id="context">Context</h2><div>
 <p>This case study covers the design and deployment of the <strong>Enigma Cognitive Engine, Document Management System (DMS), and Copilot layer</strong>. Operating within Vidal Health's TPA modernization, this platform provides medical and billing document understanding, rule evaluation, and human-in-the-loop (HITL) operator support for high-volume, regulated healthcare claims.</p>
-</div></section>
-<section class="cg-article-section"><h2>Business problem</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 02</span>
+<h2 id="business-problem">Business problem</h2><div>
 <p>Healthcare operations depend on reading complex, multi-page medical records under extreme time pressure. Operators spent up to 10 minutes per case manually categorizing files, reconciling billing headers, and mapping room categories. Legacy processes suffered from high variance due to manual data entry, leading to inconsistent deductions and package mapping.</p>
 <p><strong>First Principles Analysis:</strong> The core problem was data extraction and validation mismatch. A simple OCR tool is insufficient because medical documents lack standard layouts. The product needed to build a cognitive proofing layer where every extracted fact could be traced back to its specific visual coordinates on the source document, providing trust indicators to operators.</p>
-</div></section>
-<section class="cg-article-section"><h2>User or operational pain</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 03</span>
+<h2 id="user-or-operational-pain">User or operational pain</h2><div>
 <p>Finance and quality teams faced high audit exposure due to tariff catalog deviations and room category caps being miscalculated. Operators experienced cognitive overload from switching between PDF viewers and core systems, leading to high override rates and low trust in automated recommendations.</p>
-</div></section>
-<section class="cg-article-section"><h2>Product intervention</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 04</span>
+<h2 id="product-intervention">Product intervention</h2><div>
 <p>We designed and layered a cognitive decision platform on top of existing systems:</p>
 <ul>
   <li><strong>Document Chronology & DMS:</strong> A split-screen document viewer with chronological categorization and missing-document warning indicators.</li>
   <li><strong>Reconciliation Proofing Grid:</strong> Surfaced OCR-extracted values side-by-side with original document fields, highlighting mismatch alerts.</li>
   <li><strong>Allowed Amount Calculator:</strong> An interactive assistant mapping room categories and tariff package rules directly into the decision interface.</li>
 </ul>
-</div></section>
-<section class="cg-article-section"><h2>AI capability used</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 05</span>
+<h2 id="ai-capability-used">AI capability used</h2><div>
 <p>The AI system deployed Computer Vision and Natural Language Processing (NLP) models:</p>
 <ul>
   <li><strong>Document Classifier:</strong> Classifies intake documents (Estimate bills, Pre-Auth forms, Clinical reports, ID cards) automatically.</li>
   <li><strong>Structured Field Extractor:</strong> Extracts critical entities (VPA, bank accounts, admission dates, room categories, billing line items).</li>
   <li><strong>Confidence Scoring & Indicator Engine:</strong> Flags low-confidence extractions, routing them directly to exception queues.</li>
 </ul>
-</div></section>
-<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 06</span>
+<h2 id="samadhan-x27-s-role">Samadhan&#x27;s role</h2><div>
 <p>Samadhan led the product strategy and execution for the decision engine. He defined operator journeys, designed the confidence-band logic, established the human-in-the-loop exception routing policy, and authored specifications for the reconciliation proofing interface.</p>
-</div></section>
-<section class="cg-article-section"><h2>Business outcome</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 07</span>
+<h2 id="business-outcome">Business outcome</h2><div>
 <p>The Enigma platform successfully automated unstructured document extraction, reducing manual handling on high-volume documents. It established a reliable audit log for all manual overrides, captured before/after values with edit reasons, and minimized room category caps leakage.</p>
-</div></section>
-<section class="cg-article-section"><h2>Lessons for other companies</h2><div>
+</div></section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 08</span>
+<h2 id="lessons-for-other-companies">Lessons for other companies</h2><div>
 <p><strong>Key Product Leadership Takeaways:</strong></p>
 <ol>
   <li><strong>Operator trust is a product requirement:</strong> Presenting a recommendation without evidence leads to rejection. Surfacing confidence levels and direct document source links accelerates adoption.</li>
   <li><strong>Design overrides as first-class actions:</strong> Instead of blocking manual corrections, log overrides to capture rich data for model retraining.</li>
 </ol>
-</div></section>
-<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/ai-agents-consultant/">AI Agents Consulting</a> · <a href="/insights/">Insights</a></p>
-
-<section class="cg-section cg-reveal" id="cta">
-      <div class="cg-card large glow">
-        <h2>Ready to move from AI pilots to production?</h2>
-        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
-        <div class="cg-hero-actions" style="margin-top:20px;">
-          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
-          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
-        </div>
-      </div>
-    </section>
+</div></section><p style="margin-top:32px; border-top: 1px solid var(--soft); padding-top:24px;"><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/ai-agents-consultant/">AI Agents Consulting</a> · <a href="/insights/">Insights</a></p>
+    </div>
   </main>
+
   <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
   <script src="/assets/js/theme.js"></script>
   <script src="/assets/js/nav.js"></script>
 
+
+<script>
+  function toggleMobileTOC() {
+    const el = document.getElementById('mobile-toc');
+    el.classList.toggle('open');
+  }
+
+  // Active section scroll tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const links = document.querySelectorAll(`.cs-toc-list a[href="#${id}"]`);
+        if (links.length === 0) return;
+        if (entry.intersectionRatio > 0) {
+          document.querySelectorAll('.cs-toc-item').forEach(item => item.classList.remove('active'));
+          links.forEach(link => link.parentElement.classList.add('active'));
+        }
+      });
+    }, { rootMargin: '-100px 0px -70% 0px' });
+
+    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {
+      observer.observe(h2);
+    });
+  });
+</script>
 </body>
 </html>

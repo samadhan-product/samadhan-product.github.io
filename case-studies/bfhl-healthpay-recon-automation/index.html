@@ -88,7 +88,7 @@
 </script>
 
 </head>
-<body class="cg-blog-theme portal-page" data-page="case-studies">
+<body class="cg-blog-theme portal-page case-study-premium" data-page="case-studies">
   <div class="animated-dot-field" aria-hidden="true"></div>
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
 <!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
@@ -134,24 +134,96 @@
     </nav>
   </div>
 </header>
-<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
-<a href="https://samadhanmishra.com/">Home</a>
-<span class="sep">→</span>
-<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
-<span class="sep">→</span>
-<span class="current">HealthPay Recon Automation</span>
-</nav>
 
-  <header class="cg-hero cg-hero-compact">
-    <div class="cg-hero-content" style="max-width:800px;">
-      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
-      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Automating HealthPay Reconciliation So Payouts Could Move at Business Speed</h1>
-      <p class="cg-hero-subtitle">How we automated pay-in and payout reconciliation across multiple systems to enable reliable T+1 payouts for providers.</p>
+  <header class="cs-hero">
+    <div class="cs-hero-container">
+      <div class="cs-hero-chips">
+        <span class="cs-hero-chip">Lead Product Manager</span>
+        <span class="cs-hero-chip">FinTech / Financial Operations</span>
+        <span class="cs-hero-chip">HealthPay Payout &amp; Recon Engine</span>
+      </div>
+      <h1 class="cs-hero-title">Automating HealthPay Reconciliation So Payouts Could Move at Business Speed</h1>
+      <p class="cs-hero-desc">How we automated pay-in and payout reconciliation across multiple systems to enable reliable T+1 payouts for providers.</p>
+      <div class="cs-hero-outcomes">
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">RazorpayX</span>
+          <span class="cs-hero-outcome-lbl">API Payout Integration</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Automated</span>
+          <span class="cs-hero-outcome-lbl">Daily PG Reconciliation</span>
+        </div>
+        
+        <div class="cs-hero-outcome-card">
+          <span class="cs-hero-outcome-val">Audit-Ready</span>
+          <span class="cs-hero-outcome-lbl">Internal Payout Controls</span>
+        </div>
+        
+      </div>
     </div>
   </header>
-  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
 
-<section class="cg-article-section">
+  <main class="cs-layout">
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-pay-in-reconciliation">Track 1: Pay-in reconciliation</a></li>
+<li class="cs-toc-item"><a href="#track-2-benefit-reconciliation">Track 2: Benefit reconciliation</a></li>
+<li class="cs-toc-item"><a href="#track-3-settlement-reconciliation">Track 3: Settlement reconciliation</a></li>
+<li class="cs-toc-item"><a href="#track-4-doctor-and-lab-payout-automation">Track 4: Doctor and lab payout automation</a></li>
+<li class="cs-toc-item"><a href="#track-5-raw-data-ingestion-and-visibility">Track 5: Raw data ingestion and visibility</a></li>
+<li class="cs-toc-item"><a href="#track-6-matching-engine">Track 6: Matching engine</a></li>
+<li class="cs-toc-item"><a href="#track-7-manual-review-and-exception-management">Track 7: Manual review and exception management</a></li>
+<li class="cs-toc-item"><a href="#track-8-audit-logs-and-controllership">Track 8: Audit logs and controllership</a></li>
+<li class="cs-toc-item"><a href="#track-9-recon-and-settlement-dashboard">Track 9: Recon and settlement dashboard</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered-for-healthpay">Why this mattered for HealthPay</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="cs-content-area">
+      <div class="cs-mobile-toc" id="mobile-toc">
+        <button class="cs-mobile-toc-trigger" onclick="toggleMobileTOC()">
+          <span>Table of Contents</span>
+        </button>
+        <div class="cs-mobile-toc-content">
+          <ul class="cs-toc-list">
+            <li class="cs-toc-item"><a href="#the-situation">The situation</a></li>
+<li class="cs-toc-item"><a href="#what-was-actually-broken">What was actually broken</a></li>
+<li class="cs-toc-item"><a href="#the-product-insight">The product insight</a></li>
+<li class="cs-toc-item"><a href="#what-i-shaped">What I shaped</a></li>
+<li class="cs-toc-item"><a href="#track-1-pay-in-reconciliation">Track 1: Pay-in reconciliation</a></li>
+<li class="cs-toc-item"><a href="#track-2-benefit-reconciliation">Track 2: Benefit reconciliation</a></li>
+<li class="cs-toc-item"><a href="#track-3-settlement-reconciliation">Track 3: Settlement reconciliation</a></li>
+<li class="cs-toc-item"><a href="#track-4-doctor-and-lab-payout-automation">Track 4: Doctor and lab payout automation</a></li>
+<li class="cs-toc-item"><a href="#track-5-raw-data-ingestion-and-visibility">Track 5: Raw data ingestion and visibility</a></li>
+<li class="cs-toc-item"><a href="#track-6-matching-engine">Track 6: Matching engine</a></li>
+<li class="cs-toc-item"><a href="#track-7-manual-review-and-exception-management">Track 7: Manual review and exception management</a></li>
+<li class="cs-toc-item"><a href="#track-8-audit-logs-and-controllership">Track 8: Audit logs and controllership</a></li>
+<li class="cs-toc-item"><a href="#track-9-recon-and-settlement-dashboard">Track 9: Recon and settlement dashboard</a></li>
+<li class="cs-toc-item"><a href="#how-the-workflow-changed">How the workflow changed</a></li>
+<li class="cs-toc-item"><a href="#what-made-this-hard">What made this hard</a></li>
+<li class="cs-toc-item"><a href="#what-was-achieved">What was achieved</a></li>
+<li class="cs-toc-item"><a href="#why-this-mattered-for-healthpay">Why this mattered for HealthPay</a></li>
+<li class="cs-toc-item"><a href="#what-this-says-about-my-product-approach">What this says about my product approach</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <section class="cg-article-section cs-chapter">
 <p>Payment systems look simple when a transaction succeeds.</p>
 <p>A customer pays.<br>
 A provider receives money.<br>
@@ -161,10 +233,7 @@ The business moves on.</p>
 <p>The business needed faster and more accurate settlement. Providers needed timely payouts. Finance needed control. Operations needed visibility. Product needed to make the entire flow scalable.</p>
 <p>That was the core of the HealthPay Recon &amp; Settlement Automation project.</p>
 <p>I led this project as Lead PM in 2023, immediately after Service Guarantee. The goal was to automate pay-in and payout reconciliation across HealthPay, including doctor and lab payouts, with RazorpayX as the final payout rail.</p>
-</section>
-
-<section class="cg-article-section">
-
+</section><section class="cg-article-section cs-chapter">
 <div class="cg-stats-grid">
   <div class="cg-stat-card">
     <span class="cg-stat-val">RazorpayX</span>
@@ -180,7 +249,8 @@ The business moves on.</p>
   </div>
 </div>
 
-<h2>The situation</h2>
+<span class="cs-chapter-num">Chapter 01</span>
+<h2 id="the-situation">The situation</h2>
 <p>HealthPay was not a simple payment collection product.</p>
 <p>A single transaction could involve multiple components:</p>
 <ul>
@@ -210,10 +280,9 @@ Finance needed final settlement visibility.</p>
   <p>If each system holds only part of the truth, reconciliation becomes the process of rebuilding the truth every day.</p>
 </blockquote>
 <p>Before automation, this meant manual reconciliation effort, open mismatches, delayed visibility, payout dependency, and controllership risk.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What was actually broken</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 02</span>
+<h2 id="what-was-actually-broken">What was actually broken</h2>
 <p>The obvious problem was reconciliation effort.</p>
 <p>But the deeper issue was that HealthPay&rsquo;s payment ecosystem had too many partial ledgers.</p>
 <p>Each source knew something, but no single source had the full picture.</p>
@@ -248,10 +317,9 @@ Finance needed final settlement visibility.</p>
 </ul>
 <p>The problem was not just operational effort.</p>
 <p>It was financial trust.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>The product insight</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 03</span>
+<h2 id="the-product-insight">The product insight</h2>
 <p>The obvious product answer would have been:</p>
 <blockquote class="cg-editorial-quote">
   <p>&ldquo;Build a reconciliation dashboard.&rdquo;</p>
@@ -277,10 +345,9 @@ It cannot automatically create trust.</p>
   <li>give finance and operations real-time visibility.</li>
 </ol>
 <p>The product had to move reconciliation from a manual exercise to a controlled system workflow.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What I shaped</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 04</span>
+<h2 id="what-i-shaped">What I shaped</h2>
 <p>As Lead PM, I owned the full HealthPay Recon &amp; Settlement Automation project.</p>
 <p>My ownership covered:</p>
 <ul>
@@ -300,10 +367,9 @@ It cannot automatically create trust.</p>
 <p>The project covered both pay-in and pay-out automation.</p>
 <p>It included doctor payouts and lab payouts.</p>
 <p>API ingestion went live for all sources, while manual upload was retained as fallback.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 1: Pay-in reconciliation</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 05</span>
+<h2 id="track-1-pay-in-reconciliation">Track 1: Pay-in reconciliation</h2>
 <p>The pay-in side had to reconcile money collected from customers.</p>
 <p>Different payment scenarios required different logic.</p>
 <h3 style="margin-top:16px;">Full PG payment</h3>
@@ -335,10 +401,9 @@ It cannot automatically create trust.</p>
 <p>In those cases, reconciliation needed to validate benefit utilization across DRx, HRx, Voucherify, HealthCoin, Claims, and PayRx.</p>
 <p>The system had to understand that payment value was not always equal to cash collected.</p>
 <p>That was one of the central complexities of HealthPay recon.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 2: Benefit reconciliation</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 06</span>
+<h2 id="track-2-benefit-reconciliation">Track 2: Benefit reconciliation</h2>
 <p>Benefit reconciliation was critical because HealthPay transactions could include more than money.</p>
 <p>The system needed to reconcile:</p>
 <ul>
@@ -354,10 +419,9 @@ It cannot automatically create trust.</p>
 <p>This made HealthPay different from a simple payment gateway integration.</p>
 <p>The product had to reconcile both financial and non-financial instruments.</p>
 <p>Without this, provider payouts would either be delayed, incorrect, or manually adjusted.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 3: Settlement reconciliation</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 07</span>
+<h2 id="track-3-settlement-reconciliation">Track 3: Settlement reconciliation</h2>
 <p>Settlement was where finance trust was established.</p>
 <p>The product had to validate the relationship between:</p>
 <ul>
@@ -375,10 +439,9 @@ It cannot automatically create trust.</p>
 </blockquote>
 <p>This required matching transaction value, settlement value, and bank credit.</p>
 <p>A mismatch here could not be treated casually. It had finance, audit, and provider-trust implications.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 4: Doctor and lab payout automation</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 08</span>
+<h2 id="track-4-doctor-and-lab-payout-automation">Track 4: Doctor and lab payout automation</h2>
 <p>The payout side was equally important.</p>
 <p>Providers do not care how complex the reconciliation is behind the scenes. They care about when they get paid and whether the amount is correct.</p>
 <p>The project covered both doctor and lab payouts.</p>
@@ -398,10 +461,9 @@ It cannot automatically create trust.</p>
 </ul>
 <p>The target was to move payouts reliably to <strong>T+1</strong>.</p>
 <p>That became one of the most important operational outcomes.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 5: Raw data ingestion and visibility</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 09</span>
+<h2 id="track-5-raw-data-ingestion-and-visibility">Track 5: Raw data ingestion and visibility</h2>
 <p>Automation cannot work on bad data.</p>
 <p>So the product first needed strong raw data ingestion and visibility.</p>
 <p>The system supported:</p>
@@ -417,10 +479,9 @@ It cannot automatically create trust.</p>
 </ul>
 <p>This was important because operations and finance teams needed to trust the data before trusting automation.</p>
 <p>If a transaction did not match, users needed to know whether the issue came from the transaction itself, the source file, the API response, a missing value, or a manual correction.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 6: Matching engine</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 10</span>
+<h2 id="track-6-matching-engine">Track 6: Matching engine</h2>
 <p>The matching engine was the heart of the product.</p>
 <p>It had to compare records across systems using defined identifiers and validation rules.</p>
 <p>The matching logic included:</p>
@@ -443,10 +504,9 @@ It cannot automatically create trust.</p>
   <li>manual review required.</li>
 </ul>
 <p>This moved reconciliation from spreadsheet comparison to system-led matching.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 7: Manual review and exception management</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 11</span>
+<h2 id="track-7-manual-review-and-exception-management">Track 7: Manual review and exception management</h2>
 <p>No reconciliation system can assume that every case will match automatically.</p>
 <p>The product had to support exceptions properly.</p>
 <p>Manual review was designed for cases such as:</p>
@@ -474,10 +534,9 @@ It cannot automatically create trust.</p>
   <li>stakeholder notification.</li>
 </ul>
 <p>This was important because automation without exception handling simply shifts the problem elsewhere.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 8: Audit logs and controllership</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 12</span>
+<h2 id="track-8-audit-logs-and-controllership">Track 8: Audit logs and controllership</h2>
 <p>Financial automation needs strict governance.</p>
 <p>The product included:</p>
 <ul>
@@ -499,10 +558,9 @@ It cannot automatically create trust.</p>
   <p>Users can correct data, but the system must remember exactly who changed what, when, why, and what the value was before and after.</p>
 </blockquote>
 <p>That is what made the product controllership-ready.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>Track 9: Recon and settlement dashboard</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 13</span>
+<h2 id="track-9-recon-and-settlement-dashboard">Track 9: Recon and settlement dashboard</h2>
 <p>The dashboard was designed to give leadership, finance, and operations visibility into reconciliation health.</p>
 <p>It showed payments by:</p>
 <ul>
@@ -525,10 +583,9 @@ It cannot automatically create trust.</p>
   <li>Are open items increasing or decreasing?</li>
 </ul>
 <p>This turned reconciliation from a backend activity into an operationally visible process.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>How the workflow changed</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 14</span>
+<h2 id="how-the-workflow-changed">How the workflow changed</h2>
 <p>Before automation, the workflow looked like this:</p>
 <blockquote class="cg-editorial-quote">
   <p>Download reports &rarr; compare transactions manually &rarr; identify mismatches &rarr; check benefit data &rarr; validate settlement reports &rarr; coordinate with finance/ops &rarr; trigger payout manually &rarr; track failures manually &rarr; maintain audit trail separately.</p>
@@ -540,10 +597,9 @@ It cannot automatically create trust.</p>
 <p>This was a fundamental shift.</p>
 <p>The old workflow made people reconcile data.<br>
 The new workflow made the system reconcile data and made people handle exceptions.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What made this hard</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 15</span>
+<h2 id="what-made-this-hard">What made this hard</h2>
 <p>This project was hard because reconciliation problems are unforgiving.</p>
 <p>A small mismatch is not a UI bug. It can delay payout, create provider escalation, distort finance reporting, or create audit risk.</p>
 <p>Several challenges made this complex.</p>
@@ -557,10 +613,9 @@ The new workflow made the system reconcile data and made people handle exception
 <p>Doctors and labs expected timely settlement. Delays could create escalations and damage trust.</p>
 <h3 style="margin-top:16px;">Fallbacks were still needed</h3>
 <p>API ingestion went live for all sources, but manual uploads were retained as fallback. That was the right product decision because financial operations cannot stop if one integration fails.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What was achieved</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 16</span>
+<h2 id="what-was-achieved">What was achieved</h2>
 <p>The HealthPay Recon &amp; Settlement Automation project went live with all major capabilities:</p>
 <ul>
   <li>dashboard,</li>
@@ -593,20 +648,18 @@ The new workflow made the system reconcile data and made people handle exception
 <blockquote class="cg-editorial-quote">
   <p>The reconciliation process became completely automated, manual reconciliation effort was eliminated, and payouts moved to T+1.</p>
 </blockquote>
-</section>
-
-<section class="cg-article-section">
-<h2>Why this mattered for HealthPay</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 17</span>
+<h2 id="why-this-mattered-for-healthpay">Why this mattered for HealthPay</h2>
 <p>This project strengthened HealthPay&rsquo;s financial operating foundation.</p>
 <p>A payment product cannot scale if reconciliation is manual.<br>
 A provider network cannot trust the product if payouts are delayed.<br>
 Finance cannot support growth without accurate settlement controls.<br>
 Operations cannot manage exceptions without visibility.</p>
 <p>By automating reconciliation and payout workflows, HealthPay gained the financial infrastructure needed to scale transaction volume, support provider trust, and reduce operational dependency.</p>
-</section>
-
-<section class="cg-article-section">
-<h2>What this says about my product approach</h2>
+</section><section class="cg-article-section cs-chapter">
+<span class="cs-chapter-num">Chapter 18</span>
+<h2 id="what-this-says-about-my-product-approach">What this says about my product approach</h2>
 <p>This project reflects my ability to work on deep operational and financial systems where product quality is measured by control, accuracy, and reliability.</p>
 <p>The product was not glamorous in a consumer-facing sense. But it solved a critical business problem.</p>
 <p>It required thinking across:</p>
@@ -626,23 +679,40 @@ Operations cannot manage exceptions without visibility.</p>
   <p>Automate the predictable, isolate the exceptions, and make every manual action auditable.</p>
 </blockquote>
 <p>That principle made the system scalable and trustworthy.</p>
-</section>
-<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/healthcare-insurance-ai/">Healthcare &amp; Insurance AI</a> · <a href="/insights/">Insights</a></p>
-
-<section class="cg-section cg-reveal" id="cta">
-      <div class="cg-card large glow">
-        <h2>Ready to move from AI pilots to production?</h2>
-        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
-        <div class="cg-hero-actions" style="margin-top:20px;">
-          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
-          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
-        </div>
-      </div>
-    </section>
+</section><p style="margin-top:32px; border-top: 1px solid var(--soft); padding-top:24px;"><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/healthcare-insurance-ai/">Healthcare &amp; Insurance AI</a> · <a href="/insights/">Insights</a></p>
+    </div>
   </main>
+
   <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
   <script src="/assets/js/theme.js"></script>
   <script src="/assets/js/nav.js"></script>
 
+
+<script>
+  function toggleMobileTOC() {
+    const el = document.getElementById('mobile-toc');
+    el.classList.toggle('open');
+  }
+
+  // Active section scroll tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        const links = document.querySelectorAll(`.cs-toc-list a[href="#${id}"]`);
+        if (links.length === 0) return;
+        if (entry.intersectionRatio > 0) {
+          document.querySelectorAll('.cs-toc-item').forEach(item => item.classList.remove('active'));
+          links.forEach(link => link.parentElement.classList.add('active'));
+        }
+      });
+    }, { rootMargin: '-100px 0px -70% 0px' });
+
+    document.querySelectorAll('.cs-chapter h2[id]').forEach(h2 => {
+      observer.observe(h2);
+    });
+  });
+</script>
 </body>
 </html>
