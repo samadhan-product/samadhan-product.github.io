@@ -173,28 +173,11 @@
   </header>
 
   <!-- ═══════════════════════════════════════════════
-       MAIN LAYOUT: content + sticky TOC
+       MAIN LAYOUT: article (left, dominant) + TOC (right, sticky)
   ════════════════════════════════════════════════ -->
   <main class="cs-layout">
 
-    <!-- Right-side sticky TOC (desktop only) -->
-    <aside class="cs-toc-sidebar">
-      <nav aria-label="Table of Contents">
-        <div class="cs-toc-title">On this page</div>
-        <ul class="cs-toc-list">
-          <li class="cs-toc-item"><a href="#context">01 / Context</a></li>
-          <li class="cs-toc-item"><a href="#the-problem">02 / The Problem</a></li>
-          <li class="cs-toc-item"><a href="#product-strategy">03 / Product Strategy</a></li>
-          <li class="cs-toc-item"><a href="#what-i-shaped">04 / What I Shaped</a></li>
-          <li class="cs-toc-item"><a href="#workflow-redesign">05 / Workflow Redesign</a></li>
-          <li class="cs-toc-item"><a href="#what-made-this-hard">06 / Challenges</a></li>
-          <li class="cs-toc-item"><a href="#operational-impact">07 / Operational Impact</a></li>
-          <li class="cs-toc-item"><a href="#why-this-mattered">08 / Why This Mattered</a></li>
-        </ul>
-      </nav>
-    </aside>
-
-    <!-- Content area -->
+    <!-- Content area — left/main column -->
     <div class="cs-content-area">
 
       <!-- Collapsible mobile TOC -->
@@ -341,7 +324,45 @@
         <span class="cs-chapter-num">04 / What I Shaped</span>
         <h2 id="what-i-shaped">Product Direction Across Six Layers</h2>
 
-        <p>The solutioning evolved across multiple layers of the cashless journey.</p>
+        <p>The solutioning evolved across multiple layers of the cashless journey. Each layer had its own set of gaps, and the product work addressed them in a deliberate sequence — from how cases entered the system, to how decisions were recorded and audited.</p>
+
+        <div class="cs-stack">
+          <div class="cs-stack-layer">
+            <span class="cs-stack-num">01</span>
+            <span class="cs-stack-name">Intake Layer</span>
+            <span class="cs-stack-desc">Priority-led queue model separating discharge, routine pre-auth, high-risk, specialty, emergency, and exception cases — moving away from flat FIFO processing.</span>
+          </div>
+          <div class="cs-stack-layer">
+            <span class="cs-stack-num">02</span>
+            <span class="cs-stack-name">Document Intelligence Layer</span>
+            <span class="cs-stack-desc">AI-assisted document classification, completeness check, field extraction, and evidence surfacing — reducing manual document hunting before a decision can be made.</span>
+          </div>
+          <div class="cs-stack-layer">
+            <span class="cs-stack-num">03</span>
+            <span class="cs-stack-name">Medical Validation Layer</span>
+            <span class="cs-stack-desc">Diagnosis and procedure code validation, ICD mapping, billing-vs-diagnosis cross-checks, and clinical summary extraction to support medically sound decisions.</span>
+          </div>
+          <div class="cs-stack-layer">
+            <span class="cs-stack-num">04</span>
+            <span class="cs-stack-name">Policy &amp; Benefit Rule Layer</span>
+            <span class="cs-stack-desc">Structured deduction sequencing — hospital discount → package price → non-medical exclusions → room rent → co-pay → ailment cap → threshold → balance sum insured — enforced in strict order.</span>
+          </div>
+          <div class="cs-stack-layer">
+            <span class="cs-stack-num">05</span>
+            <span class="cs-stack-name">Tariff / Package Rule Layer</span>
+            <span class="cs-stack-desc">Network tariff application, package rate overrides, room category resolution, and implant invoice handling — preventing rate mismatches from distorting the final payable amount.</span>
+          </div>
+          <div class="cs-stack-layer">
+            <span class="cs-stack-num">06</span>
+            <span class="cs-stack-name">Decision Workbench Layer</span>
+            <span class="cs-stack-desc">The processor's primary workspace — combining case context, document evidence, rule outputs, AI recommendations, and exception handling into a single, traceable decision surface.</span>
+          </div>
+          <div class="cs-stack-layer">
+            <span class="cs-stack-num">07</span>
+            <span class="cs-stack-name">Audit &amp; Reporting Layer</span>
+            <span class="cs-stack-desc">Full decision trail — concurrence requests, insurer responses, escalation history, deduction justification, and outcome linked to every case for ops review and compliance.</span>
+          </div>
+        </div>
 
         <hr class="cs-section-divider">
         <h3>A Smarter Intake and Queue Model</h3>
@@ -713,6 +734,24 @@
       <p style="margin-top:16px;">Related service: <a href="/healthcare-ai-product-consultant/">Healthcare AI Product Consulting</a> · <a href="/insights/">Insights</a></p>
 
     </div><!-- /cs-content-area -->
+
+    <!-- TOC — right column (sticky, desktop only) -->
+    <aside class="cs-toc-sidebar">
+      <nav aria-label="Table of Contents">
+        <div class="cs-toc-title">On this page</div>
+        <ul class="cs-toc-list">
+          <li class="cs-toc-item"><a href="#context">01 / Context</a></li>
+          <li class="cs-toc-item"><a href="#the-problem">02 / The Problem</a></li>
+          <li class="cs-toc-item"><a href="#product-strategy">03 / Product Strategy</a></li>
+          <li class="cs-toc-item"><a href="#what-i-shaped">04 / What I Shaped</a></li>
+          <li class="cs-toc-item"><a href="#workflow-redesign">05 / Workflow Redesign</a></li>
+          <li class="cs-toc-item"><a href="#what-made-this-hard">06 / Challenges</a></li>
+          <li class="cs-toc-item"><a href="#operational-impact">07 / Operational Impact</a></li>
+          <li class="cs-toc-item"><a href="#why-this-mattered">08 / Why This Mattered</a></li>
+        </ul>
+      </nav>
+    </aside>
+
   </main>
 
   <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
