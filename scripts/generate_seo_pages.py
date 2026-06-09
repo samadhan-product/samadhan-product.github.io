@@ -423,20 +423,24 @@ def service_page(svc: dict) -> str:
 def case_study_page(cs: dict) -> str:
     slug = cs["slug"]
     path = f"/case-studies/{slug}/"
-    sections = [
-        ("Context", cs["context"]),
-        ("Business problem", cs["problem"]),
-        ("User or operational pain", cs["pain"]),
-        ("Product intervention", cs["intervention"]),
-        ("AI capability used", cs["ai"]),
-        ("Samadhan's role", cs["role"]),
-        ("Business outcome", cs["outcome"]),
-        ("Lessons for other companies", cs["lessons"]),
-    ]
-    body = ""
-    for h, p in sections:
-        body += f'<section class="cg-article-section"><h2>{esc(h)}</h2><div>{p}</div></section>\n'
+    if "custom_body" in cs:
+        body = cs["custom_body"]
+    else:
+        sections = [
+            ("Context", cs["context"]),
+            ("Business problem", cs["problem"]),
+            ("User or operational pain", cs["pain"]),
+            ("Product intervention", cs["intervention"]),
+            ("AI capability used", cs["ai"]),
+            ("Samadhan's role", cs["role"]),
+            ("Business outcome", cs["outcome"]),
+            ("Lessons for other companies", cs["lessons"]),
+        ]
+        body = ""
+        for h, p in sections:
+            body += f'<section class="cg-article-section"><h2>{esc(h)}</h2><div>{p}</div></section>\n'
     body += f'<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p>'
+
 
     service = cs.get("service_link", "/ai-product-management-consultant/")
     body += f'<p style="margin-top:16px;">Related service: <a href="{esc(service)}">{esc(cs.get("service_label", "AI Product Consulting"))}</a> · <a href="/insights/">Insights</a></p>'
