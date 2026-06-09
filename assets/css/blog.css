@@ -3306,7 +3306,13 @@ html[data-theme="light"] .cg-bento-list strong { color: #1f2933; }
     gap: 0;
     padding: 24px 20px 64px;
   }
+  .case-study-premium .cs-content-area { grid-column: 1; }
+  .case-study-premium .cs-toc-sidebar  { grid-column: 1; }
 }
+
+/* Explicit column placement — works regardless of DOM order */
+.case-study-premium .cs-content-area { grid-column: 1; }
+.case-study-premium .cs-toc-sidebar  { grid-column: 2; }
 
 /* TOC Sidebar — right rail, sticky */
 .case-study-premium .cs-toc-sidebar {
