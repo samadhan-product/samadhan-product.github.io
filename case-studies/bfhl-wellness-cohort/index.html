@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XWSM8RBV2S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XWSM8RBV2S');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="How we built an integrated wellness engagement and care-delivery platform, replacing external vendors and saving ₹95 lakhs at BFHL." />
+  <title>Building Wellness as a Habit System, Not Just a Health Feature | Case Study — Samadhan Mishra | Case Study — Samadhan Mishra</title>
+  <link rel="canonical" href="https://samadhanmishra.com/case-studies/bfhl-wellness-cohort/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Building Wellness as a Habit System, Not Just a Health Feature | Case Study — Samadhan Mishra | Case Study — Samadhan Mishra" />
+  <meta property="og:description" content="How we built an integrated wellness engagement and care-delivery platform, replacing external vendors and saving ₹95 lakhs at BFHL." />
+  <meta property="og:url" content="https://samadhanmishra.com/case-studies/bfhl-wellness-cohort/" />
+  <meta property="og:site_name" content="Samadhan Mishra" />
+  <meta property="og:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Building Wellness as a Habit System, Not Just a Health Feature | Case Study — Samadhan Mishra | Case Study — Samadhan Mishra" />
+  <meta name="twitter:description" content="How we built an integrated wellness engagement and care-delivery platform, replacing external vendors and saving ₹95 lakhs at BFHL." />
+  <meta name="twitter:image" content="https://samadhanmishra.com/assets/og/samadhan-mishra-ai-product-leader.png" />
+  <script>!function(){var t=localStorage.getItem('site-theme')||'dark';document.documentElement.setAttribute('data-theme',t)}();</script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://samadhanmishra.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://samadhanmishra.com/case-studies/" },
+    { "@type": "ListItem", "position": 3, "name": "Wellness Cohort", "item": "https://samadhanmishra.com/case-studies/bfhl-wellness-cohort/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Samadhan Mishra",
+      "url": "https://samadhanmishra.com/",
+      "jobTitle": [
+        "AI Product Leader",
+        "AI Product Management Consultant",
+        "Product Head",
+        "Product Strategy Consultant"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pune",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/samadhan-mishra/"
+      ],
+      "knowsAbout": [
+        "AI Product Management",
+        "AI Agents",
+        "Generative AI",
+        "RAG",
+        "MCP",
+        "Healthcare Automation",
+        "Insurance TPA",
+        "Product Strategy",
+        "Product Leadership",
+        "Workflow Automation"
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Building Wellness as a Habit System, Not Just a Health Feature",
+      "description": "How we built an integrated wellness engagement and care-delivery platform, replacing external vendors and saving ₹95 lakhs at BFHL.",
+      "author": {
+        "@type": "Person",
+        "name": "Samadhan Mishra"
+      },
+      "url": "https://samadhanmishra.com/case-studies/bfhl-wellness-cohort/"
+    }
+  ]
+}
+</script>
+
+</head>
+<body class="cg-blog-theme portal-page" data-page="case-studies">
+  <div class="animated-dot-field" aria-hidden="true"></div>
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<!-- Shared site navigation — keep in sync with frontend/src/data/navLinks.js -->
+<header class="site-nav" data-testid="top-nav">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">
+      <span class="site-logo-box">SM</span>
+      <span class="site-brand-text">/ Samadhan</span>
+    </a>
+    <nav class="site-menu" aria-label="Primary">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="site-nav-meta">
+      <div class="site-time" aria-live="polite">
+        <span data-nav-clock></span>
+      </div>
+      <button type="button" class="site-theme-toggle theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="theme-toggle-icon">◑</span>
+      </button>
+      <button type="button" class="site-nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
+        <span class="site-nav-toggle-bar"></span>
+        <span class="site-nav-toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+  <div class="site-nav-mobile" data-nav-mobile hidden>
+    <nav aria-label="Mobile">
+      <a class="site-menu-link" href="/#about" data-nav="about">About</a>
+      <a class="site-menu-link" href="/#services" data-nav="services">Services</a>
+      <a class="site-menu-link" href="/case-studies/" data-nav="case-studies">Case Studies</a>
+      <a class="site-menu-link" href="/#experience" data-nav="experience">Experience</a>
+      <a class="site-menu-link" href="/insights/" data-nav="insights">Insights</a>
+      <a class="site-menu-link site-menu-link--blog" href="/blog/" data-nav="blog"><span class="site-menu-dot" aria-hidden="true"></span>Blog</a>
+      <a class="site-menu-link" href="/work-with-me/" data-nav="work-with-me">Work With Me</a>
+      <a class="site-menu-link" href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<nav class="cg-breadcrumbs" aria-label="Breadcrumb">
+<a href="https://samadhanmishra.com/">Home</a>
+<span class="sep">→</span>
+<a href="https://samadhanmishra.com/case-studies/">Case Studies</a>
+<span class="sep">→</span>
+<span class="current">Wellness Cohort</span>
+</nav>
+
+  <header class="cg-hero cg-hero-compact">
+    <div class="cg-hero-content" style="max-width:800px;">
+      <span class="cg-pill">Samadhan Mishra · AI Product Consulting</span>
+      <h1 class="cg-hero-title" style="font-size:clamp(2rem,5vw,3rem);">Building Wellness as a Habit System, Not Just a Health Feature</h1>
+      <p class="cg-hero-subtitle">How we built an integrated wellness engagement and care-delivery platform, replacing external vendors and saving ₹95 lakhs at BFHL.</p>
+    </div>
+  </header>
+  <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
+
+<section class="cg-article-section">
+<p>Wellness products often fail because they treat health as information.</p>
+<p>Give users articles.<br>
+Show them step counts.<br>
+Offer a one-time consultation.<br>
+Send a few reminders.</p>
+<p>Then engagement drops.</p>
+<p>When I moved into BFHL&rsquo;s Wellness cohort, the challenge was to build something more durable: a system that could help users stay active, get expert nutrition support, build healthier routines, and give corporate clients a credible wellness proposition.</p>
+<p>The work covered activity, step tracking, gamified challenges, diet and nutrition, weight management, and fitness. But the real product challenge was deeper:</p>
+<blockquote>
+  <p>How do you turn wellness from a passive feature into a repeatable engagement and care-delivery engine?</p>
+</blockquote>
+</section>
+
+<section class="cg-article-section">
+<h2>The situation</h2>
+<p>BFHL had a strong opportunity in corporate wellness.</p>
+<p>GMC customers and corporate clients were looking for more than insurance or one-time health benefits. They wanted engagement, prevention, lifestyle support, and visible employee participation.</p>
+<p>At the same time, users needed help with basic but difficult behaviour change:</p>
+<ul>
+  <li>walking more,</li>
+  <li>staying active consistently,</li>
+  <li>improving diet,</li>
+  <li>losing weight,</li>
+  <li>getting expert guidance,</li>
+  <li>following up after a consultation,</li>
+  <li>staying accountable beyond the first few days.</li>
+</ul>
+<p>The Wellness cohort had to serve both sides of the problem.</p>
+<p>For users, it had to feel motivating and useful.<br>
+For corporate clients, it had to show engagement and business value.<br>
+For BFHL, it had to support GMC retention and corporate wellness revenue.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What was actually broken</h2>
+<p>The wellness problem was not lack of content.</p>
+<p>Most users already know they should walk more, eat better, manage weight, and follow healthier routines. The issue is that knowing does not create behaviour change.</p>
+<p>The actual gaps were different.</p>
+<h3 style="margin-top:16px;">Activity tracking was too passive</h3>
+<p>A step count by itself is not enough. Users may check it for a few days, but without goals, competition, rewards, themes, or social triggers, the habit fades.</p>
+<p>The product needed to create a reason to come back.</p>
+<h3 style="margin-top:16px;">Diet support was too dependent on external vendors</h3>
+<p>Nutrition and weight management required expert support, but relying on external dietician vendors created cost, dependency, and limited control over the service experience.</p>
+<p>BFHL needed its own dietician-led operating model.</p>
+<h3 style="margin-top:16px;">Consultations needed structure</h3>
+<p>A diet consultation cannot be treated as a one-off call.</p>
+<p>A meaningful nutrition journey needs:</p>
+<ul>
+  <li>assessment,</li>
+  <li>medical context,</li>
+  <li>24-hour diet recall,</li>
+  <li>food preferences,</li>
+  <li>lifestyle understanding,</li>
+  <li>diet-plan creation,</li>
+  <li>follow-up scheduling,</li>
+  <li>reminders,</li>
+  <li>chat support,</li>
+  <li>missed-consultation recovery,</li>
+  <li>progress records.</li>
+</ul>
+<p>Without this structure, diet programs become fragmented and difficult to scale.</p>
+<h3 style="margin-top:16px;">Corporate wellness needed engagement proof</h3>
+<p>For GMC retention and corporate wellness revenue, the product had to show that employees were actively participating. That made active users a key metric for activity challenges.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>The product insight</h2>
+<p>The key insight was simple:</p>
+<blockquote>
+  <p>Wellness is not a content problem. It is a habit, motivation, and guided-care problem.</p>
+</blockquote>
+<p>That changed the product direction.</p>
+<p>Instead of building disconnected wellness features, the cohort had to create two connected engines:</p>
+<ol>
+  <li><strong>An engagement engine</strong> through gamified activity challenges.</li>
+  <li><strong>A guided-care engine</strong> through an in-house dietician platform.</li>
+</ol>
+<p>One created participation and movement.<br>
+The other created expert-led support and continuity.</p>
+<p>Together, they helped move Wellness from a feature bucket to a business cohort.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What I shaped</h2>
+<p>I led the full BFHL Wellness cohort from <strong>January 2024 to September 2024</strong>, covering Activity, Step Tracker, Diet & Nutrition, Weight Management, and Fitness.</p>
+<p>The team included Maaz Modak, Saumya Shukla, Pragya Kumpawat, Aditi Rana, and Mahak Sonekar reporting to me.</p>
+<p>The work had two major product tracks.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 1: Gamified activity and step-tracker challenges</h2>
+<p>The first part of the wellness strategy was to make activity more engaging.</p>
+<p>Plain step tracking gives users data.<br>
+Gamified challenges give users purpose.</p>
+<p>We designed activity journeys where users could participate in themed challenges, complete daily tasks, compete on leaderboards, earn rewards, and progress through virtual routes.</p>
+<p>The experience included:</p>
+<ul>
+  <li>step challenges,</li>
+  <li>Everest-style virtual journeys,</li>
+  <li>Kilimanjaro-style challenges,</li>
+  <li>team challenges,</li>
+  <li>rewards,</li>
+  <li>leaderboards,</li>
+  <li>milestone-based progress,</li>
+  <li>themed routes,</li>
+  <li>social competition.</li>
+</ul>
+<p>The goal was not only to count steps.<br>
+The goal was to make movement feel like progress.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>How activity challenges changed the experience</h2>
+<p>Before this, the user experience was closer to:</p>
+<blockquote>
+  <p>Open app &rarr; check steps &rarr; maybe participate &rarr; forget after a few days.</p>
+</blockquote>
+<p>The new experience moved toward:</p>
+<blockquote>
+  <p>Join challenge &rarr; complete daily goal &rarr; see progress &rarr; compete with others &rarr; unlock rewards &rarr; stay active with team/social motivation.</p>
+</blockquote>
+<p>That shift mattered because behaviour change needs reinforcement.</p>
+<p>A leaderboard creates social pressure.<br>
+A themed route creates narrative progress.<br>
+A team challenge creates accountability.<br>
+A reward creates a visible completion loop.</p>
+<p>Active users became the primary metric for this stream because the business needed proof that users were not just enrolled but actually participating.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Track 2: Building the in-house dietician platform</h2>
+<p>The deeper transformation was in Diet & Nutrition.</p>
+<p>BFHL had been paying external vendors for dietician services. That created cost and limited control. The opportunity was to build an in-house dietician capability with a dedicated platform and operating model.</p>
+<p>We built a custom platform for in-house dieticians and launched it with <strong>3 dieticians</strong> initially.</p>
+<p>The platform served <strong>all wellness users</strong> and replaced external dietician vendors completely, creating a saving of <strong>₹95 lakhs</strong>.</p>
+<p>But the important part was not only cost saving. The bigger product shift was that BFHL now controlled the full dietician journey.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What the dietician platform enabled</h2>
+<p>The custom platform supported the full nutrition-care workflow:</p>
+<h3 style="margin-top:16px;">Consultation booking</h3>
+<p>Users could be scheduled for dietician consultations through a structured flow instead of ad-hoc coordination.</p>
+<h3 style="margin-top:16px;">First consultation</h3>
+<p>The first consultation was designed as a comprehensive assessment, not a generic diet discussion.</p>
+<p>Dieticians captured:</p>
+<ul>
+  <li>health history,</li>
+  <li>current health status,</li>
+  <li>medical condition,</li>
+  <li>24-hour diet recall,</li>
+  <li>food preferences,</li>
+  <li>food patterns,</li>
+  <li>daily schedule,</li>
+  <li>user goals,</li>
+  <li>restrictions and lifestyle context.</li>
+</ul>
+<p>This gave the dietician enough context to create a useful plan.</p>
+<h3 style="margin-top:16px;">Diet-plan creation</h3>
+<p>Dieticians could create and assign personalized diet plans after consultation.</p>
+<p>The expectation was that the diet plan should be created within a defined TAT, rather than being left open-ended.</p>
+<h3 style="margin-top:16px;">Follow-up scheduling</h3>
+<p>The platform supported follow-up scheduling so that users did not drop off after the first consultation.</p>
+<p>Follow-ups were critical because diet and weight management need iteration. A plan rarely works perfectly on day one. It needs review, adjustment, and accountability.</p>
+<h3 style="margin-top:16px;">Chat support</h3>
+<p>Users could ask diet-related questions after receiving the plan.</p>
+<p>This mattered because diet adherence often fails in small daily moments: what to eat outside, what to replace, what to do when cravings happen, how to manage meals during travel, and how to adjust to routine changes.</p>
+<h3 style="margin-top:16px;">Automated reminders</h3>
+<p>The platform supported reminders for upcoming consultations and follow-ups.</p>
+<p>This reduced dependency on manual chasing and helped maintain continuity.</p>
+<h3 style="margin-top:16px;">Missed-consultation handling</h3>
+<p>Missed consultations were not treated as dead ends.</p>
+<p>The workflow included rescheduling and follow-up communication so that users could be brought back into the journey.</p>
+<h3 style="margin-top:16px;">EMR and progress records</h3>
+<p>Consultation notes, dietary plans, progress records, and user interactions were maintained so that dieticians had continuity across sessions.</p>
+<p>This turned dietician support from isolated calls into a managed care journey.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>How the dietician journey changed</h2>
+<p>Before the in-house model, diet support was vendor-dependent and less controlled.</p>
+<p>The experience looked closer to:</p>
+<blockquote>
+  <p>User needs diet support &rarr; external dependency &rarr; consultation happens &rarr; limited continuity &rarr; follow-up depends on process discipline.</p>
+</blockquote>
+<p>The new model moved toward:</p>
+<blockquote>
+  <p>User enters wellness journey &rarr; consultation booked &rarr; dietician assesses context &rarr; plan created &rarr; reminders triggered &rarr; follow-up scheduled &rarr; chat support available &rarr; progress recorded &rarr; plan adjusted.</p>
+</blockquote>
+<p>This changed the operating model from outsourced service access to owned care delivery.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What made this hard</h2>
+<p>The difficulty in this project was not only building a platform.</p>
+<p>The harder problem was designing a service model that could scale.</p>
+<p>A dietician platform is not like a pure software feature. It sits at the intersection of product, operations, healthcare expertise, scheduling, communication, and user behaviour.</p>
+<p>There were several product challenges.</p>
+<h3 style="margin-top:16px;">Standardization without making care generic</h3>
+<p>Dieticians needed a standard SOP, but users still needed personalized care.</p>
+<p>The platform had to standardize the process while allowing dieticians to adapt plans based on user context.</p>
+<h3 style="margin-top:16px;">Capacity planning</h3>
+<p>When service is delivered by human experts, scale depends on availability, consultation duration, follow-up frequency, and operating cost.</p>
+<p>The product had to account for dietician capacity and consultation load.</p>
+<h3 style="margin-top:16px;">Continuity of care</h3>
+<p>The first consultation was not enough. Follow-ups, reminders, chat support, and progress records were needed to maintain engagement.</p>
+<h3 style="margin-top:16px;">Behaviour change</h3>
+<p>Users do not improve diet just because they receive a plan. The system had to support habit-building through nudges, communication, and repeated interaction.</p>
+<h3 style="margin-top:16px;">Business viability</h3>
+<p>The model had to reduce external cost while improving service quality and engagement.</p>
+<p>Replacing vendors with in-house dieticians solved both cost control and experience control.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What this delivered</h2>
+<p>The Wellness cohort delivered two connected outcomes.</p>
+<h3 style="margin-top:16px;">1. Stronger user engagement through activity challenges</h3>
+<p>The Step Tracker and gamified challenge formats went live, including step challenges, Everest/Kilimanjaro-style journeys, team challenges, rewards, and leaderboards.</p>
+<p>The primary metric was active users.</p>
+<p>This supported GMC retention and corporate wellness revenue by giving corporate clients an engagement-led wellness proposition.</p>
+<h3 style="margin-top:16px;">2. A scalable in-house dietician platform</h3>
+<p>The custom dietician platform went live with all major capabilities:</p>
+<ul>
+  <li>consultation booking,</li>
+  <li>diet-plan creation,</li>
+  <li>follow-up scheduling,</li>
+  <li>chat support,</li>
+  <li>automated reminders,</li>
+  <li>EMR/progress records,</li>
+  <li>missed-consultation handling.</li>
+</ul>
+<p>BFHL onboarded 3 in-house dieticians initially.</p>
+<p>The platform fully replaced external dietician vendors and saved <strong>₹95 lakhs</strong>.</p>
+<p>Engagement and repeat consultations improved, though consultation volume, utilization rate, and NPS numbers are not available.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>Why this mattered for BFHL</h2>
+<p>This project strengthened BFHL&rsquo;s wellness proposition in three ways.</p>
+<h3 style="margin-top:16px;">It improved control</h3>
+<p>BFHL no longer had to depend fully on external dietician vendors for nutrition support.</p>
+<h3 style="margin-top:16px;">It improved economics</h3>
+<p>Replacing external vendors generated ₹95 lakhs in savings.</p>
+<h3 style="margin-top:16px;">It improved product depth</h3>
+<p>Wellness became more than challenges or content. It now included guided nutrition support, activity engagement, follow-ups, and habit-building mechanisms.</p>
+<p>This created a stronger foundation for corporate wellness programs and GMC retention.</p>
+</section>
+
+<section class="cg-article-section">
+<h2>What this says about my product approach</h2>
+<p>This project reflects an important part of my product thinking:</p>
+<blockquote>
+  <p>A good product does not always replace humans. Sometimes it makes expert-led service scalable.</p>
+</blockquote>
+<p>The dietician platform was not designed to remove dieticians. It was designed to make them more effective, structured, measurable, and scalable.</p>
+<p>Similarly, the activity challenges were not built to show steps. They were built to create motivation.</p>
+<p>Across the Wellness cohort, the product approach was to combine:</p>
+<ul>
+  <li>behaviour design,</li>
+  <li>service design,</li>
+  <li>platform workflows,</li>
+  <li>expert support,</li>
+  <li>gamification,</li>
+  <li>operational scalability,</li>
+  <li>business viability.</li>
+</ul>
+<p>The result was a wellness product direction that served users, dieticians, corporate clients, and BFHL&rsquo;s business goals at the same time.</p>
+</section>
+<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/product-leadership-advisory/">Product Leadership Advisory</a> · <a href="/insights/">Insights</a></p>
+
+<section class="cg-section cg-reveal" id="cta">
+      <div class="cg-card large glow">
+        <h2>Ready to move from AI pilots to production?</h2>
+        <p>Share your workflow, constraints, and timeline. I will respond with a clear view on fit, approach, and next steps.</p>
+        <div class="cg-hero-actions" style="margin-top:20px;">
+          <a class="cg-btn primary" href="/work-with-me/">Work With Me</a>
+          <a class="cg-btn secondary" href="/case-studies/">View case studies</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="cg-footer">© 2026 Samadhan Mishra · <a href="/work-with-me/">Work With Me</a></footer>
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/nav.js"></script>
+
+</body>
+</html>
