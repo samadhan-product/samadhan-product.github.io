@@ -150,14 +150,40 @@
     </div>
   </header>
   <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
-<section class="cg-article-section"><h2>Context</h2><p>Vidal Health TPA modernization under Bajaj Finserv Health. The project addressed the Network Claims workflow covering daily planning, document/medical review, billing/tariff validation, and approval letter generation.</p></section>
-<section class="cg-article-section"><h2>Business problem</h2><p>Post-discharge claims and billing reconciliation spanned multiple legacy systems (Vings) and offline spreadsheets. Manual bill-head capture was highly prone to error, delaying final insurer settlement.</p></section>
-<section class="cg-article-section"><h2>User or operational pain</h2><p>Claim processors lacked a clean daily worklist. Billing teams struggled with tariff deviation mapping and implant invoice detection, leading to high rework rates and insurer escalations.</p></section>
-<section class="cg-article-section"><h2>Product intervention</h2><p>Designed a structured Network Claims processing workflow: automated allocation and planning worklists, billing validation tracking, check lists, and automated claim letter generation.</p></section>
-<section class="cg-article-section"><h2>AI capability used</h2><p>Structured billing-head extraction, automated tariff catalog mapping, room category validation alerts, and automated concurrence email pack generation.</p></section>
-<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><p>Samadhan led product discovery and solutioning: decomposed network claim activities into a structured task map, defined validation checklist rules, and designed dashboard instrumentation for team leads.</p></section>
-<section class="cg-article-section"><h2>Business outcome</h2><p>Delivered a structured processing model with automated allocation. Reduced tariff calculation errors and enabled real-time productivity tracking for operations management.</p></section>
-<section class="cg-article-section"><h2>Lessons for other companies</h2><p>Agentic value is bounded by tool quality and catalog mapping—not prompt engineering. Clean data structure at intake is critical for downstream automation.</p></section>
+<section class="cg-article-section"><h2>Context</h2><div>
+<p>The Network Claims modernization initiative focused on automating post-discharge claims, billing reconciliation, and insurer concurrence. This workflow operates in a high-volume TPA environment where claims must be reconciled against provider agreements, insurer packages, and historical pre-authorizations before final settlement.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business problem</h2><div>
+<p>End-to-end claim visibility was weak. Processors manually planned their days, opened allocated claims from dumps, and cross-referenced bills against tariff booklets. Tariff deviations, package exclusions, and implant invoice discrepancies were processed manually, resulting in long payment cycles and financial leakage.</p>
+<p><strong>First Principles Analysis:</strong> The challenge was not just document extraction, but the lack of dynamic tool execution. Processors spent excessive time fetching files and manually compiling insurer concurrence packets. We reframed this as an <em>agentic tool integration problem</em>: decomposing claim review tasks into actions that could be performed by automated scripts with structured inputs and rollback capabilities.</p>
+</div></section>
+<section class="cg-article-section"><h2>User or operational pain</h2><div>
+<p>Claim processors suffered from high manual effort and lack of daily workload organization. Operations experienced high error rates in billing capture and room category matching, causing high reclaim volume, audit findings, and provider relationship strain.</p>
+</div></section>
+<section class="cg-article-section"><h2>Product intervention</h2><div>
+<p>We designed a structured Claims Processing operating platform:</p>
+<ul>
+  <li><strong>Auto-Allocation and Planning:</strong> Replaced spreadsheet allocation with intelligent queues, tagging cases by complexity and urgency.</li>
+  <li><strong>Checklist-Driven Review:</strong> Built interactive checklists for document, medical, and rule checking.</li>
+  <li><strong>Claim Letter & Concurrence Automation:</strong> Automatically compiles the final approval letter and maps insurer concurrence details, creating ready-to-send email packages.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>AI capability used</h2><div>
+<p>Deploying agentic patterns, the system uses tool-calling agents to perform validation runs, RAG over policy documents, and structured extraction of implant invoice values.</p>
+</div></section>
+<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><div>
+<p>Samadhan led the product discovery and solutioning. He mapped the complete Network Claims task journey (from planning the day to final insurer concurrence revert tracking), defined validation checklist rules, and designed dashboard interfaces for queue tracking and productivity management.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business outcome</h2><div>
+<p>The project delivered a structured claims validation workflow. It significantly reduced billing errors, automated the generation of approval letters and concurrence packages, and provided operations managers with real-time capacity and productivity insights.</p>
+</div></section>
+<section class="cg-article-section"><h2>Lessons for other companies</h2><div>
+<p><strong>Key Product Leadership Takeaways:</strong></p>
+<ol>
+  <li><strong>Map the workflow before buying models:</strong> Automation success is bounded by tool quality and data integration, not prompt structure.</li>
+  <li><strong>Control the blast radius:</strong> Enable tool-calling agents to perform actions in sandbox environments with explicit human approvals before final writes.</li>
+</ol>
+</div></section>
 <p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/ai-agents-consultant/">AI Agents Consulting</a> · <a href="/insights/">Insights</a></p>
 
 <section class="cg-section cg-reveal" id="cta">

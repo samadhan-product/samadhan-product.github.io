@@ -150,14 +150,45 @@
     </div>
   </header>
   <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
-<section class="cg-article-section"><h2>Context</h2><p>Bajaj Finserv Health Limited (BFHL) 2022 OPD Reimbursement claims-processing project executed on Salesforce.</p></section>
-<section class="cg-article-section"><h2>Business problem</h2><p>Processors manually pulled claims (Service Requests) from lists, switched between multiple screens for client and policy history, and ran benefit checks manually using external notes.</p></section>
-<section class="cg-article-section"><h2>User or operational pain</h2><p>Processor capacity was capped at 75 claims/day. Duplicate claims created by customers sending requests via different modes went undetected, leading to high operational leakages.</p></section>
-<section class="cg-article-section"><h2>Product intervention</h2><p>Product discovery and solutioning: built a Customer 360 console on Salesforce, round-robin auto-allocation, configurable rule engine for eligibility and duplicate checks, and embedded document management.</p></section>
-<section class="cg-article-section"><h2>AI capability used</h2><p>Automated duplicate detection logic, rule-engine rules for eligibility checks, and OCR document processing validation.</p></section>
-<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><p>Samadhan led product requirement specifications and discovery: sat with processors at the call center to observe workflows, mapped leakage areas, and designed the Salesforce capability tracks.</p></section>
-<section class="cg-article-section"><h2>Business outcome</h2><p>Processor productivity increased from 75 to 130 claims/day (30% efficiency improvement achieved). STP pass rate reached 50% and decision accuracy stabilized at 99%.</p></section>
-<section class="cg-article-section"><h2>Lessons for other companies</h2><p>Discovery must happen on the operating floor. True efficiency comes from screen-consolidation and workflow automation rather than standalone features.</p></section>
+<section class="cg-article-section"><h2>Context</h2><div>
+<p>In 2022, Bajaj Finserv Health Limited (BFHL) undertook a major transformation of its OPD Reimbursement Claims Processing platform. Running on Salesforce Service Cloud, this system handles the intake of claims submitted via emails, consumer apps, and provider portals, routing them to claims processing desks.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business problem</h2><div>
+<p>The existing claim processing was slow and heavily dependent on manual screen navigation. Processors spent significant time searching for customer profiles, pulling documents, verifying eligibility limits, and checking for duplicate submissions. Every customer email created a new Service Request (SR), leading to duplicates across multiple channels that went undetected.</p>
+<p><strong>First Principles Analysis:</strong> The block was not the database speed, but cognitive switching. Processors had to open up to 6 different Salesforce tabs to make a single claim decision. The solution required designing a single Customer 360 view that unified client history, policy limits, active benefits, and document viewers into one screen, coupled with an automated rules engine.</p>
+</div></section>
+<section class="cg-article-section"><h2>User or operational pain</h2><div>
+<p>Claim processor capacity was capped at 75 claims per day per agent, causing backlogs. Manual validation led to inconsistent policy rule applications and high audit error rates. Duplicate payments caused financial leakage, and the customer experience suffered from long settlement cycles.</p>
+</div></section>
+<section class="cg-article-section"><h2>Product intervention</h2><div>
+<p>We designed and shipped a unified claims operations interface on Salesforce:</p>
+<ul>
+  <li><strong>Customer 360 Console:</strong> Consolidated policy data, transaction histories, active benefits, and case documents into a single page.</li>
+  <li><strong>Round-Robin Auto-Allocation:</strong> Automated claim routing, prioritization, and SLA-based queues.</li>
+  <li><strong>Configurable Rules Engine:</strong> Automated rules checking eligibility, document completeness, policy benefits, and duplicate checks.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>AI capability used</h2><div>
+<p>The rules engine automated the verification of standard claim criteria, and basic NLP matching algorithms were implemented to scan active claims for potential duplicate indicators.</p>
+</div></section>
+<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><div>
+<p>Samadhan led the product discovery and requirement specifications (PRS). He visited the call center, sat directly with claims processing agents to map workflow friction points, analyzed intake forms, and designed the Salesforce capability tracks.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business outcome</h2><div>
+<p>The transformation delivered outstanding operational metrics:</p>
+<ul>
+  <li>Processor productivity increased from 75 to 130 claims/day (a <strong>30% efficiency improvement achieved</strong>).</li>
+  <li>Straight-Through Processing (STP) rate reached 50%.</li>
+  <li>Decision accuracy reached 99%, with agent NPS improving to 40.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>Lessons for other companies</h2><div>
+<p><strong>Key Product Leadership Takeaways:</strong></p>
+<ol>
+  <li><strong>Sit with your users:</strong> Floor-level discovery reveals friction points (like manual screen switching and local MS Paint usage) that standard telemetry missed.</li>
+  <li><strong>Automate the checks, empower the human:</strong> Rule engines should automatically validate standard limits, allowing processors to focus entirely on exception resolution.</li>
+</ol>
+</div></section>
 <p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/healthcare-insurance-ai/">Healthcare &amp; Insurance AI</a> · <a href="/insights/">Insights</a></p>
 
 <section class="cg-section cg-reveal" id="cta">

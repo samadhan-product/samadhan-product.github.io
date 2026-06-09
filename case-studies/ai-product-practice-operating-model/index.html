@@ -150,14 +150,40 @@
     </div>
   </header>
   <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
-<section class="cg-article-section"><h2>Context</h2><p>A product organization ran parallel AI pilots without shared standards for quality, cost, or release governance.</p></section>
-<section class="cg-article-section"><h2>Business problem</h2><p>Teams chose models ad hoc, skipped evals, and could not compare initiatives on business impact or operational risk.</p></section>
-<section class="cg-article-section"><h2>User or operational pain</h2><p>Leadership lacked a portfolio view; engineers and PMs duplicated learnings; customer-facing features shipped with inconsistent safety posture.</p></section>
-<section class="cg-article-section"><h2>Product intervention</h2><p>An operating model with intake criteria, model selection memo templates, eval rubrics, tiering strategy, and executive review cadence.</p></section>
-<section class="cg-article-section"><h2>AI capability used</h2><p>Cross-cutting patterns for RAG, agents, and copilots with shared observability and cost attribution by feature.</p></section>
-<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><p>Samadhan advised on operating model, templates, and leadership rituals—grounded in production experience from HealthTech AI portfolios.</p></section>
-<section class="cg-article-section"><h2>Business outcome</h2><p>Faster decisions, fewer repeated failures, and clearer accountability from experiment to production.</p></section>
-<section class="cg-article-section"><h2>Lessons for other companies</h2><p>AI scale is an operating model problem. Templates and governance beat heroics.</p></section>
+<section class="cg-article-section"><h2>Context</h2><div>
+<p>This case study covers the design and deployment of an AI Product Practice Operating Model. Developed for product organizations running parallel AI pilots, this model establishes governance, evaluation, and model-tiering standards to scale AI initiatives efficiently.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business problem</h2><div>
+<p>Product squads launched AI pilots ad-hoc. There was no shared standard for model selection, eval metrics, prompt grounding, or cost attribution. This led to high API token costs, security vulnerabilities, and duplicate learning loops across squads.</p>
+<p><strong>First Principles Analysis:</strong> AI scale is not just an engineering problem; it is an operating model problem. Unlike traditional software, AI is non-deterministic. The product organization needed a structured process for model evaluation (evals), task-routing, and security tiering, ensuring that teams do not start coding until they document their model selections and safety boundaries.</p>
+</div></section>
+<section class="cg-article-section"><h2>User or operational pain</h2><div>
+<p>Executive leadership lacked visibility into AI return on investment. Product teams wasted cycles repeating the same LLM mistakes, and security and compliance teams flagged safety issues late in production cycles, causing release blocks.</p>
+</div></section>
+<section class="cg-article-section"><h2>Product intervention</h2><div>
+<p>We designed and rolled out the AI Product Practice Operating Model:</p>
+<ul>
+  <li><strong>Model Selection Framework:</strong> Created standardized templates for documenting model choices, cost trade-offs, and prompts.</li>
+  <li><strong>Eval Suite Standards:</strong> Standardized evaluation rubrics (measuring grounding, faithfulness, and latency) before production deployment.</li>
+  <li><strong>Release Governance:</strong> Set up a cross-functional review board to audit safety, security, and cost per run parameters.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>AI capability used</h2><div>
+<p>Established shared libraries for RAG evaluations, model-routing rules, and prompt safety guardrails.</p>
+</div></section>
+<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><div>
+<p>Samadhan advised on the operating model, template designs, and leadership rituals, leveraging his experience leading HealthTech AI portfolios to build scalable governance structures.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business outcome</h2><div>
+<p>Delivered an operating model that aligned product, engineering, and compliance. Enabled faster launch decisions, reduced token cost wastage, and established consistent safety guardrails across all AI features.</p>
+</div></section>
+<section class="cg-article-section"><h2>Lessons for other companies</h2><div>
+<p><strong>Key Product Leadership Takeaways:</strong></p>
+<ol>
+  <li><strong>Templates beat heroics:</strong> Scaling AI requires structured checklists and templates. Documenting model choices and evals before writing code ensures process consistency.</li>
+  <li><strong>Evaluate early and often:</strong> Set up eval runs early in the design cycle. Waiting until production to measure latency and grounding leads to major rework.</li>
+</ol>
+</div></section>
 <p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/product-leadership-advisory/">Product Leadership Advisory</a> · <a href="/insights/">Insights</a></p>
 
 <section class="cg-section cg-reveal" id="cta">

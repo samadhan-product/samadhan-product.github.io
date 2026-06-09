@@ -150,14 +150,52 @@
     </div>
   </header>
   <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
-<section class="cg-article-section"><h2>Context</h2><p>Vidal Health TPA modernization under Bajaj Finserv Health. The project focused on the IPD Cashless Pre-Auth workflow covering fresh authorization, interim enhancement, and final discharge-related processing.</p></section>
-<section class="cg-article-section"><h2>Business problem</h2><p>Pre-authorization requests were document-heavy, clinical-rule dependent, and time-sensitive. Operational queues grew rapidly with network expansion. Teams relied on fragmented systems and manual, inconsistent document checks.</p></section>
-<section class="cg-article-section"><h2>User or operational pain</h2><p>Operations leaders faced rising Average Handling Time (AHT) and queue aging. Hospital partners escalated slow response times on discharge approvals, while internal medical teams burned capacity on repeatable administrative checks.</p></section>
-<section class="cg-article-section"><h2>Product intervention</h2><p>Product-led workflow modernization: queue strategy (Discharge Fast-Lane), document intelligence (chronological viewer and missing-document flags), and medical decision support with a rule engine positioning as the single source of truth for allowed amount sequencing.</p></section>
-<section class="cg-article-section"><h2>AI capability used</h2><p>Chronological document classification and chronological viewer synchronization, clinical signal summarization, ICD/PCS coding validation, and rule-based decision support with override triggers.</p></section>
-<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><p>Samadhan led the product solutioning and workflow discovery: mapped granular Pre-Auth tasks, defined rule-engine sequencing, designed document viewer and queue strategies, and aligned clinical, operations, and engineering teams.</p></section>
-<section class="cg-article-section"><h2>Business outcome</h2><p>Successfully rolled out a structured modernization blueprint. Reduced Pre-Auth Fresh and Discharge TAT risk, improved processor productivity, and enforced rule compliance to prevent manual deduction bypass.</p></section>
-<section class="cg-article-section"><h2>Lessons for other companies</h2><p>Start with workflow truth, not model demos. Enforce rule sequencing at the system level to protect financial controls. Keep human experts in the loop for complex exceptions.</p></section>
+<section class="cg-article-section"><h2>Context</h2><div>
+<p>This initiative was executed as a core pillar of the <strong>Vidal Health TPA modernization</strong> under Bajaj Finserv Health. The project coverage focused on IPD Cashless workflows spanning three critical stages: Fresh Pre-Auth (initial authorization requests), Interim requests (enhancements during hospitalization), and Final Discharge authorizations. The system handles massive transaction volumes across a large network of hospitals, insurance companies, and internal processing centers.</p>
+<p>The operational landscape relied on the legacy <em>Vings system</em>, which required processors to navigate multiple fragmented screens, read unstructured clinical documents, check policy limits, and manage manual communications. The goal was to build a structured, AI-assisted, and auditable cashless operating system to replace fragmented manual processing.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business problem</h2><div>
+<p>The core business challenge was extreme workflow fragmentation and the non-deterministic nature of medical decisions under strict Turnaround Time (TAT) pressures. Pre-auth queues grew rapidly with network expansion, leading to time, decision, data, and control leakage. Processors had to manually verify document completeness, match tariff package prices, and coordinate insurer concurrence.</p>
+<p><strong>First Principles Analysis:</strong> The bottleneck was not booking creation or digitization; it was the lack of structured decision sequencing. Without backend validations, manual deductions bypassed the rule engine, distorting the final approved amount and creating inconsistent outcomes for patients and insurers alike. The problem had to be reframed: <em>how do we enforce a strict deduction sequence while keeping the medical and finance rules auditable?</em></p>
+</div></section>
+<section class="cg-article-section"><h2>User or operational pain</h2><div>
+<p>Operations leaders faced rising Average Handling Time (AHT) and queue aging, resulting in critical SLA breaches. Hospital partners frequently escalated slow responses on fresh and discharge cases, directly impacting patient discharge timelines. TPA processors suffered from cognitive fatigue from switching screens, manual medical-code verification, and chasing insurer concurrence, leading to high audit errors and cost-per-claim leakage.</p>
+</div></section>
+<section class="cg-article-section"><h2>Product intervention</h2><div>
+<p>We implemented a multi-track operational redesign focused on structural workflow modernization:</p>
+<ul>
+  <li><strong>Queue Strategy:</strong> Introduced specialized queues, including a Discharge Fast-Lane to expedite critical discharge approvals, alongside Emergency and Specialty queues.</li>
+  <li><strong>Rule Engine Governance:</strong> Enforced a strict deduction sequence: <code>Hospital Discount &rarr; Package Price &rarr; NME &rarr; Room Rent Limit &rarr; Co-pay &rarr; Ailment Cap &rarr; Threshold &rarr; Balance Sum Insured</code>. Backend validations restricted premature manual deduction overrides.</li>
+  <li><strong>Insurer Workflow:</strong> Automated the concurrence loop by auto-generating structured email packs and tracking reverts, replacing manual follow-up.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>AI capability used</h2><div>
+<p>The AI capability was integrated as an assistive decision-support layer rather than blind automation:</p>
+<ul>
+  <li><strong>Document Completeness Agent:</strong> Automatically scans and detects missing or unreadable documents at intake, avoiding late-stage shortfalls.</li>
+  <li><strong>Medical Summary Assistant:</strong> Generates clinical summaries, extracting diagnoses, procedures, and history.</li>
+  <li><strong>ICD/PCS Support:</strong> Suggests and validates medical coding changes, routing low-confidence exceptions to the doctor team.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><div>
+<p>As <strong>Lead Product Manager</strong> (AI Product Leader), Samadhan owned the complete product solutioning and discovery. He mapped granular Pre-Auth tasks (decomposing the journey into 27 tasks ranging from document upload to final UTR capture), defined the rule-engine sequencing logic, designed the DMS and chronological viewer interfaces, and managed stakeholder alignment across clinical, operations, billing, and engineering teams.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business outcome</h2><div>
+<p>The modernization blueprint translated fragmented workflows into a rule-driven, AI-assisted, and auditable cashless operations model. Delivered benefits include:</p>
+<ul>
+  <li>Reduced TAT risk through automated queue prioritization and Fast-Lane routing.</li>
+  <li>Enforced strict compliance on deduction sequences, preventing rule-engine bypass and manual leakages.</li>
+  <li>Improved audit trails, providing evidence links for every AI recommendation and capturing clear change-reason codes.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>Lessons for other companies</h2><div>
+<p><strong>Key Product Leadership Takeaways:</strong></p>
+<ol>
+  <li><strong>Start with workflow truth, not model demos:</strong> AI value is bounded by tool quality and integration points rather than prompt cleverness.</li>
+  <li><strong>Automate the repeatable middle:</strong> Let rules and AI handle the standard checks while reserving human clinical experts for complex exceptions.</li>
+  <li><strong>Instrument before scaling:</strong> Track micro-decisions and log override reasons to build a feedback loop for continuous rule-engine tuning.</li>
+</ol>
+</div></section>
 <p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/healthcare-ai-product-consultant/">Healthcare AI Product Consulting</a> · <a href="/insights/">Insights</a></p>
 
 <section class="cg-section cg-reveal" id="cta">

@@ -435,11 +435,12 @@ def case_study_page(cs: dict) -> str:
     ]
     body = ""
     for h, p in sections:
-        body += f'<section class="cg-article-section"><h2>{esc(h)}</h2><p>{p}</p></section>\n'
+        body += f'<section class="cg-article-section"><h2>{esc(h)}</h2><div>{p}</div></section>\n'
     body += f'<p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p>'
 
     service = cs.get("service_link", "/ai-product-management-consultant/")
     body += f'<p style="margin-top:16px;">Related service: <a href="{esc(service)}">{esc(cs.get("service_label", "AI Product Consulting"))}</a> · <a href="/insights/">Insights</a></p>'
+
 
     return page(
         path=path,

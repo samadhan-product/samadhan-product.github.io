@@ -150,14 +150,41 @@
     </div>
   </header>
   <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
-<section class="cg-article-section"><h2>Context</h2><p>BFHL HealthPay 2023. Transition and integration design for migrating payment QR infrastructure to BajajPay.</p></section>
-<section class="cg-article-section"><h2>Business problem</h2><p>Merchant/provider payments needed to migrate to the BajajPay QR network. The transition affected provider onboarding, QR mapping, logistics, settlements, refunds, and communications.</p></section>
-<section class="cg-article-section"><h2>User or operational pain</h2><p>A direct cutover risked disrupting provider operations. Operations and logistics teams needed clear processes for QR softcopy generation, logistics tracking, and support during the transition.</p></section>
-<section class="cg-article-section"><h2>Product intervention</h2><p>Designed a controlled migration roadmap: defined integration endpoints for QR generation, transaction/settlement feeds, refunds, support ops, and provider communication flows.</p></section>
-<section class="cg-article-section"><h2>AI capability used</h2><p>Auto-generation algorithms for QR codes, automated transactional notifications, and API-led integration flows.</p></section>
-<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><p>Samadhan defined product requirements, solutioning, integration coordinates, QR migration planning, logistics SOP, and UAT support.</p></section>
-<section class="cg-article-section"><h2>Business outcome</h2><p>Successfully completed integration design and UAT. Delivered the codebase to production, establishing the foundation for smooth merchant onboarding and operations.</p></section>
-<section class="cg-article-section"><h2>Lessons for other companies</h2><p>Migration is a logistics and communication challenge, not just a tech stack challenge. Define clear UAT parameters and operational SOPs early.</p></section>
+<section class="cg-article-section"><h2>Context</h2><div>
+<p>In 2023, during the Partner Center rollout, HealthPay undertook a major migration project to transition its payment QR infrastructure to <strong>BajajPay QR</strong>. The scope spanned provider onboarding, QR generation, transaction feeds, PG settlements, refunds, and support operations across doctors, labs, and hospital partners.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business problem</h2><div>
+<p>HealthPay needed to merge its provider-side payment collection infrastructure with BajajPay (BFL). The change affected how QR codes were mapped, how PG settlement credits were tracked, and how refund webhooks operated.</p>
+<p><strong>First Principles Analysis:</strong> The challenge was not just coding APIs, but managing payment infrastructure migration without operational disruption. We reframed this from a simple QR replacement to a <em>controlled cross-company payment infrastructure transition</em>. It required mapping precise workflows for provider onboarding, QR mapping/logistics, settlement reconciliation, and refund triggers to ensure operational continuity.</p>
+</div></section>
+<section class="cg-article-section"><h2>User or operational pain</h2><div>
+<p>A direct, unmanaged cutover could result in lost transactions, merchant onboarding errors, and settlement delays. Operations and logistics teams needed clear processes to manage QR distributions, and relationship managers required tools to handle provider concerns during the transition.</p>
+</div></section>
+<section class="cg-article-section"><h2>Product intervention</h2><div>
+<p>We designed the QR transition integration architecture:</p>
+<ul>
+  <li><strong>QR Logistics and Onboarding:</strong> Defined QR generation, center mapping, and onboarding flows.</li>
+  <li><strong>Reconciliation Integration:</strong> Synced BajajPay transaction and settlement feeds with PayRx.</li>
+  <li><strong>Refund Workflows:</strong> Programmed webhook triggers to handle partial and full refunds.</li>
+  <li><strong>Support & Continuity SOPs:</strong> Created backup workflows for finance and operations during the migration.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>AI capability used</h2><div>
+<p>The system integrated API-led transaction hooks, settlement matching webhooks, and automated refund validations.</p>
+</div></section>
+<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><div>
+<p>Samadhan worked on the merger in parallel to Partner Center. He was responsible for product requirements definition, solutioning, integration coordinates, QR migration planning, logistics SOP, and UAT support until transitioning to another project in the final phases.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business outcome</h2><div>
+<p>The integration between BajajPay and HealthPay was successfully completed, UAT was passed, and the codebase was deployed to production, establishing the foundation for provider QR migration.</p>
+</div></section>
+<section class="cg-article-section"><h2>Lessons for other companies</h2><div>
+<p><strong>Key Product Leadership Takeaways:</strong></p>
+<ol>
+  <li><strong>Ownership boundaries:</strong> In multi-company integrations, define clear ownership boundaries (e.g., who owns provider communication vs payout rails) to avoid execution blocks.</li>
+  <li><strong>Design for operational fallbacks:</strong> Build manual verification loops into UAT plans to handle edge cases where webhook events are dropped.</li>
+</ol>
+</div></section>
 <p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/ai-product-strategy/">AI Product Strategy</a> · <a href="/insights/">Insights</a></p>
 
 <section class="cg-section cg-reveal" id="cta">

@@ -150,14 +150,46 @@
     </div>
   </header>
   <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
-<section class="cg-article-section"><h2>Context</h2><p>BFHL HealthPay 2023. Executed pay-in and pay-out automation across customer QR payments, vouchers, PG settlements, and doctor/lab payouts.</p></section>
-<section class="cg-article-section"><h2>Business problem</h2><p>HealthPay transactions were complex multi-ledger compositions (customer payments, Voucherify, Healthcoin, and Claims benefits). Reconciling these manually against PG settlement and bank statements was slow and error-prone.</p></section>
-<section class="cg-article-section"><h2>User or operational pain</h2><p>Payout delays led to doctor and lab partner escalations. Manual correction of raw transaction data lacked audit trails and maker-checker validation, creating financial risk.</p></section>
-<section class="cg-article-section"><h2>Product intervention</h2><p>Created an API-led reconciliation engine (PayRx) that ingested gateway settlements, verified gross transaction values, ran payout logic, and triggered payouts via RazorpayX.</p></section>
-<section class="cg-article-section"><h2>AI capability used</h2><p>Multi-ledger matching engine algorithms matching transaction values against PG settlement files and bank feeds, automated payout triggering, and anomaly highlighting.</p></section>
-<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><p>Samadhan was Lead PM for the entire project: owned the PRD, user stories, matching engine specifications, audit control design, and participated in daily operations review until stabilization.</p></section>
-<section class="cg-article-section"><h2>Business outcome</h2><p>Eliminated manual reconciliation effort completely. Payouts moved to T+1, payout failures and escalations reduced significantly, and auditability improved via maker-checker approvals.</p></section>
-<section class="cg-article-section"><h2>Lessons for other companies</h2><p>Financial automation requires strong fallback designs. Retain manual upload tools and define clear business continuity plans for system downtime.</p></section>
+<section class="cg-article-section"><h2>Context</h2><div>
+<p>Executed in 2023 immediately after the Service Guarantee project, the <strong>HealthPay Recon & Settlement Automation</strong> initiative focused on automating pay-in and pay-out reconciliation across customer QR scans, corporate benefit utilization (vouchers, healthcoins, claims), payment gateway settlements, and provider payouts (doctors, labs).</p>
+</div></section>
+<section class="cg-article-section"><h2>Business problem</h2><div>
+<p>HealthPay transactions were not simple single-ledger payments. A single transaction involved net payments, Voucherify redemptions, Healthcoin burns, claims discounts, payment gateway fees, service taxes, and provider payouts. Reconciling these across PayU, RazorPay, PayRx, HRx, DRx, Voucherify, and bank statements required manual verification, resulting in slow operations and high settlement risk.</p>
+<p><strong>First Principles Analysis:</strong> Reconciliation cannot rely on a single gateway ledger. The matching engine needed to understand value composition: <code>Gross Transaction Value = Net Customer Paid + Voucher + Healthcoin + Claim Benefit</code>. The payout calculation had to be dynamically triggered based on pay-in matching: <code>Final Payout = Net Received + Benefits Applied + PG Charges</code>. Payouts had to be triggered programmatically via RazorpayX APIs only after successful matching.</p>
+</div></section>
+<section class="cg-article-section"><h2>User or operational pain</h2><div>
+<p>Finance teams spent hours matching daily records, delaying doctor and lab payouts. Delayed settlements led to severe provider escalations and relationship strain. Manual correction of raw ledger entries lacked audit trails and authorization, creating high financial controllership risks.</p>
+</div></section>
+<section class="cg-article-section"><h2>Product intervention</h2><div>
+<p>We built a multi-layered financial operations platform:</p>
+<ul>
+  <li><strong>API Ingestion Layer:</strong> Automated ingestion of feeds from PayU, RazorPay, Voucherify, Claims, and bank statements, retaining manual upload as a fallback.</li>
+  <li><strong>Reconciliation Engine (PayRx):</strong> Ran multi-ledger matching rules to reconcile transaction count and amount details.</li>
+  <li><strong>Governed Manual Review:</strong> Surfaced exceptions (amount mismatches, failed payouts, beneficiary bank issues) in specialized queues.</li>
+  <li><strong>Governance Layer:</strong> Implemented role-based edit permissions, maker-checker approvals for edited ledger data, and comprehensive audit logs.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>AI capability used</h2><div>
+<p>Reconciliation algorithms matched multi-ledger balances, flagged count and value anomalies, and triggered RazorpayX payouts programmatically.</p>
+</div></section>
+<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><div>
+<p>Samadhan was Lead PM for the complete project: owned the PRD, user stories, matching engine rules, governance controls, and participated in daily operations review until stabilization.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business outcome</h2><div>
+<p>The matching engine successfully went live, delivering substantial operational impact:</p>
+<ul>
+  <li><strong>Manual reconciliation effort was eliminated</strong> as the process became fully automated.</li>
+  <li>Payouts to doctors and labs were completed on a <strong>T+1 cycle</strong>.</li>
+  <li>Payout delays and provider escalations reduced, and financial controllership was strengthened through audit trails.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>Lessons for other companies</h2><div>
+<p><strong>Key Product Leadership Takeaways:</strong></p>
+<ol>
+  <li><strong>Build for resilience:</strong> API failures occur. Retaining manual upload fallbacks and designing clear contingency plans for payment gateway downtime prevents operational paralysis.</li>
+  <li><strong>Governance is not a feature; it is core:</strong> Multi-ledger matching engines need role-based edits and maker-checker validation to satisfy audit, risk, and compliance standards.</li>
+</ol>
+</div></section>
 <p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/ai-agents-workflow-automation/">AI Agents &amp; Workflow Automation</a> · <a href="/insights/">Insights</a></p>
 
 <section class="cg-section cg-reveal" id="cta">

@@ -150,14 +150,41 @@
     </div>
   </header>
   <main class="cg-main cg-article-content" style="max-width:800px;margin:0 auto;padding:0 24px 80px;">
-<section class="cg-article-section"><h2>Context</h2><p>Bajaj Finserv Health Limited (BFHL) 2022. The project covered fulfilment assurance for lab test bookings and doctor appointments across SFDC, HRx, and consumer-facing channels.</p></section>
-<section class="cg-article-section"><h2>Business problem</h2><p>Customers could book services digitally, but booking did not guarantee provider confirmation or actual fulfilment. Manual coordination across multiple systems resulted in high cancellation and silent booking failures.</p></section>
-<section class="cg-article-section"><h2>User or operational pain</h2><p>Operations teams lacked visibility into SLA breaches. Customers suffered from broken journeys and high anxiety after booking, leading to volume escalations and complaints.</p></section>
-<section class="cg-article-section"><h2>Product intervention</h2><p>Product-led shift from booking to fulfilment assurance: created an SFDC case-management flow integrated with HRx, app-facing status tracking, automated WhatsApp/SMS notifications, and voice-blast escalations.</p></section>
-<section class="cg-article-section"><h2>AI capability used</h2><p>Automated status synchronization workflows, TAT-based escalation alerts, and automated reminder logic triggering communication rules.</p></section>
-<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><p>Samadhan owned the complete product solutioning as Lead PM: defined SFDC case states, synced HRx integration requirements, designed provider response states, and coordinated go-live of the complete flow.</p></section>
-<section class="cg-article-section"><h2>Business outcome</h2><p>The complete Service Guarantee flow went live. Fulfilment rate was established as the primary business metric, resulting in a significant reduction in customer complaints and improved provider accountability.</p></section>
-<section class="cg-article-section"><h2>Lessons for other companies</h2><p>Reframer from booking management to fulfilment assurance. The product is not successful when a booking is created, but when the service is actually completed.</p></section>
+<section class="cg-article-section"><h2>Context</h2><div>
+<p>Following the OPD Reimbursement revamp, Samadhan led the <strong>Service Guarantee product initiative</strong> in 2022 at Bajaj Finserv Health Limited (BFHL). The scope covered doctor appointments and lab test bookings, orchestrating integrations across Salesforce (SFDC), HRx (core medical booking database), consumer apps, and operational queues.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business problem</h2><div>
+<p>BFHL customers could easily book services digitally, but booking did not guarantee fulfilment. Provider confirmation, appointment execution, rescheduling, and cancellation tracking were handled manually over disconnected channels. There was no real-time status tracking, and provider no-shows or rejections left customers stranded.</p>
+<p><strong>First Principles Analysis:</strong> We reframed the product thesis: <em>the product is not a booking system; it is a service assurance system</em>. The customer's journey is incomplete when they book; it is complete only when they successfully receive the medical service. The product had to transition from booking creation to active fulfilment tracking, tracking provider responses and offering automated recovery paths.</p>
+</div></section>
+<section class="cg-article-section"><h2>User or operational pain</h2><div>
+<p>Operational teams had zero visibility into pending provider confirmations or SLA breaches. Customers suffered from high post-booking anxiety, leading to broken journeys, booking drop-offs, and a high volume of support complaints.</p>
+</div></section>
+<section class="cg-article-section"><h2>Product intervention</h2><div>
+<p>We built a complete fulfilment assurance layer:</p>
+<ul>
+  <li><strong>SFDC Case Management Layer:</strong> Automatically converted every booking into an active, tracked case.</li>
+  <li><strong>Provider Confirmation Tracker:</strong> Systematized provider accept, reject, reschedule, and no-response states.</li>
+  <li><strong>Automated Communication:</strong> Triggered proactive WhatsApp, SMS, and Voice-Blast updates at key milestones.</li>
+  <li><strong>TAT-Based Escalation:</strong> Programmed alerts for provider delays, moving cases automatically to agent queues.</li>
+</ul>
+</div></section>
+<section class="cg-article-section"><h2>AI capability used</h2><div>
+<p>The system utilized automated state synchronizations, TAT-based escalation rule triggers, and automated voice-blast integration rules to recover unconfirmed bookings.</p>
+</div></section>
+<section class="cg-article-section"><h2>Samadhan&#x27;s role</h2><div>
+<p>As Lead PM, Samadhan owned the complete product solutioning. Supported by junior PMs, he defined the SFDC case status flows, authored the HRx-SFDC integration requirements, designed customer communication triggers, and led cross-functional execution until go-live.</p>
+</div></section>
+<section class="cg-article-section"><h2>Business outcome</h2><div>
+<p>The complete Service Guarantee flow went live successfully. Fulfilment Rate was established as the primary success metric. The initiative drastically reduced customer complaints, improved provider response TAT, and built trust in BFHL's booking platform.</p>
+</div></section>
+<section class="cg-article-section"><h2>Lessons for other companies</h2><div>
+<p><strong>Key Product Leadership Takeaways:</strong></p>
+<ol>
+  <li><strong>Align the metric with the value:</strong> Shifting the north star metric from "bookings created" to "fulfilment rate" aligned the product, engineering, and operations teams on the true customer outcome.</li>
+  <li><strong>Design for recovery:</strong> Service failures (like doctor cancellations) are inevitable. Designing automated recovery paths (rescheduling slots, instant notification) is what preserves customer trust.</li>
+</ol>
+</div></section>
 <p><a class="cg-read-link" href="/case-studies/">← All case studies</a></p><p style="margin-top:16px;">Related service: <a href="/services/healthcare-insurance-ai/">Healthcare &amp; Insurance AI</a> · <a href="/insights/">Insights</a></p>
 
 <section class="cg-section cg-reveal" id="cta">
