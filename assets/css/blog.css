@@ -3554,3 +3554,364 @@ html[data-theme="light"] .cg-bento-list strong { color: #1f2933; }
   border-radius: 4px;
   text-decoration: none;
 }
+
+/* ============================================================
+   Case Study Premium — Enhanced Editorial Components v2
+   Used on ai-led-pre-auth-automation and similar pages
+   ============================================================ */
+
+/* Hero eyebrow */
+.case-study-premium .cs-hero-eyebrow {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+
+/* Chip label prefix */
+.case-study-premium .cs-chip-label {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  margin-right: 5px;
+}
+
+/* Hero outcome cards (3 metric chips in hero) */
+.case-study-premium .cs-hero-outcomes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+.case-study-premium .cs-hero-outcome-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 18px;
+  background: var(--ivory-bg);
+  border: 1px solid var(--ivory-border);
+  border-radius: 6px;
+}
+.case-study-premium .cs-hero-outcome-val {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--charcoal-dark);
+  line-height: 1.2;
+}
+.case-study-premium .cs-hero-outcome-lbl {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Case snapshot: 4 descriptive cards (Problem / Intervention / Model / Impact) */
+.case-study-premium .cs-case-snapshot {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--ivory-border-strong);
+}
+.case-study-premium .cs-case-card {
+  background: var(--ivory-bg);
+  border: 1px solid var(--ivory-border);
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+.case-study-premium .cs-case-card-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 7px;
+}
+.case-study-premium .cs-case-card-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--charcoal-body);
+  font-weight: 550;
+  margin: 0;
+}
+
+/* Beautified bullet list — with bold lead-in support */
+.case-study-premium .cs-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.case-study-premium .cs-bullet-list li {
+  padding-left: 22px;
+  position: relative;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--charcoal-body);
+}
+.case-study-premium .cs-bullet-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.55;
+}
+.case-study-premium .cs-bullet-list li strong {
+  color: var(--charcoal-dark);
+}
+
+/* Checklist-style bullets — 2-column on desktop */
+.case-study-premium .cs-check-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 32px;
+}
+@media (max-width: 580px) {
+  .case-study-premium .cs-check-list { grid-template-columns: 1fr; }
+}
+.case-study-premium .cs-check-list li {
+  padding-left: 18px;
+  position: relative;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--charcoal-body);
+}
+.case-study-premium .cs-check-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+  opacity: 0.5;
+  top: 1px;
+}
+
+/* Numbered definition blocks (leakage types, key problems) */
+.case-study-premium .cs-numbered-blocks {
+  border: 1px solid var(--ivory-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 24px 0;
+}
+.case-study-premium .cs-num-block {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--ivory-border);
+}
+.case-study-premium .cs-num-block:last-child { border-bottom: none; }
+.case-study-premium .cs-num-block:nth-child(odd) { background: var(--ivory-surface); }
+.case-study-premium .cs-num-block-num {
+  font-size: 12px;
+  font-weight: 900;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  color: var(--accent);
+  opacity: 0.75;
+  flex-shrink: 0;
+  min-width: 26px;
+  padding-top: 3px;
+}
+.case-study-premium .cs-num-block-title {
+  font-weight: 800;
+  color: var(--charcoal-dark);
+  font-size: 15px;
+  margin: 0 0 5px;
+}
+.case-study-premium .cs-num-block-desc {
+  font-size: 15.5px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.65;
+}
+
+/* Numbered process flow — circle steps */
+.case-study-premium .cs-process-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.case-study-premium .cs-process-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.case-study-premium .cs-process-num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  background: var(--ivory-bg);
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+}
+[data-theme="dark"] .case-study-premium .cs-process-num {
+  background: rgba(255,255,255,0.04);
+}
+.case-study-premium .cs-process-body { padding-top: 6px; }
+.case-study-premium .cs-process-title {
+  display: block;
+  font-weight: 750;
+  color: var(--charcoal-dark);
+  font-size: 15.5px;
+  margin-bottom: 3px;
+}
+.case-study-premium .cs-process-desc {
+  font-size: 14.5px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Section divider within a chapter */
+.case-study-premium .cs-section-divider {
+  height: 1px;
+  background: var(--ivory-border);
+  margin: 36px 0;
+  border: none;
+}
+
+/* Premium comparison / data tables */
+.case-study-premium .cs-table-wrap {
+  overflow-x: auto;
+  margin: 24px 0;
+  border-radius: 8px;
+  border: 1px solid var(--ivory-border);
+  -webkit-overflow-scrolling: touch;
+}
+.case-study-premium .cs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  min-width: 480px;
+}
+.case-study-premium .cs-table th {
+  background: var(--ivory-surface);
+  padding: 11px 18px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+  border-bottom: 1px solid var(--ivory-border-strong);
+  white-space: nowrap;
+}
+.case-study-premium .cs-table td {
+  padding: 14px 18px;
+  vertical-align: top;
+  color: var(--charcoal-body);
+  border-bottom: 1px solid var(--ivory-border);
+  line-height: 1.6;
+  font-size: 14.5px;
+}
+.case-study-premium .cs-table tr:nth-child(even) td {
+  background: rgba(0,0,0,0.015);
+}
+[data-theme="dark"] .case-study-premium .cs-table tr:nth-child(even) td {
+  background: rgba(255,255,255,0.02);
+}
+.case-study-premium .cs-table tr:last-child td { border-bottom: none; }
+.case-study-premium .cs-table td:first-child {
+  font-weight: 700;
+  color: var(--charcoal-dark);
+  white-space: nowrap;
+}
+.case-study-premium .cs-table .before-cell { color: #b91c1c; }
+[data-theme="dark"] .case-study-premium .cs-table .before-cell { color: #fca5a5; }
+.case-study-premium .cs-table .after-cell { color: #15803d; }
+[data-theme="dark"] .case-study-premium .cs-table .after-cell { color: #86efac; }
+
+/* Tensions — compact definition-list style */
+.case-study-premium .cs-tensions { margin: 24px 0; }
+.case-study-premium .cs-tension-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--ivory-border);
+  align-items: start;
+}
+.case-study-premium .cs-tension-row:last-child { border-bottom: none; }
+.case-study-premium .cs-tension-label {
+  font-weight: 800;
+  font-size: 14.5px;
+  color: var(--charcoal-dark);
+  padding-top: 1px;
+}
+.case-study-premium .cs-tension-desc {
+  font-size: 15.5px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}
+@media (max-width: 580px) {
+  .case-study-premium .cs-tension-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+/* Final reflection closing block */
+.case-study-premium .cs-reflection {
+  margin: 44px 0 0;
+  padding: 32px 36px;
+  background: var(--ivory-surface);
+  border: 1px solid var(--ivory-border);
+  border-top: 3px solid var(--charcoal-dark);
+  border-radius: 0 0 6px 6px;
+}
+[data-theme="dark"] .case-study-premium .cs-reflection {
+  border-top-color: rgba(255,255,255,0.35);
+}
+.case-study-premium .cs-reflection-quote {
+  font-size: 18.5px;
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--charcoal-dark);
+  margin: 0 0 20px;
+}
+.case-study-premium .cs-reflection-coda {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.75;
+}
+
+/* Section fade-in on scroll */
+@keyframes cs-section-reveal {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.case-study-premium .cs-chapter {
+  animation: cs-section-reveal 0.45s ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-study-premium .cs-chapter { animation: none; }
+}
