@@ -106,9 +106,9 @@ export const profile = {
       blurb:
         "Delivered e-Governance and digital transformation projects for government departments and educational institutions.",
       points: [
-        "National skills assessment portal — online exams at scale",
-        "School MIS — 500+ schools, 100K+ students",
-        "Child welfare tracking — programs serving 50K+ children"
+        "ESDM Portal DEITY",
+        "Digital Transformation of Utkal University",
+        "MAMATA Project, Women and Child Development Department, Odisha"
       ],
       stack: ["GovTech", "MIS", "Stakeholder Mgmt"]
     },
