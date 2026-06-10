@@ -32,7 +32,6 @@ export const profile = {
         "Leading an AI/ML product portfolio with a 13+ member team across claims automation, health-insurance payments, partner operations, and wellness platforms on the core TPA stack.",
       points: [
         "Reduced claims adjudication time by 60% through ML automation",
-        "Scaled product team from 3 to 13+ PMs",
         "Processes millions of health-insurance transactions monthly",
         "99% settlement accuracy in payment processing",
         "30% drop in customer drop-rate via UX optimisation"
