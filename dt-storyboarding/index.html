@@ -50,7 +50,7 @@
 
     /* HEADER */
     header {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
@@ -391,6 +391,30 @@
     .anim-garba {
       animation: garbaDance 0.8s ease-in-out infinite;
       transform-origin: center;
+    }
+
+    /* MINIMAP HUD */
+    .minimap-hud {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 240px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 3px solid var(--border-ink);
+      border-radius: 12px;
+      box-shadow: var(--shadow-comic);
+      overflow: hidden;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .minimap-viewport-rect {
+      position: absolute;
+      border: 2.5px solid var(--color-saffron);
+      background: rgba(255, 153, 51, 0.25);
+      border-radius: 4px;
+      pointer-events: none;
     }
   </style>
 </head>
