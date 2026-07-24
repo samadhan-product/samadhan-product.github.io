@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taarak Mehta Ka Ooltah Chashmah - Jethalal Gada Gold Loan Storyboard Map</title>
+  <!-- Google Fonts: Comic & Sketch Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Architects+Daughter&family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Fira+Code:wght@600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --font-comic: 'Bangers', cursive, sans-serif;
+      --font-sketch: 'Architects Daughter', cursive, sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      
+      --bg-paper: #FFFDF9;
+      --border-ink: #1E1B18;
+      --color-saffron: #FF9933;
+      --color-gold: #FFD700;
+      --color-red: #E11D48;
+      --color-blue: #0284C7;
+      --color-green: #16A34A;
+
+      --shadow-comic: 6px 6px 0px #1E1B18;
+      --shadow-comic-hover: 10px 10px 0px #1E1B18;
+      --shadow-active: 0 0 0 5px #FF9933, 10px 10px 0px #1E1B18;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-body);
+      background-color: var(--bg-paper);
+      /* Vintage Comic Map Grid Pattern */
+      background-image: 
+        radial-gradient(#CBD5E1 1.5px, transparent 1.5px),
+        linear-gradient(to right, rgba(30, 27, 24, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 27, 24, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px, 120px 120px, 120px 120px;
+    }
+
+    /* HEADER */
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: #FFFFFF;
+      border-bottom: 4px solid var(--border-ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .brand h1 {
+      font-family: var(--font-comic);
+      font-size: 2.2rem;
+      letter-spacing: 1.5px;
+      color: var(--border-ink);
+      text-shadow: 2px 2px 0px #FF9933;
+    }
+
+    .badge-tmkoc {
+      background: #FF9933;
+      color: #1E1B18;
+      font-family: var(--font-comic);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      padding: 0.2rem 0.6rem;
+      border: 2px solid var(--border-ink);
+      border-radius: 6px;
+      box-shadow: 2px 2px 0px var(--border-ink);
+    }
+
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      font-family: var(--font-comic);
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      padding: 0.35rem 1rem;
+      background: #FFFFFF;
+      color: var(--border-ink);
+      border: 3px solid var(--border-ink);
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: var(--shadow-comic);
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: var(--shadow-comic-hover);
+      background: #FFFDE7;
+    }
+
+    .btn-primary {
+      background: #FF9933;
+      color: #1E1B18;
+    }
+
+    /* INFINITE CANVAS VIEWPORT */
+    #canvas-container {
+      width: 100vw;
+      height: calc(100vh - 70px);
+      margin-top: 70px;
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    #canvas-container:active {
+      cursor: grabbing;
+    }
+
+    #viewport {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    /* CONNECTIONS LAYER FOR MAP PATHS & ARROWS */
+    #connections-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6000px;
+      height: 5500px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .map-path {
+      fill: none;
+      stroke: var(--border-ink);
+      stroke-width: 6;
+      stroke-dasharray: 12 8;
+      stroke-linecap: round;
+      animation: mapFlow 30s linear infinite;
+    }
+
+    @keyframes mapFlow {
+      from { stroke-dashoffset: 400; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* COMIC PANEL NODE */
+    .comic-node {
+      position: absolute;
+      width: 420px;
+      background: #FFFFFF;
+      border: 4px solid var(--border-ink);
+      border-radius: 16px;
+      box-shadow: var(--shadow-comic);
+      padding: 0.95rem;
+      z-index: 10;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .comic-node:nth-child(even) {
+      transform: rotate(1.2deg);
+    }
+    .comic-node:nth-child(odd) {
+      transform: rotate(-1.2deg);
+    }
+
+    .comic-node:hover {
+      transform: translateY(-8px) scale(1.02) rotate(0deg) !important;
+      box-shadow: 12px 12px 0px #1E1B18;
+      border-color: var(--color-saffron);
+      z-index: 50;
+    }
+
+    .comic-node.active-node {
+      box-shadow: 0 0 0 6px #FF9933, 14px 14px 0px #1E1B18 !important;
+      border-color: #FF9933;
+      background: #FFFDF5;
+      transform: rotate(0deg) scale(1.03) !important;
+      z-index: 100;
+    }
+
+    /* COMIC BURST / STARBURST BADGES */
+    .comic-burst {
+      position: absolute;
+      top: -16px;
+      right: -14px;
+      background: #FFD700;
+      color: #1E1B18;
+      font-family: var(--font-comic);
+      font-size: 0.9rem;
+      letter-spacing: 0.8px;
+      padding: 0.35rem 0.65rem;
+      border: 3px solid #1E1B18;
+      box-shadow: 3px 3px 0px #1E1B18;
+      border-radius: 8px;
+      transform: rotate(6deg);
+      z-index: 25;
+      animation: burstFloat 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes burstFloat {
+      0% { transform: rotate(5deg) scale(1); }
+      100% { transform: rotate(8deg) scale(1.06); }
+    }
+
+    .node-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid var(--border-ink);
+      padding-bottom: 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .node-badge {
+      font-family: var(--font-comic);
+      font-size: 1.35rem;
+      background: #FF9933;
+      color: #1E1B18;
+      border: 2.5px solid var(--border-ink);
+      padding: 0.05rem 0.6rem;
+      border-radius: 6px;
+      box-shadow: 2px 2px 0px var(--border-ink);
+    }
+
+    .node-title {
+      font-family: var(--font-comic);
+      font-size: 1.55rem;
+      letter-spacing: 0.5px;
+      color: var(--border-ink);
+      margin-bottom: 0.15rem;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .node-subtitle {
+      font-size: 0.82rem;
+      color: #475569;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .comic-frame {
+      background: #FFFFFF;
+      border: 2.5px solid var(--border-ink);
+      border-radius: 10px;
+      padding: 0.4rem;
+      margin-bottom: 0.5rem;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.03);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .comic-frame img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .speech-bubble {
+      background: #FFFDE7;
+      border: 2.5px solid var(--border-ink);
+      border-radius: 12px;
+      padding: 0.55rem 0.75rem;
+      font-family: var(--font-sketch);
+      font-size: 0.95rem;
+      color: #1E1B18;
+      position: relative;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+      font-weight: bold;
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.06);
+    }
+
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 24px;
+      border-width: 10px 8px 0 8px;
+      border-style: solid;
+      border-color: var(--border-ink) transparent transparent transparent;
+    }
+
+    .meta-box {
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .meta-item {
+      background: #F8FAFC;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      border: 1.5px solid var(--border-ink);
+    }
+
+    .meta-item strong {
+      font-family: var(--font-comic);
+      font-size: 0.88rem;
+      letter-spacing: 0.5px;
+      display: block;
+      color: var(--color-blue);
+    }
+
+    /* MAP LANDMARK REGIONS */
+    .map-region {
+      position: absolute;
+      border: 4px dashed rgba(30, 27, 24, 0.35);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.4);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .map-region-title {
+      position: absolute;
+      top: -24px;
+      left: 40px;
+      background: #1E1B18;
+      color: #FFFFFF;
+      font-family: var(--font-comic);
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+      padding: 0.2rem 1.2rem;
+      border-radius: 20px;
+      border: 3px solid var(--border-ink);
+      box-shadow: 3px 3px 0px #FF9933;
+    }
+
+    /* FULL SCREEN STYLING & ANIMATIONS */
+    :fullscreen header, :-webkit-full-screen header {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    /* CHARACTER ANIMATIONS */
+    @keyframes shiver {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      20% { transform: translate(-3px, 2px) rotate(-2deg); }
+      40% { transform: translate(3px, -2px) rotate(2deg); }
+      60% { transform: translate(-2px, -1px) rotate(-1deg); }
+      80% { transform: translate(2px, 2px) rotate(1deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    @keyframes walkBounce {
+      0% { transform: translateX(-15px) translateY(0); }
+      25% { transform: translateX(-5px) translateY(-6px); }
+      50% { transform: translateX(5px) translateY(0); }
+      75% { transform: translateX(15px) translateY(-6px); }
+      100% { transform: translateX(-15px) translateY(0); }
+    }
+
+    @keyframes garbaDance {
+      0% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-8px) rotate(4deg); }
+      100% { transform: translateY(0) rotate(-4deg); }
+    }
+
+    .anim-shiver {
+      animation: shiver 0.25s linear infinite;
+      transform-origin: center;
+    }
+
+    .anim-walk {
+      animation: walkBounce 2s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .anim-garba {
+      animation: garbaDance 0.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand" style="display:flex; align-items:center; gap:1rem;">
+      <h1>Gada Electronics Gold Loan Storyboard Map</h1>
+      <span class="badge-tmkoc">📺 Taarak Mehta Ka Ooltah Chashmah Special</span>
+    </div>
+    <div class="controls-bar">
+      <button class="btn" onclick="zoomCanvas(1.2)">🔍 Zoom In</button>
+      <button class="btn" onclick="zoomCanvas(0.8)">🔍 Zoom Out</button>
+      <button class="btn" onclick="resetCanvasView()">📍 Fit Map</button>
+      <button class="btn btn-primary" onclick="autoPlayJourney()">▶️ Guided Tour</button>
+      <button class="btn" id="btn-fullscreen" onclick="toggleFullScreen()">🖥️ Full Screen</button>
+    </div>
+  </header>
+
+  <!-- INFINITE CANVAS -->
+  <div id="canvas-container">
+    <div id="viewport">
+      <svg id="connections-layer"></svg>
+
+      <!-- SPACED-OUT REGION MAP ZONES -->
+      <div class="map-region" style="left: 60px; top: 100px; width: 3400px; height: 1100px;">
+        <span class="map-region-title">ZONE 1: GADA ELECTRONICS ORDER & FAMILY DISCUSSION WITH DAYA & BAPUJI (STAGES 01 - 04)</span>
+      </div>
+
+      <div class="map-region" style="left: 60px; top: 1350px; width: 3400px; height: 1100px;">
+        <span class="map-region-title">ZONE 2: MEHTA SAHEB'S ADVICE & BANK BRANCH VISIT (STAGES 05 - 08)</span>
+      </div>
+
+      <div class="map-region" style="left: 60px; top: 2600px; width: 3400px; height: 1100px;">
+        <span class="map-region-title">ZONE 3: KANGANS PURITY TEST & VAULTING IN BANK (STAGES 09 - 12)</span>
+      </div>
+
+      <div class="map-region" style="left: 60px; top: 3850px; width: 4200px; height: 1100px;">
+        <span class="map-region-title">ZONE 4: INSTANT DISBURSAL TO SURAT SUPPLIER & BAGHA-NATU KAKA CELEBRATION (STAGES 13 - 17)</span>
+      </div>
+
+      <div id="nodes-container"></div>
+    </div>
+  </div>
+
+  <!-- MINIMAP -->
+  <div class="minimap-hud">
+    <div class="minimap-viewport-rect" id="minimap-rect"></div>
+  </div>
+
+  <script>
+    // LOCAL TMKOC CHARACTER AVATARS (INSTANT LOCAL LOADING)
+    function getCharacterAvatar(character) {
+      switch(character) {
+        case 'jethalal':
+          return `<img src="jethalal.png" alt="Jethalal Gada" class="char-avatar" style="width:44px; height:44px; border-radius:50%; border:2.5px solid #1E1B18; object-fit:cover; vertical-align:middle; margin-right:8px; box-shadow:2px 2px 0px #FF9933;">`;
+        case 'daya':
+          return `<img src="daya.png" alt="Daya Gada" class="char-avatar" style="width:44px; height:44px; border-radius:50%; border:2.5px solid #1E1B18; object-fit:cover; vertical-align:middle; margin-right:8px; box-shadow:2px 2px 0px #E11D48;">`;
+        case 'bapuji':
+          return `<img src="bapuji.png" alt="Champaklal Bapuji" class="char-avatar" style="width:44px; height:44px; border-radius:50%; border:2.5px solid #1E1B18; object-fit:cover; vertical-align:middle; margin-right:8px; box-shadow:2px 2px 0px #16A34A;">`;
+        case 'taarak':
+          return `<img src="taarak.png" alt="Taarak Mehta" class="char-avatar" style="width:44px; height:44px; border-radius:50%; border:2.5px solid #1E1B18; object-fit:cover; vertical-align:middle; margin-right:8px; box-shadow:2px 2px 0px #0284C7;">`;
+        default:
+          return `<img src="jethalal.png" alt="Jethalal Gada" class="char-avatar" style="width:44px; height:44px; border-radius:50%; border:2.5px solid #1E1B18; object-fit:cover; vertical-align:middle; margin-right:8px; box-shadow:2px 2px 0px #FF9933;">`;
+      }
+    }
+
+    // 17 TMKOC STORY STAGES FEATURING JETHALAL GADA WITH BACKSTAGE PROCESSES
+    const stagesData = [
+      { 
+        id: 1, title: "The Emergency Order", subtitle: "Jethalal needs ₹2L urgently for Gada Electronics", x: 150, y: 180, 
+        action: "Surat supplier demands ₹2L upfront for urgent Diwali TV stock delivery at Gada Electronics.", 
+        dialogue: "Jethalal: \"Natu Kaka, itta bada TV order aaya hai! Par Surat wale supplier ko 2 Lakh cash abhi Dena padega! Hey Bhagwan, Chai-Piyo, Biscut-Khao, par paise kahan se lau?!\"", 
+        emotion: "Panicked, stressed, desperate.",
+        backstage: "No backstage step here."
+      },
+      { 
+        id: 2, title: "Gokuldham Home Discussion", subtitle: "Discussing the Emergency Shortfall over Fafda-Jalebi", x: 950, y: 180, 
+        action: "Jethalal comes home stressed about ₹2L TV order shortfall. Family discusses urgency before any loan idea.", 
+        dialogue: "Jethalal: \"Bapuji, Surat ke supplier ko ₹2 Lakh cash abhi dena padega! Warna Diwali ka sabse bada TV order haath se nikal jayega! Main kya karu?!\"\nDaya: \"Tapu ke Papa! Arey tension mat lo, Garba karke Ambaji se mannat maangte hain! Sab theek ho jayega! Ahisooo!!\"\nBapu Ji: \"Jethiya! Chinta karke fafda thanda mat kar! Dimag shant rakh aur koi behtar raasta nikal!\"", 
+        emotion: "Nervous, seeking Bapuji's blessing.",
+        backstage: "No backstage step here."
+      },
+      { 
+        id: 3, title: "Options & Google Search Discovery", subtitle: "Evaluating Options & Searching Gold Loan Online", x: 1750, y: 180, 
+        action: "Jethalal rejects Sundar/Popatlal/Bhide/Personal Loans, then Google searches 'Urgent Gold Loan Mumbai' on phone to discover LenderX features.", 
+        dialogue: "Jethalal: \"Option 1 - Sundar Lal: 2 Lakh maange toh wo Ahmedabad se taxi main aayega aur 4 Lakh ka bill pakda dega! Takleef express! ❌\"\nJethalal: \"Option 2 - Popatlal: Pehle bolega 'Meri shaadi karwao tabhi dunga!' Cancel cancel! ❌\"\nJethalal: \"Option 3 - Bhide Secretary: 2 ghante Tak 'Hamare Zamane me' bol ke FD ka gyaan dega! ❌\"\nJethalal: \"Option 4 - Personal Bank Loan: 200 documents aur 15 din lagenge! Surat order haath se gaya! ❌\"\nJethalal (Google Search): \"Smartphone pe Google search kiya: 'Urgent Gold Loan Mumbai 30 Mins safe'. Top result LenderX dikha - 30 min disbursal, 100% insured vault, 0% processing fee! Gold Loan hi rasta hai! 🔍💡\"", 
+        emotion: "Analytical, enlightened by Google search results.",
+        backstage: "SEO ranking #1 for 'Urgent Gold Loan Mumbai'; Google SEM Ads targeted at SME shop owners in Goregaon."
+      },
+      { 
+        id: 4, title: "Decision to Pledge Gold & Sacred Vow", subtitle: "Emotional Conflict over Ancestral Gold & Sacred 30-Day Vow", x: 2550, y: 180, 
+        action: "Jethalal proposes Gold Loan. Family wrestles with emotional hesitation of pledging ancestral bangles, aligned by Daya & Bapuji's blessing.", 
+        dialogue: "Jethalal: \"Bapuji, Daya... Maine Gold Loan ke baare me padha. Par mujhe bohot sharm aa rahi hai Daya ke khandaani kangans girvi rakhne me. Main nalayak hu!\"\nDaya: \"Arey Tapu ke papa, aisi baat mat bolo! Gada Electronics humara ghar chalata hai. Ye le jao 40 gram ancestral bangles... Lekin Mummyji ke kangans safe toh rahenge na?\"\nBapu Ji: \"Jethiya! Sharm business ke liye mehnat karne me nahi, haar maanne me hai! Ye humari izzat hai, 100% safe bank me rakhna aur time pe wapas lana!\"\nJethalal: \"Daya, Bapuji... Main vaada karta hu! Din-raat ek karke 30 din me loan chuka dunga aur ye kangans Daya ke haathon me wapas pehnaunga!\"", 
+        emotion: "Deep emotional conflict, family alignment, solemn vow.",
+        backstage: "Website video content addressing gold loan social stigma & safety guarantees."
+      },
+
+      // ZONE 2 (Mehta Saheb Advice & Bank Visit)
+      { 
+        id: 5, title: "Taarak Mehta's Advice", subtitle: "Fire Brigade Taarak recommends LenderX", x: 2550, y: 1430, 
+        action: "Fire Brigade Taarak Mehta recommends LenderX branch near Gokuldham Society.", 
+        dialogue: "Taarak Mehta: \"Jetha, Chinta mat kar! Gold loan par interest kam hota hai aur 30 mins main disbursement hota hai. LenderX branch chal!\"", 
+        emotion: "Reassured, confident.",
+        backstage: "Performance-marketing bids on 'gold loan Mumbai'; Lead Activity Post (Event: 201 - Branch Inquiry) logged on existing Lead."
+      },
+      { 
+        id: 6, title: "First Call with CSM", subtitle: "Jethalal phones LenderX helpline", x: 1750, y: 1430, 
+        action: "Short qualifying call. Books priority appointment & receives SMS token.", 
+        dialogue: "Jethalal: \"Hello, LenderX? Jethalal Gada speaking from Gada Electronics! Mujhe urgent 2 Lakh gold loan chahiye!\"\nCSM: \"Ji Gada ji, slot booked!\"", 
+        emotion: "Optimistic, prompt.",
+        backstage: "CSM posts Activity (Event: 202 - Appt Scheduled) via POST /v2/ProspectActivity.svc/Create; Lead stage updated to Appt Booked (No re-capture)."
+      },
+      { 
+        id: 7, title: "Arriving at LenderX Branch", subtitle: "Velvet pouch with Kangans in hand", x: 950, y: 1430, 
+        action: "Shown to private Counter 2 by guard. BM Akash greets Jethalal warmly.", 
+        dialogue: "Branch Manager Akash: \"Kem Cho Gada ji! Welcome to LenderX! Pura process 30 minutes main complete ho jayega!\"", 
+        emotion: "Impressed, welcomed.",
+        backstage: "RM posts Lead Activity (Event: 203 - Customer Branch Checkin); Pre-fed appointment details retrieved from LMS by Lead Id."
+      },
+      { 
+        id: 8, title: "Process Explanation", subtitle: "BM walks through the 4 steps", x: 150, y: 1430, 
+        action: "Akash explains 1. Testing ➔ 2. eKYC Docs ➔ 3. Scheme Offer ➔ 4. 10-Min Bank Credit.", 
+        dialogue: "Jethalal: \"Arey Wah Akash bhai! Ye toh Bagha ke kaam se bhi fast hai!\"", 
+        emotion: "Surprised & happy.",
+        backstage: "Lead Activity (Event: 204 - Counseling Done) posted; LOS loan application linked via Lead GUID."
+      },
+
+      // ZONE 3 (Purity Testing & Secure Vaulting)
+      { 
+        id: 9, title: "Testing Daya's Kangans", subtitle: "XRF Karat & weight check behind glass", x: 150, y: 2680, 
+        action: "Bangles weighed & purity tested behind transparent glass viewing window.", 
+        dialogue: "Gold Tester: \"Congratulations Gada ji! 22K Purity confirmed - 38.2 grams!\"\nJethalal: \"Hey Maa Mataji! Daya ke kangans pure 22 Karat nikle!\"", 
+        emotion: "Thrilled, relieved.",
+        backstage: "Tester app uploads photos & posts Lead Activity (Event: 205 - Gold Valuation Verified: 22K/38.2g) to existing Lead."
+      },
+      { 
+        id: 10, title: "The Best Offer Sheet", subtitle: "LTV & ROI calculated live in LOS", x: 950, y: 2680, 
+        action: "Reviews offer: ₹3L market value = ₹2.4L LTV @ 12% p.a.", 
+        dialogue: "Offer Sheet: ₹2,40,000 Eligible | 12% p.a. interest | Zero Hidden Charges.", 
+        emotion: "Calculative, extremely pleased.",
+        backstage: "LOS auto-computes offer variants; Lead Activity (Event: 206 - Loan Offer Generated) posted against Lead GUID."
+      },
+      { 
+        id: 11, title: "The Best-Deal Moment", subtitle: "Zero processing fee surprise!", x: 1750, y: 2680, 
+        action: "Jethalal compares rates and accepts the offer immediately.", 
+        dialogue: "Jethalal internal: \"Wah Jethalal wah! 0% processing fee! Nattu Kaka ko abhi bolta hu Surat order final kare!\"", 
+        emotion: "Ecstatic.",
+        backstage: "Lead Activity (Event: 207 - Customer Offer Acceptance) posted in LOS; Zero processing fee tag logged."
+      },
+      { 
+        id: 12, title: "Securing Gold in Vault", subtitle: "Tamper-proof pouch & dual-lock vault", x: 2550, y: 2680, 
+        action: "Kangans sealed in pouch with unique ID & photo tagged to Jethalal's CustID.", 
+        dialogue: "Branch Manager Akash: \"Gada ji, dekhiye aapke kangans Barcode-Sealed tamper-proof pouch me pack ho gaye. Insured Dual-Lock Vault me rakhe hain. Live photo app par dikhegi!\"\nJethalal: \"Wah Akash Bhai! Bapuji aur Daya ko abhi phone karke bolta hu. Unka darr bilkul door ho gaya. Complete peace of mind!\"", 
+        emotion: "Deep relief, complete trust restored.",
+        backstage: "Lead Activity (Event: 208 - Vault Bag Sealed & Tagged) posted with Box ID & Insurance Policy ID against CustID."
+      },
+
+      // ZONE 4 (Disbursal, Surat Supplier Payment & Celebration)
+      { 
+        id: 13, title: "Aadhaar eKYC Documentation", subtitle: "Digital signatures on tablet", x: 2550, y: 3930, 
+        action: "Completes Aadhaar OTP eKYC, PAN verification & signs digitally.", 
+        dialogue: "Jethalal: \"Aadhaar OTP aa gaya! Natu kaka dekho, paperless kaam ho gaya!\"", 
+        emotion: "Satisfied, modern.",
+        backstage: "Aadhaar eKYC via UIDAI API, PAN verified live via NSDL API; Dynamic agreement generation."
+      },
+      { 
+        id: 14, title: "10-Minute Disbursal Ping", subtitle: "₹2,40,000 NEFT credited!", x: 1750, y: 3930, 
+        action: "Bank SMS pings with instant NEFT loan disbursal credit.", 
+        dialogue: "SMS: \"₹2,40,000 credited to A/C XXXX2318 Ref: NEFT/2026\"\nJethalal: \"Arey Baap Re! Utne time main toh Iyer idli bhi nahi banata jitna fast paisa aaya!\"", 
+        emotion: "Overjoyed!",
+        backstage: "Auto-NEFT triggered from LOS on final approval; SMS auto-fired; Loan account activated; Schedule pushed to app."
+      },
+      { 
+        id: 15, title: "Repayment App Demo", subtitle: "Flexible EMI modes explained", x: 950, y: 3930, 
+        action: "Officer demos LenderX mobile app for monthly EMI & part-prepayment.", 
+        dialogue: "Jethalal: \"Bagha! Mere phone main ye LenderX App download kar! Ek mahine main poora loan chuka dunga!\"", 
+        emotion: "In full control.",
+        backstage: "Repayment schedule pushed to mobile app; Top-up eligibility flag tracked in CRM for contextual nudges."
+      },
+      { 
+        id: 16, title: "Surat Order Fulfilled!", subtitle: "Payment sent & TV dispatch confirmed", x: 150, y: 3930, 
+        action: "Jethalal transfers ₹2L to Surat supplier. TV stock dispatch started!", 
+        dialogue: "Jethalal on call: \"Surat Seth! Payment done! Stock Gokuldham bhejo! Natu Kaka, Bagha, Jalebi-Fafda mangao!\"", 
+        emotion: "Triumphant, proud shop owner!",
+        backstage: "Lender is invisible here — but this moment generates positive word-of-mouth & T+3 NPS survey schedule."
+      },
+      { 
+        id: 17, title: "First EMI Paid & Gold Return", subtitle: "30 days later — EMI paid in-app & sacred vow fulfilled", x: 3350, y: 3930, 
+        action: "Pays ₹42,300 first EMI through LenderX app prior to due date.", 
+        dialogue: "Jethalal: \"Arey wah! App se ek click main EMI pay ho gaya! Bass thode din aur, phir Daya ke haathon me unke khandani kangans wapas! Vaada pura hua!\"\nDaya: \"Tapu ke Papa, mujhe pata tha aap mera vaada zaroor pura karoge! Ahisooo!!\"\nApp: \"EMI 1 of 12 Paid • Gold Vault Status: 100% Safe Insured\"", 
+        emotion: "Triumphant, proud, emotionally fulfilled.",
+        backstage: "Payment reconciled, receipt emailed & in-app, EMI counter updated; On-time payment flags Jethalal for pre-approved working-capital offers."
+      }
+    ];
+
+    // HAND-DRAWN STICK FIGURE GENERATOR WITH ANIMATIONS & EXPRESSIONS
+    function getStickFigureSVG(expression, x = 170, y = 90) {
+      const stroke = "#1E1B18";
+      let faceDetails = '';
+      let animClass = 'anim-walk';
+
+      switch(expression) {
+        case 'panicked': // Jethalal shivering in panic
+          animClass = 'anim-shiver';
+          faceDetails = `
+            <!-- Shocked Eyes -->
+            <circle cx="${x - 7}" cy="${y - 4}" r="3" fill="none" stroke="${stroke}" stroke-width="2"/>
+            <circle cx="${x + 7}" cy="${y - 4}" r="3" fill="none" stroke="${stroke}" stroke-width="2"/>
+            <!-- Open Shocked Mouth -->
+            <ellipse cx="${x}" cy="${y + 8}" rx="5" ry="7" fill="#E11D48" stroke="${stroke}" stroke-width="2"/>
+            <!-- Sweat drop -->
+            <path d="M ${x + 16} ${y - 10} Q ${x + 22} ${y - 4} ${x + 16} ${y + 2} Q ${x + 10} ${y - 4} ${x + 16} ${y - 10} Z" fill="#38BDF8" stroke="${stroke}" stroke-width="1.5"/>
+            <!-- Mustache -->
+            <path d="M ${x - 8} ${y + 2} Q ${x} ${y - 1} ${x + 8} ${y + 2}" stroke="${stroke}" stroke-width="3" fill="none"/>
+          `;
+          break;
+        case 'happy_garba': // Daya doing Garba dance
+          animClass = 'anim-garba';
+          faceDetails = `
+            <path d="M ${x - 9} ${y - 4} Q ${x - 5} ${y - 10} ${x - 1}" stroke="${stroke}" stroke-width="2.5" fill="none"/>
+            <path d="M ${x + 1} ${y - 10} Q ${x + 5} ${y - 10} ${x + 9}" stroke="${stroke}" stroke-width="2.5" fill="none"/>
+            <path d="M ${x - 7} ${y + 4} Q ${x} ${y + 12} ${x + 7}" stroke="${stroke}" stroke-width="2.5" fill="none"/>
+            <circle cx="${x}" cy="${y - 10}" r="2" fill="#E11D48"/>
+          `;
+          break;
+        case 'relieved_smile': // Jethalal walking happily
+          animClass = 'anim-walk';
+          faceDetails = `
+            <circle cx="${x - 6}" cy="${y - 5}" r="2.5" fill="${stroke}"/>
+            <circle cx="${x + 6}" cy="${y - 5}" r="2.5" fill="${stroke}"/>
+            <path d="M ${x - 8} ${y + 4} Q ${x} ${y + 12} ${x + 8}" stroke="${stroke}" stroke-width="2.5" fill="none"/>
+            <path d="M ${x - 8} ${y + 1} Q ${x} ${y - 2} ${x + 8} ${y + 1}" stroke="${stroke}" stroke-width="3" fill="none"/>
+          `;
+          break;
+        case 'thinking': // Taarak thinking
+          animClass = '';
+          faceDetails = `
+            <circle cx="${x - 5}" cy="${y - 6}" r="2.5" fill="${stroke}"/>
+            <circle cx="${x + 7}" cy="${y - 6}" r="2.5" fill="${stroke}"/>
+            <line x1="${x - 6}" y1="${y + 6}" x2="${x + 6}" y2="${y + 5}" stroke="${stroke}" stroke-width="2.5"/>
+            <rect x="${x - 12}" y="${y - 10}" width="10" height="8" rx="2" fill="none" stroke="${stroke}" stroke-width="2"/>
+            <rect x="${x + 2}" y="${y - 10}" width="10" height="8" rx="2" fill="none" stroke="${stroke}" stroke-width="2"/>
+          `;
+          break;
+        default:
+          animClass = 'anim-walk';
+          faceDetails = `
+            <circle cx="${x - 5}" cy="${y - 4}" r="2.5" fill="${stroke}"/>
+            <circle cx="${x + 5}" cy="${y - 4}" r="2.5" fill="${stroke}"/>
+            <path d="M ${x - 6} ${y + 4} Q ${x} ${y + 8} ${x + 6}" stroke="${stroke}" stroke-width="2" fill="none"/>
+          `;
+      }
+
+      return `
+        <g class="${animClass}">
+          <!-- Head -->
+          <circle cx="${x}" cy="${y}" r="18" fill="#FFE082" stroke="${stroke}" stroke-width="3.5"/>
+          ${faceDetails}
+          <!-- Body -->
+          <path d="M ${x} ${y + 18} L ${x} ${y + 55}" stroke="${stroke}" stroke-width="4.5" stroke-linecap="round"/>
+          <!-- Arms -->
+          <path d="M ${x} ${y + 28} L ${x - 22} ${y + 45} M ${x} ${y + 28} L ${x + 22} ${y + 15}" stroke="${stroke}" stroke-width="4" stroke-linecap="round"/>
+          <!-- Legs -->
+          <path d="M ${x} ${y + 55} L ${x - 18} ${y + 85} M ${x} ${y + 55} L ${x + 18} ${y + 85}" stroke="#1E1B18" stroke-width="4" stroke-linecap="round"/>
+        </g>
+      `;
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // COMIC PHOTO & VECTOR HYBRID ILLUSTRATION GENERATOR FOR TMKOC
+    function getComicSVG(id) {
+      switch(id) {
+        case 1:
+          return `<div style="display:flex; align-items:center; justify-content:space-around; height:150px; position:relative; gap:6px;">
+            <img src="jethalal.png" style="max-height:135px; max-width:46%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #FF9933; object-fit:cover;">
+            <img src="natu_bagha.png" style="max-height:135px; max-width:46%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #0284C7; object-fit:cover;">
+          </div>`;
+        case 2:
+          return `<div style="display:flex; align-items:center; justify-content:space-around; height:150px; position:relative; gap:4px;">
+            <img src="jethalal.png" style="max-height:125px; max-width:30%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #FF9933; object-fit:cover;">
+            <img src="bapuji.png" style="max-height:125px; max-width:30%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #16A34A; object-fit:cover;">
+            <img src="daya.png" style="max-height:125px; max-width:30%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #E11D48; object-fit:cover;">
+          </div>`;
+        case 3:
+          return `<div style="background:#FFFFFF; border:2.5px solid #1E1B18; border-radius:10px; padding:0.4rem; box-shadow:3px 3px 0px #1E1B18;">
+            <!-- GOOGLE SEARCH BAR MOCKUP -->
+            <div style="background:#F1F5F9; border:2px solid #1E1B18; border-radius:20px; padding:0.25rem 0.5rem; display:flex; align-items:center; gap:5px; margin-bottom:4px;">
+              <span style="font-size:0.85rem;">🔍</span>
+              <span style="font-family:'Plus Jakarta Sans'; font-size:0.75rem; font-weight:bold; color:#1E1B18;">Google: "Urgent Gold Loan Mumbai 30 mins"</span>
+            </div>
+            <!-- GOOGLE RESULT SNIPPET -->
+            <div style="background:#F0F9FF; border:1.5px solid #0284C7; border-radius:6px; padding:0.3rem; margin-bottom:4px; font-size:0.72rem;">
+              <div style="font-size:0.62rem; color:#0369A1; font-weight:bold;">Ad • www.lenderx.com/gold-loan</div>
+              <div style="font-family:'Bangers'; font-size:0.88rem; color:#0284C7; letter-spacing:0.5px;">LenderX Gold Loan | 30-Min Disbursal</div>
+              <div style="color:#334155; font-size:0.68rem; line-height:1.15;">⭐⭐⭐⭐⭐ 4.9 Rating • 100% Insured Vault • 0% Proc Fee</div>
+            </div>
+            <!-- MATRIX -->
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2px; font-size:0.68rem;">
+              <div style="background:#FFEEF0; border:1px solid #E11D48; border-radius:4px; padding:1px 3px; color:#9F1239; font-weight:bold;">🚕 Sundar ❌</div>
+              <div style="background:#FFEEF0; border:1px solid #E11D48; border-radius:4px; padding:1px 3px; color:#9F1239; font-weight:bold;">🗞️ Popatlal ❌</div>
+              <div style="background:#FFEEF0; border:1px solid #E11D48; border-radius:4px; padding:1px 3px; color:#9F1239; font-weight:bold;">📜 Bhide ❌</div>
+              <div style="background:#DCFCE7; border:1px solid #16A34A; border-radius:4px; padding:1px 3px; color:#15803D; font-weight:bold;">🪙 Gold Loan ✅</div>
+            </div>
+          </div>`;
+        case 4:
+          return `<div style="display:flex; align-items:center; justify-content:space-around; height:150px; position:relative; gap:6px;">
+            <img src="daya.png" style="max-height:135px; max-width:46%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #E11D48; object-fit:cover;">
+            <div style="background:#FFFDE7; border:2.5px solid #1E1B18; border-radius:10px; padding:0.6rem; text-align:center; box-shadow:3px 3px 0px #1E1B18; max-width:46%;">
+              <div style="font-family:'Bangers'; font-size:1.1rem; color:#D97706;">DAYA'S KANGANS</div>
+              <div style="font-family:'Fira Code'; font-size:1.1rem; font-weight:bold; margin-top:4px;">40 GRAMS</div>
+              <div style="font-family:'Architects Daughter'; font-size:0.75rem; color:#64748B;">Ancestral Gold</div>
+            </div>
+          </div>`;
+        case 5:
+          return `<div style="display:flex; align-items:center; justify-content:space-around; height:150px; position:relative; gap:6px;">
+            <img src="taarak.png" style="max-height:135px; max-width:46%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #0284C7; object-fit:cover;">
+            <img src="jethalal.png" style="max-height:135px; max-width:46%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #FF9933; object-fit:cover;">
+          </div>`;
+        case 14:
+          return `<div style="display:flex; align-items:center; justify-content:space-around; height:150px; position:relative; gap:6px;">
+            <img src="jethalal.png" style="max-height:135px; max-width:46%; width:auto; border-radius:12px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #16A34A; object-fit:cover;">
+            <div style="background:#E8F5E9; border:2.5px solid #1E1B18; border-radius:10px; padding:0.6rem; text-align:center; box-shadow:3px 3px 0px #1E1B18; max-width:46%;">
+              <div style="font-family:'Bangers'; font-size:1.1rem; color:#16A34A;">BANK CREDIT SMS</div>
+              <div style="font-family:'Fira Code'; font-size:1.2rem; font-weight:bold; margin-top:4px;">₹2,40,000</div>
+              <div style="font-family:'Architects Daughter'; font-size:0.75rem; color:#15803D;">NEFT DISBURSED!</div>
+            </div>
+          </div>`;
+        case 16:
+          return `<div style="display:flex; align-items:center; justify-content:space-around; height:150px; position:relative; gap:6px;">
+            <img src="jethalal.png" style="max-height:135px; max-width:46%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #FF9933; object-fit:cover;">
+            <img src="natu_bagha.png" style="max-height:135px; max-width:46%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #16A34A; object-fit:cover;">
+          </div>`;
+        default:
+          return `<div style="display:flex; align-items:center; justify-content:space-around; height:150px; position:relative; gap:6px;">
+            <img src="jethalal.png" style="max-height:135px; max-width:46%; width:auto; border-radius:10px; border:2.5px solid #1E1B18; box-shadow:3px 3px 0px #FF9933; object-fit:cover;">
+            <div style="background:#FFFDE7; border:2.5px solid #1E1B18; border-radius:10px; padding:0.5rem 0.8rem; text-align:center; box-shadow:3px 3px 0px #1E1B18; max-width:46%;">
+              <div style="font-family:'Bangers'; font-size:1.2rem;">EPISODE ${String(id).padStart(2, '0')}</div>
+              <div style="font-family:'Architects Daughter'; font-size:0.8rem;">Gada Electronics</div>
+            </div>
+          </div>`;
+      }
+    }
+
+    // CANVAS PAN/ZOOM LOGIC
+    let panX = 60, panY = 40, scale = 0.45;
+    let isDragging = false, startX = 0, startY = 0;
+
+    const viewport = document.getElementById('viewport');
+    const container = document.getElementById('canvas-container');
+
+    function updateTransform() {
+      viewport.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+      updateMinimap();
+    }
+
+    function getComicBurstText(id) {
+      const bursts = {
+        1: "💥 URGENT ₹2L!",
+        2: "💃 AHISOOO GARBA!",
+        3: "💡 GOLD LOAN IDEA!",
+        4: "✨ 40g KANGANS!",
+        5: "🚑 TAARAK SAHEB!",
+        6: "📞 APPT BOOKED!",
+        7: "🏢 BRANCH CHECKIN!",
+        8: "⏱️ 30 MIN PROCESS!",
+        9: "🔎 22K PURITY TESTED!",
+        10: "💰 ₹2.4L LTV OFFER!",
+        11: "🎉 0% PROC FEE!",
+        12: "🔒 DUAL-LOCK VAULT!",
+        13: "📲 AADHAAR OTP eKYC!",
+        14: "⚡ 10-MIN PING!",
+        15: "📱 MOBILE APP DEMO!",
+        16: "📦 SURAT TV DISPATCH!",
+        17: "✅ EMI PAID!"
+      };
+      return bursts[id] || "🔥 ACTION!";
+    }
+
+    function getSpeakerAvatar(speaker) {
+      const s = speaker.toLowerCase();
+      if (s.includes('daya')) return getCharacterAvatar('daya');
+      if (s.includes('bapu')) return getCharacterAvatar('bapuji');
+      if (s.includes('taarak') || s.includes('mehta')) return getCharacterAvatar('taarak');
+      if (s.includes('csm')) return `<span style="font-size:1.3rem; margin-right:6px;">📞</span>`;
+      if (s.includes('akash') || s.includes('manager')) return `<span style="font-size:1.3rem; margin-right:6px;">👔</span>`;
+      if (s.includes('tester')) return `<span style="font-size:1.3rem; margin-right:6px;">🔬</span>`;
+      if (s.includes('sms')) return `<span style="font-size:1.3rem; margin-right:6px;">💬</span>`;
+      if (s.includes('app')) return `<span style="font-size:1.3rem; margin-right:6px;">📲</span>`;
+      if (s.includes('offer')) return `<span style="font-size:1.3rem; margin-right:6px;">📋</span>`;
+      return getCharacterAvatar('jethalal');
+    }
+
+    function getSpeakerBg(speaker) {
+      const s = speaker.toLowerCase();
+      if (s.includes('daya')) return '#FFF0F5'; // soft pink
+      if (s.includes('bapu')) return '#F0FDF4'; // soft green
+      if (s.includes('taarak')) return '#F0F9FF'; // soft blue
+      if (s.includes('csm') || s.includes('manager') || s.includes('akash')) return '#F8FAFC'; // slate
+      if (s.includes('sms') || s.includes('app')) return '#FEF3C7'; // soft yellow
+      return '#FFFDF0'; // warm white/yellow for Jethalal
+    }
+
+    function renderDialogues(dialogueText) {
+      const lines = dialogueText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      return lines.map(line => {
+        const colonIndex = line.indexOf(':');
+        let speaker = 'Jethalal';
+        let text = line;
+        if (colonIndex !== -1) {
+          speaker = line.substring(0, colonIndex).trim();
+          text = line.substring(colonIndex + 1).trim();
+        }
+        const avatar = getSpeakerAvatar(speaker);
+        const bg = getSpeakerBg(speaker);
+        return `<div class="speech-bubble" style="background:${bg}; margin-bottom:0.45rem;">
+          <div style="display:flex; align-items:center; margin-bottom:3px;">
+            ${avatar}
+            <strong style="font-family:var(--font-comic); font-size:1.05rem; color:var(--border-ink); letter-spacing:0.5px;">${speaker}</strong>
+          </div>
+          <div style="padding-left:2px; font-family:var(--font-sketch); font-size:0.92rem; color:#1E1B18; line-height:1.3;">${text}</div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderCanvas() {
+      const nodesContainer = document.getElementById('nodes-container');
+      const svg = document.getElementById('connections-layer');
+
+      nodesContainer.innerHTML = '';
+      let svgPaths = '';
+
+      stagesData.forEach((node, index) => {
+        // Comic Node Card
+        const nodeEl = document.createElement('div');
+        nodeEl.className = 'comic-node';
+        nodeEl.id = `node-${node.id}`;
+        nodeEl.style.left = `${node.x}px`;
+        nodeEl.style.top = `${node.y}px`;
+        nodeEl.onclick = () => focusNode(node.id);
+
+        nodeEl.innerHTML = `
+          <div class="comic-burst">${getComicBurstText(node.id)}</div>
+          <div class="node-header">
+            <span class="node-badge">EPISODE ${String(node.id).padStart(2, '0')}</span>
+          </div>
+          <div class="node-title">${node.title}</div>
+          <div class="node-subtitle">${node.subtitle}</div>
+          <div class="comic-frame">${getComicSVG(node.id)}</div>
+          ${renderDialogues(node.dialogue)}
+          <div class="meta-box">
+            <div class="meta-item"><strong>Jethalal's Action</strong>${node.action}</div>
+            <div class="meta-item"><strong>Emotional State</strong>${node.emotion}</div>
+            <div class="meta-item" style="background:#F1F5F9; border-color:#94A3B8;"><strong>⚙️ Backstage Systems & Ops</strong>${node.backstage}</div>
+          </div>
+        `;
+        nodesContainer.appendChild(nodeEl);
+
+        // Map Connection Line to Next Node
+        if (index < stagesData.length - 1) {
+          const nextNode = stagesData[index + 1];
+          const startX = node.x + 220;
+          const startY = node.y + 250;
+          const endX = nextNode.x + 220;
+          const endY = nextNode.y + 250;
+
+          const dx = endX - startX;
+          const dy = endY - startY;
+          const cx1 = startX + dx * 0.5;
+          const cy1 = startY;
+          const cx2 = startX + dx * 0.5;
+          const cy2 = endY;
+
+          svgPaths += `<path class="map-path" d="M ${startX} ${startY} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${endX} ${endY}" />`;
+        }
+      });
+
+      svg.innerHTML = svgPaths;
+      updateTransform();
+    }
+
+    // CANVAS DRAG AND ZOOM
+    container.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.comic-node')) return;
+      isDragging = true;
+      startX = e.clientX - panX;
+      startY = e.clientY - panY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      panX = e.clientX - startX;
+      panY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    // TRACKPAD 2-FINGER PAN & PINCH-TO-ZOOM + TOUCH SUPPORT
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+
+      if (e.ctrlKey) {
+        // Pinch-to-zoom (Trackpad pinch or Ctrl + wheel)
+        const zoomFactor = e.deltaY < 0 ? 1.08 : 0.92;
+        zoomCanvas(zoomFactor);
+      } else {
+        // 2-Finger trackpad scroll moves the board canvas
+        panX -= e.deltaX * 1.2;
+        panY -= e.deltaY * 1.2;
+        updateTransform();
+      }
+    }, { passive: false });
+
+    // TOUCHSCREEN MULTI-TOUCH PINCH & PAN CONTROLS
+    let initialTouchDist = null;
+    let initialScale = scale;
+
+    container.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        startX = e.touches[0].clientX - panX;
+        startY = e.touches[0].clientY - panY;
+      } else if (e.touches.length === 2) {
+        isDragging = false;
+        initialTouchDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        initialScale = scale;
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1 && isDragging) {
+        panX = e.touches[0].clientX - startX;
+        panY = e.touches[0].clientY - startY;
+        updateTransform();
+      } else if (e.touches.length === 2 && initialTouchDist) {
+        const currentDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        const factor = currentDist / initialTouchDist;
+        scale = Math.min(Math.max(0.2, initialScale * factor), 1.5);
+        updateTransform();
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchend', () => {
+      isDragging = false;
+      initialTouchDist = null;
+    });
+
+    function zoomCanvas(factor) {
+      scale *= factor;
+      if (scale < 0.2) scale = 0.2;
+      if (scale > 1.5) scale = 1.5;
+      updateTransform();
+    }
+
+    function resetCanvasView() {
+      panX = 60;
+      panY = 40;
+      scale = 0.45;
+      updateTransform();
+    }
+
+    function focusNode(nodeId) {
+      document.querySelectorAll('.comic-node').forEach(n => n.classList.remove('active-node'));
+      const target = stagesData.find(s => s.id === nodeId);
+      if (!target) return;
+
+      const nodeEl = document.getElementById(`node-${nodeId}`);
+      nodeEl.classList.add('active-node');
+
+      // Dynamically calculate optimal scale so card fits completely inside screen height without vertical clipping
+      const availableHeight = window.innerHeight - 100; // Subtract header height and padding
+      const cardHeight = nodeEl.offsetHeight || 550; // Get actual rendered card height
+      const targetScale = Math.min(Math.max(0.4, (availableHeight / cardHeight) * 0.92), 1.0);
+
+      scale = targetScale;
+      panX = (window.innerWidth / 2) - (target.x + 220) * scale;
+      panY = (window.innerHeight / 2 + 35) - (target.y + (cardHeight / 2)) * scale;
+
+      viewport.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+      updateTransform();
+
+      setTimeout(() => {
+        viewport.style.transition = 'none';
+      }, 450);
+    }
+
+    function autoPlayJourney() {
+      let step = 1;
+      focusNode(step);
+      const interval = setInterval(() => {
+        step++;
+        if (step > 17) {
+          clearInterval(interval);
+          return;
+        }
+        focusNode(step);
+      }, 3500);
+    }
+
+    function updateMinimap() {
+      const rect = document.getElementById('minimap-rect');
+      rect.style.left = `${Math.max(0, (-panX / 30))}px`;
+      rect.style.top = `${Math.max(0, (-panY / 30))}px`;
+      rect.style.width = `${Math.min(240, (window.innerWidth / scale / 30))}px`;
+      rect.style.height = `${Math.min(150, (window.innerHeight / scale / 30))}px`;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCanvas();
+      resetCanvasView();
+    });
+  </script>
+</body>
+</html>
