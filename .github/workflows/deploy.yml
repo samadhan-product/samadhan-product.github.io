@@ -43,7 +43,8 @@ jobs:
           for path in blog portfolio assets ai-learning posts \
             case-studies ai-product-leader ai-product-management-consultant \
             ai-agents-consultant healthcare-ai-product-consultant \
-            product-leadership-advisory speaking-workshops insights work-with-me services; do
+            product-leadership-advisory speaking-workshops insights work-with-me services \
+            dt-storyboarding; do
             if [ -e "$path" ]; then
               cp -r "$path" frontend/build/
             fi
