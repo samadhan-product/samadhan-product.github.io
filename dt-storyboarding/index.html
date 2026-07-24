@@ -1019,7 +1019,9 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       renderCanvas();
-      resetCanvasView();
+      setTimeout(() => {
+        focusNode(1);
+      }, 150);
     });
   </script>
 </body>
