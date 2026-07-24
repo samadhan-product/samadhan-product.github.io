@@ -416,6 +416,90 @@
       border-radius: 4px;
       pointer-events: none;
     }
+
+    /* MOBILE FLOATING BAR */
+    .mobile-nav-bar {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        height: auto;
+        padding: 0.5rem 0.75rem;
+        flex-direction: column;
+        gap: 0.35rem;
+        align-items: flex-start;
+      }
+
+      .brand h1 {
+        font-size: 1.15rem;
+        line-height: 1.2;
+      }
+
+      .badge-tmkoc {
+        font-size: 0.75rem;
+        padding: 0.1rem 0.4rem;
+      }
+
+      .controls-bar {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        gap: 0.35rem;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .controls-bar .btn {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.45rem;
+        white-space: nowrap;
+        border-width: 2px;
+      }
+
+      #canvas-container {
+        margin-top: 85px;
+        height: calc(100vh - 145px);
+      }
+
+      .minimap-hud {
+        width: 110px;
+        height: 70px;
+        bottom: 70px;
+        right: 10px;
+      }
+
+      .comic-node {
+        width: min(380px, 92vw);
+        padding: 0.75rem;
+      }
+
+      .mobile-nav-bar {
+        display: flex;
+        position: fixed;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #FFFFFF;
+        border: 3px solid var(--border-ink);
+        border-radius: 30px;
+        padding: 0.3rem 0.6rem;
+        box-shadow: var(--shadow-comic);
+        gap: 0.35rem;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .mobile-step-tag {
+        font-family: var(--font-comic);
+        font-size: 0.9rem;
+        color: var(--border-ink);
+        background: #FFFDE7;
+        border: 2px solid var(--border-ink);
+        padding: 0.15rem 0.5rem;
+        border-radius: 12px;
+        white-space: nowrap;
+      }
+    }
   </style>
 </head>
 <body>
@@ -464,6 +548,14 @@
   <!-- MINIMAP -->
   <div class="minimap-hud">
     <div class="minimap-viewport-rect" id="minimap-rect"></div>
+  </div>
+
+  <!-- MOBILE FLOATING NAVIGATION BAR -->
+  <div class="mobile-nav-bar">
+    <button class="btn" onclick="prevEpisode()">◀️ Prev</button>
+    <span id="mobile-step-indicator" class="mobile-step-tag">EP 01 / 17</span>
+    <button class="btn" onclick="nextEpisode()">Next ▶️</button>
+    <button class="btn btn-primary" onclick="autoPlayJourney()">▶️ Tour</button>
   </div>
 
   <script>
@@ -988,29 +1080,59 @@
       updateTransform();
     }
 
+    let currentStep = 1;
+
+    function nextEpisode() {
+      currentStep = (currentStep % 17) + 1;
+      focusNode(currentStep);
+    }
+
+    function prevEpisode() {
+      currentStep = currentStep === 1 ? 17 : currentStep - 1;
+      focusNode(currentStep);
+    }
+
     function resetCanvasView() {
-      panX = 60;
-      panY = 40;
-      scale = 0.45;
-      updateTransform();
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        focusNode(1);
+      } else {
+        panX = 60;
+        panY = 40;
+        scale = 0.45;
+        updateTransform();
+      }
     }
 
     function focusNode(nodeId) {
+      currentStep = nodeId;
+      const stepTag = document.getElementById('mobile-step-indicator');
+      if (stepTag) {
+        stepTag.innerText = `EP ${String(nodeId).padStart(2, '0')} / 17`;
+      }
+
       document.querySelectorAll('.comic-node').forEach(n => n.classList.remove('active-node'));
       const target = stagesData.find(s => s.id === nodeId);
       if (!target) return;
 
       const nodeEl = document.getElementById(`node-${nodeId}`);
+      if (!nodeEl) return;
       nodeEl.classList.add('active-node');
 
-      // Dynamically calculate optimal scale so card fits completely inside screen height without vertical clipping
-      const availableHeight = window.innerHeight - 100; // Subtract header height and padding
-      const cardHeight = nodeEl.offsetHeight || 550; // Get actual rendered card height
-      const targetScale = Math.min(Math.max(0.4, (availableHeight / cardHeight) * 0.92), 1.0);
+      // Dynamically calculate optimal scale for screen width and height
+      const isMobile = window.innerWidth <= 768;
+      const availableHeight = window.innerHeight - (isMobile ? 150 : 100);
+      const availableWidth = window.innerWidth - (isMobile ? 24 : 60);
+      const cardHeight = nodeEl.offsetHeight || 550;
+      const cardWidth = nodeEl.offsetWidth || 420;
+
+      const scaleY = availableHeight / cardHeight;
+      const scaleX = availableWidth / cardWidth;
+      const targetScale = Math.min(Math.max(0.3, Math.min(scaleX, scaleY) * 0.94), 1.0);
 
       scale = targetScale;
-      panX = (window.innerWidth / 2) - (target.x + 220) * scale;
-      panY = (window.innerHeight / 2 + 35) - (target.y + (cardHeight / 2)) * scale;
+      panX = (window.innerWidth / 2) - (target.x + cardWidth / 2) * scale;
+      panY = (window.innerHeight / 2 + (isMobile ? 15 : 35)) - (target.y + cardHeight / 2) * scale;
 
       viewport.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
       updateTransform();
